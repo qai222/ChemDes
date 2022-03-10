@@ -1,3 +1,9 @@
+import json
+import pathlib
+import typing
+
+import monty.json
+import numpy as np
 from rdkit import Chem
 from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles
 from rdkit.Chem.inchi import MolFromInchi
@@ -24,3 +30,22 @@ def neutralize_atoms(mol):
             atom.SetNumExplicitHs(hcount - chg)
             atom.UpdatePropertyCache()
     return mol
+
+
+def to_float(x):
+    try:
+        assert not np.isnan(x)
+        return float(x)
+    except (ValueError, AssertionError) as e:
+        return None
+
+
+def json_dump(o, fn: typing.Union[str, pathlib.Path]):
+    with open(fn, "w") as f:
+        json.dump(o, f, cls=monty.json.MontyEncoder)
+
+
+def json_load(fn: typing.Union[str, pathlib.Path]):
+    with open(fn, "r") as f:
+        o = json.load(f, cls=monty.json.MontyDecoder)
+    return o

@@ -8,8 +8,6 @@ from mordred import descriptors as mordred_descriptors
 
 from chemdes.schema import Descriptor, Molecule
 
-_mordred_descriptors = mordred.Calculator(mordred_descriptors).descriptors
-
 
 class MoleculeCalculator(MSONable, abc.ABC):
     def __init__(self, name: str, targets: [Descriptor], results: dict = None):
@@ -72,7 +70,7 @@ class MordredCalculator(MoleculeCalculator):
 
     @staticmethod
     def get_all_mordred_descriptors() -> [Descriptor]:
-        return [Descriptor.from_mordred_descriptor(des) for des in _mordred_descriptors]
+        return [Descriptor.from_mordred_descriptor(des) for des in mordred.Calculator(mordred_descriptors).descriptors]
 
 
 class PubChemCalculator(MoleculeCalculator):

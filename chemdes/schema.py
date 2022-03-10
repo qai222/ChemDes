@@ -1,3 +1,5 @@
+import os
+
 import mordred
 from monty.json import MSONable
 
@@ -6,8 +8,9 @@ from chemdes.utils import *
 
 class Molecule(MSONable):
 
-    def __init__(self, inchi: str):
+    def __init__(self, inchi: str, iupac_name: str = "unknwon"):
         self.inchi = inchi
+        self.iupac_name = iupac_name
 
     @property
     def rdmol(self):
@@ -18,11 +21,11 @@ class Molecule(MSONable):
         return inchi2smiles(self.inchi)
 
     @classmethod
-    def from_str(cls, s: str, repr_type="inchi"):
+    def from_str(cls, s: str, repr_type="inchi", iupac_name="unknown"):
         if repr_type.startswith("i"):
-            return cls(s)
+            return cls(s, iupac_name=iupac_name)
         elif repr_type.startswith("s"):
-            return cls(smiles2inchi(s))
+            return cls(smiles2inchi(s), iupac_name=iupac_name)
         else:
             raise NotImplementedError("`repr_type` not implemented: {}".format(repr_type))
 
@@ -75,3 +78,29 @@ class Descriptor(MSONable):
         name = str(des)
         decription = des.__doc__
         return cls(name, "MORDRED-{}".format(mordred.__version__), decription, params)
+
+
+def load_inventory(fn: typing.Union[pathlib.Path, str], to_mols=True):
+    assert os.path.isfile(fn)
+    _, extension = os.path.splitext(fn)
+    if extension == ".csv":
+        df = pd.read_csv(fn)
+    elif extension == ".xlsx":
+        df = pd.read_excel(fn)
+    else:
+        raise AssertionError("inventory file should be either csv or xlsx")
+    assert "InChI" in df.columns, "InChI must be specified in the inventory"
+    df = df.dropna(axis=0, how="all", subset=["InChI"])
+    if to_mols:
+        mols = []
+        for row in df.to_dict("records"):
+            inchi = row["InChI"]
+            try:
+                name = row["IUPAC Name"]
+            except KeyError:
+                name = "unknown"
+            m = Molecule.from_str(inchi, "inchi", iupac_name=name)
+            mols.append(m)
+        return mols
+    else:
+        return df
