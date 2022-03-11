@@ -117,7 +117,8 @@ if __name__ == '__main__':
     # # if exclude by iupac_name
     # molecules_without_unwanted_ligands = [m for m in molecules if m.iupac_name not in ["name1", "name2", ]]
 
-    new_all_pairs = [frozenset(pair) for pair in itertools.combinations(molecules, 2)]
+    new_all_pairs = [frozenset(pair) for pair in itertools.combinations(molecules_without_unwanted_ligands, 2)]
+    NSAMPLES_PAIR = len(new_all_pairs)
     random_pairs_unwanted_removed = random.sample(new_all_pairs, k=NSAMPLES_PAIR)
     write_pairs(random_pairs_unwanted_removed, "random_pairs_without_unwanted.csv")
 
