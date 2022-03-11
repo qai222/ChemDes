@@ -13,7 +13,7 @@ from chemdes import *
 """
 https://github.com/PatWalters/interactive_plots
 """
-dimred_data = json_load("dimred/dimred.json")
+dimred_data = json_load("dimred.json")
 data_2d = dimred_data["data_2d"]
 molecules = dimred_data["molecules"]
 x = data_2d.T[0]

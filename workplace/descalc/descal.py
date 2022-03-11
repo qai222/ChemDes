@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     ]
 
-    mols = load_inventory("data/2022_0217_ligand_InChI_mk.xlsx", to_mols=True)
+    mols = load_inventory("../data/2022_0217_ligand_InChI_mk.xlsx", to_mols=True)
 
     # mordred calculator
     mc = MordredCalculator()
@@ -96,4 +96,4 @@ if __name__ == '__main__':
         combine_results.append(record)
     df = pd.DataFrame.from_records(combine_results)
     assert not df.isnull().values.any()
-    df.to_csv("data/molecular_descriptors_{}.csv".format(datetime.datetime.now().strftime("%Y_%m_%d")), index=False)
+    df.to_csv("../data/molecular_descriptors_{}.csv".format(datetime.datetime.now().strftime("%Y_%m_%d")), index=False)

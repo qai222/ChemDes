@@ -11,7 +11,7 @@ from chemdes import *
 SEED = 42
 _distance_metric = "manhattan"
 
-_inchi_to_iupac_name = {m.inchi: m.iupac_name for m in load_inventory("data/2022_0217_ligand_InChI_mk.xlsx")}
+_inchi_to_iupac_name = {m.inchi: m.iupac_name for m in load_inventory("../data/2022_0217_ligand_InChI_mk.xlsx")}
 
 
 def load_molecular_descriptors(fn: typing.Union[pathlib.Path, str]):
@@ -69,7 +69,7 @@ def tune_umap(
 
 
 if __name__ == '__main__':
-    molecules, df = load_molecular_descriptors("data/molecular_descriptors_2022_03_09.csv")
+    molecules, df = load_molecular_descriptors("../data/molecular_descriptors_2022_03_09.csv")
     data_df = preprocess_descriptor_df(df)
 
     distance_matrix = pairwise_distances(data_df.values, metric=_distance_metric)
@@ -83,4 +83,4 @@ if __name__ == '__main__':
         "data_2d": data_2d,
         "molecules": molecules,
     }
-    json_dump(dimred_data, "dimred/dimred.json")
+    json_dump(dimred_data, "dimred.json")

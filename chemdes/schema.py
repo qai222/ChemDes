@@ -92,15 +92,19 @@ def load_inventory(fn: typing.Union[pathlib.Path, str], to_mols=True):
     assert "InChI" in df.columns, "InChI must be specified in the inventory"
     df = df.dropna(axis=0, how="all", subset=["InChI"])
     if to_mols:
-        mols = []
-        for row in df.to_dict("records"):
-            inchi = row["InChI"]
-            try:
-                name = row["IUPAC Name"]
-            except KeyError:
-                name = "unknown"
-            m = Molecule.from_str(inchi, "inchi", iupac_name=name)
-            mols.append(m)
-        return mols
+        return inventory_df_to_mols(df)
     else:
         return df
+
+
+def inventory_df_to_mols(df:pd.DataFrame) -> [Molecule]:
+    mols = []
+    for row in df.to_dict("records"):
+        inchi = row["InChI"]
+        try:
+            name = row["IUPAC Name"]
+        except KeyError:
+            name = "unknown"
+        m = Molecule.from_str(inchi, "inchi", iupac_name=name)
+        mols.append(m)
+    return mols
