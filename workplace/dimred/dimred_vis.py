@@ -7,8 +7,7 @@ import dash_html_components as html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 from rdkit.Chem.Draw import MolsToGridImage
-
-from chemdes import *
+from chemdes.utils import json_load
 
 """
 https://github.com/PatWalters/interactive_plots
@@ -77,7 +76,6 @@ def display_selected_data(selectedData):
         mol_list = []
         for i in match_idx:
             mol = molecules[i]
-            mol: Molecule
             smiles_list.append(mol.smiles)
             name_list.append(mol.iupac_name)
             mol_list.append(mol.rdmol)
@@ -93,8 +91,8 @@ def display_selected_data(selectedData):
 
 
 if __name__ == '__main__':
-    import socket
-
-    hostname = socket.gethostname()
-    IPAddr = socket.gethostbyname(hostname)
-    app.run_server(debug=False, host=IPAddr)
+    # import socket
+    # hostname = socket.gethostname()
+    # IPAddr = socket.gethostbyname(hostname)
+    # app.run_server(debug=False, host=IPAddr)
+    app.run_server(debug=False, host="0.0.0.0")

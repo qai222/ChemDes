@@ -1,9 +1,14 @@
 import heapq
 import itertools
 import math
+import pathlib
 import random
+import typing
 
-from chemdes import *
+import numpy as np
+
+from chemdes.schema import Molecule, pd
+from chemdes.utils import json_load
 
 
 def write_mols(mols: [Molecule], fn: typing.Union[str, pathlib.Path]):
@@ -113,9 +118,6 @@ if __name__ == '__main__':
     # remove the unwanted ligand from `all_pairs`
     # create a copy molecules with unwanted ligands removed
     molecules_without_unwanted_ligands = [m for m in molecules if m.inchi not in ["InChI=1S/C18H39N/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19/h2-19H2,1H3","InChI=1S/C9H11NO2/c10-8(9(11)12)6-7-4-2-1-3-5-7/h1-5,8H,6,10H2,(H,11,12)","InChI=1S/C10H24N2/c11-9-7-5-3-1-2-4-6-8-10-12/h1-12H2","InChI=1S/C10H24O6P2/c11-17(12,13)9-7-5-3-1-2-4-6-8-10-18(14,15)16/h1-10H2,(H2,11,12,13)(H2,14,15,16)","InChI=1S/C10H22S2/c11-9-7-5-3-1-2-4-6-8-10-12/h11-12H,1-10H2"]]
-
-    # # if exclude by iupac_name
-    # molecules_without_unwanted_ligands = [m for m in molecules if m.iupac_name not in ["name1", "name2", ]]
 
     new_all_pairs = [frozenset(pair) for pair in itertools.combinations(molecules_without_unwanted_ligands, 2)]
     NSAMPLES_PAIR = len(new_all_pairs)

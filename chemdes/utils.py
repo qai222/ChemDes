@@ -1,12 +1,17 @@
+import functools
+import itertools
 import json
+import logging
+import os
 import pathlib
 import typing
 
 import monty.json
 import numpy as np
-from rdkit import Chem
-from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles
+from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles, MolFromSmarts
 from rdkit.Chem.inchi import MolFromInchi
+
+SEED = 42
 
 
 def inchi2smiles(inchi: str) -> str:
@@ -18,7 +23,7 @@ def smiles2inchi(smi: str) -> str:
 
 
 def neutralize_atoms(mol):
-    pattern = Chem.MolFromSmarts("[+1!h0!$([*]~[-1,-2,-3,-4]),-1!$([*]~[+1,+2,+3,+4])]")
+    pattern = MolFromSmarts("[+1!h0!$([*]~[-1,-2,-3,-4]),-1!$([*]~[+1,+2,+3,+4])]")
     at_matches = mol.GetSubstructMatches(pattern)
     at_matches_list = [y[0] for y in at_matches]
     if len(at_matches_list) > 0:
@@ -45,7 +50,41 @@ def json_dump(o, fn: typing.Union[str, pathlib.Path]):
         json.dump(o, f, cls=monty.json.MontyEncoder)
 
 
-def json_load(fn: typing.Union[str, pathlib.Path]):
+def json_load(fn: typing.Union[str, pathlib.Path], warning=False):
+    if warning:
+        logging.warning("loading file: {}".format(fn))
     with open(fn, "r") as f:
         o = json.load(f, cls=monty.json.MontyDecoder)
     return o
+
+
+# https://stackoverflow.com/questions/31174295
+def rsetattr(obj, attr, val):
+    pre, _, post = attr.rpartition('.')
+    return setattr(rgetattr(obj, pre) if pre else obj, post, val)
+
+
+def rgetattr(obj, attr, *args):
+    def _getattr(obj, attr):
+        return getattr(obj, attr, *args)
+
+    return functools.reduce(_getattr, [obj] + attr.split('.'))
+
+
+def strip_extension(p: typing.Union[pathlib.Path, str]):
+    return os.path.splitext(p)[0]
+
+
+def unison_shuffle(a, b, seed):
+    assert len(a) == len(b)
+    p = np.random.RandomState(seed=seed).permutation(len(a))
+    return a[p], b[p]
+
+def sort_and_group(data, keyf):
+    groups = []
+    unique_keys = []
+    data = sorted(data, key=keyf)
+    for k, g in itertools.groupby(data, keyf):
+        groups.append(list(g))
+        unique_keys.append(k)
+    return unique_keys, groups

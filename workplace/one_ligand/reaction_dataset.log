@@ -1,0 +1,50 @@
+WARNING:root:===CAREFULLY CHECK THE FOLLOWING DEFAULT SETTINGS !!!===
+WARNING:root:The solvent is: m-xylene
+WARNING:root:The ligand stock solutions have concentration: 0.05 M
+WARNING:root:The ligand solution was measured in: ul
+WARNING:root:The ligands are, from L1 to L5:
+LIGAND: 2-pyridin-2-ylpyridine
+LIGAND: dodecanoic acid
+LIGAND: N,N-dibutylbutan-1-amine
+LIGAND: octylphosphonic acid
+LIGAND: octadecane-1-thiol
+WARNING:root:===DEFAULT SETTINGS END===
+WARNING:root:...reading reactions...
+WARNING:root:ligand name: 2-pyridin-2-ylpyridine
+WARNING:root:# of real reactions: 43
+WARNING:root:# of blank reactions: 2
+WARNING:root:# of ref reactions: 3
+CRITICAL:root:this BLANK reaction has nonzero FOM???
+CRITICAL:root:ReactionNcOneLigand:
+	identifier: LS001_L2_robotinput--F12
+	nano_crystal: {'@module': 'chemdes.schema', '@class': 'ReactantSolution', '@version': None, 'identity': 'CsPbBr3', 'volume': 0, 'concentration': None, 'solvent_identity': 'm-xylene', 'properties': {'batch': 'MK003'}, 'volume_unit': 'ul', 'concentration_unit': None}
+	ligand: {'@module': 'chemdes.schema', '@class': 'ReactantSolution', '@version': None, 'identity': {'@module': 'chemdes.schema', '@class': 'Molecule', '@version': None, 'inchi': 'InChI=1S/C12H24O2/c1-2-3-4-5-6-7-8-9-10-11-12(13)14/h2-11H2,1H3,(H,13,14)', 'iupac_name': 'dodecanoic acid'}, 'volume': 0, 'concentration': 0.05, 'solvent_identity': 'm-xylene', 'properties': {}, 'volume_unit': 'ul', 'concentration_unit': 'M'}
+	conditions: [{'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Temperature (C):', 'value': 25.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Stir Rate (rpm):', 'value': 750.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Mixing time1 (s):', 'value': 600.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Mixing time2 (s):', 'value': 600.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Reaction time (s):', 'value': 60.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Preheat Temperature (C):', 'value': 80.0}]
+	solvent: {'@module': 'chemdes.schema', '@class': 'ReactantSolvent', '@version': None, 'identity': 'm-xylene', 'volume': 500, 'volume_unit': 'ul', 'properties': {}}
+	properties: {'vial': 'F12', 'fom': 0.00013574968}
+
+WARNING:root:ligand name: dodecanoic acid
+WARNING:root:# of real reactions: 43
+WARNING:root:# of blank reactions: 2
+WARNING:root:# of ref reactions: 3
+WARNING:root:ligand name: N,N-dibutylbutan-1-amine
+WARNING:root:# of real reactions: 43
+WARNING:root:# of blank reactions: 2
+WARNING:root:# of ref reactions: 3
+CRITICAL:root:this BLANK reaction has nonzero FOM???
+CRITICAL:root:ReactionNcOneLigand:
+	identifier: LS001_L5_robotinput--F06
+	nano_crystal: {'@module': 'chemdes.schema', '@class': 'ReactantSolution', '@version': None, 'identity': 'CsPbBr3', 'volume': 0, 'concentration': None, 'solvent_identity': 'm-xylene', 'properties': {'batch': 'MK003'}, 'volume_unit': 'ul', 'concentration_unit': None}
+	ligand: {'@module': 'chemdes.schema', '@class': 'ReactantSolution', '@version': None, 'identity': {'@module': 'chemdes.schema', '@class': 'Molecule', '@version': None, 'inchi': 'InChI=1S/C18H38S/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19/h19H,2-18H2,1H3', 'iupac_name': 'octadecane-1-thiol'}, 'volume': 0, 'concentration': 0.05, 'solvent_identity': 'm-xylene', 'properties': {}, 'volume_unit': 'ul', 'concentration_unit': 'M'}
+	conditions: [{'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Temperature (C):', 'value': 25.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Stir Rate (rpm):', 'value': 750.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Mixing time1 (s):', 'value': 600.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Mixing time2 (s):', 'value': 600.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Reaction time (s):', 'value': 60.0}, {'@module': 'chemdes.schema', '@class': 'ReactionCondition', '@version': None, 'name': 'Preheat Temperature (C):', 'value': 80.0}]
+	solvent: {'@module': 'chemdes.schema', '@class': 'ReactantSolvent', '@version': None, 'identity': 'm-xylene', 'volume': 500, 'volume_unit': 'ul', 'properties': {}}
+	properties: {'vial': 'F06', 'fom': 0.0011414656}
+
+WARNING:root:ligand name: octadecane-1-thiol
+WARNING:root:# of real reactions: 43
+WARNING:root:# of blank reactions: 2
+WARNING:root:# of ref reactions: 3
+WARNING:root:ligand name: octylphosphonic acid
+WARNING:root:# of real reactions: 43
+WARNING:root:# of blank reactions: 2
+WARNING:root:# of ref reactions: 3

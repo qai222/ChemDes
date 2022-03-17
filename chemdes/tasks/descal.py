@@ -1,9 +1,16 @@
-import datetime
+import logging
+import os
+import pathlib
+import typing
 
-from chemdes import *
+from chemdes.calculator import MordredCalculator, RdkitCalculator
+from chemdes.schema import Molecule, pd
+from chemdes.utils import to_float
 
 
-def simplify_results(results: dict, important_descriptor_names: [str]):
+def simplify_results(results: dict, important_descriptor_names: [str]) -> dict:
+    logging.warning(">>> simplify_results <<<")
+    logging.warning("important descriptors are:\n{}\n".format("\n".join(important_descriptor_names)))
     simplified = dict()
     for m in results:
         simplified[m] = dict()
@@ -11,16 +18,19 @@ def simplify_results(results: dict, important_descriptor_names: [str]):
         for k, v in r.items():
             if k.name in important_descriptor_names:
                 simplified[m][k] = v
+                logging.warning("ACCEPT descriptor: {}".format(k.name))
+            else:
+                logging.warning("REJECT descriptor: {}".format(k.name))
     return simplified
 
 
-def opera_pka(mols):
-    """only return first pKa"""
+def opera_pka(mols, opera_output: typing.Union[pathlib.Path, str] = "mols-smi_OPERA2.7Pred.csv") -> dict:
+    """ only return first pKa """
     # input gen for opera
     if not os.path.isfile("mols.smi"):
         Molecule.write_smi(mols, "mols.smi")
     # parse output
-    opera_df = pd.read_csv("mols-smi_OPERA2.7Pred.csv")
+    opera_df = pd.read_csv(opera_output)
     opera_df = opera_df.dropna(axis=1, how="all")
     opera_df = opera_df.drop(labels="MoleculeID", axis=1)
     # opera_df = opera_df[[c for c in opera_df.columns if c.endswith("_pred")]]
@@ -31,45 +41,12 @@ def opera_pka(mols):
         pka = pka_1
         if pka_1 is None:
             pka = pka_2
-        assert not pka is None
+        assert pka is not None
         opera_results[m] = {"pKa": pka}
     return opera_results
 
 
-if __name__ == '__main__':
-
-    # https://mordred-descriptor.github.io/documentation/master/descriptors.html
-    # https://github.com/kmansouri/OPERA
-    expert_descriptors = [
-        # mordred
-        "SLogP",
-        "nHBDon",
-        "nHBAcc",
-        "nRot",
-        "TopoPSA",
-        "nHeavyAtom",
-        "fragCpx",
-        "nC",
-        "nO",
-        "nN",
-        "nP",
-        "nS",
-        "nRing",
-
-        # rdkit
-        "FormalCharge",
-
-        # opera
-        "pKa"
-
-        # unknown
-        "?chain length"
-        "?number of branches"
-
-    ]
-
-    mols = load_inventory("../data/2022_0217_ligand_InChI_mk.xlsx", to_mols=True)
-
+def calcall(mols: [Molecule], opera_results: dict, expert_descriptors: [str]) -> pd.DataFrame:
     # mordred calculator
     mc = MordredCalculator()
     mc.calc_all(mols)
@@ -80,13 +57,11 @@ if __name__ == '__main__':
     rc.calc_all(mols)
     rdkit_results = simplify_results(rc.results, expert_descriptors)
 
-    # opera calculator
-    opera_results = opera_pka(mols)
-
     combine_results = []
     for m in mols:
         record = dict()
         record["InChI"] = m.inchi
+        record["IUPAC Name"] = m.iupac_name
         for k, v in opera_results[m].items():
             record["OPERA-" + k] = v
         for k, v in rdkit_results[m].items():
@@ -96,4 +71,4 @@ if __name__ == '__main__':
         combine_results.append(record)
     df = pd.DataFrame.from_records(combine_results)
     assert not df.isnull().values.any()
-    df.to_csv("../data/molecular_descriptors_{}.csv".format(datetime.datetime.now().strftime("%Y_%m_%d")), index=False)
+    return df

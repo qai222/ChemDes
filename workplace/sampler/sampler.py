@@ -1,12 +1,17 @@
 import heapq
 import itertools
 import math
+import pathlib
 import random
+import typing
 
-from chemdes import *
+import numpy as np
+
+from chemdes.schema import Molecule, pd
+from chemdes.utils import json_load
 
 
-def write_mols(mols: [Molecule], fn: typing.Union[str, pathlib.Path]):
+def write_mols_names(mols: [Molecule], fn: typing.Union[str, pathlib.Path]):
     records = []
     for m in mols:
         record = {"ligand0": m.iupac_name}
@@ -15,7 +20,7 @@ def write_mols(mols: [Molecule], fn: typing.Union[str, pathlib.Path]):
     df.to_csv(fn, index=False)
 
 
-def write_pairs(pairs, fn: typing.Union[str, pathlib.Path]):
+def write_pairs_names(pairs, fn: typing.Union[str, pathlib.Path]):
     records = []
     for p in pairs:
         p = tuple(p)
@@ -99,8 +104,8 @@ if __name__ == '__main__':
     all_pairs = [frozenset(pair) for pair in itertools.combinations(molecules, 2)]
     assert len(all_pairs) == len(set(all_pairs)) == math.comb(len(molecules), 2)
 
-    write_mols(molecules, "all_mols.csv")
-    write_pairs(all_pairs, "all_pairs.csv")
+    write_mols_names(molecules, "all_mols.csv")
+    write_pairs_names(all_pairs, "all_pairs.csv")
 
     if NSAMPLES_MOL is None:
         NSAMPLES_MOL = len(molecules)
@@ -110,16 +115,16 @@ if __name__ == '__main__':
     # random sample 1 mol
     random.seed(SEED)
     random_mols = random.sample(molecules, k=NSAMPLES_MOL)
-    write_mols(random_mols, "random_mols.csv")
+    write_mols_names(random_mols, "random_mols.csv")
 
     # random sample pairs
     random.seed(SEED + 1)
     random_pairs = random.sample(all_pairs, k=NSAMPLES_PAIR)
-    write_pairs(random_pairs, "random_pairs.csv")
+    write_pairs_names(random_pairs, "random_pairs.csv")
 
     # ks sample 1 mol
     ks_mols = ks_sampler(dmat, k=NSAMPLES_MOL)
-    write_mols([molecules[i] for i in ks_mols], "ks_mols.csv")
+    write_mols_names([molecules[i] for i in ks_mols], "ks_mols.csv")
 
     # ks sample pairs, `sum_of_four` xor `sum_of_two_smallest`
     for distance_definition in ("sum_of_four", "sum_of_two_smallest"):
@@ -129,4 +134,4 @@ if __name__ == '__main__':
             i, j = pair_idx_to_pair[pid]
             ks_pairs.append(frozenset([molecules[i], molecules[j]]))
         assert len(ks_pairs) == len(set(ks_pairs))
-        write_pairs(ks_pairs, "ks_pairs-{}.csv".format(distance_definition))
+        write_pairs_names(ks_pairs, "ks_pairs-{}.csv".format(distance_definition))
