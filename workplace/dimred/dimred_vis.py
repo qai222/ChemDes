@@ -2,8 +2,8 @@ import base64
 from io import BytesIO
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 from rdkit.Chem.Draw import MolsToGridImage
