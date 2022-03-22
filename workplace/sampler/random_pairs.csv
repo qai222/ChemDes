@@ -1,277 +1,277 @@
 ligand0,ligand1
-octanoic acid,"decane-1,10-dithiol"
-(Z)-octadec-9-en-1-amine,"N,N-dibutylbutan-1-amine"
+"decane-1,10-dithiol",octanoic acid
+"N,N-dibutylbutan-1-amine",(Z)-octadec-9-en-1-amine
 (Z)-octadec-9-enoic acid,octadecylphosphonic acid
 "decane-1,10-dithiol","N,N-dibutylbutan-1-amine"
 dodecylphosphonic acid,"N,N-dioctyloctan-1-amine"
 octadecanoic acid,(Z)-octadec-9-en-1-amine
-2-amino-3-phenylpropanoic acid,"N,N-dibutylbutan-1-amine"
+"N,N-dibutylbutan-1-amine",2-amino-3-phenylpropanoic acid
 "decane-1,10-diamine","3,3-diphenylpropan-1-amine"
-octanoic acid,dodecylphosphonic acid
+dodecylphosphonic acid,octanoic acid
 "decane-1,10-diamine",2-pyridin-2-ylpyridine
 "N,N-dibutylbutan-1-amine",N-octyloctan-1-amine
-2-amino-3-phenylpropanoic acid,dodecylphosphonic acid
-"N,N-dioctyloctan-1-amine",N-octyloctan-1-amine
+dodecylphosphonic acid,2-amino-3-phenylpropanoic acid
+N-octyloctan-1-amine,"N,N-dioctyloctan-1-amine"
 octadecylphosphonic acid,"N,N-dioctyloctan-1-amine"
 octan-1-amine,octylphosphonic acid
-octadecane-1-thiol,dodecanoic acid
+dodecanoic acid,octadecane-1-thiol
 octadecanoic acid,N-butylbutan-1-amine
-octadecanoic acid,2-pyridin-2-ylpyridine
+2-pyridin-2-ylpyridine,octadecanoic acid
 "decane-1,10-diamine",dodecylphosphonic acid
-2-amino-3-phenylpropanoic acid,(Z)-octadec-9-enoic acid
-2-pyridin-2-ylpyridine,"decane-1,10-dithiol"
+(Z)-octadec-9-enoic acid,2-amino-3-phenylpropanoic acid
+"decane-1,10-dithiol",2-pyridin-2-ylpyridine
 "decane-1,10-dithiol",dodecanoic acid
 octadecan-1-amine,"N,N-dioctyloctan-1-amine"
-2-amino-3-phenylpropanoic acid,N-butylbutan-1-amine
+N-butylbutan-1-amine,2-amino-3-phenylpropanoic acid
 dodecylphosphonic acid,octadecan-1-amine
-octadecylphosphonic acid,dodecanoic acid
-"1,10-phenanthroline",dodecylphosphonic acid
-octan-1-amine,"decane-1,10-diamine"
-(Z)-octadec-9-en-1-amine,"decane-1,10-dithiol"
-octadecan-1-amine,N-octyloctan-1-amine
-(Z)-octadec-9-en-1-amine,(Z)-octadec-9-enoic acid
+dodecanoic acid,octadecylphosphonic acid
+dodecylphosphonic acid,"1,10-phenanthroline"
+"decane-1,10-diamine",octan-1-amine
+"decane-1,10-dithiol",(Z)-octadec-9-en-1-amine
+N-octyloctan-1-amine,octadecan-1-amine
+(Z)-octadec-9-enoic acid,(Z)-octadec-9-en-1-amine
 (Z)-octadec-9-en-1-amine,"N,N-dioctyloctan-1-amine"
-octan-1-amine,octadecanoic acid
-octan-1-amine,"N,N-dioctyloctan-1-amine"
-octanoic acid,"3,3-diphenylpropan-1-amine"
-octanoic acid,N-octyloctan-1-amine
-2-amino-3-phenylpropanoic acid,(Z)-octadec-9-en-1-amine
+octadecanoic acid,octan-1-amine
+"N,N-dioctyloctan-1-amine",octan-1-amine
+"3,3-diphenylpropan-1-amine",octanoic acid
+N-octyloctan-1-amine,octanoic acid
+(Z)-octadec-9-en-1-amine,2-amino-3-phenylpropanoic acid
 octanoic acid,2-amino-3-phenylpropanoic acid
-octadecanoic acid,dodecan-1-amine
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,"N,N-dibutylbutan-1-amine"
-N-butylbutan-1-amine,"3,3-diphenylpropan-1-amine"
+dodecan-1-amine,octadecanoic acid
+"N,N-dibutylbutan-1-amine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+"3,3-diphenylpropan-1-amine",N-butylbutan-1-amine
 2-pyridin-2-ylpyridine,dodecanoic acid
-(Z)-octadec-9-enoic acid,N-octyloctan-1-amine
-octadecane-1-thiol,(Z)-octadec-9-enoic acid
+N-octyloctan-1-amine,(Z)-octadec-9-enoic acid
+(Z)-octadec-9-enoic acid,octadecane-1-thiol
 "decane-1,10-dithiol",N-octyloctan-1-amine
 "1,10-phenanthroline",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-octadecan-1-amine,"3,3-diphenylpropan-1-amine"
+"3,3-diphenylpropan-1-amine",octadecan-1-amine
 octadecane-1-thiol,N-butylbutan-1-amine
-dodecan-1-amine,dodecanoic acid
-N-butylbutan-1-amine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+dodecanoic acid,dodecan-1-amine
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,N-butylbutan-1-amine
 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octadecylphosphonic acid
-(Z)-octadec-9-en-1-amine,"3,3-diphenylpropan-1-amine"
-octadecane-1-thiol,"decane-1,10-dithiol"
-octadecane-1-thiol,10-phosphonodecylphosphonic acid
-octylphosphonic acid,N-butylbutan-1-amine
-"1,10-phenanthroline","decane-1,10-dithiol"
-(Z)-octadec-9-enoic acid,dodecanoic acid
-N-butylbutan-1-amine,10-phosphonodecylphosphonic acid
+"3,3-diphenylpropan-1-amine",(Z)-octadec-9-en-1-amine
+"decane-1,10-dithiol",octadecane-1-thiol
+10-phosphonodecylphosphonic acid,octadecane-1-thiol
+N-butylbutan-1-amine,octylphosphonic acid
+"decane-1,10-dithiol","1,10-phenanthroline"
+dodecanoic acid,(Z)-octadec-9-enoic acid
+10-phosphonodecylphosphonic acid,N-butylbutan-1-amine
 2-pyridin-2-ylpyridine,N-octyloctan-1-amine
 "decane-1,10-diamine",dodecan-1-amine
-"decane-1,10-diamine","decane-1,10-dithiol"
-octadecane-1-thiol,"decane-1,10-diamine"
+"decane-1,10-dithiol","decane-1,10-diamine"
+"decane-1,10-diamine",octadecane-1-thiol
 dodecylphosphonic acid,octadecylphosphonic acid
-(Z)-octadec-9-enoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-N-butylbutan-1-amine,"N,N-dioctyloctan-1-amine"
-octadecan-1-amine,10-phosphonodecylphosphonic acid
-octadecane-1-thiol,"1,10-phenanthroline"
-octylphosphonic acid,"decane-1,10-diamine"
-N-octyloctan-1-amine,dodecan-1-amine
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,(Z)-octadec-9-enoic acid
+"N,N-dioctyloctan-1-amine",N-butylbutan-1-amine
+10-phosphonodecylphosphonic acid,octadecan-1-amine
+"1,10-phenanthroline",octadecane-1-thiol
+"decane-1,10-diamine",octylphosphonic acid
+dodecan-1-amine,N-octyloctan-1-amine
 "decane-1,10-diamine","N,N-dibutylbutan-1-amine"
-2-amino-3-phenylpropanoic acid,10-phosphonodecylphosphonic acid
-octanoic acid,2-pyridin-2-ylpyridine
-octadecylphosphonic acid,N-octyloctan-1-amine
-(Z)-octadec-9-enoic acid,10-phosphonodecylphosphonic acid
-2-amino-3-phenylpropanoic acid,"N,N-dioctyloctan-1-amine"
-(Z)-octadec-9-en-1-amine,10-phosphonodecylphosphonic acid
+10-phosphonodecylphosphonic acid,2-amino-3-phenylpropanoic acid
+2-pyridin-2-ylpyridine,octanoic acid
+N-octyloctan-1-amine,octadecylphosphonic acid
+10-phosphonodecylphosphonic acid,(Z)-octadec-9-enoic acid
+"N,N-dioctyloctan-1-amine",2-amino-3-phenylpropanoic acid
+10-phosphonodecylphosphonic acid,(Z)-octadec-9-en-1-amine
 (Z)-octadec-9-enoic acid,octadecan-1-amine
-octan-1-amine,N-octyloctan-1-amine
+N-octyloctan-1-amine,octan-1-amine
 dodecylphosphonic acid,N-butylbutan-1-amine
 2-pyridin-2-ylpyridine,"N,N-dibutylbutan-1-amine"
-octylphosphonic acid,octadecylphosphonic acid
-(Z)-octadec-9-en-1-amine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-octanoic acid,10-phosphonodecylphosphonic acid
-octylphosphonic acid,(Z)-octadec-9-en-1-amine
-octadecane-1-thiol,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+octadecylphosphonic acid,octylphosphonic acid
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,(Z)-octadec-9-en-1-amine
+10-phosphonodecylphosphonic acid,octanoic acid
+(Z)-octadec-9-en-1-amine,octylphosphonic acid
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octadecane-1-thiol
 "1,10-phenanthroline","3,3-diphenylpropan-1-amine"
-(Z)-octadec-9-enoic acid,"N,N-dibutylbutan-1-amine"
-2-amino-3-phenylpropanoic acid,"decane-1,10-dithiol"
+"N,N-dibutylbutan-1-amine",(Z)-octadec-9-enoic acid
+"decane-1,10-dithiol",2-amino-3-phenylpropanoic acid
 "decane-1,10-diamine",2-amino-3-phenylpropanoic acid
-octan-1-amine,octadecylphosphonic acid
-octylphosphonic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-N-butylbutan-1-amine,dodecan-1-amine
-octanoic acid,octadecylphosphonic acid
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,dodecan-1-amine
-(Z)-octadec-9-en-1-amine,dodecan-1-amine
-dodecylphosphonic acid,"decane-1,10-dithiol"
-octanoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-octan-1-amine,dodecylphosphonic acid
+octadecylphosphonic acid,octan-1-amine
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octylphosphonic acid
+dodecan-1-amine,N-butylbutan-1-amine
+octadecylphosphonic acid,octanoic acid
+dodecan-1-amine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+dodecan-1-amine,(Z)-octadec-9-en-1-amine
+"decane-1,10-dithiol",dodecylphosphonic acid
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octanoic acid
+dodecylphosphonic acid,octan-1-amine
 10-phosphonodecylphosphonic acid,octadecylphosphonic acid
 10-phosphonodecylphosphonic acid,"N,N-dibutylbutan-1-amine"
-octanoic acid,"1,10-phenanthroline"
+"1,10-phenanthroline",octanoic acid
 "1,10-phenanthroline",octadecylphosphonic acid
 "decane-1,10-diamine",dodecanoic acid
-"1,10-phenanthroline",2-pyridin-2-ylpyridine
+2-pyridin-2-ylpyridine,"1,10-phenanthroline"
 10-phosphonodecylphosphonic acid,"3,3-diphenylpropan-1-amine"
-octadecan-1-amine,dodecanoic acid
+dodecanoic acid,octadecan-1-amine
 2-pyridin-2-ylpyridine,octadecan-1-amine
-octylphosphonic acid,dodecan-1-amine
-"N,N-dibutylbutan-1-amine",dodecan-1-amine
+dodecan-1-amine,octylphosphonic acid
+dodecan-1-amine,"N,N-dibutylbutan-1-amine"
 "decane-1,10-diamine",(Z)-octadec-9-en-1-amine
-2-pyridin-2-ylpyridine,10-phosphonodecylphosphonic acid
-2-amino-3-phenylpropanoic acid,dodecanoic acid
-octanoic acid,dodecanoic acid
-octylphosphonic acid,N-octyloctan-1-amine
-dodecylphosphonic acid,dodecanoic acid
+10-phosphonodecylphosphonic acid,2-pyridin-2-ylpyridine
+dodecanoic acid,2-amino-3-phenylpropanoic acid
+dodecanoic acid,octanoic acid
+N-octyloctan-1-amine,octylphosphonic acid
+dodecanoic acid,dodecylphosphonic acid
 octylphosphonic acid,2-amino-3-phenylpropanoic acid
-octanoic acid,dodecan-1-amine
-octan-1-amine,dodecan-1-amine
-octylphosphonic acid,dodecanoic acid
-octadecan-1-amine,"decane-1,10-dithiol"
+dodecan-1-amine,octanoic acid
+dodecan-1-amine,octan-1-amine
+dodecanoic acid,octylphosphonic acid
+"decane-1,10-dithiol",octadecan-1-amine
 octadecan-1-amine,octadecylphosphonic acid
-octan-1-amine,(Z)-octadec-9-enoic acid
-"3,3-diphenylpropan-1-amine",dodecan-1-amine
-octan-1-amine,octadecan-1-amine
-octan-1-amine,"3,3-diphenylpropan-1-amine"
-octylphosphonic acid,"N,N-dibutylbutan-1-amine"
-octylphosphonic acid,octanoic acid
-octadecanoic acid,dodecanoic acid
-octadecanoic acid,dodecylphosphonic acid
-octan-1-amine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,10-phosphonodecylphosphonic acid
-dodecylphosphonic acid,2-pyridin-2-ylpyridine
-octylphosphonic acid,10-phosphonodecylphosphonic acid
-octan-1-amine,"1,10-phenanthroline"
-(Z)-octadec-9-enoic acid,2-pyridin-2-ylpyridine
-octan-1-amine,"decane-1,10-dithiol"
-octan-1-amine,(Z)-octadec-9-en-1-amine
-octanoic acid,"N,N-dibutylbutan-1-amine"
+(Z)-octadec-9-enoic acid,octan-1-amine
+dodecan-1-amine,"3,3-diphenylpropan-1-amine"
+octadecan-1-amine,octan-1-amine
+"3,3-diphenylpropan-1-amine",octan-1-amine
+"N,N-dibutylbutan-1-amine",octylphosphonic acid
+octanoic acid,octylphosphonic acid
+dodecanoic acid,octadecanoic acid
+dodecylphosphonic acid,octadecanoic acid
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octan-1-amine
+10-phosphonodecylphosphonic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+2-pyridin-2-ylpyridine,dodecylphosphonic acid
+10-phosphonodecylphosphonic acid,octylphosphonic acid
+"1,10-phenanthroline",octan-1-amine
+2-pyridin-2-ylpyridine,(Z)-octadec-9-enoic acid
+"decane-1,10-dithiol",octan-1-amine
+(Z)-octadec-9-en-1-amine,octan-1-amine
+"N,N-dibutylbutan-1-amine",octanoic acid
 dodecylphosphonic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-octadecanoic acid,(Z)-octadec-9-enoic acid
+(Z)-octadec-9-enoic acid,octadecanoic acid
 octadecanoic acid,octadecan-1-amine
-octadecan-1-amine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-octadecanoic acid,"3,3-diphenylpropan-1-amine"
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,"decane-1,10-dithiol"
-octadecanoic acid,"N,N-dibutylbutan-1-amine"
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octadecan-1-amine
+"3,3-diphenylpropan-1-amine",octadecanoic acid
+"decane-1,10-dithiol",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+"N,N-dibutylbutan-1-amine",octadecanoic acid
 "1,10-phenanthroline",octadecan-1-amine
-N-butylbutan-1-amine,N-octyloctan-1-amine
-octadecanoic acid,N-octyloctan-1-amine
-octadecylphosphonic acid,"N,N-dibutylbutan-1-amine"
-octadecan-1-amine,dodecan-1-amine
-(Z)-octadec-9-en-1-amine,N-octyloctan-1-amine
-(Z)-octadec-9-en-1-amine,dodecanoic acid
+N-octyloctan-1-amine,N-butylbutan-1-amine
+N-octyloctan-1-amine,octadecanoic acid
+"N,N-dibutylbutan-1-amine",octadecylphosphonic acid
+dodecan-1-amine,octadecan-1-amine
+N-octyloctan-1-amine,(Z)-octadec-9-en-1-amine
+dodecanoic acid,(Z)-octadec-9-en-1-amine
 octadecane-1-thiol,octanoic acid
 octadecanoic acid,2-amino-3-phenylpropanoic acid
-octadecanoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,octadecanoic acid
 (Z)-octadec-9-en-1-amine,octadecan-1-amine
 "decane-1,10-diamine",N-butylbutan-1-amine
-octan-1-amine,octanoic acid
+octanoic acid,octan-1-amine
 10-phosphonodecylphosphonic acid,dodecan-1-amine
 2-pyridin-2-ylpyridine,"N,N-dioctyloctan-1-amine"
-octadecylphosphonic acid,dodecan-1-amine
-octylphosphonic acid,dodecylphosphonic acid
-octadecane-1-thiol,2-pyridin-2-ylpyridine
+dodecan-1-amine,octadecylphosphonic acid
+dodecylphosphonic acid,octylphosphonic acid
+2-pyridin-2-ylpyridine,octadecane-1-thiol
 "1,10-phenanthroline",octadecanoic acid
-octylphosphonic acid,2-pyridin-2-ylpyridine
-2-amino-3-phenylpropanoic acid,dodecan-1-amine
-octylphosphonic acid,"1,10-phenanthroline"
-octanoic acid,"N,N-dioctyloctan-1-amine"
+2-pyridin-2-ylpyridine,octylphosphonic acid
+dodecan-1-amine,2-amino-3-phenylpropanoic acid
+"1,10-phenanthroline",octylphosphonic acid
+"N,N-dioctyloctan-1-amine",octanoic acid
 (Z)-octadec-9-enoic acid,N-butylbutan-1-amine
-"1,10-phenanthroline",dodecanoic acid
-N-butylbutan-1-amine,dodecanoic acid
+dodecanoic acid,"1,10-phenanthroline"
+dodecanoic acid,N-butylbutan-1-amine
 octadecane-1-thiol,octadecan-1-amine
 "3,3-diphenylpropan-1-amine","N,N-dioctyloctan-1-amine"
 octadecanoic acid,"N,N-dioctyloctan-1-amine"
 octan-1-amine,2-amino-3-phenylpropanoic acid
-octadecane-1-thiol,octadecanoic acid
+octadecanoic acid,octadecane-1-thiol
 "1,10-phenanthroline",N-octyloctan-1-amine
-octadecane-1-thiol,"N,N-dibutylbutan-1-amine"
+"N,N-dibutylbutan-1-amine",octadecane-1-thiol
 octadecane-1-thiol,2-amino-3-phenylpropanoic acid
 "decane-1,10-diamine",octadecan-1-amine
-octan-1-amine,octadecane-1-thiol
+octadecane-1-thiol,octan-1-amine
 dodecylphosphonic acid,(Z)-octadec-9-en-1-amine
 "1,10-phenanthroline",N-butylbutan-1-amine
 dodecylphosphonic acid,(Z)-octadec-9-enoic acid
-(Z)-octadec-9-enoic acid,"3,3-diphenylpropan-1-amine"
+"3,3-diphenylpropan-1-amine",(Z)-octadec-9-enoic acid
 octadecanoic acid,octadecylphosphonic acid
-octan-1-amine,dodecanoic acid
+dodecanoic acid,octan-1-amine
 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,"N,N-dioctyloctan-1-amine"
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,"3,3-diphenylpropan-1-amine"
+"3,3-diphenylpropan-1-amine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 "decane-1,10-diamine","N,N-dioctyloctan-1-amine"
-octanoic acid,octadecanoic acid
-"1,10-phenanthroline","N,N-dibutylbutan-1-amine"
-octadecan-1-amine,"N,N-dibutylbutan-1-amine"
-2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine
-octadecylphosphonic acid,"decane-1,10-dithiol"
+octadecanoic acid,octanoic acid
+"N,N-dibutylbutan-1-amine","1,10-phenanthroline"
+"N,N-dibutylbutan-1-amine",octadecan-1-amine
+N-octyloctan-1-amine,2-amino-3-phenylpropanoic acid
+"decane-1,10-dithiol",octadecylphosphonic acid
 10-phosphonodecylphosphonic acid,dodecanoic acid
-dodecylphosphonic acid,"N,N-dibutylbutan-1-amine"
+"N,N-dibutylbutan-1-amine",dodecylphosphonic acid
 "3,3-diphenylpropan-1-amine",octadecylphosphonic acid
-octanoic acid,"decane-1,10-diamine"
-(Z)-octadec-9-en-1-amine,2-pyridin-2-ylpyridine
+"decane-1,10-diamine",octanoic acid
+2-pyridin-2-ylpyridine,(Z)-octadec-9-en-1-amine
 2-pyridin-2-ylpyridine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-2-amino-3-phenylpropanoic acid,"3,3-diphenylpropan-1-amine"
+"3,3-diphenylpropan-1-amine",2-amino-3-phenylpropanoic acid
 "1,10-phenanthroline",(Z)-octadec-9-en-1-amine
-octan-1-amine,"N,N-dibutylbutan-1-amine"
-octadecane-1-thiol,dodecylphosphonic acid
-octanoic acid,octadecan-1-amine
+"N,N-dibutylbutan-1-amine",octan-1-amine
+dodecylphosphonic acid,octadecane-1-thiol
+octadecan-1-amine,octanoic acid
 octanoic acid,N-butylbutan-1-amine
-N-octyloctan-1-amine,dodecanoic acid
-octadecanoic acid,10-phosphonodecylphosphonic acid
-"N,N-dioctyloctan-1-amine",dodecan-1-amine
-octylphosphonic acid,"N,N-dioctyloctan-1-amine"
-(Z)-octadec-9-enoic acid,dodecan-1-amine
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,dodecanoic acid
+dodecanoic acid,N-octyloctan-1-amine
+10-phosphonodecylphosphonic acid,octadecanoic acid
+dodecan-1-amine,"N,N-dioctyloctan-1-amine"
+"N,N-dioctyloctan-1-amine",octylphosphonic acid
+dodecan-1-amine,(Z)-octadec-9-enoic acid
+dodecanoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 2-pyridin-2-ylpyridine,octadecylphosphonic acid
 "decane-1,10-diamine",octadecylphosphonic acid
-(Z)-octadec-9-enoic acid,"decane-1,10-dithiol"
-octadecane-1-thiol,(Z)-octadec-9-en-1-amine
+"decane-1,10-dithiol",(Z)-octadec-9-enoic acid
+(Z)-octadec-9-en-1-amine,octadecane-1-thiol
 10-phosphonodecylphosphonic acid,"N,N-dioctyloctan-1-amine"
 octadecane-1-thiol,octadecylphosphonic acid
-octylphosphonic acid,(Z)-octadec-9-enoic acid
+(Z)-octadec-9-enoic acid,octylphosphonic acid
 "decane-1,10-diamine",(Z)-octadec-9-enoic acid
-octadecanoic acid,"decane-1,10-dithiol"
-dodecylphosphonic acid,10-phosphonodecylphosphonic acid
-"N,N-dioctyloctan-1-amine",dodecanoic acid
-2-amino-3-phenylpropanoic acid,octadecylphosphonic acid
-N-butylbutan-1-amine,octadecylphosphonic acid
-octadecane-1-thiol,dodecan-1-amine
-"1,10-phenanthroline",dodecan-1-amine
-2-amino-3-phenylpropanoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-octan-1-amine,10-phosphonodecylphosphonic acid
-octylphosphonic acid,octadecan-1-amine
-"N,N-dibutylbutan-1-amine",dodecanoic acid
-"3,3-diphenylpropan-1-amine","N,N-dibutylbutan-1-amine"
-octylphosphonic acid,"decane-1,10-dithiol"
-"1,10-phenanthroline","decane-1,10-diamine"
+"decane-1,10-dithiol",octadecanoic acid
+10-phosphonodecylphosphonic acid,dodecylphosphonic acid
+dodecanoic acid,"N,N-dioctyloctan-1-amine"
+octadecylphosphonic acid,2-amino-3-phenylpropanoic acid
+octadecylphosphonic acid,N-butylbutan-1-amine
+dodecan-1-amine,octadecane-1-thiol
+dodecan-1-amine,"1,10-phenanthroline"
+4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,2-amino-3-phenylpropanoic acid
+10-phosphonodecylphosphonic acid,octan-1-amine
+octadecan-1-amine,octylphosphonic acid
+dodecanoic acid,"N,N-dibutylbutan-1-amine"
+"N,N-dibutylbutan-1-amine","3,3-diphenylpropan-1-amine"
+"decane-1,10-dithiol",octylphosphonic acid
+"decane-1,10-diamine","1,10-phenanthroline"
 octadecane-1-thiol,"N,N-dioctyloctan-1-amine"
-N-butylbutan-1-amine,octadecan-1-amine
-octylphosphonic acid,"3,3-diphenylpropan-1-amine"
-"N,N-dioctyloctan-1-amine","decane-1,10-dithiol"
-N-butylbutan-1-amine,"decane-1,10-dithiol"
-octan-1-amine,2-pyridin-2-ylpyridine
+octadecan-1-amine,N-butylbutan-1-amine
+"3,3-diphenylpropan-1-amine",octylphosphonic acid
+"decane-1,10-dithiol","N,N-dioctyloctan-1-amine"
+"decane-1,10-dithiol",N-butylbutan-1-amine
+2-pyridin-2-ylpyridine,octan-1-amine
 "1,10-phenanthroline","N,N-dioctyloctan-1-amine"
 "1,10-phenanthroline",(Z)-octadec-9-enoic acid
-octanoic acid,(Z)-octadec-9-en-1-amine
-"1,10-phenanthroline",10-phosphonodecylphosphonic acid
-"3,3-diphenylpropan-1-amine","decane-1,10-dithiol"
+(Z)-octadec-9-en-1-amine,octanoic acid
+10-phosphonodecylphosphonic acid,"1,10-phenanthroline"
+"decane-1,10-dithiol","3,3-diphenylpropan-1-amine"
 10-phosphonodecylphosphonic acid,N-octyloctan-1-amine
 dodecylphosphonic acid,"3,3-diphenylpropan-1-amine"
-dodecylphosphonic acid,dodecan-1-amine
+dodecan-1-amine,dodecylphosphonic acid
 2-pyridin-2-ylpyridine,dodecan-1-amine
-octadecane-1-thiol,N-octyloctan-1-amine
+N-octyloctan-1-amine,octadecane-1-thiol
 dodecylphosphonic acid,N-octyloctan-1-amine
-octylphosphonic acid,octadecane-1-thiol
+octadecane-1-thiol,octylphosphonic acid
 (Z)-octadec-9-en-1-amine,N-butylbutan-1-amine
-"3,3-diphenylpropan-1-amine",dodecanoic acid
+dodecanoic acid,"3,3-diphenylpropan-1-amine"
 "3,3-diphenylpropan-1-amine",N-octyloctan-1-amine
 2-pyridin-2-ylpyridine,"3,3-diphenylpropan-1-amine"
 octan-1-amine,N-butylbutan-1-amine
 "decane-1,10-diamine",octadecanoic acid
-octylphosphonic acid,octadecanoic acid
+octadecanoic acid,octylphosphonic acid
 (Z)-octadec-9-en-1-amine,octadecylphosphonic acid
 "decane-1,10-diamine",N-octyloctan-1-amine
-N-butylbutan-1-amine,"N,N-dibutylbutan-1-amine"
-"N,N-dioctyloctan-1-amine","N,N-dibutylbutan-1-amine"
+"N,N-dibutylbutan-1-amine",N-butylbutan-1-amine
+"N,N-dibutylbutan-1-amine","N,N-dioctyloctan-1-amine"
 "decane-1,10-dithiol",dodecan-1-amine
-octadecane-1-thiol,"3,3-diphenylpropan-1-amine"
-2-amino-3-phenylpropanoic acid,octadecan-1-amine
-octanoic acid,(Z)-octadec-9-enoic acid
+"3,3-diphenylpropan-1-amine",octadecane-1-thiol
+octadecan-1-amine,2-amino-3-phenylpropanoic acid
+(Z)-octadec-9-enoic acid,octanoic acid
 (Z)-octadec-9-enoic acid,"N,N-dioctyloctan-1-amine"
 "decane-1,10-diamine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 "1,10-phenanthroline",2-amino-3-phenylpropanoic acid
-10-phosphonodecylphosphonic acid,"decane-1,10-dithiol"
-2-amino-3-phenylpropanoic acid,2-pyridin-2-ylpyridine
+"decane-1,10-dithiol",10-phosphonodecylphosphonic acid
+2-pyridin-2-ylpyridine,2-amino-3-phenylpropanoic acid
 "decane-1,10-diamine",10-phosphonodecylphosphonic acid
-4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,N-octyloctan-1-amine
-N-butylbutan-1-amine,2-pyridin-2-ylpyridine
+N-octyloctan-1-amine,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+2-pyridin-2-ylpyridine,N-butylbutan-1-amine

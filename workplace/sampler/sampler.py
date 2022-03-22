@@ -23,7 +23,7 @@ def write_mols_names(mols: [Molecule], fn: typing.Union[str, pathlib.Path]):
 def write_pairs_names(pairs, fn: typing.Union[str, pathlib.Path]):
     records = []
     for p in pairs:
-        p = tuple(p)
+        p = tuple(sorted(p))
         m0, m1 = p
         record = {"ligand0": m0.iupac_name, "ligand1": m1.iupac_name}
         records.append(record)
@@ -135,3 +135,18 @@ if __name__ == '__main__':
             ks_pairs.append(frozenset([molecules[i], molecules[j]]))
         assert len(ks_pairs) == len(set(ks_pairs))
         write_pairs_names(ks_pairs, "ks_pairs-{}.csv".format(distance_definition))
+
+    random.seed(SEED + 1)
+    # remove the unwanted ligand from `all_pairs`
+    # create a copy molecules with unwanted ligands removed
+    molecules_without_unwanted_ligands = [m for m in molecules if m.inchi not in [
+    "InChI=1S/C18H39N/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19/h2-19H2,1H3",
+    "InChI=1S/C9H11NO2/c10-8(9(11)12)6-7-4-2-1-3-5-7/h1-5,8H,6,10H2,(H,11,12)",
+    "InChI=1S/C10H24N2/c11-9-7-5-3-1-2-4-6-8-10-12/h1-12H2",
+    "InChI=1S/C10H24O6P2/c11-17(12,13)9-7-5-3-1-2-4-6-8-10-18(14,15)16/h1-10H2,(H2,11,12,13)(H2,14,15,16)",
+    "InChI=1S/C10H22S2/c11-9-7-5-3-1-2-4-6-8-10-12/h11-12H,1-10H2"]]
+
+    new_all_pairs = [frozenset(pair) for pair in itertools.combinations(molecules_without_unwanted_ligands, 2)]
+    NSAMPLES_PAIR = len(new_all_pairs)
+    random_pairs_unwanted_removed = random.sample(new_all_pairs, k=NSAMPLES_PAIR)
+    write_pairs_names(random_pairs_unwanted_removed, "random_pairs_without_unwanted.csv")
