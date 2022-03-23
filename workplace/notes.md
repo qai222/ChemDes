@@ -32,14 +32,29 @@
   ```
 
 ### 2022.03.17
+- existing data shows not positive correlation for c-fom
+  - lower max C for solubility? 
 - sample concentrations for unlabelled ligands
-  - denser >= 43 should be fine, p value estimates
+  - denser >= 43? **should be fine, p value estimates**
 - model persistence: once the active learning starts 
   the following parameters/feature set cannot change
+  - adding more features? `10.1021/jacs.8b11035`
 - feature scaling method: do we want to use theoretic limits, or limits from dataset?
-  - can be ignored in DT based methods
+  - **can be ignored in DT based methods**
 - error propagation
   - peak fitting?
-- comparing arbitrary distributions:[pick top 10%, use KS/THOMPSON, fig 11. jcp2022]
+- comparing arbitrary distributions:
+  - **pick top 10%, use KS/THOMPSON, fig 11. jcp2022**
   - A is higher than B
   - A is more uncertainly than B
+
+#### 2022.03.19
+- new descriptors added from `cxcalc`
+  - re-perform tasks dependent on descriptor list
+#### 2022.03.21
+- use only `2022_0317_LS_PeakArea_mk.xlsx`, deprecate other FOM sheets.
+- suggestion using MC binary sampling, note the comparison results are not transitive.
+#### 2022.03.22
+- leave-one-ligand-out (lolo.py)
+- BayesCV
+- should we tune the regressor during each iteration?

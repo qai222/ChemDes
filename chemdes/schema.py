@@ -36,10 +36,15 @@ class Molecule(MSONable):
             raise NotImplementedError("`repr_type` not implemented: {}".format(repr_type))
 
     def __repr__(self):
-        return "{}: {}".format(self.__class__.__name__, self.inchi)
+        return self.inchi + "---" + self.iupac_name
 
     def __str__(self):
-        return str(self.inchi)
+        return "{}: {}".format(self.__class__.__name__, self.inchi)
+
+    @classmethod
+    def from_repr(cls, s: str):
+        inchi, name = s.split("---")
+        return cls(inchi, name)
 
     def __hash__(self):
         return hash(self.inchi)

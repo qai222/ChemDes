@@ -3,9 +3,9 @@ from pathlib import Path
 from typing import Union
 
 import numpy as np
-import scipy.stats
 
-from chemdes.twinsk.estimator import TwinEstimator, BaseEstimator, TwinClassifier, TwinRegressor, RegressorMixin, ClassifierMixin
+from chemdes.twinsk.estimator import BaseEstimator, TwinClassifier, TwinRegressor, RegressorMixin, \
+    upper_confidence_interval
 from chemdes.utils import SEED
 
 
@@ -34,17 +34,6 @@ def multi_argmax(values: np.ndarray, n_instances: int = 1) -> np.ndarray:
 
     max_idx = np.argpartition(-values, n_instances - 1, axis=0)[:n_instances]
     return max_idx
-
-
-def upper_confidence_interval(data: np.ndarray, confidence=0.95):
-    # TODO ubc algorithm uses sample size to penalize mean, we have a fixed plate, sample size stays the same
-    """ https://stackoverflow.com/questions/15033511/ """
-    assert data.ndim == 1 and len(data) >= 2
-    a = 1.0 * np.array(data)
-    n = len(a)
-    m, se = np.mean(a), scipy.stats.sem(a)
-    h = se * scipy.stats.t.ppf((1 + confidence) / 2., n - 1)
-    return m + h
 
 
 class TwinActiveLearnerError(Exception): pass

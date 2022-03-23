@@ -13,35 +13,15 @@ from chemdes.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition,
     reactions_to_xy, categorize_reactions
 from chemdes.schema import inventory_df_to_mols
 from chemdes.schema import load_inventory
-from chemdes.utils import json_dump, strip_extension
+from chemdes.utils import strip_extension, json_dump
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
 
+_ligand_inventory = load_inventory("../data/2022_0217_ligand_InChI_mk.xlsx", to_mols=True)
 _SolventIdentity = "m-xylene"
 _LigandStockSolutionConcentration = 0.05
 _LigandStockSolutionConcentrationUnit = "M"
 _VolumeUnit = "ul"
-
-
-class FomStrategy:
-
-    # @staticmethod
-    # def FOM_strategy_BINARY_BetterThanSmallestRef(ref_reactions: [ReactionNcOneLigand],
-    #                                               real_reactions: [ReactionNcOneLigand]):
-    #     """ is there at least one fom higher than the smallest ref fom? """
-    #     min_ref_fom = min([r.properties["fom"] for r in ref_reactions])
-    #     max_real_fom = max([r.properties["fom"] for r in real_reactions])
-    #     return int(max_real_fom > min_ref_fom)
-
-    @staticmethod
-    def FOM_strategy_CONTINUOUS_MaxFom(ref_reactions, real_reactions: [ReactionNcOneLigand]):
-        """ max fom of real reactions """
-        return max([r.properties["fom"] for r in real_reactions])
-
-    @staticmethod
-    def FOM_strategy_CONTINUOUS_AvgTop5(ref_reactions, real_reactions: [ReactionNcOneLigand]):
-        """ avg of top 5 fom of real reactions """
-        return np.mean(sorted([r.properties["fom"] for r in real_reactions], reverse=True)[:5])
 
 
 def padding_vial_label(v: str) -> str:
@@ -57,6 +37,36 @@ def padding_vial_label(v: str) -> str:
         return final_string
     except (AssertionError, ValueError) as e:
         raise ValueError("invalid vial: {}".format(v))
+
+
+def name_ligand(l: Molecule):
+    for ll in _ligand_inventory:
+        if ll == l:
+            l.iupac_name = ll.iupac_name
+            break
+    return l
+
+
+def load_reaction_excel(ligand_specification_string: str, excel_path: Union[Path, str]) -> tuple[
+    list[Molecule], list[ReactionNcOneLigand]]:
+    # load excel file
+    ef = pd.ExcelFile(os.path.join(this_dir, excel_path))
+
+    # what are the ligands?
+    ligands_used = pd.read_table(StringIO(ligand_specification_string))
+    ligands_used = inventory_df_to_mols(ligands_used)
+    ligands_used = [name_ligand(l) for l in ligands_used]
+
+    # parse condition sheets
+    reactions = []
+    condition_sheets = ef.sheet_names[2:]
+    assert all("robotinput" in sheet for sheet in condition_sheets)
+    assert len(ligands_used) == len(condition_sheets)
+    for ligand, sheet in zip(ligands_used, condition_sheets):
+        condition_dataframe = ef.parse(sheet)
+        reactions_of_this_ligand = load_reaction_dataframe(condition_dataframe, sheet, ligand)
+        reactions += reactions_of_this_ligand
+    return ligands_used, reactions
 
 
 def load_reaction_dataframe(reaction_df: pd.DataFrame, sheet_name: str, ligand_mol: Molecule):
@@ -98,43 +108,8 @@ def load_reaction_dataframe(reaction_df: pd.DataFrame, sheet_name: str, ligand_m
     return reactions
 
 
-def load_reactions(ligand_mols, reaction_path: Union[Path, str]):
-    # load excel file
-    ef = pd.ExcelFile(os.path.join(this_dir, reaction_path))
-
-    # parse the figure of merit sheet
-    fom_sheet = ef.sheet_names[1]
-    fom_df = ef.parse(fom_sheet)
-    vial_col = "Layout"
-    assert len(fom_df.columns == len(ligand_mols) + 1)
-    assert fom_df.columns[0] == vial_col
-    fom_dict = dict()
-    for iligand, ligand_fom_col in enumerate(fom_df.columns[1:]):
-        ligand_mol = ligand_mols[iligand]
-        fom_dict[ligand_mol] = dict()
-        for vial, fom_val in zip(fom_df[vial_col], fom_df[ligand_fom_col]):
-            fom_dict[ligand_mol][padding_vial_label(vial)] = fom_val
-
-    # parse the conditions
-    all_reactions = []
-    ligand_sheets = ef.sheet_names[2:]
-    assert len(ligand_sheets) == len(ligand_mols)
-    for ligand_mol, sheet_name in zip(ligand_mols, ligand_sheets):
-        reaction_dataframe = ef.parse(sheet_name)
-        reactions = load_reaction_dataframe(reaction_dataframe, sheet_name, ligand_mol)
-        # link each reaction to a fom
-        for r in reactions:
-            reaction_fom = fom_dict[ligand_mol][r.properties["vial"]]
-            r.properties["fom"] = reaction_fom
-        all_reactions += reactions
-
-    # # check reactions
-    # for r in all_reactions:
-    #     r.check()
-    return all_reactions
-
-
 def plot_concentration_fom(real: [ReactionNcOneLigand], ref: [ReactionNcOneLigand], saveas: str):
+    # TODO add error bars for dfom
     x_real, y_real, x_unit = reactions_to_xy(real)
     x_ref, y_ref, x_unit = reactions_to_xy(ref)
     fig, ax = plt.subplots()
@@ -152,28 +127,7 @@ def plot_concentration_fom(real: [ReactionNcOneLigand], ref: [ReactionNcOneLigan
     fig.savefig("{}.png".format(saveas), dpi=300)
 
 
-if __name__ == '__main__':
-    logging.basicConfig(filename='{}.log'.format(strip_extension(os.path.basename(__file__))), filemode="w")
-
-    ligands_from_inventory = load_inventory("../data/2022_0217_ligand_InChI_mk.xlsx", to_mols=True)
-
-    # read ligand information from the first sheet of 2022_0304_LS001_MK003
-    Ligand_Selected = StringIO("""Name	CAS	Molecular Formula	InChI
-    2,2′-Bipyridyl	366-18-7	C10H8N2	InChI=1S/C10H8N2/c1-3-7-11-9(5-1)10-6-2-4-8-12-10/h1-8H
-    Lauric acid (dodecanoic acid)	143-07-7	C12H24O2	InChI=1S/C12H24O2/c1-2-3-4-5-6-7-8-9-10-11-12(13)14/h2-11H2,1H3,(H,13,14)
-    Tributylamine	102-82-9	C12H27N	InChI=1S/C12H27N/c1-4-7-10-13(11-8-5-2)12-9-6-3/h4-12H2,1-3H3
-    Octylphosphonic acid	4724-48-5	C8H19O3P	InChI=1S/C8H19O3P/c1-2-3-4-5-6-7-8-12(9,10)11/h2-8H2,1H3,(H2,9,10,11)
-    Octadecanethiol	2885-00-9	C18H38S	InChI=1S/C18H38S/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19/h19H,2-18H2,1H3""")
-    df_ligand = pd.read_table(Ligand_Selected)
-    ligands = inventory_df_to_mols(df_ligand)
-
-    # add iupac_names
-    for l in ligands:
-        for ll in ligands_from_inventory:
-            if l == ll:
-                l.iupac_name = ll.iupac_name
-
-    # check defaults
+def default_warning(ligands: [Molecule]):
     logging.warning("=" * 3 + "CAREFULLY CHECK THE FOLLOWING DEFAULT SETTINGS !!!" + "=" * 3)
     logging.warning("The solvent is: {}".format(_SolventIdentity))
     logging.warning("The ligand stock solutions have concentration: {} {}".format(_LigandStockSolutionConcentration,
@@ -183,47 +137,82 @@ if __name__ == '__main__':
         ["LIGAND: {}".format(m.iupac_name) for m in ligands])))
     logging.warning("=" * 3 + "DEFAULT SETTINGS END" + "=" * 3)
 
-    # read reactions
-    logging.warning("...reading reactions...")
-    reactions = load_reactions(ligands, "../data/2022_0304_LS001_MK003_with_update.xlsx")
 
-    # subgroup reactions by ligand, reaction type (ref, blank, or real)
-    reaction_data = []
-    ligand_to_categorized_reactions = categorize_reactions(reactions)
-    for ligand, categorized_reactions in categorize_reactions(reactions).items():
-        # data holder for this ligand
+def categorized_reactions_warning(data: dict):
+    for l in data:
+        logging.warning(">> ligand: {}".format(l))
+        real, ref, blank = data[l]
+        logging.warning("# of real reactions: {}".format(len(real)))
+        logging.warning("# of ref reactions: {}".format(len(ref)))
+        logging.warning("# of blank reactions: {}".format(len(blank)))
+
+
+def load_fom_sheet(excel_file: Union[Path, str], sheet_name: str, ligands_used: [Molecule]):
+    ef = pd.ExcelFile(os.path.join(this_dir, excel_file))
+    fom_dataframe = ef.parse(sheet_name)
+
+    layout_col = "Layout"
+    fom_cols = [c for c in fom_dataframe.columns if c.endswith("PL_area")]
+    dfom_cols = [c for c in fom_dataframe.columns if c.endswith("PL_area_s")]
+    assert len(fom_cols) == len(dfom_cols) == len(ligands_used)
+
+    data = dict()
+    for i in range(len(ligands_used)):
         ligand_data = dict()
-        ligand_data["ligand"] = ligand
+        ligand = ligands_used[i]
+        fom_col = fom_cols[i]
+        dfom_col = dfom_cols[i]
+        this_df = fom_dataframe[[layout_col, fom_col, dfom_col]].dropna(axis=0, how="any")
+        records = this_df.to_dict(orient="records")
+        for r in records:
+            ligand_data[padding_vial_label(r[layout_col])] = {"fom": r[fom_col], "dfom": r[dfom_col]}
+        data[ligand] = ligand_data
+    return data  # data[ligand][vial number] -> "fom":fom, "dfom":dfom
 
-        real_reactions, ref_reactions, blank_reactions = categorized_reactions
-        ligand_data["real_reactions"] = real_reactions
-        ligand_data["ref_reactions"] = ref_reactions
-        ligand_data["blank_reactions"] = blank_reactions
 
-        # check blank reactions
-        for r in blank_reactions:
+if __name__ == '__main__':
+    logging.basicConfig(filename='{}.log'.format(strip_extension(os.path.basename(__file__))), filemode="w")
+
+    LIGANDS_SPECIFICATION = """Name	CAS	Molecular Formula	InChI
+    2,2′-Bipyridyl	366-18-7	C10H8N2	InChI=1S/C10H8N2/c1-3-7-11-9(5-1)10-6-2-4-8-12-10/h1-8H
+    Lauric acid (dodecanoic acid)	143-07-7	C12H24O2	InChI=1S/C12H24O2/c1-2-3-4-5-6-7-8-9-10-11-12(13)14/h2-11H2,1H3,(H,13,14)
+    Tributylamine	102-82-9	C12H27N	InChI=1S/C12H27N/c1-4-7-10-13(11-8-5-2)12-9-6-3/h4-12H2,1-3H3
+    Octylphosphonic acid	4724-48-5	C8H19O3P	InChI=1S/C8H19O3P/c1-2-3-4-5-6-7-8-12(9,10)11/h2-8H2,1H3,(H2,9,10,11)
+    Octadecanethiol	2885-00-9	C18H38S	InChI=1S/C18H38S/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19/h19H,2-18H2,1H3"""
+
+    ligands_used, reactions = load_reaction_excel(LIGANDS_SPECIFICATION,
+                                                  excel_path="../data/2022_0304_LS001_MK003.xlsx")
+    default_warning(ligands_used)
+
+    fom_data = load_fom_sheet("../data/2022_0317_LS_PeakArea_mk.xlsx", sheet_name="LS001_single_RPA_MK003",
+                              ligands_used=ligands_used)
+
+    invalid_reactions = []
+    for ir, r in enumerate(reactions):
+        try:
+            entry = fom_data[r.ligand.identity][r.properties["vial"]]
+            r.properties["fom"] = entry["fom"]
+            r.properties["dfom"] = entry["dfom"]
+        except KeyError:
+            logging.critical(
+                "this reaction is missing FOM: {}".format(r.ligand.identity.iupac_name + "--" + r.properties["vial"]))
+            invalid_reactions.append(ir)
+    for i in invalid_reactions:
+        reactions.pop(i)
+
+    ligand_to_categorized_reactions = categorize_reactions(reactions)
+    categorized_reactions_warning(ligand_to_categorized_reactions)
+
+    # plot c vs fom
+    for l in ligand_to_categorized_reactions:
+        real, ref, blank = ligand_to_categorized_reactions[l]
+        ref_fom = np.mean([r.properties["fom"] for r in ref])
+        for r in real + ref + blank:
             try:
-                assert r.properties["fom"] < 1e-7 or np.isnan(r.properties["fom"])
-            except AssertionError:
-                logging.critical("this BLANK reaction has nonzero FOM???")
-                logging.critical(r.__repr__())
+                r.properties["fom"] /= ref_fom
+            except KeyError:
+                continue
+        plot_concentration_fom(real, ref, saveas="c_vs_fom/" + l.iupac_name)
 
-        # plot c vs fom for each ligand
-        plot_concentration_fom(real_reactions, ref_reactions, "c_vs_fom/" + ligand.iupac_name)
-
-        # fom value for a ligand
-        fs = FomStrategy()
-        for strategy in [getattr(fs, n) for n in dir(fs) if n.startswith("FOM_")]:
-            fom_value = strategy(ref_reactions, real_reactions)
-            ligand_data[strategy.__name__] = fom_value
-
-        # printout info
-        logging.warning("ligand name: {}".format(ligand.iupac_name))
-        logging.warning("# of real reactions: {}".format(len(real_reactions)))
-        logging.warning("# of blank reactions: {}".format(len(blank_reactions)))
-        logging.warning("# of ref reactions: {}".format(len(ref_reactions)))
-
-        reaction_data.append(ligand_data)
-
-    # export json
-    json_dump(reaction_data, "output/2022_0304_LS001_MK003_reaction_data.json")
+    json_dump({k.__repr__(): v for k, v in ligand_to_categorized_reactions.items()},
+              "output/2022_0304_LS001_MK003_reaction_data.json")
