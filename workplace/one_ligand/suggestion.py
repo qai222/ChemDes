@@ -152,7 +152,7 @@ if __name__ == '__main__':
 
     # predict
     unlabelled_ligands = [l for l in LigandToDesRecord if l not in labelled_ligands]
-    df_outcome_unlabelled = get_predictions(reg, unlabelled_ligands, LigandToDesRecord, cmin, cmax, 100, y_real=None)
+    df_outcome_unlabelled = get_predictions(reg, unlabelled_ligands, LigandToDesRecord, cmin, cmax, 1000, y_real=None)
     df_outcome_labelled = get_predictions(reg, labelled_ligands, LigandToDesRecord, cmin, cmax, 100,
                                           y_real=df_y_labelled.values, df_X_real=df_X_labelled)
     df_outcome = pd.concat([df_outcome_labelled, df_outcome_unlabelled], axis=0)
