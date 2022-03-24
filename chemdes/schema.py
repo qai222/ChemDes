@@ -277,7 +277,7 @@ class GeneralReaction(MSONable, abc.ABC):
         return self.__repr__() == other.__repr__()
 
 
-def group_reactions(reactions: [GeneralReaction], field: str) -> tuple[list, [GeneralReaction]]:
+def group_reactions(reactions: [GeneralReaction], field: str):
     from chemdes.utils import rgetattr
     groups = []
     unique_keys = []
