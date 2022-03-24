@@ -1,9 +1,10 @@
 Ligand Selection with Active Learning
 ---
 
-### Visualization
+### Results and visualizations
 - Seed dataset
-  - [Ligand Inventory](http://143.198.128.149:8123/) (raw [csv](./workplace/inventory/inventory.csv))
+  - [Ligand inventory](http://143.198.128.149:8123/) (raw [csv](./workplace/inventory/inventory.csv))
+  - [Dimensionality reduction of the ligand pool](http://143.198.128.149:8125/) with [selected features](./workplace/ligand_descriptors/calculate.py)
   - [One-ligand experiments](./workplace/one_ligand/c_vs_fom)
   - [Sampling](./workplace/sampler)
 - One-ligand system predictions
