@@ -3,6 +3,7 @@ import itertools
 import json
 import logging
 import os
+import re
 import pathlib
 import typing
 
@@ -13,6 +14,7 @@ from rdkit.Chem.inchi import MolFromInchi
 
 SEED = 42
 
+FilePath = typing.Union[pathlib.Path, os.PathLike, str]
 
 def inchi2smiles(inchi: str) -> str:
     return MolToSmiles(MolFromInchi(inchi))
@@ -88,3 +90,23 @@ def sort_and_group(data, keyf):
         groups.append(list(g))
         unique_keys.append(k)
     return unique_keys, groups
+
+def get_folder(path: typing.Union[pathlib.Path, str]):
+    return os.path.dirname(os.path.abspath(path))
+
+def padding_vial_label(v: str) -> str:
+    """ pad zeros for vial label, e.g. A1 -> A01 """
+    assert len(v) <= 3
+    v_list = re.findall(r"[^\W\d_]+|\d+", v)
+    try:
+        assert len(v_list) == 2
+        alpha, numeric = v_list
+        assert len(numeric) <= 2
+        final_string = alpha + "{0:02d}".format(int(numeric))
+        assert len(final_string) == len(alpha) + 2
+        return final_string
+    except (AssertionError, ValueError) as e:
+        raise ValueError("invalid vial: {}".format(v))
+
+def get_basename(path: typing.Union[pathlib.Path, str]):
+    return strip_extension(os.path.basename(os.path.abspath(path)))
