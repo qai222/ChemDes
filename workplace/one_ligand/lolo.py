@@ -7,10 +7,10 @@ from sklearn.ensemble import RandomForestRegressor
 from skopt import BayesSearchCV
 from skopt import load
 
-from chemdes.one_ligand import Molecule
-from chemdes.tasks.preprocess import preprocess_descriptor_df, load_descriptors_and_fom
-from chemdes.twinsk.estimator import TwinRegressor
-from chemdes.utils import SEED
+from lsal.one_ligand import Molecule
+from lsal.tasks.preprocess import preprocess_descriptor_df, load_descriptors_and_fom
+from lsal.twinsk.estimator import TwinRegressor
+from lsal.utils import SEED
 
 
 def ligands_from_df(df: pd.DataFrame) -> list[Molecule]:

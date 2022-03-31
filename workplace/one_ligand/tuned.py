@@ -3,9 +3,9 @@ from sklearn.ensemble import RandomForestRegressor
 from skopt import BayesSearchCV
 from skopt import load
 
-from chemdes.tasks.preprocess import load_descriptors_and_fom, preprocess_descriptor_df, Union, Path
-from chemdes.twinsk.estimator import TwinRegressor
-from chemdes.utils import SEED
+from lsal.tasks.preprocess import load_descriptors_and_fom, preprocess_descriptor_df, Union, Path
+from lsal.twinsk.estimator import TwinRegressor
+from lsal.utils import SEED
 
 
 def train_with_tuned_params(X, y, opt: BayesSearchCV, dumpto: Union[Path, str]):

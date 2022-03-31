@@ -5,8 +5,8 @@ import pandas as pd
 from skopt import BayesSearchCV
 from skopt import load
 
-from chemdes.one_ligand import Molecule
-from chemdes.twinsk.estimator import TwinRegressor
+from lsal.one_ligand import Molecule
+from lsal.twinsk.estimator import TwinRegressor
 
 
 def ligands_from_df(df: pd.DataFrame) -> list[Molecule]:

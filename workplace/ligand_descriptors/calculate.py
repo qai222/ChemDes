@@ -8,8 +8,8 @@ from typing import Union
 import numpy as np
 import pandas as pd
 
-from chemdes.schema import load_inventory, Molecule
-from chemdes.utils import to_float
+from lsal.schema import load_inventory, Molecule
+from lsal.utils import to_float
 
 """
 Three calculators are used:

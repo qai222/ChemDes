@@ -9,10 +9,10 @@ from sklearn.model_selection import train_test_split
 from skopt import dump, BayesSearchCV
 from skopt.space import Integer
 
-from chemdes.tasks.preprocess import preprocess_descriptor_df, load_descriptors_and_fom
-from chemdes.twinsk.estimator import TwinRegressor
-from chemdes.utils import SEED
-from chemdes.utils import strip_extension
+from lsal.tasks.preprocess import preprocess_descriptor_df, load_descriptors_and_fom
+from lsal.twinsk.estimator import TwinRegressor
+from lsal.utils import SEED
+from lsal.utils import strip_extension
 
 labelled_ligands, df_X_labelled, df_y_labelled = load_descriptors_and_fom(
     mdes_csv="../ligand_descriptors/molecular_descriptors_2022_03_21.csv",

@@ -7,7 +7,7 @@ from dash import html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 from rdkit.Chem.Draw import MolsToGridImage
-from chemdes.utils import json_load
+from lsal.utils import json_load
 
 """
 https://github.com/PatWalters/interactive_plots

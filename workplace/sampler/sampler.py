@@ -7,8 +7,8 @@ import typing
 
 import numpy as np
 
-from chemdes.schema import Molecule, pd
-from chemdes.utils import json_load
+from lsal.schema import Molecule, pd
+from lsal.utils import json_load
 
 
 def write_mols_names(mols: [Molecule], fn: typing.Union[str, pathlib.Path]):

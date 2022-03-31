@@ -4,7 +4,7 @@ import os
 import matplotlib.pyplot as plt
 import umap
 
-from chemdes.utils import SEED
+from lsal.utils import SEED
 
 
 def plot2d(data_2d, saveas):

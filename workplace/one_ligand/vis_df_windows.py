@@ -1,6 +1,5 @@
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output
 
 df = pd.read_csv('output/df_windows.csv')
@@ -16,8 +15,6 @@ xmin = xmin - (xmax - xmin) * 0.05
 xmax = xmax + (xmax - xmin) * 0.05
 
 ligands = sorted(set(df["ligand"].tolist()))
-
-
 
 app = Dash(__name__)
 app.layout = html.Div([
@@ -49,16 +46,15 @@ def update_graph(ligand_iupac_name):
     y = dff["fom"]
     colors = dff["window"]
 
-
     fig = px.scatter(x=x, y=y, color=colors)
 
     # fig.add_trace(go.Scatter(x=x, y=y, name="experimental", mode="markers"))
 
     fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
-    fig.update_xaxes(title="Ligand Amount (uL * M)",)
+    fig.update_xaxes(title="Ligand Amount (uL * M)", )
 
-    fig.update_yaxes(title="Figure of Merit (a.u.)",)
+    fig.update_yaxes(title="Figure of Merit (a.u.)", )
 
     fig.update_layout(yaxis_range=[ymin, ymax], xaxis_range=[xmin, xmax])
     return fig

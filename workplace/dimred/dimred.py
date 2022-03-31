@@ -1,7 +1,7 @@
 from sklearn.metrics import pairwise_distances
-from chemdes.tasks.preprocess import load_molecular_descriptors, preprocess_descriptor_df
-from chemdes.tasks.dimred import umap_run, tune_umap
-from chemdes.utils import json_dump
+from lsal.tasks.preprocess import load_molecular_descriptors, preprocess_descriptor_df
+from lsal.tasks.dimred import umap_run, tune_umap
+from lsal.utils import json_dump
 
 _distance_metric = "manhattan"
 

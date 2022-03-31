@@ -5,9 +5,9 @@ import random
 import numpy as np
 import pandas as pd
 
-from chemdes.schema import Molecule
-from chemdes.tasks.preprocess import load_ligand_to_des_record, preprocess_descriptor_df, load_descriptors_and_fom
-from chemdes.twinsk.estimator import TwinRegressor, upper_confidence_interval
+from lsal.schema import Molecule
+from lsal.tasks.preprocess import load_ligand_to_des_record, preprocess_descriptor_df, load_descriptors_and_fom
+from lsal.twinsk.estimator import TwinRegressor, upper_confidence_interval
 
 
 def cartesian_product(*arrays):

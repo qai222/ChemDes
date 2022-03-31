@@ -4,9 +4,9 @@ from typing import Union
 
 import numpy as np
 
-from chemdes.twinsk.estimator import BaseEstimator, TwinClassifier, TwinRegressor, RegressorMixin, \
+from lsal.twinsk.estimator import BaseEstimator, TwinClassifier, TwinRegressor, RegressorMixin, \
     upper_confidence_interval
-from chemdes.utils import SEED
+from lsal.utils import SEED
 
 
 def valid_float_indices(a: np.ndarray) -> np.ndarray:

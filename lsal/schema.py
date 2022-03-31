@@ -9,7 +9,7 @@ import mordred
 import pandas as pd
 from monty.json import MSONable
 
-from chemdes.utils import inchi2smiles, smiles2inchi, MolFromInchi
+from lsal.utils import inchi2smiles, smiles2inchi, MolFromInchi
 
 
 class Molecule(MSONable):
@@ -278,7 +278,7 @@ class GeneralReaction(MSONable, abc.ABC):
 
 
 def group_reactions(reactions: [GeneralReaction], field: str):
-    from chemdes.utils import rgetattr
+    from lsal.utils import rgetattr
     groups = []
     unique_keys = []
     keyfunc = lambda x: rgetattr(x, field)

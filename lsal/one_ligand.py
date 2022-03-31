@@ -1,4 +1,4 @@
-from chemdes.schema import GeneralReaction, ReactionCondition, ReactantSolution, ReactantSolvent, group_reactions, \
+from lsal.schema import GeneralReaction, ReactionCondition, ReactantSolution, ReactantSolvent, group_reactions, \
     Molecule
 
 

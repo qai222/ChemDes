@@ -9,11 +9,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from chemdes.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition, ReactantSolvent, ReactantSolution, \
+from lsal.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition, ReactantSolvent, ReactantSolution, \
     reactions_to_xy, categorize_reactions
-from chemdes.schema import inventory_df_to_mols
-from chemdes.schema import load_inventory
-from chemdes.utils import strip_extension, json_dump
+from lsal.schema import inventory_df_to_mols
+from lsal.schema import load_inventory
+from lsal.utils import strip_extension, json_dump
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
 

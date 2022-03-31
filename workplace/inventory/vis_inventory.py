@@ -8,7 +8,7 @@ from dash import html
 from rdkit.Chem import MolFromSmiles
 from rdkit.Chem.Draw import MolToImage
 
-from chemdes.schema import load_inventory
+from lsal.schema import load_inventory
 
 
 def smi2imagestr(smi: str, to_html=True):

@@ -5,9 +5,9 @@ from typing import Union
 from sklearn import preprocessing
 from sklearn.feature_selection import VarianceThreshold
 
-from chemdes.one_ligand import Molecule
-from chemdes.schema import pd
-from chemdes.utils import json_load
+from lsal.one_ligand import Molecule
+from lsal.schema import pd
+from lsal.utils import json_load
 
 
 def load_molecular_descriptors(fn: Union[Path, str], warning=False):

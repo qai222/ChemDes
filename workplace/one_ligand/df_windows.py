@@ -10,18 +10,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pathlib
 import typing
-from chemdes.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition, ReactantSolvent, ReactantSolution, \
+from lsal.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition, ReactantSolvent, ReactantSolution, \
     reactions_to_xy, categorize_reactions
-from chemdes.schema import inventory_df_to_mols
-from chemdes.schema import load_inventory
-from chemdes.utils import strip_extension, json_dump
+from lsal.schema import inventory_df_to_mols
+from lsal.schema import load_inventory
+from lsal.utils import strip_extension, json_dump
 from pathlib import Path
 from typing import Union
-from chemdes.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition, categorize_reactions
+from lsal.one_ligand import ReactionNcOneLigand, Molecule, ReactionCondition, categorize_reactions
 import os
-from chemdes.schema import inventory_df_to_mols
-from chemdes.schema import load_inventory, ReactantSolution, ReactantSolvent
-from chemdes.utils import padding_vial_label, get_folder, get_basename, FilePath
+from lsal.schema import inventory_df_to_mols
+from lsal.schema import load_inventory, ReactantSolution, ReactantSolvent
+from lsal.utils import padding_vial_label, get_folder, get_basename, FilePath
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
 
