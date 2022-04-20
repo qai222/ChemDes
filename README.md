@@ -9,6 +9,6 @@ Ligand Selection with Active Learning
 - One-ligand system
   - 2022-04-15:
     - [suggestions](./workplace/one_ligand_0415/output/suggestions.csv)
-    - [Predictions from the suggester](./workplace/one_ligand_0415/output/suggestions_pred.csv)
+    - [Predictions from the suggester](http://143.198.128.149:8124/)
     - [Suggester cross validation](./workplace/one_ligand_0415/vis_cv/)
     - [Suggester perdictions: leave one ligand out](./workplace/one_ligand_0415/output/lolo.png)
