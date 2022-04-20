@@ -1,6 +1,7 @@
-best_5_mean,worst_5_mean,best_5_std,worst_5_std,best_5_uci,worst_5_uci
+best_6_mean,worst_6_mean,best_6_std,worst_6_std,best_6_uci,worst_6_uci
 "decane-1,10-diamine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,10-phosphonodecylphosphonic acid,N-octyloctan-1-amine,"decane-1,10-diamine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 octan-1-amine,"N,N-dioctyloctan-1-amine","decane-1,10-diamine",octadecan-1-amine,octan-1-amine,"N,N-dioctyloctan-1-amine"
 octanoic acid,"1,10-phenanthroline",octan-1-amine,(Z)-octadec-9-en-1-amine,octanoic acid,"1,10-phenanthroline"
 2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine,octanoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine
 N-butylbutan-1-amine,(Z)-octadec-9-en-1-amine,2-amino-3-phenylpropanoic acid,"N,N-dioctyloctan-1-amine",N-butylbutan-1-amine,(Z)-octadec-9-en-1-amine
+10-phosphonodecylphosphonic acid,octadecan-1-amine,octadecylphosphonic acid,"3,3-diphenylpropan-1-amine",10-phosphonodecylphosphonic acid,octadecan-1-amine

@@ -67,6 +67,7 @@ if __name__ == '__main__':
 
     data = {
         "X": X,
+        "df_X_labelled": df_X_labelled,
         "X_ligands": X_ligands,
         "y": y,
         "X_train": X_train,

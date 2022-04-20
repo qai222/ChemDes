@@ -162,10 +162,11 @@ if __name__ == '__main__':
     data, labelled_ligands_names, unlabelled_ligands_names = get_data_for_comparison(df_outcome)
 
     # suggestions from unlabelled ligands
+    k = 6
     suggestions = pd.DataFrame()
     for key in ["mean", "std", "uci"]:
-        suggestions["best_5_{}".format(key)] = suggest_k(k=5, data=data, ligands=unlabelled_ligands_names, key=key,
-                                                         higher_is_better=True)
-        suggestions["worst_5_{}".format(key)] = suggest_k(k=5, data=data, ligands=unlabelled_ligands_names, key=key,
-                                                          higher_is_better=False)
+        suggestions["best_{}_{}".format(k, key)] = suggest_k(k=k, data=data, ligands=unlabelled_ligands_names, key=key,
+                                                             higher_is_better=True)
+        suggestions["worst_{}_{}".format(k, key)] = suggest_k(k=k, data=data, ligands=unlabelled_ligands_names, key=key,
+                                                              higher_is_better=False)
     suggestions.to_csv("output/suggestions.csv", index=False)
