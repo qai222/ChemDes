@@ -3,8 +3,8 @@ import itertools
 import json
 import logging
 import os
-import re
 import pathlib
+import re
 import typing
 
 import monty.json
@@ -15,6 +15,7 @@ from rdkit.Chem.inchi import MolFromInchi
 SEED = 42
 
 FilePath = typing.Union[pathlib.Path, os.PathLike, str]
+
 
 def inchi2smiles(inchi: str) -> str:
     return MolToSmiles(MolFromInchi(inchi))
@@ -82,6 +83,7 @@ def unison_shuffle(a, b, seed):
     p = np.random.RandomState(seed=seed).permutation(len(a))
     return a[p], b[p]
 
+
 def sort_and_group(data, keyf):
     groups = []
     unique_keys = []
@@ -91,8 +93,10 @@ def sort_and_group(data, keyf):
         unique_keys.append(k)
     return unique_keys, groups
 
+
 def get_folder(path: typing.Union[pathlib.Path, str]):
     return os.path.dirname(os.path.abspath(path))
+
 
 def padding_vial_label(v: str) -> str:
     """ pad zeros for vial label, e.g. A1 -> A01 """
@@ -107,6 +111,7 @@ def padding_vial_label(v: str) -> str:
         return final_string
     except (AssertionError, ValueError) as e:
         raise ValueError("invalid vial: {}".format(v))
+
 
 def get_basename(path: typing.Union[pathlib.Path, str]):
     return strip_extension(os.path.basename(os.path.abspath(path)))

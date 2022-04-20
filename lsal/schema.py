@@ -14,9 +14,11 @@ from lsal.utils import inchi2smiles, smiles2inchi, MolFromInchi
 
 class Molecule(MSONable):
 
-    def __init__(self, inchi: str, iupac_name: str = "unknwon"):
+    def __init__(self, inchi: str, iupac_name: str = "unknwon", name="unknown", label=None):
         self.inchi = inchi.strip()
         self.iupac_name = iupac_name.strip()
+        self.name = name.strip()
+        self.label = label
 
     @property
     def rdmol(self):
@@ -27,24 +29,24 @@ class Molecule(MSONable):
         return inchi2smiles(self.inchi)
 
     @classmethod
-    def from_str(cls, s: str, repr_type="inchi", iupac_name="unknown"):
+    def from_str(cls, s: str, repr_type="inchi", iupac_name="unknown", name="unknown", label=None):
         if repr_type.startswith("i"):
-            return cls(s, iupac_name=iupac_name)
+            return cls(s, iupac_name=iupac_name, name=name, label=label)
         elif repr_type.startswith("s"):
-            return cls(smiles2inchi(s), iupac_name=iupac_name)
+            return cls(smiles2inchi(s), iupac_name=iupac_name, name=name, label=label)
         else:
             raise NotImplementedError("`repr_type` not implemented: {}".format(repr_type))
 
     def __repr__(self):
-        return self.inchi + "---" + self.iupac_name
+        return self.inchi + "---" + self.iupac_name + "---" + self.name + "--- {}".format(self.label)
 
     def __str__(self):
-        return "{}: {}".format(self.__class__.__name__, self.inchi)
+        return "{}: {} -- {} -- {} -- {}".format(self.__class__.__name__, self.inchi, self.iupac_name, self.name, self.label)
 
     @classmethod
     def from_repr(cls, s: str):
-        inchi, name = s.split("---")
-        return cls(inchi, name)
+        inchi, iupac_name, name, label = s.split("---")
+        return cls(inchi, iupac_name, name, label)
 
     def __hash__(self):
         return hash(self.inchi)
@@ -67,6 +69,18 @@ class Molecule(MSONable):
         with open(fn, "w") as f:
             f.write("\n".join([m.smiles for m in mols]))
 
+
+def molecule_from_name(name: str, inventory:list[Molecule]) -> Molecule:
+    for m in inventory:
+        if m.name == name:
+            return m
+    raise ValueError("name not found in the inventory: {}".format(name))
+
+def molecule_from_label(label:int, inventory:list[Molecule]) -> Molecule:
+    for m in inventory:
+        if m.label == label:
+            return m
+    raise ValueError("label not found in the inventory: {}".format(label))
 
 class Descriptor(MSONable):
 
@@ -126,14 +140,21 @@ def inventory_df_to_mols(df:pd.DataFrame) -> [Molecule]:
     for row in df.to_dict("records"):
         inchi = row["InChI"]
         name = "unknown"
-        for name_key in ["IUPAC Name", "Name"]:
-            try:
-                name = row[name_key]
-            except KeyError:
-                continue
-            else:
-                break
-        m = Molecule.from_str(inchi, "inchi", iupac_name=name)
+        iupac_name = "unknown"
+        label = None
+        try:
+            name = row["Name"]
+        except KeyError:
+            pass
+        try:
+            iupac_name = row["IUPAC Name"]
+        except KeyError:
+            pass
+        try:
+            label = int(row["LigandLabel"])
+        except KeyError:
+            pass
+        m = Molecule.from_str(inchi, "inchi", iupac_name=iupac_name, name=name, label=label)
         mols.append(m)
     return mols
 

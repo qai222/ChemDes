@@ -7,7 +7,7 @@ from sklearn.feature_selection import VarianceThreshold
 
 from lsal.one_ligand import Molecule
 from lsal.schema import pd
-from lsal.utils import json_load
+from lsal.utils import json_load, FilePath
 
 
 def load_molecular_descriptors(fn: Union[Path, str], warning=False):
@@ -71,6 +71,9 @@ def reactions_to_df_Xy(ligand_to_categorized_reactions: dict, ligand_to_des_reco
     final_cols = set()
     ligands = []
     for ligand in ligand_to_categorized_reactions:
+        real_reactions = ligand_to_categorized_reactions[ligand][0]
+        if len(real_reactions) == 0:
+            continue
         ligands.append(ligand)
         des_record = ligand_to_des_record[ligand]
         for reaction in ligand_to_categorized_reactions[ligand][0]:
@@ -95,7 +98,7 @@ def load_ligand_to_des_record(mdes_csv: Union[Path, str], ):
     return LigandToDesRecord
 
 
-def load_descriptors_and_fom(mdes_csv: Union[Path, str], reactions_json: Union[Path, str]):
+def load_descriptors_and_fom(mdes_csv: FilePath, reactions_json: FilePath):
     LigandToDesRecord = load_ligand_to_des_record(mdes_csv)
 
     ligand_to_categorized_reactions = json_load(reactions_json)
