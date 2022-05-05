@@ -64,7 +64,6 @@ class TwinEstimator(BaseEstimator, abc.ABC):
         y_pred_distribution = y_pair_pred.reshape(n1, n2) + self._train_y[np.newaxis, :]
         return y_pred_distribution
 
-
     def twin_predict(self, X):
         y_pred_distribution = self.twin_predict_distribution(X)
         mu = y_pred_distribution.mean(axis=1)
@@ -72,7 +71,8 @@ class TwinEstimator(BaseEstimator, abc.ABC):
         return mu, std
 
     @abc.abstractmethod
-    def predict(self, X):pass
+    def predict(self, X):
+        pass
 
 
 class TwinClassifier(TwinEstimator, ClassifierMixin):

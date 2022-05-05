@@ -9,12 +9,28 @@ import typing
 
 import monty.json
 import numpy as np
+from monty.json import MSONable
 from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles, MolFromSmarts
 from rdkit.Chem.inchi import MolFromInchi
 
 SEED = 42
 
 FilePath = typing.Union[pathlib.Path, os.PathLike, str]
+
+
+def msonable_repr(msonable: MSONable, precision=5):
+    s = "{}: ".format(msonable.__class__.__name__)
+    for k, v in msonable.as_dict().items():
+        if k.startswith("@"):
+            continue
+        if isinstance(v, float):
+            v = round(v, precision)
+        s += "{}={}\t".format(k, v)
+    return s
+
+
+def file_exists(fn: FilePath):
+    return os.path.isfile(fn) and os.path.getsize(fn) > 0
 
 
 def inchi2smiles(inchi: str) -> str:

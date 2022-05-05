@@ -1,37 +1,16 @@
-import logging
-import os
-import random
-
-import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import make_scorer, mean_squared_error
 from sklearn.model_selection import train_test_split
-from skopt import dump, BayesSearchCV
+from skopt import BayesSearchCV
 from skopt.space import Integer
 
-from lsal.tasks.preprocess import preprocess_descriptor_df, load_descriptors_and_fom
 from lsal.twinsk.estimator import TwinRegressor
 from lsal.utils import SEED
-from lsal.utils import strip_extension
 
-labelled_ligands, df_X_labelled, df_y_labelled = load_descriptors_and_fom(
-    mdes_csv="../ligand_descriptors/molecular_descriptors_2022_03_21.csv",
-    reactions_json="output/2022_0304_LS001_MK003_reaction_data.json",
-)
 
-# prepare ML input
-X_ligands = df_X_labelled[["ligand_inchi", "ligand_iupac_name"]]
-X = preprocess_descriptor_df(df_X_labelled, scale=False, vthreshould=False)  # select numbers
-y = df_y_labelled
-n_features = X.shape[1]
-
-if __name__ == '__main__':
-    random.seed(SEED)
-    np.random.seed(SEED)
-
-    # setup logging
-    filebasename = strip_extension(os.path.basename(__file__))
-    logging.basicConfig(filename='{}.log'.format(filebasename), filemode="w")
+def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, ):
+    n_features = X.shape[1]
 
     # split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=SEED)
@@ -65,16 +44,18 @@ if __name__ == '__main__':
     )
     opt.fit(X_train.values, y_train.values)
 
-    data = {
-        "X": X,
-        "X_ligands": X_ligands,
-        "y": y,
+    tune_data = {
         "X_train": X_train,
         "y_train": y_train,
         "X_test": X_test,
         "y_test": y_test,
         "opt": opt,
     }
+    return tune_data
 
-    print(opt.score(X_test.values, y_test.values))
-    dump(data, "output/{}-data.pkl".format(filebasename))
+
+def train_twin_rf_with_tuned_params(X, y, opt: BayesSearchCV):
+    reg = TwinRegressor(RandomForestRegressor(n_estimators=100, random_state=SEED))
+    reg.set_params(**opt.best_params_)
+    reg.fit(X, y)
+    return reg
