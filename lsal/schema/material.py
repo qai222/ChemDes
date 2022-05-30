@@ -9,14 +9,30 @@ from lsal.utils import inchi2smiles, MolFromInchi, FilePath
 
 
 class Material(MSONable, abc.ABC):
+    _label_template = "{}-{0:0>4}"
 
-    def __init__(self, identifier: str, identifier_type: str, properties=None, label: str = None):
+    def __init__(
+            self, identifier: str, identifier_type: str, properties: dict = None,
+            int_label: int = None, mat_type: str = None
+    ):
+        """
+        :param identifier: unique identifier for this material
+        :param identifier_type: what does this identifier represent?
+        :param properties: a dictionary
+        :param int_label: internal label
+        :param mat_type: materials type
+        """
         self.identifier = identifier
         self.identifier_type = identifier_type
         if properties is None:
             properties = dict()
         self.properties = properties
-        self.label = label
+        self.int_label = int_label
+        self.mat_type = mat_type.upper()
+
+    @property
+    def label(self):
+        return self._label_template.format(self.mat_type.upper(), self.int_label)
 
     def __gt__(self, other):
         return self.__repr__().__gt__(other.__repr__())
@@ -33,36 +49,24 @@ class Material(MSONable, abc.ABC):
     def __repr__(self):
         return "{} - {}: {}".format(self.__class__.__name__, self.identifier_type, self.identifier)
 
-    @staticmethod
-    def select_from_inventory(value, inventory: list[Material], field: str) -> Material:
-        for m in inventory:
-            if getattr(m, field) == value:
-                return m
-        raise ValueError("not found in the inventory: {} == {}".format(field, value))
-
 
 class NanoCrystal(Material):
 
-    def __init__(self, identifier: str, properties: dict = None, label: str = None):
-        super().__init__(identifier, "formula", properties, label)
-        self.formula = self.identifier
-
-
-class SolventMolecule(Material):
-    def __init__(self, identifier: str, properties: dict = None, label: str = None):
-        super().__init__(identifier, "solvent_name", properties, label)
-        self.solvent_name = self.identifier
+    def __init__(self, identifier: str, properties: dict = None, int_label: int = None):
+        super().__init__(identifier, "batch_number", properties, int_label, "NC")
+        self.batch_number = self.identifier
 
 
 class Molecule(Material):
 
     def __init__(self, identifier: str, iupac_name: str = None, name: str = None, smiles: str = None,
-                 label: str = None, properties=None):
-        super().__init__(identifier, "inchi", properties, label)
+                 int_label: int = None, mol_type: str = None, properties=None):
+        super().__init__(identifier, "inchi", properties, int_label, mol_type)
+        self.mol_type = mol_type
         self.inchi = self.identifier
         self.iupac_name = iupac_name
         self.name = name
-        self.label = label
+        self.int_label = int_label
         if smiles is None:
             self.smiles = inchi2smiles(self.inchi)
         else:
@@ -93,3 +97,26 @@ class Molecule(Material):
             return df
         else:
             raise ValueError("Unknown output extension: {}".format(output))
+
+
+class SolventMolecule(Molecule):
+    def __init__(
+            self, identifier: str, iupac_name: str = None, name: str = None,
+            smiles: str = None, int_label: int = None, properties=None
+    ):
+        super().__init__(identifier, iupac_name, name, smiles, int_label, "SOLVENT", properties)
+
+
+class LigandMolecule(Molecule):
+    def __init__(
+            self, identifier: str, iupac_name: str = None, name: str = None,
+            smiles: str = None, int_label: int = None, properties=None
+    ):
+        super().__init__(identifier, iupac_name, name, smiles, int_label, "LIGAND", properties)
+
+
+def select_from_inventory(value, inventory: list[Material] or list[Molecule], field: str) -> Material or Molecule:
+    for m in inventory:
+        if getattr(m, field) == value:
+            return m
+    raise ValueError("not found in the inventory: {} == {}".format(field, value))

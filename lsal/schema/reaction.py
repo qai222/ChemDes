@@ -6,16 +6,16 @@ import logging
 
 from monty.json import MSONable
 
-from lsal.schema.material import Material
-from lsal.utils import msonable_repr
-from lsal.utils import rgetattr
+from lsal.schema import Molecule, Material
+from lsal.utils import msonable_repr, rgetattr
 
 _Precision = 5
+_EPS = 1 ** -_Precision
 
 
 class ReactionInfo(MSONable, abc.ABC):
 
-    def __init__(self, properties=None):
+    def __init__(self, properties: dict = None):
         if properties is None:
             properties = dict()
         self.properties = properties
@@ -57,15 +57,8 @@ class Reactant(ReactionInfo):
         self.material = material
 
 
-class ReactantSolvent(Reactant):
-    def __init__(self, material: Material, volume: float, volume_unit: str = "ul", properties: dict = None):
-        super().__init__(material, properties)
-        self.volume_unit = volume_unit
-        self.volume = volume
-
-
 class ReactantSolution(Reactant):
-    def __init__(self, solute: Material,
+    def __init__(self, solute: Material or Molecule,
                  volume: float, concentration: float or None,
                  solvent: Material or None,
                  properties: dict = None, volume_unit: str = "ul", concentration_unit: str or None = "M"):
@@ -76,6 +69,12 @@ class ReactantSolution(Reactant):
         self.solvent = solvent
         self.concentration = concentration
         self.volume = volume
+        if self.concentration == 0:
+            assert self.solvent == self.solute
+
+    @property
+    def is_solvent(self) -> bool:
+        return self.concentration == 0
 
 
 class GeneralReaction(MSONable, abc.ABC):
@@ -128,3 +127,50 @@ class GeneralReaction(MSONable, abc.ABC):
             groups.append(list(g))
             unique_keys.append(k)
         return unique_keys, groups
+
+
+class LigandExchangeReaction(GeneralReaction):
+
+    def __init__(
+            self,
+            identifier: str,
+            conditions: [ReactionCondition],
+            solvent: ReactantSolution = None,
+            nc_solution: ReactantSolution = None,
+            ligand_solutions: list[ReactantSolution] = None,
+            properties: dict = None,
+    ):
+        super().__init__(identifier, [ligand_solutions, solvent, nc_solution], conditions, properties)
+        self.solvent = solvent
+        assert self.solvent.is_solvent, "the solvent given is not really a solvent: {}".format(self.solvent)
+        self.nc_solution = nc_solution
+        self.ligand_solutions = ligand_solutions
+
+    @property
+    def is_reaction_nc_reference(self) -> bool:
+        """ whether the reaction is a reference reaction in which only NC solution and solvent were added """
+        nc_good = self.nc_solution is not None and self.nc_solution.volume > _EPS
+        solvent_good = self.solvent is not None and self.solvent.volume > _EPS
+        no_ligand = all(ls is None or ls.volume < _EPS for ls in self.ligand_solutions)
+        return nc_good and solvent_good and no_ligand
+
+    @property
+    def is_reaction_blank_reference(self) -> bool:
+        """ whether the reaction is a reference reaction in which only solvent was added """
+        no_nc = self.nc_solution is None or self.nc_solution.volume < _EPS
+        solvent_good = self.solvent is not None and self.solvent.volume > _EPS
+        no_ligand = all(ls is None or ls.volume < _EPS for ls in self.ligand_solutions)
+        return no_nc and no_ligand and solvent_good
+
+    @property
+    def is_reaction_real(self) -> bool:
+        """ whether the reaction is neither a blank nor a ref """
+        return not self.is_reaction_blank_reference and not self.is_reaction_nc_reference
+
+    @property
+    def ligands(self) -> list[Molecule]:
+        return [ls.solute for ls in self.ligand_solutions]
+
+    @property
+    def is_single_ligand(self) -> bool:
+        return len(set(self.ligands)) == 1
