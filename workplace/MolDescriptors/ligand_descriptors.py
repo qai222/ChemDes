@@ -26,13 +26,15 @@ Three calculators are used:
 
 _cxcalc_descriptors = """
 # polarizability
-avgpol axxpol ayypol azzpol molpol dipole 
+avgpol axxpol ayypol azzpol molpol
 # surface
 asa maximalprojectionarea maximalprojectionradius minimalprojectionarea minimalprojectionradius psa vdwsa volume   
 # count
 chainatomcount chainbondcount fsp3 fusedringcount rotatablebondcount acceptorcount accsitecount donorcount donsitecount mass
 # topological
 hararyindex balabanindex hyperwienerindex wienerindex wienerpolarity
+# polarizability, somehow cxcalc always put dipole at the end
+dipole
 """
 _cxcalc_descriptors = [l for l in _cxcalc_descriptors.strip().split("\n") if not l.startswith("#")]
 _cxcalc_descriptors = [l.split() for l in _cxcalc_descriptors]
@@ -43,10 +45,8 @@ def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", mol_file="mols_test.s
                      descriptors: list[str] = _cxcalc_descriptors) -> pd.DataFrame:
     result = subprocess.run([bin, ] + [mol_file, ] + descriptors, capture_output=True)
     data = result.stdout.decode("utf-8").strip()
-
     lines = data.split("\n")
     n_cols = len(lines[1].split())
-
     colnames = ["id"] + descriptors.copy()
     if "asa" in colnames:
         asa_index = colnames.index("asa")
@@ -117,7 +117,7 @@ def opera_pka(opera_output: Union[Path, str] = "mols-smi_OPERA2.7Pred.csv") -> p
 if __name__ == '__main__':
 
     mols_file = "ligand_descriptors.smi"
-    mols = json_load("ligand_inventory.json")
+    mols = json_load("../Inventory/ligand_inventory.json")
     if not file_exists(mols_file):
         Molecule.write_molecules(mols, mols_file, "smi")  # write smi file
     mordred_df = calculate_mordred(smis=[m.smiles for m in mols])
