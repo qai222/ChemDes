@@ -1,19 +1,22 @@
 import abc
 import logging
+from typing import Callable
 
+import pandas as pd
+
+from lsal.schema.material import Molecule
+from lsal.schema.reaction import LigandExchangeReaction
 from lsal.utils import FilePath, file_exists, get_extension
 
 
 class FileLoader(abc.ABC):
     def __init__(
             self, name: str, allowed_format: list[str], desired_outputs: list[str],
-            loaded: dict = None,
+            loaded=None,
     ):
         if desired_outputs is None:
             desired_outputs = []
         self.desired_outputs = desired_outputs
-        if loaded is None:
-            loaded = dict()
         self.loaded = loaded
         self.allowed_format = allowed_format
         self.name = name
@@ -28,7 +31,7 @@ class FileLoader(abc.ABC):
         assert ext in self.allowed_format, "extension not allowed: {} -- {}".format(ext, self.allowed_format)
 
     def post_check(self):
-        assert set(self.loaded.keys()) == set(self.desired_outputs)
+        pass
 
     def load(self, fn: FilePath, *args, **kwargs):
         logging.info("FILE LOADER: \n\t{}".format(self.__class__.__name__))
@@ -43,3 +46,56 @@ class FileLoader(abc.ABC):
         self.post_check()
         logging.info("LOADING FINISHED")
         return self.loaded
+
+
+def get_ml_unknown_y_single_ligand(
+        ligand_to_amounts: dict[Molecule, list[float]],
+        ligand_to_des_record: dict[Molecule, dict],
+):
+    records = []
+    df_ligands = []
+    final_cols = set()
+    for ligand, amounts in ligand_to_amounts.items():
+        des_record = ligand_to_des_record[ligand]
+        for amount in amounts:
+            record = {"ligand_amount": amount}
+            record.update(des_record)
+            if len(final_cols) == 0:
+                final_cols.update(set(record.keys()))
+            records.append(record)
+            df_ligands.append(ligand)
+    df_x = pd.DataFrame.from_records(records, columns=sorted(final_cols))
+    logging.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, None))
+    return df_ligands, df_x, None
+
+
+def get_ml_known_y_single_ligand(
+        ligand_to_reactions: dict[Molecule, list[LigandExchangeReaction]],
+        ligand_to_des_record: dict[Molecule, dict],
+        get_fom_field: Callable, fill_nan: bool = False,
+):
+    records = []
+    df_ligands = []
+    final_cols = set()
+    for ligand, reactions in ligand_to_reactions.items():
+        des_record = ligand_to_des_record[ligand]
+        records_of_this_ligand = []
+        for reaction in reactions:
+            fom_field = get_fom_field(reaction.properties)
+            record = {
+                "ligand_amount": reaction.ligand_solutions[0].amount,
+                "FigureOfMerit": reaction.properties[fom_field],
+            }
+            record.update(des_record)
+            if len(final_cols) == 0:
+                final_cols.update(set(record.keys()))
+            records_of_this_ligand.append(record)
+            df_ligands.append(ligand)
+        records += records_of_this_ligand
+    df = pd.DataFrame.from_records(records, columns=sorted(final_cols))
+    df_x = df[[c for c in df.columns if c != "FigureOfMerit"]]
+    df_y = df["FigureOfMerit"]
+    if fill_nan:
+        df_y.fillna(0, inplace=True)
+    logging.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
+    return df_ligands, df_x, df_y

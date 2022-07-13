@@ -9,11 +9,9 @@ from lsal.utils import inchi2smiles, MolFromInchi, FilePath
 
 
 class Material(MSONable, abc.ABC):
-    _label_template = "{}-{0:0>4}"
 
     def __init__(
-            self, identifier: str, identifier_type: str, properties: dict = None,
-            int_label: int = None, mat_type: str = None
+            self, identifier: str, identifier_type: str, properties: dict = None, mat_type: str = None
     ):
         """
         :param identifier: unique identifier for this material
@@ -27,12 +25,11 @@ class Material(MSONable, abc.ABC):
         if properties is None:
             properties = dict()
         self.properties = properties
-        self.int_label = int_label
         self.mat_type = mat_type.upper()
 
     @property
-    def label(self):
-        return self._label_template.format(self.mat_type.upper(), self.int_label)
+    @abc.abstractmethod
+    def label(self): pass
 
     def __gt__(self, other):
         return self.__repr__().__gt__(other.__repr__())
@@ -52,16 +49,20 @@ class Material(MSONable, abc.ABC):
 
 class NanoCrystal(Material):
 
-    def __init__(self, identifier: str, properties: dict = None, int_label: int = None):
-        super().__init__(identifier, "batch_number", properties, int_label, "NC")
+    def __init__(self, identifier: str, properties: dict = None):
+        super().__init__(identifier, "batch_number", properties, "NC")
         self.batch_number = self.identifier
+
+    @property
+    def label(self):
+        return "{}-{}".format(self.mat_type, self.identifier)
 
 
 class Molecule(Material):
 
     def __init__(self, identifier: str, iupac_name: str = None, name: str = None, smiles: str = None,
                  int_label: int = None, mol_type: str = None, properties=None):
-        super().__init__(identifier, "inchi", properties, int_label, mol_type)
+        super().__init__(identifier, "inchi", properties, mol_type)
         self.mol_type = mol_type
         self.inchi = self.identifier
         self.iupac_name = iupac_name
@@ -71,6 +72,14 @@ class Molecule(Material):
             self.smiles = inchi2smiles(self.inchi)
         else:
             self.smiles = smiles
+
+    def __repr__(self):
+        return "{} - {}: {}".format(self.__class__.__name__, self.label, self.name)
+
+    @property
+    def label(self):
+        label_template = "-{0:0>4}"
+        return self.mat_type + label_template.format(self.int_label)
 
     @property
     def rdmol(self):
@@ -86,7 +95,7 @@ class Molecule(Material):
         elif output == "csv":
             records = []
             for m in mols:
-                r = {k: v for k, v in m.as_dict().items() if not k.startswith("@") and k != "properties"}
+                r = {k: v for k, v in m.as_record().items() if not k.startswith("@") and k != "properties"}
                 for k in m.properties:
                     r["properties__{}".format(k)] = m.properties[k]
                 records.append(r)
@@ -98,25 +107,14 @@ class Molecule(Material):
         else:
             raise ValueError("Unknown output extension: {}".format(output))
 
+    def as_record(self) -> dict:
+        d = self.as_dict()
+        d["label"] = self.label
+        return d
 
-class SolventMolecule(Molecule):
-    def __init__(
-            self, identifier: str, iupac_name: str = None, name: str = None,
-            smiles: str = None, int_label: int = None, properties=None
-    ):
-        super().__init__(identifier, iupac_name, name, smiles, int_label, "SOLVENT", properties)
-
-
-class LigandMolecule(Molecule):
-    def __init__(
-            self, identifier: str, iupac_name: str = None, name: str = None,
-            smiles: str = None, int_label: int = None, properties=None
-    ):
-        super().__init__(identifier, iupac_name, name, smiles, int_label, "LIGAND", properties)
-
-
-def select_from_inventory(value, inventory: list[Material] or list[Molecule], field: str) -> Material or Molecule:
-    for m in inventory:
-        if getattr(m, field) == value:
-            return m
-    raise ValueError("not found in the inventory: {} == {}".format(field, value))
+    @staticmethod
+    def select_from_inventory(value, inventory: list[Molecule], field: str) -> Molecule:
+        for m in inventory:
+            if getattr(m, field) == value:
+                return m
+        raise ValueError("not found in the inventory: {} == {}".format(field, value))

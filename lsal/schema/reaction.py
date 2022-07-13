@@ -5,8 +5,8 @@ import itertools
 import logging
 
 from monty.json import MSONable
-
-from lsal.schema import Molecule, Material
+from typing import Tuple
+from lsal.schema import Molecule, NanoCrystal
 from lsal.utils import msonable_repr, rgetattr
 
 _Precision = 5
@@ -51,26 +51,27 @@ class ReactionCondition(ReactionInfo):
         self.name = name
 
 
-class Reactant(ReactionInfo):
-    def __init__(self, material: Material, properties: dict = None):
+class ReactantSolution(ReactionInfo):
+    def __init__(self, solute: NanoCrystal or Molecule, volume: float, concentration: float or None, solvent: Molecule,
+                 volume_unit: str, concentration_unit: str or None, properties: dict = None, ):
         super().__init__(properties)
-        self.material = material
-
-
-class ReactantSolution(Reactant):
-    def __init__(self, solute: Material or Molecule,
-                 volume: float, concentration: float or None,
-                 solvent: Material or None,
-                 properties: dict = None, volume_unit: str = "ul", concentration_unit: str or None = "M"):
-        super().__init__(solute, properties)
         self.solute = solute
-        self.volume_unit = volume_unit
-        self.concentration_unit = concentration_unit
         self.solvent = solvent
-        self.concentration = concentration
+        self.concentration = concentration  # concentration can be None for e.g. nanocrystal
         self.volume = volume
         if self.concentration == 0:
-            assert self.solvent == self.solute
+            assert self.solvent == self.solute, "zero concentration but different solvent and solute: {} - {}".format(
+                self.solvent, self.solute)
+        self.volume_unit = volume_unit
+        self.concentration_unit = concentration_unit
+
+    @property
+    def amount(self) -> float:
+        return self.concentration * self.volume
+
+    @property
+    def amount_unit(self) -> str:
+        return "{}*{}".format(self.volume_unit, self.concentration_unit)
 
     @property
     def is_solvent(self) -> bool:
@@ -78,7 +79,7 @@ class ReactantSolution(Reactant):
 
 
 class GeneralReaction(MSONable, abc.ABC):
-    def __init__(self, identifier: str, reactants: list[Reactant], conditions: list[ReactionCondition],
+    def __init__(self, identifier: str, reactants: list[ReactantSolution], conditions: list[ReactionCondition],
                  properties: dict = None):
         if properties is None:
             properties = dict()
@@ -116,18 +117,6 @@ class GeneralReaction(MSONable, abc.ABC):
         for c in self.conditions:
             c.check()
 
-    @staticmethod
-    def group_reactions(reactions: list[GeneralReaction], field: str):
-        """ group reactions by a field, the field can be dot-structured, e.g. "ligand_solution.solute" """
-        groups = []
-        unique_keys = []
-        keyfunc = lambda x: rgetattr(x, field)
-        rs = sorted(reactions, key=keyfunc)
-        for k, g in itertools.groupby(rs, key=keyfunc):
-            groups.append(list(g))
-            unique_keys.append(k)
-        return unique_keys, groups
-
 
 class LigandExchangeReaction(GeneralReaction):
 
@@ -140,18 +129,22 @@ class LigandExchangeReaction(GeneralReaction):
             ligand_solutions: list[ReactantSolution] = None,
             properties: dict = None,
     ):
-        super().__init__(identifier, [ligand_solutions, solvent, nc_solution], conditions, properties)
+        super().__init__(identifier, ligand_solutions + [solvent, nc_solution], conditions, properties)
         self.solvent = solvent
-        assert self.solvent.is_solvent, "the solvent given is not really a solvent: {}".format(self.solvent)
         self.nc_solution = nc_solution
         self.ligand_solutions = ligand_solutions
+        assert len(self.ligands) == len(
+            set(self.ligands)), "one solution for one ligand, but we have # solutions vs # ligands: {} vs {}".format(
+            len(set(self.ligands)), len(self.ligands))
+        assert self.solvent.is_solvent, "the solvent given is not really a solvent: {}".format(self.solvent)
 
     @property
     def is_reaction_nc_reference(self) -> bool:
         """ whether the reaction is a reference reaction in which only NC solution and solvent were added """
         nc_good = self.nc_solution is not None and self.nc_solution.volume > _EPS
         solvent_good = self.solvent is not None and self.solvent.volume > _EPS
-        no_ligand = all(ls is None or ls.volume < _EPS for ls in self.ligand_solutions)
+        no_ligand = len(self.ligand_solutions) == 0 or all(
+            ls is None or ls.volume < _EPS for ls in self.ligand_solutions)
         return nc_good and solvent_good and no_ligand
 
     @property
@@ -159,7 +152,8 @@ class LigandExchangeReaction(GeneralReaction):
         """ whether the reaction is a reference reaction in which only solvent was added """
         no_nc = self.nc_solution is None or self.nc_solution.volume < _EPS
         solvent_good = self.solvent is not None and self.solvent.volume > _EPS
-        no_ligand = all(ls is None or ls.volume < _EPS for ls in self.ligand_solutions)
+        no_ligand = len(self.ligand_solutions) == 0 or all(
+            ls is None or ls.volume < _EPS for ls in self.ligand_solutions)
         return no_nc and no_ligand and solvent_good
 
     @property
@@ -168,9 +162,21 @@ class LigandExchangeReaction(GeneralReaction):
         return not self.is_reaction_blank_reference and not self.is_reaction_nc_reference
 
     @property
-    def ligands(self) -> list[Molecule]:
-        return [ls.solute for ls in self.ligand_solutions]
+    def ligands(self):
+        return tuple(sorted([ls.solute for ls in self.ligand_solutions]))
 
     @property
-    def is_single_ligand(self) -> bool:
-        return len(set(self.ligands)) == 1
+    def unique_ligands(self):
+        return tuple(sorted(set(self.ligands)))
+
+    @staticmethod
+    def group_reactions(reactions: list[GeneralReaction], field: str):
+        """ group reactions by a field, the field can be dot-structured, e.g. "nc_solution.solute" """
+        groups = []
+        unique_keys = []
+        keyfunc = lambda x: rgetattr(x, field)
+        rs = sorted(reactions, key=keyfunc)
+        for k, g in itertools.groupby(rs, key=keyfunc):
+            groups.append(list(g))
+            unique_keys.append(k)
+        return unique_keys, groups
