@@ -44,18 +44,11 @@ def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, ):
     )
     opt.fit(X_train.values, y_train.values)
 
-    tune_data = {
-        "X_train": X_train,
-        "y_train": y_train,
-        "X_test": X_test,
-        "y_test": y_test,
-        "opt": opt,
-    }
-    return tune_data
+    return X_train, y_train, X_test, y_test, opt
 
 
-def train_twin_rf_with_tuned_params(X, y, opt: BayesSearchCV):
+def train_twin_rf_with_tuned_params(X, y, opt_params: dict):
     reg = TwinRegressor(RandomForestRegressor(n_estimators=100, random_state=SEED))
-    reg.set_params(**opt.best_params_)
+    reg.set_params(**opt_params)
     reg.fit(X, y)
     return reg
