@@ -34,9 +34,9 @@ experiment_input_files = [
     "data/2022_0520_SL06_0003_0010_robotinput.xls",
     "data/2022_0520_SL07_0013_0021_robotinput.xls",
     "data/2022_0520_SL08_0023_0000_robotinput.xls",
-    "data/2022_0523_SL09_0000_0001_robotinput.xls",
-    "data/2022_0523_SL10_0005_0020_robotinput.xls",
-    "data/2022_0523_SL11_0002_0022_robotinput.xls",
+    "data/2022_0525_SL09_0000_0001_robotinput.xls",
+    "data/2022_0525_SL10_0020_0002_robotinput.xls",
+    "data/2022_0525_SL11_0005_0022_robotinput.xls",
 ]
 
 experiment_output_files = [
@@ -48,9 +48,9 @@ experiment_output_files = [
     "data/PS0520_SL06_peakInfo.csv",
     "data/PS0520_SL07_peakInfo.csv",
     "data/PS0520_SL08_peakInfo.csv",
-    "data/PS0523_SL09_peakInfo.csv",
-    "data/PS0523_SL10_peakInfo.csv",
-    "data/PS0523_SL11_peakInfo.csv",
+    "data/PS0525_SL09_peakInfo.csv",
+    "data/PS0525_SL10_peakInfo.csv",
+    "data/PS0525_SL11_peakInfo.csv",
 ]
 
 
@@ -130,6 +130,7 @@ class SingleWorkflow:
             get_fom_field=get_field_plfom,
             prefit=False,
             n_predictions=200,
+            exclude_reaction_function=None,
     ):
         self.prefit = prefit
         self.n_predictions = n_predictions
@@ -142,12 +143,27 @@ class SingleWorkflow:
             self.get_fom_field,
             self.ligand_to_des_record
         )
-        self.campaign_reactions = ReactionCollection.from_files(
+        collected_reactions = ReactionCollection.from_files(
             experiment_input_files=experiment_input_files,
             experiment_output_files=experiment_output_files,
             ligand_inventory=self.ligand_inventory,
             solvent_inventory=self.solvent_inventory,
         )
+        if exclude_reaction_function is None:
+            self.campaign_reactions = collected_reactions
+        else:
+            self.campaign_reactions = ReactionCollection(
+                [r for r in collected_reactions.reactions if not exclude_reaction_function(r)],
+                collected_reactions.properties,
+        )
+
+        # map ref to each reaction
+        for r in self.campaign_reactions.real_reactions:
+            ref_reactions = []
+            for ref_r in self.campaign_reactions.ref_reactions:
+                if ref_r.identifier.split("@@")[0] == r.identifier.split("@@")[0]:
+                    ref_reactions.append(ref_r.identifier)
+            r.properties["ref_reaction_identifiers"] = ref_reactions
 
         # spline fit for campaign reactions
         if prefit:
@@ -226,6 +242,14 @@ class SingleWorkflow:
             }
             visdata = self.visualize_iteration()
             json_dump(visdata, "vis/vis-{0:0>4}.json".format(nligands_taught))
+
+    def get_real_xy(self):
+        data = dict()
+        for ligand, reactions in self.ligand_to_reactions.items():
+            real_xs = np.array([r.ligand_solutions[0].amount for r in reactions])
+            real_ys = [r.properties[self.get_fom_field(r.properties.keys())] for r in reactions]
+            data[ligand.smiles] = real_xs, real_ys
+        return data
 
     def visualize_iteration(self):
         ligand_label_to_vis_data = dict()
