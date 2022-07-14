@@ -140,3 +140,5 @@ cython_debug/
 
 /tmp/
 /archive/
+/workplace/Screening/step1_pubchem/PubChem_compound.csv
+/workplace/Screening/step1_pubchem/pubchem_screen.csv

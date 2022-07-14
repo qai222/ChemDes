@@ -68,15 +68,15 @@ def chunk_out_to_df(out_file: FilePath, descriptors: list[str] = _cxcalc_descrip
 
 if __name__ == '__main__':
 
-    # # takes ~6 h
-    # split_smi("../../step1_pubchem/pubchem_screened.smi")
-    # mol_files = sorted(glob.glob("split/smi_*.smi"))
-    # mol_files_chunks = list(chunks(mol_files, 6))
-    # for chunk in mol_files_chunks:
-    #     ts1 = time.perf_counter()
-    #     calculate_cxcalc_raw(mol_files=chunk)
-    #     ts2 = time.perf_counter()
-    #     print("cxcalc: {:.2f}s".format(ts2 - ts1))
+    # takes ~6 h
+    split_smi("../../step1_pubchem/pubchem_screened.smi")
+    mol_files = sorted(glob.glob("split/smi_*.smi"))
+    mol_files_chunks = list(chunks(mol_files, 6))
+    for chunk in mol_files_chunks:
+        ts1 = time.perf_counter()
+        calculate_cxcalc_raw(mol_files=chunk)
+        ts2 = time.perf_counter()
+        print("cxcalc: {:.2f}s".format(ts2 - ts1))
 
     mol_files = sorted(glob.glob("split/smi_*.smi"))
     out_files = sorted(glob.glob("split/smi_*.smi.out"))

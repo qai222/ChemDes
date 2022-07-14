@@ -1,10 +1,10 @@
 import pandas as pd
 from sklearn.metrics import pairwise_distances
+
 from lsal.campaign.loader import LoaderLigandDescriptors
 from lsal.utils import json_dump, json_load, FilePath, scale_df
 
 _distance_metric = "manhattan"
-
 
 
 def prepare_dimred_data(inv_json: FilePath, des_csv: FilePath):
@@ -17,12 +17,13 @@ def prepare_dimred_data(inv_json: FilePath, des_csv: FilePath):
 
 
 if __name__ == '__main__':
-
-    molecules, data_df = prepare_dimred_data("ligand_inventory.json", "../MolDescriptors/ligand_descriptors_2022_06_16_expka.csv")
+    molecules, data_df = prepare_dimred_data("ligand_inventory.json",
+                                             "../MolDescriptors/ligand_descriptors_2022_06_16_expka.csv")
 
     distance_matrix = pairwise_distances(data_df.values, metric=_distance_metric)
 
-    from lsal.tasks.dimred import umap_run, tune_umap
+    from lsal.tasks.dimred import umap_run
+
     # tune_umap(
     #     distance_matrix,
     #     n_neighbors_values=(3, 5, 7, 9),

@@ -276,6 +276,17 @@ class ReactionCollection(MSONable):
         self.properties = properties
 
     @property
+    def ref_reactions(self):
+        reactions = []
+        for r in self.reactions:
+            if r.is_reaction_nc_reference:
+                reactions.append(r)
+            else:
+                continue
+        return reactions
+
+
+    @property
     def ligand_amount_range(self):
         amounts = []
         amount_unit = []
