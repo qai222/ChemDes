@@ -1,7 +1,0 @@
-best_6_mean,worst_6_mean,best_6_std,worst_6_std,best_6_uci,worst_6_uci,translated_best_6_mean,translated_worst_6_mean,translated_best_6_std,translated_worst_6_std,translated_best_6_uci,translated_worst_6_uci
-Ligand-0016,Ligand-0013,Ligand-0011,Ligand-0013,Ligand-0016,Ligand-0013,2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine,octadecylphosphonic acid,N-octyloctan-1-amine,2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine
-Ligand-0005,Ligand-0010,Ligand-0005,Ligand-0023,Ligand-0005,Ligand-0010,dodecan-1-amine,dodecylphosphonic acid,dodecan-1-amine,"1,10-phenanthroline",dodecan-1-amine,dodecylphosphonic acid
-Ligand-0011,Ligand-0023,Ligand-0019,Ligand-0010,Ligand-0011,Ligand-0023,octadecylphosphonic acid,"1,10-phenanthroline",10-phosphonodecylphosphonic acid,dodecylphosphonic acid,octadecylphosphonic acid,"1,10-phenanthroline"
-Ligand-0017,Ligand-0019,Ligand-0016,Ligand-0017,Ligand-0017,Ligand-0019,"3,3-diphenylpropan-1-amine",10-phosphonodecylphosphonic acid,2-amino-3-phenylpropanoic acid,"3,3-diphenylpropan-1-amine","3,3-diphenylpropan-1-amine",10-phosphonodecylphosphonic acid
-Ligand-0019,Ligand-0017,Ligand-0017,Ligand-0016,Ligand-0019,Ligand-0017,10-phosphonodecylphosphonic acid,"3,3-diphenylpropan-1-amine","3,3-diphenylpropan-1-amine",2-amino-3-phenylpropanoic acid,10-phosphonodecylphosphonic acid,"3,3-diphenylpropan-1-amine"
-Ligand-0023,Ligand-0011,Ligand-0010,Ligand-0019,Ligand-0023,Ligand-0011,"1,10-phenanthroline",octadecylphosphonic acid,dodecylphosphonic acid,10-phosphonodecylphosphonic acid,"1,10-phenanthroline",octadecylphosphonic acid

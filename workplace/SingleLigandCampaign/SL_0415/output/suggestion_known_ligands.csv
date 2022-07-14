@@ -1,7 +1,0 @@
-label,identifier,iupac_name,name,smiles,properties__raw_file
-Ligand-0020,"InChI=1S/C10H22S2/c11-9-7-5-3-1-2-4-6-8-10-12/h11-12H,1-10H2","decane-1,10-dithiol","1,10-Decanedithiol",SCCCCCCCCCCS,2022_0217_ligand_InChI_mk.xlsx
-Ligand-0021,InChI=1S/C10H8N2/c1-3-7-11-9(5-1)10-6-2-4-8-12-10/h1-8H,2-pyridin-2-ylpyridine,"2,2′-Bipyridyl",c1ccc(-c2ccccn2)nc1,2022_0217_ligand_InChI_mk.xlsx
-Ligand-0001,"InChI=1S/C12H24O2/c1-2-3-4-5-6-7-8-9-10-11-12(13)14/h2-11H2,1H3,(H,13,14)",dodecanoic acid,Lauric acid (dodecanoic acid),CCCCCCCCCCCC(=O)O,2022_0217_ligand_InChI_mk.xlsx
-Ligand-0014,"InChI=1S/C12H27N/c1-4-7-10-13(11-8-5-2)12-9-6-3/h4-12H2,1-3H3","N,N-dibutylbutan-1-amine",Tributylamine,CCCCN(CCCC)CCCC,2022_0217_ligand_InChI_mk.xlsx
-Ligand-0008,"InChI=1S/C18H38S/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19/h19H,2-18H2,1H3",octadecane-1-thiol,Octadecanethiol,CCCCCCCCCCCCCCCCCCS,2022_0217_ligand_InChI_mk.xlsx
-Ligand-0009,"InChI=1S/C8H19O3P/c1-2-3-4-5-6-7-8-12(9,10)11/h2-8H2,1H3,(H2,9,10,11)",octylphosphonic acid,Octylphosphonic acid,CCCCCCCCP(=O)(O)O,2022_0217_ligand_InChI_mk.xlsx

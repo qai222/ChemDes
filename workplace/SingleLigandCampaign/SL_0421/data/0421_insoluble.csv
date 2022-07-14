@@ -1,3 +1,0 @@
-LigandLabel,Name,Canonical SMILES,IUPAC Name,InChI
-0016,DL-Phenylalanine,C1=CC=C(C=C1)CC(C(=O)O)N,2-amino-3-phenylpropanoic acid,"InChI=1S/C9H11NO2/c10-8(9(11)12)6-7-4-2-1-3-5-7/h1-5,8H,6,10H2,(H,11,12)"
-0019,"1,10-Decyldiphosphonic acid",C(CCCCCP(=O)(O)O)CCCCP(=O)(O)O,10-phosphonodecylphosphonic acid,"InChI=1S/C10H24O6P2/c11-17(12,13)9-7-5-3-1-2-4-6-8-10-18(14,15)16/h1-10H2,(H2,11,12,13)(H2,14,15,16)"

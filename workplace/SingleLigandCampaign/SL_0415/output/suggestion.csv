@@ -1,7 +1,0 @@
-best_6_mean,worst_6_mean,best_6_std,worst_6_std,best_6_uci,worst_6_uci,translated_best_6_mean,translated_worst_6_mean,translated_best_6_std,translated_worst_6_std,translated_best_6_uci,translated_worst_6_uci
-Ligand-0018,Ligand-0022,Ligand-0019,Ligand-0013,Ligand-0018,Ligand-0022,"decane-1,10-diamine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,10-phosphonodecylphosphonic acid,N-octyloctan-1-amine,"decane-1,10-diamine",4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-Ligand-0004,Ligand-0015,Ligand-0018,Ligand-0006,Ligand-0004,Ligand-0015,octan-1-amine,"N,N-dioctyloctan-1-amine","decane-1,10-diamine",octadecan-1-amine,octan-1-amine,"N,N-dioctyloctan-1-amine"
-Ligand-0000,Ligand-0023,Ligand-0004,Ligand-0007,Ligand-0000,Ligand-0023,octanoic acid,"1,10-phenanthroline",octan-1-amine,(Z)-octadec-9-en-1-amine,octanoic acid,"1,10-phenanthroline"
-Ligand-0016,Ligand-0013,Ligand-0000,Ligand-0022,Ligand-0016,Ligand-0013,2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine,octanoic acid,4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine,2-amino-3-phenylpropanoic acid,N-octyloctan-1-amine
-Ligand-0012,Ligand-0007,Ligand-0016,Ligand-0015,Ligand-0012,Ligand-0007,N-butylbutan-1-amine,(Z)-octadec-9-en-1-amine,2-amino-3-phenylpropanoic acid,"N,N-dioctyloctan-1-amine",N-butylbutan-1-amine,(Z)-octadec-9-en-1-amine
-Ligand-0019,Ligand-0006,Ligand-0011,Ligand-0017,Ligand-0019,Ligand-0006,10-phosphonodecylphosphonic acid,octadecan-1-amine,octadecylphosphonic acid,"3,3-diphenylpropan-1-amine",10-phosphonodecylphosphonic acid,octadecan-1-amine
