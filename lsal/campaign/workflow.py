@@ -157,13 +157,6 @@ class SingleWorkflow:
                 collected_reactions.properties,
         )
 
-        # map ref to each reaction
-        for r in self.campaign_reactions.real_reactions:
-            ref_reactions = []
-            for ref_r in self.campaign_reactions.ref_reactions:
-                if ref_r.identifier.split("@@")[0] == r.identifier.split("@@")[0]:
-                    ref_reactions.append(ref_r.identifier)
-            r.properties["ref_reaction_identifiers"] = ref_reactions
 
         # spline fit for campaign reactions
         if prefit:

@@ -1,10 +1,12 @@
+import os.path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
 
-from lsal.utils import FilePath
+from lsal.utils import FilePath, write_smi, json_dump, createdir
 
 sns.set_style("whitegrid")
 
@@ -41,16 +43,22 @@ def delta_feature_screen(delta: float, feature_lim_dict: dict, smis: list[str], 
     return screened_records, screened_smis, smis
 
 
-def delta_plot(initial_smis, domain_lim, feature_df, out: FilePath, available_features: list[str]):
-    xs = np.linspace(-0.2, 0.2, 5)
+def delta_plot(
+        initial_smis, domain_lim, feature_df, out: FilePath,
+        available_features: list[str], xmin=1e-5, xmax=0.4, nxs=9, wdir:FilePath="./"
+):
+    xs = np.linspace(xmin, xmax, nxs)
     ys = []
-
+    createdir(wdir)
     for delta in xs:
         rs, smis, all_smis = delta_feature_screen(delta, domain_lim, initial_smis, feature_df, available_features)
+        delta_str = "{:.2f}".format(delta)
+        delta_data = rs, smis
+        json_dump(delta_data, os.path.join(wdir, delta_str + ".json"))
         ys.append(len(rs))
     plt.plot(xs, ys, "ro-", label="# in domain")
     plt.hlines(len(all_smis), -0.5, 0.5, colors=["k"], linestyles="dotted", label="# total")
-    plt.xlim([-0.2 * 1.05, 0.2 * 1.05])
+    plt.xlim([xmin * 1.05, xmax * 1.05])
     plt.yscale("log")
     plt.ylabel("# of molecules")
     plt.xlabel(r"$\Delta ({\mathrm{Feature}})$")

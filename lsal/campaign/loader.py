@@ -285,6 +285,13 @@ class ReactionCollection(MSONable):
                 continue
         return reactions
 
+    def get_reference_reactions(self, reaction: LigandExchangeReaction):
+        # map ref to each reaction
+        refs = []
+        for ref_r in self.ref_reactions:
+            if ref_r.identifier.split("@@")[0] == reaction.identifier.split("@@")[0]:
+                refs.append(ref_r)
+        return refs
 
     @property
     def ligand_amount_range(self):

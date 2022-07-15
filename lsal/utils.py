@@ -9,6 +9,7 @@ import re
 import time
 import typing
 import collections
+from datetime import datetime
 import monty.json
 import numpy as np
 import pandas as pd
@@ -200,7 +201,7 @@ def write_smi(smis: list[str], outfile: FilePath):
             f.write(smi + "\n")
 
 def remove_stereo(smi: str):
-    smi = smi.replace("/", "").replace("\\", "")
+    smi = smi.replace("/", "").replace("\\", "").replace("@", "").replace("@@", "")
     return smi
 
 def parse_formula(formula: str) -> dict[str, float]:  # from pymatgen
@@ -227,3 +228,27 @@ def parse_formula(formula: str) -> dict[str, float]:  # from pymatgen
         expanded_formula = formula.replace(m.group(), expanded_sym)
         return parse_formula(expanded_formula)
     return get_sym_dict(formula, 1)
+
+def createdir(directory):
+    """
+    mkdir
+    :param directory:
+    :return:
+    """
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+def get_timestamp():
+    return int(datetime.now().timestamp() * 1000)
+
+def removefile(what:FilePath):
+    try:
+        os.remove(what)
+    except OSError:
+        pass
+
+def removefolder(what: FilePath):
+    try:
+        os.rmdir(what)
+    except OSError:
+        pass
