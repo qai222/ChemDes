@@ -399,3 +399,50 @@ class ReactionCollection(MSONable):
         for r in reactions:
             data = peak_data[r.identifier]
             r.properties.update(data)
+
+
+# helper functions
+def get_od(r: LigandExchangeReaction):
+    for k in r.properties:
+        if k.strip("'").endswith("_PL_OD390"):
+            v = r.properties[k]
+            assert isinstance(v, float)
+            return v
+    raise KeyError
+
+
+def get_sumod(r: LigandExchangeReaction):
+    for k in r.properties:
+        if k.strip("'").endswith("_PL_sum/OD390"):
+            v = r.properties[k]
+            assert isinstance(v, float)
+            return v
+    raise KeyError
+
+
+def get_target_data(reaction_collection: ReactionCollection, get_function=get_od) -> dict[Molecule, dict[str, Any]]:
+    ligand_to_reactions = reaction_collection.get_lcomb_to_reactions()
+    ligand_to_reactions = {k[0]: v for k, v in ligand_to_reactions.items()}
+    data = dict()
+    for ligand, reactions in ligand_to_reactions.items():
+        amounts = []
+        amount_units = []
+        values = []
+        ref_values = []
+        identifiers = []
+        for r in reactions:
+            r: LigandExchangeReaction
+            reference_reactions = reaction_collection.get_reference_reactions(r)
+            ref_values += [get_function(refr) for refr in reference_reactions]
+            amount = r.ligand_solutions[0].amount
+            amount_unit = r.ligand_solutions[0].amount_unit
+            amount_units.append(amount_unit)
+            value = get_function(r)
+            amounts.append(amount)
+            values.append(value)
+            identifiers.append(r.identifier)
+        data[ligand] = {
+            "amount": amounts, "amount_unit": amount_units[0], "values": values, "ref_values": ref_values,
+            "identifiers": identifiers
+        }
+    return data
