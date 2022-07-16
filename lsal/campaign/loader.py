@@ -7,10 +7,9 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from monty.json import MSONable
 
 from lsal.schema import FileLoader, Molecule, ReactionCondition, LigandExchangeReaction, \
-    ReactantSolution, NanoCrystal, _EPS
+    ReactantSolution, NanoCrystal, _EPS, ReactionCollection
 from lsal.utils import FilePath, padding_vial_label, strip_extension, get_extension
 
 
@@ -267,182 +266,49 @@ class LoaderRobotInputSlc(FileLoader):
         # note the "ul" in keys here are hardcoded for robotinput files
 
 
-class ReactionCollection(MSONable):
-    # TODO the reactions in a collection should have something in common (e.g. solvent/mixing conditions)
-    def __init__(self, reactions: list[LigandExchangeReaction], properties: dict = None):
-        self.reactions = reactions
-        if properties is None:
-            properties = dict()
-        self.properties = properties
+def load_reactions_from_expt_files(
+        experiment_input_files: list[FilePath],
+        experiment_output_files: list[FilePath],
+        ligand_inventory: list[Molecule],
+        solvent_inventory: list[Molecule],
+        input_loader_kwargs: dict = None,
+        output_loader_kwargs: dict = None,
+        properties: dict = None,
+) -> ReactionCollection:
+    input_loader = LoaderRobotInputSlc("input_loader")
+    output_loader = LoaderPeakInfo("output_loader")
 
-    @property
-    def ref_reactions(self):
-        reactions = []
-        for r in self.reactions:
-            if r.is_reaction_nc_reference:
-                reactions.append(r)
-            else:
-                continue
-        return reactions
+    if input_loader_kwargs is None:
+        input_loader_kwargs = {"ligand_inventory": ligand_inventory, "solvent_inventory": solvent_inventory}
+    if output_loader_kwargs is None:
+        output_loader_kwargs = {}
 
-    def get_reference_reactions(self, reaction: LigandExchangeReaction):
-        # map ref to each reaction
-        refs = []
-        for ref_r in self.ref_reactions:
-            if ref_r.identifier.split("@@")[0] == reaction.identifier.split("@@")[0]:
-                refs.append(ref_r)
-        return refs
+    all_reactions = []
+    for ifile, ofile in zip(experiment_input_files, experiment_output_files):
+        reactions = input_loader.load(ifile, **input_loader_kwargs)
+        peak_data = output_loader.load(ofile, identifier_prefix=strip_extension(os.path.basename(ifile)),
+                                       **output_loader_kwargs)
+        ReactionCollection.assign_reaction_results(reactions, peak_data)
+        all_reactions += reactions
 
-    @property
-    def ligand_amount_range(self):
-        amounts = []
-        amount_unit = []
-        for r in self.real_reactions:
-            for ls in r.ligand_solutions:
-                amounts.append(ls.amount)
-                amount_unit.append(ls.amount_unit)
-        assert len(set(amount_unit)) == 1
-        return min(amounts), max(amounts), amount_unit[0]
-
-    @classmethod
-    def subset_by_lcombs(cls, campaign_reactions: ReactionCollection, lc_subset):
-        reactions = [r for r in campaign_reactions.real_reactions if r.ligands in lc_subset]
-        return cls(reactions, properties=deepcopy(campaign_reactions.properties))
-
-    @property
-    def real_reactions(self):
-        reactions = []
-        for r in self.reactions:
-            if r.is_reaction_real:
-                reactions.append(r)
-            else:
-                continue
-        return reactions
-
-    @property
-    def unique_lcombs(self):
-        lcombs = set()
-        for r in self.real_reactions:
-            lcombs.add(r.unique_ligands)
-        return sorted(lcombs)
-
-    def __repr__(self):
-        s = "{}\n".format(self.__class__.__name__)
-        s += "\t# of reactions: {}\n".format(len(self.reactions))
-        return s
-
-    def get_lcomb_to_reactions(self, limit_to=None):
-        reactions = self.real_reactions
-
-        lcombs, grouped_reactions = LigandExchangeReaction.group_reactions(reactions, field="unique_ligands")
-        lcombs_to_reactions = dict(zip(lcombs, grouped_reactions))
-        if limit_to is None:
-            return lcombs_to_reactions
+    # remove suspicious reactions
+    n_real = 0
+    n_blank = 0
+    n_ref = 0
+    for r in all_reactions:
+        r: LigandExchangeReaction
+        if r.is_reaction_blank_reference:
+            n_blank += 1
+        elif r.is_reaction_nc_reference:
+            n_ref += 1
+        elif r.is_reaction_real:
+            n_real += 1
         else:
-            return {c: lcombs_to_reactions[c] for c in limit_to}
-
-    @classmethod
-    def from_files(
-            cls,
-
-            experiment_input_files: list[FilePath],
-            experiment_output_files: list[FilePath],
-
-            ligand_inventory: list[Molecule],
-            solvent_inventory: list[Molecule],
-
-            input_loader_kwargs: dict = None,
-            output_loader_kwargs: dict = None,
-            properties: dict = None,
-    ):
-        input_loader = LoaderRobotInputSlc("input_loader")
-        output_loader = LoaderPeakInfo("output_loader")
-
-        if input_loader_kwargs is None:
-            input_loader_kwargs = {"ligand_inventory": ligand_inventory, "solvent_inventory": solvent_inventory}
-        if output_loader_kwargs is None:
-            output_loader_kwargs = {}
-
-        all_reactions = []
-        for ifile, ofile in zip(experiment_input_files, experiment_output_files):
-            reactions = input_loader.load(ifile, **input_loader_kwargs)
-            peak_data = output_loader.load(ofile, identifier_prefix=strip_extension(os.path.basename(ifile)),
-                                           **output_loader_kwargs)
-            cls.assign_reaction_results(reactions, peak_data)
-            all_reactions += reactions
-
-        # remove suspicious reactions
-        n_real = 0
-        n_blank = 0
-        n_ref = 0
-        for r in all_reactions:
-            r: LigandExchangeReaction
-            if r.is_reaction_blank_reference:
-                n_blank += 1
-            elif r.is_reaction_nc_reference:
-                n_ref += 1
-            elif r.is_reaction_real:
-                n_real += 1
-            else:
-                raise Exception("reaction type cannot be determined: {}".format(r))
-        logging.warning("REACTIONS LOADED: blank/ref/real: {}/{}/{}".format(n_blank, n_ref, n_real))
-        slc = cls(reactions=all_reactions, properties=properties)
-        slc.properties.update(
-            dict(experiment_input_files=experiment_input_files, experiment_output_files=experiment_output_files,
-                 ligand_inventory=ligand_inventory, solvent_inventory=solvent_inventory,
-                 input_loader_kwargs=input_loader_kwargs, output_loader_kwargs=output_loader_kwargs, ))
-        return slc
-
-    @staticmethod
-    def assign_reaction_results(reactions: list[LigandExchangeReaction], peak_data: dict[str, dict]):
-        assert len(peak_data) == len(reactions)
-        for r in reactions:
-            data = peak_data[r.identifier]
-            r.properties.update(data)
-
-
-# helper functions
-def get_od(r: LigandExchangeReaction):
-    for k in r.properties:
-        if k.strip("'").endswith("_PL_OD390"):
-            v = r.properties[k]
-            assert isinstance(v, float)
-            return v
-    raise KeyError
-
-
-def get_sumod(r: LigandExchangeReaction):
-    for k in r.properties:
-        if k.strip("'").endswith("_PL_sum/OD390"):
-            v = r.properties[k]
-            assert isinstance(v, float)
-            return v
-    raise KeyError
-
-
-def get_target_data(reaction_collection: ReactionCollection, get_function=get_od) -> dict[Molecule, dict[str, Any]]:
-    ligand_to_reactions = reaction_collection.get_lcomb_to_reactions()
-    ligand_to_reactions = {k[0]: v for k, v in ligand_to_reactions.items()}
-    data = dict()
-    for ligand, reactions in ligand_to_reactions.items():
-        amounts = []
-        amount_units = []
-        values = []
-        ref_values = []
-        identifiers = []
-        for r in reactions:
-            r: LigandExchangeReaction
-            reference_reactions = reaction_collection.get_reference_reactions(r)
-            ref_values += [get_function(refr) for refr in reference_reactions]
-            amount = r.ligand_solutions[0].amount
-            amount_unit = r.ligand_solutions[0].amount_unit
-            amount_units.append(amount_unit)
-            value = get_function(r)
-            amounts.append(amount)
-            values.append(value)
-            identifiers.append(r.identifier)
-        data[ligand] = {
-            "amount": amounts, "amount_unit": amount_units[0], "values": values, "ref_values": ref_values,
-            "identifiers": identifiers
-        }
-    return data
+            raise Exception("reaction type cannot be determined: {}".format(r))
+    logging.warning("REACTIONS LOADED: blank/ref/real: {}/{}/{}".format(n_blank, n_ref, n_real))
+    slc = ReactionCollection(reactions=all_reactions, properties=properties)
+    slc.properties.update(
+        dict(experiment_input_files=experiment_input_files, experiment_output_files=experiment_output_files,
+             ligand_inventory=ligand_inventory, solvent_inventory=solvent_inventory,
+             input_loader_kwargs=input_loader_kwargs, output_loader_kwargs=output_loader_kwargs, ))
+    return slc

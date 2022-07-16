@@ -3,9 +3,11 @@ from __future__ import annotations
 import abc
 import itertools
 import logging
+from copy import deepcopy
+from typing import Tuple
 
 from monty.json import MSONable
-from typing import Tuple
+
 from lsal.schema import Molecule, NanoCrystal
 from lsal.utils import msonable_repr, rgetattr
 
@@ -174,9 +176,99 @@ class LigandExchangeReaction(GeneralReaction):
         """ group reactions by a field, the field can be dot-structured, e.g. "nc_solution.solute" """
         groups = []
         unique_keys = []
-        keyfunc = lambda x: rgetattr(x, field)
+
+        def keyfunc(x):
+            return rgetattr(x, field)
+
         rs = sorted(reactions, key=keyfunc)
         for k, g in itertools.groupby(rs, key=keyfunc):
             groups.append(list(g))
             unique_keys.append(k)
         return unique_keys, groups
+
+
+class ReactionCollection(MSONable):
+    # TODO the reactions in a collection should have something in common (e.g. solvent/mixing conditions)
+    def __init__(self, reactions: list[LigandExchangeReaction], properties: dict = None):
+        self.reactions = reactions
+        if properties is None:
+            properties = dict()
+        self.properties = properties
+
+    @property
+    def identifiers(self) -> Tuple[str]:
+        return tuple(sorted([r.identifier for r in self.reactions]))
+
+    @property
+    def ref_reactions(self):
+        reactions = []
+        for r in self.reactions:
+            if r.is_reaction_nc_reference:
+                reactions.append(r)
+            else:
+                continue
+        return reactions
+
+    def get_reference_reactions(self, reaction: LigandExchangeReaction):
+        # map ref to each reaction
+        refs = []
+        for ref_r in self.ref_reactions:
+            if ref_r.identifier.split("@@")[0] == reaction.identifier.split("@@")[0]:
+                refs.append(ref_r)
+        return refs
+
+    @property
+    def ligand_amount_range(self):
+        amounts = []
+        amount_unit = []
+        for r in self.real_reactions:
+            for ls in r.ligand_solutions:
+                amounts.append(ls.amount)
+                amount_unit.append(ls.amount_unit)
+        assert len(set(amount_unit)) == 1
+        return min(amounts), max(amounts), amount_unit[0]
+
+    @classmethod
+    def subset_by_lcombs(cls, campaign_reactions: ReactionCollection, lc_subset):
+        reactions = [r for r in campaign_reactions.real_reactions if r.ligands in lc_subset]
+        return cls(reactions, properties=deepcopy(campaign_reactions.properties))
+
+    @property
+    def real_reactions(self):
+        reactions = []
+        for r in self.reactions:
+            if r.is_reaction_real:
+                reactions.append(r)
+            else:
+                continue
+        return reactions
+
+    @property
+    def unique_lcombs(self):
+        lcombs = set()
+        for r in self.real_reactions:
+            lcombs.add(r.unique_ligands)
+        return sorted(lcombs)
+
+    def __repr__(self):
+        s = "{}\n".format(self.__class__.__name__)
+        s += "\t# of reactions: {}\n".format(len(self.reactions))
+        s += "\t# of ligands/ligand-combinations: {}\n".format(len(self.get_lcomb_to_reactions()))
+        return s
+
+    def get_lcomb_to_reactions(self, limit_to=None):
+        reactions = self.real_reactions
+
+        lcombs, grouped_reactions = LigandExchangeReaction.group_reactions(reactions, field="unique_ligands")
+        lcombs_to_reactions = dict(zip(lcombs, grouped_reactions))
+        if limit_to is None:
+            return lcombs_to_reactions
+        else:
+            return {c: lcombs_to_reactions[c] for c in limit_to}
+
+    @staticmethod
+    def assign_reaction_results(reactions: list[LigandExchangeReaction], peak_data: dict[str, dict]):
+        assert len(peak_data) == len(reactions)
+        for r in reactions:
+            data = peak_data[r.identifier]
+            r.properties.update(data)
