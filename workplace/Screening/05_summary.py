@@ -1,9 +1,8 @@
-import glob
-
 import pandas as pd
-
-from lsal.utils import read_smi, FilePath, smiles2inchi, json_load, get_basename, createdir
 from tqdm import tqdm
+
+from lsal.utils import smiles2inchi, json_load, get_basename, createdir
+
 
 def smi2inv(smis):
     records = []
