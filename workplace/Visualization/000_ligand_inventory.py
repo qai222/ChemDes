@@ -23,7 +23,7 @@ def smi2imagestr(smi: str, to_html=True):
         return src_str
 
 
-ligand_inventory_csv = "../LigandInventory/ligand_inventory.csv"
+ligand_inventory_csv = "../Inventory/ligand_inventory.csv"
 df = pd.read_csv(ligand_inventory_csv)
 smiles = df.loc[:, "smiles"]
 df.loc[:, "Structure"] = [smi2imagestr(smi) for smi in smiles]
