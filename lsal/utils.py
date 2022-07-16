@@ -1,3 +1,4 @@
+import collections
 import functools
 import itertools
 import json
@@ -8,8 +9,8 @@ import pickle
 import re
 import time
 import typing
-import collections
 from datetime import datetime
+
 import monty.json
 import numpy as np
 import pandas as pd
@@ -190,19 +191,23 @@ def pkl_load(fn: FilePath, print_timing=True):
         print("loaded {} in: {:.4f} s".format(os.path.basename(fn), ts2 - ts1))
     return d
 
+
 def read_smi(smifile: FilePath):
     with open(smifile, "r") as f:
         lines = f.readlines()
     return [smi.strip() for smi in lines if len(smi.strip()) > 0]
+
 
 def write_smi(smis: list[str], outfile: FilePath):
     with open(outfile, "w") as f:
         for smi in smis:
             f.write(smi + "\n")
 
+
 def remove_stereo(smi: str):
     smi = smi.replace("/", "").replace("\\", "").replace("@", "").replace("@@", "")
     return smi
+
 
 def parse_formula(formula: str) -> dict[str, float]:  # from pymatgen
     def get_sym_dict(form: str, factor) -> dict[str, float]:
@@ -229,6 +234,7 @@ def parse_formula(formula: str) -> dict[str, float]:  # from pymatgen
         return parse_formula(expanded_formula)
     return get_sym_dict(formula, 1)
 
+
 def createdir(directory):
     """
     mkdir
@@ -238,17 +244,36 @@ def createdir(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+
 def get_timestamp():
     return int(datetime.now().timestamp() * 1000)
 
-def removefile(what:FilePath):
+
+def removefile(what: FilePath):
     try:
         os.remove(what)
     except OSError:
         pass
+
 
 def removefolder(what: FilePath):
     try:
         os.rmdir(what)
     except OSError:
         pass
+
+
+def is_close(a: float, b: float, eps=1e-5):
+    return abs(a - b) < eps
+
+def is_close_relative(a: float, b:float, eps=1e-5):
+    aa = abs(a)
+    bb = abs(b)
+    return abs(a-b)/min([aa, bb]) < eps
+
+
+def is_close_list(lst: list[float], eps=1e-5):
+    for i, j in itertools.combinations(lst, 2):
+        if is_close(i, j, eps):
+            return True
+    return False
