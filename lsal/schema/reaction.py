@@ -197,7 +197,7 @@ class ReactionCollection(MSONable):
 
     @property
     def identifiers(self) -> Tuple[str]:
-        return tuple(sorted([r.identifier for r in self.reactions]))
+        return tuple([r.identifier for r in self.reactions])
 
     @property
     def ref_reactions(self):
