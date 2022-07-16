@@ -6,7 +6,7 @@ from typing import Union
 import numpy as np
 import pandas as pd
 
-from lsal.utils import to_float
+from lsal.utils import to_float, FilePath, file_exists
 
 """
 Three calculators are used:
@@ -37,9 +37,10 @@ dipole
 _cxcalc_descriptors = [l for l in _cxcalc_descriptors.strip().split("\n") if not l.startswith("#")]
 _cxcalc_descriptors = [l.split() for l in _cxcalc_descriptors]
 _cxcalc_descriptors = reduce(lambda x, y: x + y, _cxcalc_descriptors)
+_cxcalc_descriptors = tuple(_cxcalc_descriptors)
 
 
-def calculate_cxcalc_raw(bin="cxcalc.exe", mol_files=[], descriptors=_cxcalc_descriptors):
+def calculate_cxcalc_raw(bin="cxcalc.exe", mol_files: list = (), descriptors=_cxcalc_descriptors):
     child_ps = []
     for mf in mol_files:
         out_file = mf + ".out"
@@ -77,9 +78,9 @@ def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", mol_file="mols_test.s
     return df
 
 
-_mordred_descriptors = [
+_mordred_descriptors = (
     "SLogP", "nHeavyAtom", "fragCpx", "nC", "nO", "nN", "nP", "nS", "nRing",
-]
+)
 
 
 def calculate_mordred(smis: list[str], descriptor_names=_mordred_descriptors) -> pd.DataFrame:
@@ -98,7 +99,7 @@ def calculate_mordred(smis: list[str], descriptor_names=_mordred_descriptors) ->
     return df
 
 
-def opera_pka(opera_output: Union[Path, str] or pd.DataFrame = "mols-smi_OPERA2.7Pred.csv") -> pd.DataFrame:
+def opera_pka(opera_output: Union[FilePath, pd.DataFrame] = "mols-smi_OPERA2.7Pred.csv") -> pd.DataFrame:
     """
     use opera to predict aqueous pKa of 2d molecular structures
     1. download opera release 2.7 from https://github.com/kmansouri/OPERA
@@ -108,9 +109,11 @@ def opera_pka(opera_output: Union[Path, str] or pd.DataFrame = "mols-smi_OPERA2.
     """
     # parse output
     if isinstance(opera_output, str):
+        assert file_exists(opera_output)
         opera_df = pd.read_csv(opera_output)
     else:
         opera_df = opera_output
+    opera_df: pd.DataFrame
     opera_df = opera_df[["pKa_a_pred", "pKa_b_pred"]]
 
     records = []
