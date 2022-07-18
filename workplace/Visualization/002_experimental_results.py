@@ -7,8 +7,8 @@ import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output
 from plotly.subplots import make_subplots
 
-from lsal.campaign.loader import  Molecule, Any
 from lsal.campaign.fom import FomCalculator, PropertyGetter
+from lsal.campaign.loader import Molecule, Any
 from lsal.utils import get_basename
 from lsal.utils import json_load
 
@@ -25,13 +25,12 @@ LigandData = [
 ]
 Ligands = sorted(LigandData[0].keys())
 
+
 def get_dfs(ligand_to_results: dict[Molecule, dict[str, Any]]):
     dfs = []
     for ligand in Ligands:
         data = ligand_to_results[ligand]
         df = pd.DataFrame()
-        # df["smiles"] = [l.smiles for l in ligands]
-        # df["name"] = ["{}:{}".format(l.int_label, l.name) for l in ligands]
         df["x"] = data["amount"]
         df["y"] = data["values"]
         df["identifier"] = data["identifiers"]
@@ -41,6 +40,7 @@ def get_dfs(ligand_to_results: dict[Molecule, dict[str, Any]]):
         df["y-3*sigma"] = y_ref - 3 * y_ref_err
         dfs.append(df)
     return dfs
+
 
 DFS = [get_dfs(ld) for ld in LigandData]
 
@@ -105,8 +105,8 @@ def update_graph(reaction_property: str):
                 marker=dict(color="black"),
                 hovertemplate=
                 "<b>%{text}</b><br>" +
-        "ligand amount: %{x:,.2f}<br>" + reaction_property+
-        ": %{y:,.2f}<br>" +
+                "ligand amount: %{x:,.2f}<br>" + reaction_property +
+                ": %{y:,.2f}<br>" +
                 "<extra></extra>",
                 showlegend=showlegend,
             ),

@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 from dash import dcc, html, Input, Output
 from rdkit import Chem
 from rdkit.Chem.Draw import MolsToGridImage
+
 from lsal.schema import Molecule
 from lsal.utils import FilePath, json_load
 
