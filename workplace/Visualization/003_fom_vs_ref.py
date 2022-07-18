@@ -158,4 +158,4 @@ def display_hover(hoverData):
 
 if __name__ == "__main__":
     port = int("8{}".format(os.path.basename(__file__)[:3]))
-    app.run_server(debug=True, host="0.0.0.0", port=port)
+    app.run_server(debug=False, host="0.0.0.0", port=port)
