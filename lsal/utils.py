@@ -152,15 +152,22 @@ def scale_df(data_df: pd.DataFrame):
     return data_df
 
 
-def truncate_distribution(x: list[float] or np.ndarray, position="top", fraction=0.1):
+def truncate_distribution(x: list[float] or np.ndarray, position="top", fraction=0.1, return_indices=False):
     """ keep top or bottom x% of the population """
     if isinstance(x, list):
         x = np.array(x)
     assert x.ndim == 1
+    nsize = int(len(x) * fraction)
+    if nsize == 0:
+        nsize = 1
     if position == "top":
-        return np.array(sorted(x, reverse=True)[:int(len(x) * fraction)])
+        indices = np.argpartition(x, -nsize)[-nsize:]
     else:
-        return np.array(sorted(x)[:int(len(x) * fraction)])
+        indices = np.argpartition(x, nsize)[:nsize]
+    if return_indices:
+        return indices
+    else:
+        return x[indices]
 
 
 def unique_element_to_indices(ligands):
