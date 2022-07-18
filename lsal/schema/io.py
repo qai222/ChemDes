@@ -72,7 +72,8 @@ def get_ml_unknown_y_single_ligand(
 def get_ml_known_y_single_ligand(
         ligand_to_reactions: dict[Molecule, list[LigandExchangeReaction]],
         ligand_to_des_record: dict[Molecule, dict],
-        get_fom_field: Callable, fill_nan: bool = False,
+        fom_def: str,
+        fill_nan: bool = False,
 ):
     records = []
     df_ligands = []
@@ -81,10 +82,9 @@ def get_ml_known_y_single_ligand(
         des_record = ligand_to_des_record[ligand]
         records_of_this_ligand = []
         for reaction in reactions:
-            fom_field = get_fom_field(reaction.properties)
             record = {
                 "ligand_amount": reaction.ligand_solutions[0].amount,
-                "FigureOfMerit": reaction.properties[fom_field],
+                "FigureOfMerit": reaction.properties[fom_def],
             }
             record.update(des_record)
             if len(final_cols) == 0:
