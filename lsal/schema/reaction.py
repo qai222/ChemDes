@@ -217,6 +217,13 @@ class ReactionCollection(MSONable):
                 refs.append(ref_r)
         return refs
 
+    def ligand_amounts(self, ligand: Molecule) -> list[float]:
+        # only works for single ligand system
+        reactions = self.get_lcomb_to_reactions()[(ligand, )]
+        reactions: list[LigandExchangeReaction]
+        assert len(reactions) > 0
+        return [r.ligand_solutions[0].amount for r in reactions]
+
     @property
     def ligand_amount_range(self):
         amounts = []
