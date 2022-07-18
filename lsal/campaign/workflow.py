@@ -1,183 +1,69 @@
+import inspect
 import logging
 import random
+import time
 from collections import OrderedDict
+from copy import deepcopy
+from typing import Any
 
-import matplotlib.pyplot as plt
 import numpy as np
-from scipy.interpolate import UnivariateSpline
-from scipy.interpolate import interp1d
-from scipy.signal import savgol_filter
-from sklearn.ensemble import RandomForestRegressor
 
-from lsal.campaign.loader import LoaderLigandDescriptors, Molecule
-from lsal.campaign.single_learner import SingleLigandLearner, ReactionCollection
-from lsal.twinsk.estimator import TwinRegressor
-from lsal.utils import SEED, json_load, json_dump
-
-
-def get_field_plfom(columns: list[str]):
-    fom_col = [c for c in columns if c.strip("'").endswith("PL_FOM")][0]
-    return fom_col
-
-
-def get_field_sumod(columns: list[str]):
-    fom_col = [c for c in columns if c.strip("'").endswith("PL_sum/OD390")][0]
-    return fom_col
-
-
-experiment_input_files = [
-    "data/2022_0519_SL01_0008_0015_robotinput.xls",
-    "data/2022_0519_SL02_0007_0012_robotinput.xls",
-    "data/2022_0520_SL03_0017_0004_robotinput.xls",
-    "data/2022_0520_SL04_0006_0009_robotinput.xls",
-    "data/2022_0520_SL05_0018_0014_robotinput.xls",
-    "data/2022_0520_SL06_0003_0010_robotinput.xls",
-    "data/2022_0520_SL07_0013_0021_robotinput.xls",
-    "data/2022_0520_SL08_0023_0000_robotinput.xls",
-    "data/2022_0525_SL09_0000_0001_robotinput.xls",
-    "data/2022_0525_SL10_0020_0002_robotinput.xls",
-    "data/2022_0525_SL11_0005_0022_robotinput.xls",
-]
-
-experiment_output_files = [
-    "data/PS0519_SL01_peakInfo.csv",
-    "data/PS0519_SL02_peakInfo.csv",
-    "data/PS0520_SL03_peakInfo.csv",
-    "data/PS0520_SL04_peakInfo.csv",
-    "data/PS0520_SL05_peakInfo.csv",
-    "data/PS0520_SL06_peakInfo.csv",
-    "data/PS0520_SL07_peakInfo.csv",
-    "data/PS0520_SL08_peakInfo.csv",
-    "data/PS0525_SL09_peakInfo.csv",
-    "data/PS0525_SL10_peakInfo.csv",
-    "data/PS0525_SL11_peakInfo.csv",
-]
-
-
-def spline_fit_single_ligand_campaign(reactions: ReactionCollection, get_fom):
-    l2rs = {lc[0]: rs for lc, rs in reactions.get_lcomb_to_reactions().items()}
-    for l, rs in l2rs.items():
-        x = [r.ligand_solutions[0].amount for r in rs]
-        y = [r.properties[get_fom(r.properties)] for r in rs]
-        y = np.nan_to_num(y, nan=0.0)
-        # TODO we assumed reaction in rs only differ in ligand amount
-        y = [yy for _, yy in sorted(zip(x, y), key=lambda t: t[0])]
-        x = sorted(x)
-        if len(x) > len(set(x)):
-            unique_xs = []
-            for xx in x:
-                while xx in unique_xs:
-                    xx += 1e-6
-                unique_xs.append(xx)
-            x = unique_xs
-        # cs = CubicSpline(x, y, bc_type="natural")
-        cs = UnivariateSpline(np.log(x), y)
-        fitted_y = cs(np.log(x))
-        plt.scatter(np.log(x), y)
-        plt.plot(np.log(x), fitted_y)
-        plt.savefig("fit/{}.png".format(l.label))
-        plt.clf()
-        for r, xx, yy in zip(rs, x, fitted_y):
-            r.ligand_solutions[0].volume = 1
-            r.ligand_solutions[0].concentration = xx
-            r.properties[get_fom(r.properties)] = yy
-    return reactions
-
-
-def smooth(x, y):
-    xx = np.linspace(min(x), max(x), 1000)
-
-    # interpolate + smooth
-    itp = interp1d(x, y, kind='linear')
-    window_size, poly_order = 801, 3
-    yy_sg = savgol_filter(itp(xx), window_size, poly_order)
-    return xx, yy_sg
-
-
-def fit_single_ligand_campaign(reactions: ReactionCollection, get_fom):
-    l2rs = {lc[0]: rs for lc, rs in reactions.get_lcomb_to_reactions().items()}
-    for l, rs in l2rs.items():
-        x = [r.ligand_solutions[0].amount for r in rs]
-        y = [r.properties[get_fom(r.properties)] for r in rs]
-        y = np.nan_to_num(y, nan=0.0)
-        # # TODO we assumed reaction in rs only differ in ligand amount
-        y = [yy for _, yy in sorted(zip(x, y), key=lambda t: t[0])]
-        x = sorted(x)
-        if len(x) > len(set(x)):
-            unique_xs = []
-            for xx in x:
-                while xx in unique_xs:
-                    xx += 1e-6
-                unique_xs.append(xx)
-            x = unique_xs
-        fitted_x, fitted_y = smooth(x, y)
-        plt.plot(fitted_x, fitted_y)
-        plt.scatter(x, y)
-        plt.savefig("{}.png".format(l.label))
-        plt.clf()
-        for r, xx, yy in zip(rs, fitted_x, fitted_y):
-            r.ligand_solutions[0].volume = 1
-            r.ligand_solutions[0].concentration = xx
-            r.properties[get_fom(r.properties)] = yy
-    return reactions
+from lsal.campaign.loader import Molecule
+from lsal.campaign.single_learner import SingleLigandLearner, ReactionCollection, SingleLigandPredictions
+from lsal.utils import SEED, get_timestamp
 
 
 class SingleWorkflow:
     def __init__(
-            self, ligand_inventory_file, solvent_inventory_file, ligand_descriptors_file,
-            experiment_input_files,
-            experiment_output_files,
-            get_fom_field=get_field_plfom,
-            prefit=False,
-            n_predictions=200,
-            exclude_reaction_function=None,
+            self,
+            reaction_collection: ReactionCollection,
+            learner: SingleLigandLearner,
+            n_predictions=200,  # num of predictions generated for each ligand over the concentration range
+            learner_history: OrderedDict = None,
+            reg_tune=False,
+            amount_space: str = "geo",
+            timing:dict=None,
+            # TODO add spline fitting
     ):
-        self.prefit = prefit
+        if timing is None:
+            timing = dict()
+        self.timing = timing
+        self.amount_space = amount_space
+        self.learner = learner
+        self.reg_tune = reg_tune
+        self.fom_field = self.learner.fom_def
+        self.ligand_to_des_record = self.learner.ligand_to_des_record
         self.n_predictions = n_predictions
-        self.get_fom_field = get_fom_field
-        self.ligand_inventory = json_load(ligand_inventory_file)
-        self.solvent_inventory = json_load(solvent_inventory_file)
-        self.ligand_to_des_record = LoaderLigandDescriptors("test").load(ligand_descriptors_file, self.ligand_inventory)
-        self.learner = SingleLigandLearner(
-            [], [], TwinRegressor(RandomForestRegressor(n_estimators=10, random_state=SEED)),
-            self.get_fom_field,
-            self.ligand_to_des_record
-        )
-        collected_reactions = ReactionCollection.from_files(
-            experiment_input_files=experiment_input_files,
-            experiment_output_files=experiment_output_files,
-            ligand_inventory=self.ligand_inventory,
-            solvent_inventory=self.solvent_inventory,
-        )
-        if exclude_reaction_function is None:
-            self.campaign_reactions = collected_reactions
-        else:
-            self.campaign_reactions = ReactionCollection(
-                [r for r in collected_reactions.reactions if not exclude_reaction_function(r)],
-                collected_reactions.properties,
-        )
-
-
-        # spline fit for campaign reactions
-        if prefit:
-            self.campaign_reactions = spline_fit_single_ligand_campaign(self.campaign_reactions, self.get_fom_field)
-        # self.campaign_reactions = fit_single_ligand_campaign(self.campaign_reactions, self.get_fom_field)
-
-        self.unique_ligands = [lc[0] for lc in self.campaign_reactions.unique_lcombs]
-        self.ligand_to_reactions = {lc[0]: reactions for lc, reactions in
-                                    self.campaign_reactions.get_lcomb_to_reactions().items()}
-
-        self.uncertainty = None
-        self.mae = None
-        self.average_uncertainty = None
-        self.average_mae = None
-        self.suggestions = None
-
+        self.campaign_reactions = reaction_collection  # this should not be changed after init
+        if learner_history is None:
+            learner_history = OrderedDict()
+        self.learner_history = learner_history
         self.amount_min, self.amount_max, self.amount_unit = self.campaign_reactions.ligand_amount_range
-        # self.amounts = np.linspace(self.amount_min, self.amount_max, self.n_predictions)
-        self.amounts = np.geomspace(self.amount_min, self.amount_max, self.n_predictions)
 
-        self.history = OrderedDict()
+    @property
+    def amounts(self):
+        if self.amount_space == "geo":
+            return self.amount_geo_space
+        elif self.amount_space == "lin":
+            return self.amount_lin_space
+        else:
+            raise NotImplementedError("unknown space: {}".format(self.amount_space))
+
+    @property
+    def unique_ligands(self):
+        return [lc[0] for lc in self.campaign_reactions.unique_lcombs]
+
+    @property
+    def ligand_to_reactions(self):
+        return {lc[0]: reactions for lc, reactions in self.campaign_reactions.get_lcomb_to_reactions().items()}
+
+    @property
+    def amount_lin_space(self):
+        return np.linspace(self.amount_min, self.amount_max, self.n_predictions)
+
+    @property
+    def amount_geo_space(self):
+        return np.geomspace(self.amount_min, self.amount_max, self.n_predictions)
 
     @property
     def unlearned_ligands(self):
@@ -187,85 +73,100 @@ class SingleWorkflow:
     def unlearned_reactions(self):
         return [r for r in self.campaign_reactions.real_reactions if r not in self.learner.learned_reactions]
 
+    @property
+    def wf_status(self) -> dict[str, Any]:
+        data = dict()
+        # learned info
+        data["learned_ligands"] = deepcopy(self.learner.learned_ligands)
+        # data["learned_reactions"] = deepcopy(self.learner.learned_reactions)  # not really useful...
+
+        # single ligand predictions
+        slpreds = self.learner.predict(self.unique_ligands, self.amounts, self.ligand_to_des_record)
+        data["predictions"] = slpreds
+
+        # ranking
+        data["rank_data"] = SingleLigandPredictions.rank_ligands(slpreds)
+
+        # compare wrt real
+        data["mae_wrt_real"] = self.learner.eval_pred_wrt_real(self.campaign_reactions.real_reactions)
+        return data
+
     def teach_ligands(self, ligands: list[Molecule]):
-        reactions_to_teach = ReactionCollection.subset_by_lcombs(self.campaign_reactions, [(ligand,) for ligand in
-                                                                                           self.learner.learned_ligands + ligands])
+        """
+        *update* the learner with the reactions (from campaign reactions) of the given ligands
+
+        :param ligands: a list of ligands, if a ligand is already learned, it's excluded
+        :param rank_unlearned: if write sorted unlearned ligands into history
+        :return:
+        """
+        teaching_list = [lig for lig in ligands if lig not in self.learner.learned_ligands]
+        reactions_to_teach = ReactionCollection.subset_by_lcombs(
+            self.campaign_reactions, [(ligand,) for ligand in self.learner.learned_ligands + teaching_list]
+        )
         logging.warning("TEACHING...")
-        self.learner.teach(reactions_to_teach)
+        ts1 = time.perf_counter()
+        self.learner.teach(reactions_to_teach.reactions, tune=self.reg_tune)
+        ts2 = time.perf_counter()
         logging.warning("AFTER TEACHING")
         logging.warning(self.learner.status)
         logging.warning("reactions learned vs unlearned: {} vs {}".format(len(self.learner.learned_reactions),
                                                                           len(self.unlearned_reactions)))
-        if len(self.unlearned_reactions) == 0:
-            return
-        self.uncertainty = self.learner.eval_pred_uncertainty(self.unlearned_ligands, amounts=self.amounts)
-        self.mae = self.learner.eval_pred_wrt_real(ReactionCollection(self.unlearned_reactions))
-        self.average_uncertainty = np.mean(list(self.uncertainty.values()))
-        self.average_mae = np.mean(list(self.mae.values()))
-        self.largest_mae = max(self.mae.values())
-        self.largest_uncertainty = max(self.uncertainty.values())
-        logging.warning("average uncertainty for unlearned: {:.4f}".format(self.average_uncertainty))
-        logging.warning("average mae for unlearned: {:.4f}".format(self.average_mae))
-        self.suggestions = self.learner.suggest_ligand(
-            self.unlearned_ligands, self.n_predictions, self.amount_min, self.amount_max, "large_average_std", k=1
+        this_round = get_timestamp()
+        self.learner_history.update(
+            {"{}: {}".format(inspect.stack()[0].function, this_round): self.wf_status}
         )
+        self.timing[this_round] = ts2 - ts1
 
     def train_seed(self, size=2, seed=SEED):
-        random.seed(seed)
-        seed_ligands = random.sample(self.unique_ligands, size)
+        assert size <= len(self.unique_ligands)
+        seed_ligands = random.Random(seed).sample(self.unique_ligands, size)
         logging.warning("seed ligands: {}".format(seed_ligands))
         self.teach_ligands(seed_ligands)
 
-    def teach(self, nligands: int = None, init_size: int = 2, init_seed: int = SEED):
-        if nligands is None:
-            nligands = len(self.unique_ligands)
-        nligands_taught = 0
-        logging.warning("learn # of ligands: {}".format(nligands))
+    def teach_one_by_one(
+            self, metric: str, num_ligands_to_teach: int = None, init_size: int = 2, init_seed: int = SEED
+    ):
+        if num_ligands_to_teach is None:
+            num_ligands_to_teach = len(self.unique_ligands)
+        num_ligands_taught = 0
+        logging.warning("learn # of ligands: {}".format(num_ligands_to_teach))
         self.train_seed(init_size, init_seed)
-        nligands_taught += init_size
-        while nligands_taught < nligands:
-            nsuggested = len(self.suggestions)
-            self.teach_ligands(self.suggestions)
-            nligands_taught += nsuggested
-            self.history[nligands_taught] = {
-                "average_uncertainty": self.average_uncertainty,
-                "average_mae": self.average_mae,
-                "largest_mae": self.largest_mae,
-                "largest_uncertainty": self.largest_uncertainty,
-            }
-            visdata = self.visualize_iteration()
-            json_dump(visdata, "vis/vis-{0:0>4}.json".format(nligands_taught))
+        num_ligands_taught += init_size
+        while num_ligands_taught < num_ligands_to_teach:
+            last_history_key, last_history_status = next(reversed(self.learner_history.items()))
+            last_rank_data = last_history_status["rank_data"][metric]
+            last_rank_data = [lv for lv in last_rank_data if lv[0] in self.unlearned_ligands]
+            suggested_ligand, suggested_value = last_rank_data[0]
+            logging.warning("learning suggestion: {} with value {:.4f}".format(suggested_ligand, suggested_value))
+            self.teach_ligands([suggested_ligand, ])
+            num_ligands_taught += 1
 
-    def get_real_xy(self):
-        data = dict()
-        for ligand, reactions in self.ligand_to_reactions.items():
-            real_xs = np.array([r.ligand_solutions[0].amount for r in reactions])
-            real_ys = [r.properties[self.get_fom_field(r.properties.keys())] for r in reactions]
-            data[ligand.smiles] = real_xs, real_ys
-        return data
+    def visualize_history_data(self, status_data: dict):
+        learned_ligands = status_data["learned_ligands"]
+        # learned_reactions = status_data["learned_reactions"]
+        rank_data = status_data["rank_data"]
+        mae_wrt_real = status_data["mae_wrt_real"]
+        sllps = status_data["predictions"]
+        visualization_data = dict()
 
-    def visualize_iteration(self):
-        ligand_label_to_vis_data = dict()
-
-        uncertainty = self.learner.eval_pred_uncertainty(self.unique_ligands, amounts=self.amounts)
-        mae = self.learner.eval_pred_wrt_real(self.campaign_reactions)
-
-        for ligand, reactions in self.ligand_to_reactions.items():
+        for sllp in sllps:
+            sllp: SingleLigandPredictions
             fake_xs = self.amounts
-            real_ys = [r.properties[self.get_fom_field(r.properties.keys())] for r in reactions],
-            llp = self.learner.predict([ligand, ], fake_xs)[0]
-            ligand_label_to_vis_data[ligand.label] = dict(
-                real_xs=np.array([r.ligand_solutions[0].amount for r in reactions]),
-                real_ys=np.nan_to_num(np.array(real_ys))[0],
-                is_learned=ligand in self.learner.learned_ligands,
-                is_suggested=ligand in self.suggestions,
+            ligand = sllp.ligand
+            real_reactions = self.ligand_to_reactions[ligand]
+            real_ys = [r.properties[self.fom_field] for r in real_reactions]
+            real_xs = [r.ligand_solutions[0].amount for r in real_reactions]
+            visualization_data[ligand] = dict(
+                real_xs=real_xs,
+                real_ys=real_ys,
+                is_learned=ligand in learned_ligands,
                 fake_xs=fake_xs,
-                fake_ys=llp.pred_mu,
-                fake_ys_err=llp.pred_std,
-                mae=mae[ligand],
-                uncertainty=uncertainty[ligand],
-                history=self.history,
+                fake_ys=sllp.pred_mu,
+                fake_ys_err=sllp.pred_std,
+                uncertainty=sllp.overall_uncertainty(),
+                uncertainty_top2=sllp.overall_uncertainty(0.02),
+                mae_wrt_real=mae_wrt_real[ligand],
             )
-        return ligand_label_to_vis_data
-
-
+            for m in rank_data:
+                visualization_data[ligand]["rank-" + m] = [rd[0] for rd in rank_data[m]].index(ligand)
+        return visualization_data
