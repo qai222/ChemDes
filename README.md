@@ -2,13 +2,9 @@ Ligand Selection with Active Learning
 ---
 
 ### Results and visualizations
-- Seed dataset
-  - [Ligand inventory](http://143.198.128.149:8123/) (raw [csv](./workplace/inventory/inventory.csv))
-  - [Dimensionality reduction of the ligand pool](http://143.198.128.149:8125/) with [selected features](./workplace/ligand_descriptors/calculate.py)
-  - [Sampling](./workplace/sampler)
-- One-ligand system
-  - 2022-04-15:
-    - [suggestions](./workplace/one_ligand_0415/output/suggestions.csv)
-    - [Predictions from the suggester](http://143.198.128.149:8124/)
-    - [Suggester cross validation](./workplace/one_ligand_0415/vis_cv/)
-    - [Suggester perdictions: leave one ligand out](./workplace/one_ligand_0415/output/lolo.png)
+- Single-ligand seed dataset
+  - [Ligand inventory](http://161.35.50.78:8000/) (raw [csv](./workplace/Inventory/ligand_inventory.csv))
+  - [Dimensionality reduction of the ligand pool](http://161.35.50.78:8001/) with [selected features](./workplace/MolDescriptors/ligand_descriptors_2022_06_16_expka.csv)
+  - [Sampling](./workplace/Sampler)
+  - [Experiment results by ligands](http://161.35.50.78:8002/)
+  - [FOM vs references](http://161.35.50.78:8003/)
