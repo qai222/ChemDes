@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
 
-from lsal.utils import FilePath, write_smi, json_dump, createdir
+from lsal.utils import FilePath, json_dump, createdir
 
 sns.set_style("whitegrid")
 
@@ -45,7 +45,7 @@ def delta_feature_screen(delta: float, feature_lim_dict: dict, smis: list[str], 
 
 def delta_plot(
         initial_smis, domain_lim, feature_df, out: FilePath,
-        available_features: list[str], xmin=1e-5, xmax=0.4, nxs=9, wdir:FilePath="./"
+        available_features: list[str], xmin=1e-5, xmax=0.4, nxs=9, wdir: FilePath = "./"
 ):
     xs = np.linspace(xmin, xmax, nxs)
     ys = []

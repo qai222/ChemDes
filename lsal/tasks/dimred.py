@@ -29,8 +29,8 @@ def umap_run(dmat, nn, md, wdir="./"):
 
 def tune_umap(
         dmat,
-        n_neighbors_values=(3, 5, 7, ),
-        min_dist_values=(0.1, 0.2, 0.3, ),
+        n_neighbors_values=(3, 5, 7,),
+        min_dist_values=(0.1, 0.2, 0.3,),
         wdir="./",
 ):
     for nn in n_neighbors_values:

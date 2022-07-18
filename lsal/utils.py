@@ -273,10 +273,11 @@ def removefolder(what: FilePath):
 def is_close(a: float, b: float, eps=1e-5):
     return abs(a - b) < eps
 
-def is_close_relative(a: float, b:float, eps=1e-5):
+
+def is_close_relative(a: float, b: float, eps=1e-5):
     aa = abs(a)
     bb = abs(b)
-    return abs(a-b)/min([aa, bb]) < eps
+    return abs(a - b) / min([aa, bb]) < eps
 
 
 def is_close_list(lst: list[float], eps=1e-5):
@@ -284,3 +285,24 @@ def is_close_list(lst: list[float], eps=1e-5):
         if is_close(i, j, eps):
             return True
     return False
+
+
+def passmein(func):
+    """
+    https://stackoverflow.com/questions/8822701
+    """
+
+    def wrapper(*args, **kwargs):
+        return func(func, *args, **kwargs)
+
+    return wrapper
+
+
+def docstring_parameter(*sub):
+    """ https://stackoverflow.com/questions/10307696 """
+
+    def dec(obj):
+        obj.__doc__ = obj.__doc__.format(*sub)
+        return obj
+
+    return dec

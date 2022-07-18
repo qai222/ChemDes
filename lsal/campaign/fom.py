@@ -22,6 +22,13 @@ possible figures of merit
 """
 
 
+def is_internal_fom(fom_name: str) -> bool:
+    """ does the fom calculation need reference experiments? """
+    if fom_name in ("fom2", "fom3"):
+        return True
+    return False
+
+
 class FomCalculator:
     def __init__(self, reaction_collection: ReactionCollection):
         self.reaction_collection = reaction_collection
@@ -73,12 +80,64 @@ class FomCalculator:
         for r in self.reaction_collection.reactions:
             for fname in self.fom_function_names:
                 fom_func = getattr(self, fname)
-                if r.is_reaction_real:
-                    fom = fom_func(r)
-                else:
+                if r.is_reaction_nc_reference:
+                    if fname == "fom4":
+                        fom = 1
+                    elif fname == "fom5":
+                        fom = 0
+                    else:
+                        fom = fom_func(r)
+                elif r.is_reaction_blank_reference:
                     fom = np.nan
+                else:
+                    fom = fom_func(r)
                 r.properties[fname] = fom
         return self.reaction_collection
+
+    # TODO add spline fitting
+    # def smooth(x, y):
+    #     xx = np.linspace(min(x), max(x), 1000)
+    #
+    #     # interpolate + smooth
+    #     itp = interp1d(x, y, kind='linear')
+    #     window_size, poly_order = 801, 3
+    #     yy_sg = savgol_filter(itp(xx), window_size, poly_order)
+    #     return xx, yy_sg
+    #
+    # def spline_fit_single_ligand_campaign(
+    #         reactions: ReactionCollection,
+    #         get_fom:PropertyGetter,
+    #         fom_name:str,
+    # ):
+    #     """
+    #     use spline to fit `amount-FOM` relation, this will update FOM in-place
+    #     """
+    #     l2rs = {lc[0]: rs for lc, rs in reactions.get_lcomb_to_reactions().items()}
+    #     for l, rs in l2rs.items():
+    #         x = [r.ligand_solutions[0].amount for r in rs]
+    #         y = [get_fom(r) for r in rs]
+    #         y = np.nan_to_num(y, nan=0.0)
+    #         # TODO we assumed reaction in rs only differ in ligand amount
+    #         y = [yy for _, yy in sorted(zip(x, y), key=lambda t: t[0])]
+    #         x = sorted(x)
+    #         assert not is_close_list(x, 1e-5), "cannot fit due to duplicates in x!"
+    #
+    #         # cs = CubicSpline(x, y, bc_type="natural")
+    #         cs = UnivariateSpline(np.log(x), y)
+    #         fitted_y = cs(np.log(x))
+    #
+    #         fig, ax = plt.subplots()
+    #         ax.scatter(np.log(x), y)
+    #         ax.plot(np.log(x), fitted_y)
+    #         ax.set_title(l.label)
+    #         ax.set_xlabel("log(amount)")
+    #         fig.savefig("fitted-{}.png".format(l.label))
+    #
+    #         for r, xx, yy in zip(rs, x, fitted_y):
+    #             r.ligand_solutions[0].volume = 1
+    #             r.ligand_solutions[0].concentration = xx
+    #             r.properties["fitted_FOM_{}".format(fom_name)] = yy
+    #     return reactions
 
 
 class PropertyGetter:
@@ -134,7 +193,6 @@ class PropertyGetter:
             reaction_collection: ReactionCollection, property_name: str
     ) -> dict[Molecule, dict[str, Any]]:
         # TODO right now this only works for single ligand reactions
-        # TODO add spline fitting
         ligand_to_reactions = reaction_collection.get_lcomb_to_reactions()
         ligand_to_reactions = {k[0]: v for k, v in ligand_to_reactions.items()}
         data = dict()

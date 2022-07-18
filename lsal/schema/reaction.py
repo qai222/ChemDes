@@ -8,7 +8,7 @@ from typing import Tuple
 
 from monty.json import MSONable
 
-from lsal.schema import Molecule, NanoCrystal
+from lsal.schema.material import Molecule, NanoCrystal
 from lsal.utils import msonable_repr, rgetattr
 
 _Precision = 5
@@ -219,7 +219,7 @@ class ReactionCollection(MSONable):
 
     def ligand_amounts(self, ligand: Molecule) -> list[float]:
         # only works for single ligand system
-        reactions = self.get_lcomb_to_reactions()[(ligand, )]
+        reactions = self.get_lcomb_to_reactions()[(ligand,)]
         reactions: list[LigandExchangeReaction]
         assert len(reactions) > 0
         return [r.ligand_solutions[0].amount for r in reactions]
