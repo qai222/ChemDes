@@ -7,24 +7,30 @@ from copy import deepcopy
 from typing import Any
 
 import numpy as np
+from sklearn.ensemble import RandomForestRegressor
 
 from lsal.campaign.loader import Molecule
-from lsal.campaign.single_learner import SingleLigandLearner, ReactionCollection, SingleLigandPredictions
+from lsal.campaign.single_learner import SingleLigandLearner, ReactionCollection, SingleLigandPredictions, TwinRegressor
+from lsal.twinsk.estimator import _default_n_estimator
 from lsal.utils import SEED, get_timestamp
 
 
 class SingleWorkflow:
     def __init__(
             self,
+            swf_name: str,
             reaction_collection: ReactionCollection,
             learner: SingleLigandLearner,
             n_predictions=200,  # num of predictions generated for each ligand over the concentration range
             learner_history: OrderedDict = None,
             reg_tune=False,
+            reg_tune_split=False,
             amount_space: str = "geo",
-            timing:dict=None,
+            timing: dict = None,
             # TODO add spline fitting
     ):
+        self.swf_name = swf_name
+        self.reg_tune_split = reg_tune_split
         if timing is None:
             timing = dict()
         self.timing = timing
@@ -89,6 +95,9 @@ class SingleWorkflow:
 
         # compare wrt real
         data["mae_wrt_real"] = self.learner.eval_pred_wrt_real(self.campaign_reactions.real_reactions)
+
+        # tuning results
+        data["tuning"] = deepcopy(self.learner.tuning_results)
         return data
 
     def teach_ligands(self, ligands: list[Molecule]):
@@ -96,7 +105,6 @@ class SingleWorkflow:
         *update* the learner with the reactions (from campaign reactions) of the given ligands
 
         :param ligands: a list of ligands, if a ligand is already learned, it's excluded
-        :param rank_unlearned: if write sorted unlearned ligands into history
         :return:
         """
         teaching_list = [lig for lig in ligands if lig not in self.learner.learned_ligands]
@@ -105,7 +113,7 @@ class SingleWorkflow:
         )
         logging.warning("TEACHING...")
         ts1 = time.perf_counter()
-        self.learner.teach(reactions_to_teach.reactions, tune=self.reg_tune)
+        self.learner.teach(reactions_to_teach.reactions, tune=self.reg_tune, split_in_tune=self.reg_tune_split)
         ts2 = time.perf_counter()
         logging.warning("AFTER TEACHING")
         logging.warning(self.learner.status)
@@ -170,3 +178,47 @@ class SingleWorkflow:
             for m in rank_data:
                 visualization_data[ligand]["rank-" + m] = [rd[0] for rd in rank_data[m]].index(ligand)
         return visualization_data
+
+
+def run_wf(
+        fom_field: str, metric: str,
+        loaded_reaction_collection: ReactionCollection,
+        ligand_to_desrecords: dict[Molecule, dict],
+        tune=False,
+        tune_split=False,
+        one_by_one=False,
+):
+    task_name = [fom_field, metric]
+    if tune:
+        task_name.append("usetune")
+    else:
+        task_name.append("notune")
+    if one_by_one:
+        task_name.append("obo")
+    else:
+        task_name.append("all")
+    task_name = "--".join(task_name)
+
+    ligand_to_reactions = {k[0]: v for k, v in loaded_reaction_collection.get_lcomb_to_reactions().items()}
+
+    loaded_ligands = sorted(ligand_to_reactions.keys())
+
+    input_reaction_collection = deepcopy(loaded_reaction_collection)
+    reg = RandomForestRegressor(n_estimators=_default_n_estimator, random_state=42, n_jobs=-1)
+    sll = SingleLigandLearner(
+        [], TwinRegressor(reg),
+        fom_field,
+        ligand_to_desrecords,
+    )
+    swf = SingleWorkflow(
+        task_name,
+        input_reaction_collection, sll, 200, None,
+        reg_tune=tune,
+        reg_tune_split=tune_split,
+        amount_space="geo",
+    )
+    if one_by_one:
+        swf.teach_one_by_one(metric=metric, init_seed=42)
+    else:
+        swf.teach_ligands(loaded_ligands)
+    return swf
