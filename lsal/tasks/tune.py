@@ -5,18 +5,21 @@ from sklearn.model_selection import train_test_split
 from skopt import BayesSearchCV
 from skopt.space import Integer
 
-from lsal.twinsk.estimator import TwinRegressor
+from lsal.twinsk.estimator import TwinRegressor, _default_n_estimator
 from lsal.utils import SEED
 
 
-def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, ):
+def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, use_split=True):
     n_features = X.shape[1]
 
     # split data
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=SEED)
+    if use_split:
+        X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=SEED)
+    else:
+        X_train, X_test, y_train, y_test = X, None, y, None
 
     # RF for twin regressor
-    base_estimator = RandomForestRegressor(n_estimators=100, random_state=SEED)
+    base_estimator = RandomForestRegressor(n_estimators=_default_n_estimator, random_state=SEED, n_jobs=-1)
     reg = TwinRegressor(base_estimator)
 
     # the search space defined for the `base_estimator`, in this case RFG
@@ -35,7 +38,8 @@ def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, ):
         estimator=reg,
         search_spaces=space,
         scoring=scorer,
-        n_jobs=1,
+        n_jobs=5,
+        n_points=1,
         cv=5,
         verbose=10,
         return_train_score=True,
@@ -48,7 +52,7 @@ def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, ):
 
 
 def train_twin_rf_with_tuned_params(X, y, opt_params: dict):
-    reg = TwinRegressor(RandomForestRegressor(n_estimators=100, random_state=SEED))
+    reg = TwinRegressor(RandomForestRegressor(n_estimators=_default_n_estimator, random_state=SEED, n_jobs=-1))
     reg.set_params(**opt_params)
     reg.fit(X, y)
     return reg
