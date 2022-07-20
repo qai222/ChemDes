@@ -4,6 +4,8 @@ import numpy as np
 import scipy.stats
 from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin
 
+_default_n_estimator = 100
+
 
 def pair_augment_x(x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
     """ augment two input arrays using their pairwise differences """
