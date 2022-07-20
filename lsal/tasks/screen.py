@@ -58,7 +58,8 @@ def delta_plot(
         ys.append(len(rs))
     plt.plot(xs, ys, "ro-", label="# in domain")
     plt.hlines(len(all_smis), -0.5, 0.5, colors=["k"], linestyles="dotted", label="# total")
-    plt.xlim([xmin * 1.05, xmax * 1.05])
+    minmax_x = xmax - xmin
+    plt.xlim([xmin - 0.05 * minmax_x, xmax + 0.05 * minmax_x])
     plt.yscale("log")
     plt.ylabel("# of molecules")
     plt.xlabel(r"$\Delta ({\mathrm{Feature}})$")

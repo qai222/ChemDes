@@ -7,7 +7,7 @@ import numpy as np
 
 from lsal.schema import Molecule, LigandExchangeReaction, ReactionCollection
 from lsal.schema.io import get_ml_unknown_y_single_ligand, get_ml_known_y_single_ligand
-from lsal.tasks.tune import tune_twin_rf, RandomForestRegressor
+from lsal.tasks.tune import tune_twin_rf
 from lsal.twinsk.estimator import TwinRegressor
 from lsal.twinsk.estimator import upper_confidence_interval
 from lsal.utils import unique_element_to_indices, truncate_distribution, docstring_parameter
@@ -72,7 +72,7 @@ class SingleLigandPredictions:
         elif metric == "uci":
             v = float(np.mean(self.pred_uci))
         elif metric == "std":
-            v = float(np.mean(self.pred_uci))
+            v = float(np.mean(self.pred_std))
         elif metric == "mu-top2%":
             v = float(np.mean(truncate_distribution(self.pred_mu, "top", 0.02, False)))
         elif metric == "uci-top2%":
@@ -145,8 +145,12 @@ class SingleLigandLearner:
             learned_reactions: list[LigandExchangeReaction],
             regressor: TwinRegressor,
             fom_def: str,
-            ligand_to_des_record: dict[Molecule, dict]
+            ligand_to_des_record: dict[Molecule, dict],
+            tuning_results: dict = None
     ):
+        if tuning_results is None:
+            tuning_results = dict()
+        self.tuning_results = tuning_results
         self.fom_def = fom_def
         self.ligand_to_des_record = ligand_to_des_record
         self.regressor = regressor
@@ -196,7 +200,7 @@ class SingleLigandLearner:
                                                                 ligand_to_amounts)
         return llps
 
-    def teach(self, reactions: list[LigandExchangeReaction], tune=False):
+    def teach(self, reactions: list[LigandExchangeReaction], tune=False, split_in_tune=True):
         reaction_collection_to_teach = ReactionCollection(reactions)
         assert all(len(lc) == 1 for lc in reaction_collection_to_teach.unique_lcombs)
         ligand_to_reactions = {k[0]: v for k, v in
@@ -205,10 +209,11 @@ class SingleLigandLearner:
                                                               self.fom_def, fill_nan=True)
         logging.warning("teaching df generated: {}".format(df_x.shape))
         if tune:
-            X_train, y_train, X_test, y_test, opt = tune_twin_rf(df_x, df_y)
-            reg = TwinRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
-            reg.set_params(**opt.best_params_)
-            self.regressor = reg
+            X_train, y_train, X_test, y_test, opt = tune_twin_rf(df_x, df_y, use_split=split_in_tune)
+            self.tuning_results = {
+                "X_train": X_train, "y_train": y_train, "X_test": X_test, "y_test": y_test, "opt": opt
+            }
+            self.regressor = opt.best_estimator_
         self.regressor.fit(df_x.values, df_y.values)
         self.learned_reactions = reactions
 

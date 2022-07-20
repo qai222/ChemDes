@@ -38,7 +38,6 @@ def dfg(input_smis: list[str], tmp_folder: FilePath = "dfg_tmp", rmtmp=True):
         else:
             fg_literal = data[:-1]
             fg_code = data[-1].split(";")[:-1]
-        assert len(fg_literal) == len(fg_code)
         dfg_data[smi] = {"literal": fg_literal, "code": fg_code}
         if rmtmp:
             removefile(fn)
