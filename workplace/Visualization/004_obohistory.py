@@ -8,7 +8,7 @@ from plotly.subplots import make_subplots
 
 from lsal.utils import pkl_load, get_basename
 
-AvailableHistoryData = sorted(glob.glob("../SingleLigandCampaign/al_workflow/visdata_obo/*.pkl"))
+AvailableHistoryData = sorted(glob.glob("../SingleLigandCampaign/al_workflow/vis_obo/visdata_obo/*.pkl"))
 AvailableHistoryData = {get_basename(f): pkl_load(f) for f in AvailableHistoryData}
 
 SWF_names = sorted(AvailableHistoryData.keys())
