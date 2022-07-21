@@ -143,3 +143,6 @@ cython_debug/
 /workplace/Screening/results/
 /lsal/bin/
 /workplace/SingleLigandCampaign/models/
+/workplace/SingleLigandCampaign/al_predict/generated_predictions/
+/workplace/SingleLigandCampaign/al_workflow/models/
+/workplace/SingleLigandCampaign/al_predict/predictions*/

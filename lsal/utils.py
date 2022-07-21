@@ -1,21 +1,25 @@
+import base64
 import collections
 import functools
 import itertools
 import json
 import logging
 import os
+import os.path
 import pathlib
 import pickle
 import re
 import time
 import typing
 from datetime import datetime
+from io import BytesIO
 
 import monty.json
 import numpy as np
 import pandas as pd
 from monty.json import MSONable
 from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles, MolFromSmarts
+from rdkit.Chem.Draw import MolToImage
 from rdkit.Chem.inchi import MolFromInchi
 from sklearn import preprocessing
 
@@ -312,3 +316,13 @@ def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
+
+
+def smi2imagestr(smi: str):
+    m = MolFromSmiles(smi)
+    img = MolToImage(m)
+    buffered = BytesIO()
+    img.save(buffered, format="JPEG")
+    encoded_image = base64.b64encode(buffered.getvalue())
+    src_str = 'data:image/png;base64,{}'.format(encoded_image.decode())
+    return src_str
