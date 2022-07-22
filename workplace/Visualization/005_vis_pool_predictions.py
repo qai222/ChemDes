@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output
 
-from lsal.utils import pkl_load
+from lsal.utils import pkl_load, get_basename, file_exists, removefile
 
 Available_FOMs = [
     "fom1",
@@ -34,6 +34,8 @@ def get_df_by_fom(fom_name: str):
     final_df = pd.concat([df, df_learned], axis=0)
     return final_df
 
+
+TMP_selected_csv = f"{get_basename(__file__)}__selected.csv"
 
 DFs = {fn: get_df_by_fom(fn) for fn in Available_FOMs}
 app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -68,6 +70,12 @@ app.layout = html.Div([
     ]),
     dcc.Graph(id='graph'),
 
+    html.Div(
+        [
+            html.Button("Download CSV", id="btn_csv"),
+            dcc.Download(id="download-dataframe-csv"),
+        ]
+    ),
     html.Div(children=[],
              style={'margin-right': '90px', 'margin-left': '90px'},
              id="ligand_table"
@@ -124,6 +132,21 @@ def update_graph(fom_type, xdef, ydef):
 
 
 @app.callback(
+    Output("download-dataframe-csv", "data"),
+    [
+        Input("btn_csv", "n_clicks"),
+    ],
+    prevent_initial_call=True,
+)
+def update_table_download(n_clicks):
+    if file_exists(TMP_selected_csv):
+        df = pd.read_csv(TMP_selected_csv)
+    else:
+        df = pd.DataFrame()
+    return dcc.send_data_frame(df.to_csv, TMP_selected_csv, index=False)
+
+
+@app.callback(
     Output('ligand_table', 'children'),
     [
         Input('fom_type', 'value'),
@@ -154,12 +177,15 @@ def update_table(fom_type, xdef, ydef, selectedData):
             }
             selected_records.append(record)
         selected_records = sorted(selected_records, key=lambda x: x[xdef], reverse=True)
-        df_table = pd.DataFrame.from_records(selected_records)
-        return [dbc.Table.from_dataframe(df_table, striped=True, bordered=True, hover=True, responsive="sm")]
+        selected_data_frame = pd.DataFrame.from_records(selected_records)
+        removefile(TMP_selected_csv)
+        selected_data_frame.to_csv(TMP_selected_csv, index=False)
+        return [dbc.Table.from_dataframe(selected_data_frame, striped=True, bordered=True, hover=True, responsive="sm")]
     else:
         return []
 
 
 if __name__ == "__main__":
+    removefile(TMP_selected_csv)
     port = int("8{}".format(os.path.basename(__file__)[:3]))
     app.run_server(debug=False, host="0.0.0.0", port=port)
