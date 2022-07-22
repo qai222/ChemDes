@@ -34,6 +34,7 @@ class TwinEstimator(BaseEstimator, abc.ABC):
         self.twin_base_estimator = twin_base_estimator
         self.twin_base_estimator.set_params(**kwargs)
         self._train_X = None
+        self._train_y = None
 
     def get_params(self, deep=True):
         d = self.twin_base_estimator.get_params(deep=deep)
