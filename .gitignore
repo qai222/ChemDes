@@ -1,4 +1,14 @@
 ### Python template
+
+
+# mk edit start
+# large vis file from Qianxiang
+export_vis_data_ligands.pkl
+#idea folder
+.idea/
+# mk edit end
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
