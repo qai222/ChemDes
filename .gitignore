@@ -2,8 +2,16 @@
 
 
 # mk edit start
-# large vis file from Qianxiang
+
+# from Qianxiang
+# large vis file
 export_vis_data_ligands.pkl
+# suggester additionals
+suggest_data.json
+
+#KS sampled file
+shortlist/
+
 #idea folder
 .idea/
 # mk edit end
