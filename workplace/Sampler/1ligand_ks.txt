@@ -5,9 +5,10 @@ LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 LIGAND-0008 -- octadecane-1-thiol
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0020 -- decane-1,10-dithiol
 LIGAND-0014 -- N,N-dibutylbutan-1-amine
 LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0018 -- decane-1,10-diamine
 LIGAND-0009 -- octylphosphonic acid
 LIGAND-0021 -- 2-pyridin-2-ylpyridine
 LIGAND-0013 -- N-octyloctan-1-amine
@@ -16,4 +17,5 @@ LIGAND-0007 -- (Z)-octadec-9-en-1-amine
 LIGAND-0005 -- dodecan-1-amine
 LIGAND-0000 -- octanoic acid
 LIGAND-0002 -- octadecanoic acid
+LIGAND-0006 -- octadecan-1-amine
 LIGAND-0004 -- octan-1-amine
