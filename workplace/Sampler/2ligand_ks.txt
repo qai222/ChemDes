@@ -1,5 +1,5 @@
 pair: 000
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0008 -- octadecane-1-thiol
 LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
 pair: 001
@@ -8,31 +8,31 @@ LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 002
 LIGAND-0009 -- octylphosphonic acid
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
 
 pair: 003
 LIGAND-0003 -- (Z)-octadec-9-enoic acid
 LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 004
+LIGAND-0013 -- N-octyloctan-1-amine
 LIGAND-0014 -- N,N-dibutylbutan-1-amine
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
 pair: 005
-LIGAND-0000 -- octanoic acid
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0004 -- octan-1-amine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
 pair: 006
 LIGAND-0000 -- octanoic acid
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0008 -- octadecane-1-thiol
 
 pair: 007
-LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0000 -- octanoic acid
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
 pair: 008
 LIGAND-0002 -- octadecanoic acid
-LIGAND-0005 -- dodecan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
 
 pair: 009
 LIGAND-0000 -- octanoic acid
@@ -43,642 +43,798 @@ LIGAND-0015 -- N,N-dioctyloctan-1-amine
 LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 011
-LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+LIGAND-0018 -- decane-1,10-diamine
 
 pair: 012
-LIGAND-0011 -- octadecylphosphonic acid
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0012 -- N-butylbutan-1-amine
 
 pair: 013
-LIGAND-0013 -- N-octyloctan-1-amine
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0005 -- dodecan-1-amine
 
 pair: 014
-LIGAND-0004 -- octan-1-amine
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-
-pair: 015
-LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 016
-LIGAND-0000 -- octanoic acid
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 017
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+LIGAND-0002 -- octadecanoic acid
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
+pair: 015
+LIGAND-0000 -- octanoic acid
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 016
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 017
+LIGAND-0020 -- decane-1,10-dithiol
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
 pair: 018
-LIGAND-0009 -- octylphosphonic acid
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
 pair: 019
-LIGAND-0011 -- octadecylphosphonic acid
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 020
-LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
 
 pair: 021
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0004 -- octan-1-amine
+LIGAND-0013 -- N-octyloctan-1-amine
 
 pair: 022
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+LIGAND-0004 -- octan-1-amine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
 pair: 023
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0013 -- N-octyloctan-1-amine
 
 pair: 024
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 025
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 026
-LIGAND-0000 -- octanoic acid
-LIGAND-0008 -- octadecane-1-thiol
-
-pair: 027
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
 LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
+pair: 026
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 027
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+
 pair: 028
-LIGAND-0011 -- octadecylphosphonic acid
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
 
 pair: 029
-LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 030
-LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
 LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
 pair: 031
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0009 -- octylphosphonic acid
-
-pair: 032
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0011 -- octadecylphosphonic acid
-
-pair: 033
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
 LIGAND-0013 -- N-octyloctan-1-amine
-
-pair: 034
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-
-pair: 035
-LIGAND-0013 -- N-octyloctan-1-amine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 036
-LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 037
-LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
+pair: 032
+LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 033
+LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 034
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 035
+LIGAND-0018 -- decane-1,10-diamine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 036
+LIGAND-0018 -- decane-1,10-diamine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 037
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0009 -- octylphosphonic acid
+
 pair: 038
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0010 -- dodecylphosphonic acid
 
 pair: 039
-LIGAND-0005 -- dodecan-1-amine
+LIGAND-0004 -- octan-1-amine
 LIGAND-0009 -- octylphosphonic acid
 
 pair: 040
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0004 -- octan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
 
 pair: 041
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0009 -- octylphosphonic acid
+LIGAND-0013 -- N-octyloctan-1-amine
 
 pair: 042
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0009 -- octylphosphonic acid
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
 pair: 043
 LIGAND-0009 -- octylphosphonic acid
-LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
 pair: 044
-LIGAND-0009 -- octylphosphonic acid
-LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0013 -- N-octyloctan-1-amine
 
 pair: 045
 LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
 pair: 046
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
 pair: 047
-LIGAND-0000 -- octanoic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
 pair: 048
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 049
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 050
+LIGAND-0000 -- octanoic acid
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 051
 LIGAND-0000 -- octanoic acid
 LIGAND-0023 -- 1,10-phenanthroline
 
-pair: 049
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-
-pair: 050
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0023 -- 1,10-phenanthroline
-
-pair: 051
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-
 pair: 052
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0023 -- 1,10-phenanthroline
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 053
-LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 054
 LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0023 -- 1,10-phenanthroline
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 055
-LIGAND-0013 -- N-octyloctan-1-amine
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 056
 LIGAND-0013 -- N-octyloctan-1-amine
-LIGAND-0023 -- 1,10-phenanthroline
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 057
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 058
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-LIGAND-0023 -- 1,10-phenanthroline
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 059
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 060
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 061
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0023 -- 1,10-phenanthroline
+
+pair: 062
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 063
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 LIGAND-0023 -- 1,10-phenanthroline
 
-pair: 061
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 062
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-LIGAND-0023 -- 1,10-phenanthroline
-
-pair: 063
-LIGAND-0000 -- octanoic acid
-LIGAND-0001 -- dodecanoic acid
-
 pair: 064
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0018 -- decane-1,10-diamine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 065
-LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0018 -- decane-1,10-diamine
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 066
-LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 067
-LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 068
-LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 069
-LIGAND-0010 -- dodecylphosphonic acid
-LIGAND-0013 -- N-octyloctan-1-amine
-
-pair: 070
-LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
-
-pair: 071
-LIGAND-0011 -- octadecylphosphonic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-
-pair: 072
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 LIGAND-0023 -- 1,10-phenanthroline
 
+pair: 070
+LIGAND-0009 -- octylphosphonic acid
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 071
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 072
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
 pair: 073
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 074
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0008 -- octadecane-1-thiol
+
+pair: 075
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0013 -- N-octyloctan-1-amine
+
+pair: 076
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+
+pair: 077
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 078
+LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 079
+LIGAND-0000 -- octanoic acid
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+
+pair: 080
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 081
 LIGAND-0002 -- octadecanoic acid
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
 
-pair: 074
-LIGAND-0012 -- N-butylbutan-1-amine
-LIGAND-0013 -- N-octyloctan-1-amine
-
-pair: 075
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0008 -- octadecane-1-thiol
-
-pair: 076
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0010 -- dodecylphosphonic acid
-
-pair: 077
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0011 -- octadecylphosphonic acid
-
-pair: 078
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 079
-LIGAND-0001 -- dodecanoic acid
+pair: 082
+LIGAND-0009 -- octylphosphonic acid
 LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
-pair: 080
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
-
-pair: 081
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 082
-LIGAND-0000 -- octanoic acid
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-
 pair: 083
-LIGAND-0008 -- octadecane-1-thiol
 LIGAND-0009 -- octylphosphonic acid
+LIGAND-0020 -- decane-1,10-dithiol
 
 pair: 084
 LIGAND-0009 -- octylphosphonic acid
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 085
 LIGAND-0009 -- octylphosphonic acid
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 086
 LIGAND-0009 -- octylphosphonic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-
-pair: 087
-LIGAND-0009 -- octylphosphonic acid
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 088
-LIGAND-0009 -- octylphosphonic acid
 LIGAND-0023 -- 1,10-phenanthroline
 
-pair: 089
-LIGAND-0001 -- dodecanoic acid
+pair: 087
 LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 088
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0012 -- N-butylbutan-1-amine
+
+pair: 089
+LIGAND-0000 -- octanoic acid
+LIGAND-0002 -- octadecanoic acid
 
 pair: 090
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0009 -- octylphosphonic acid
 
 pair: 091
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0010 -- dodecylphosphonic acid
 
 pair: 092
 LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
 pair: 093
 LIGAND-0008 -- octadecane-1-thiol
-LIGAND-0023 -- 1,10-phenanthroline
+LIGAND-0020 -- decane-1,10-dithiol
 
 pair: 094
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
 LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
 pair: 095
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0009 -- octylphosphonic acid
+LIGAND-0008 -- octadecane-1-thiol
+LIGAND-0023 -- 1,10-phenanthroline
 
 pair: 096
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0008 -- octadecane-1-thiol
 
 pair: 097
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0011 -- octadecylphosphonic acid
+LIGAND-0009 -- octylphosphonic acid
 
 pair: 098
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
 
 pair: 099
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
+LIGAND-0013 -- N-octyloctan-1-amine
 
 pair: 100
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
 pair: 101
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
 pair: 102
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-LIGAND-0023 -- 1,10-phenanthroline
-
-pair: 103
-LIGAND-0013 -- N-octyloctan-1-amine
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
+pair: 103
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
 pair: 104
-LIGAND-0009 -- octylphosphonic acid
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 105
-LIGAND-0013 -- N-octyloctan-1-amine
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 106
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
 LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
-pair: 107
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
+pair: 105
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 106
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
 LIGAND-0023 -- 1,10-phenanthroline
 
+pair: 107
+LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
 pair: 108
+LIGAND-0000 -- octanoic acid
 LIGAND-0001 -- dodecanoic acid
-LIGAND-0005 -- dodecan-1-amine
 
 pair: 109
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0009 -- octylphosphonic acid
+LIGAND-0000 -- octanoic acid
+LIGAND-0005 -- dodecan-1-amine
 
 pair: 110
 LIGAND-0001 -- dodecanoic acid
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0002 -- octadecanoic acid
 
 pair: 111
 LIGAND-0001 -- dodecanoic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
+LIGAND-0006 -- octadecan-1-amine
 
 pair: 112
 LIGAND-0001 -- dodecanoic acid
-LIGAND-0023 -- 1,10-phenanthroline
-
-pair: 113
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-
-pair: 114
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0008 -- octadecane-1-thiol
-
-pair: 115
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0010 -- dodecylphosphonic acid
-
-pair: 116
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0011 -- octadecylphosphonic acid
-
-pair: 117
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 118
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-
-pair: 119
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
-
-pair: 120
-LIGAND-0005 -- dodecan-1-amine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 121
-LIGAND-0000 -- octanoic acid
-LIGAND-0004 -- octan-1-amine
-
-pair: 122
-LIGAND-0000 -- octanoic acid
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-
-pair: 123
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0004 -- octan-1-amine
-
-pair: 124
-LIGAND-0004 -- octan-1-amine
-LIGAND-0008 -- octadecane-1-thiol
-
-pair: 125
-LIGAND-0004 -- octan-1-amine
-LIGAND-0011 -- octadecylphosphonic acid
-
-pair: 126
-LIGAND-0004 -- octan-1-amine
-LIGAND-0014 -- N,N-dibutylbutan-1-amine
-
-pair: 127
-LIGAND-0004 -- octan-1-amine
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-
-pair: 128
-LIGAND-0004 -- octan-1-amine
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-
-pair: 129
-LIGAND-0004 -- octan-1-amine
-LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
-
-pair: 130
-LIGAND-0004 -- octan-1-amine
-LIGAND-0023 -- 1,10-phenanthroline
-
-pair: 131
-LIGAND-0000 -- octanoic acid
-LIGAND-0005 -- dodecan-1-amine
-
-pair: 132
-LIGAND-0000 -- octanoic acid
 LIGAND-0009 -- octylphosphonic acid
 
-pair: 133
-LIGAND-0000 -- octanoic acid
+pair: 113
+LIGAND-0001 -- dodecanoic acid
 LIGAND-0010 -- dodecylphosphonic acid
 
-pair: 134
-LIGAND-0000 -- octanoic acid
+pair: 114
+LIGAND-0001 -- dodecanoic acid
 LIGAND-0013 -- N-octyloctan-1-amine
 
-pair: 135
-LIGAND-0000 -- octanoic acid
+pair: 115
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+
+pair: 116
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 117
+LIGAND-0001 -- dodecanoic acid
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
+pair: 118
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 119
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 120
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 121
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 122
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0023 -- 1,10-phenanthroline
+
+pair: 123
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0005 -- dodecan-1-amine
+
+pair: 124
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0006 -- octadecan-1-amine
+
+pair: 125
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0009 -- octylphosphonic acid
+
+pair: 126
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
+
+pair: 127
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0013 -- N-octyloctan-1-amine
+
+pair: 128
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+
+pair: 129
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 130
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+
+pair: 131
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 132
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 133
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 134
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 135
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0023 -- 1,10-phenanthroline
+
 pair: 136
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0000 -- octanoic acid
 LIGAND-0004 -- octan-1-amine
 
 pair: 137
 LIGAND-0000 -- octanoic acid
-LIGAND-0002 -- octadecanoic acid
-
-pair: 138
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0002 -- octadecanoic acid
-
-pair: 139
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-
-pair: 140
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0008 -- octadecane-1-thiol
-
-pair: 141
-LIGAND-0002 -- octadecanoic acid
 LIGAND-0009 -- octylphosphonic acid
 
-pair: 142
-LIGAND-0002 -- octadecanoic acid
+pair: 138
+LIGAND-0000 -- octanoic acid
 LIGAND-0010 -- dodecylphosphonic acid
 
-pair: 143
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0011 -- octadecylphosphonic acid
-
-pair: 144
-LIGAND-0002 -- octadecanoic acid
+pair: 139
+LIGAND-0000 -- octanoic acid
 LIGAND-0013 -- N-octyloctan-1-amine
 
-pair: 145
-LIGAND-0002 -- octadecanoic acid
+pair: 140
+LIGAND-0000 -- octanoic acid
 LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
-pair: 146
-LIGAND-0002 -- octadecanoic acid
-LIGAND-0015 -- N,N-dioctyloctan-1-amine
-
-pair: 147
-LIGAND-0002 -- octadecanoic acid
+pair: 141
+LIGAND-0000 -- octanoic acid
 LIGAND-0017 -- 3,3-diphenylpropan-1-amine
 
+pair: 142
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0004 -- octan-1-amine
+
+pair: 143
+LIGAND-0004 -- octan-1-amine
+LIGAND-0005 -- dodecan-1-amine
+
+pair: 144
+LIGAND-0004 -- octan-1-amine
+LIGAND-0008 -- octadecane-1-thiol
+
+pair: 145
+LIGAND-0004 -- octan-1-amine
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 146
+LIGAND-0004 -- octan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 147
+LIGAND-0004 -- octan-1-amine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
 pair: 148
-LIGAND-0002 -- octadecanoic acid
+LIGAND-0004 -- octan-1-amine
 LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
 pair: 149
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0005 -- dodecan-1-amine
-
-pair: 150
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0007 -- (Z)-octadec-9-en-1-amine
-
-pair: 151
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0021 -- 2-pyridin-2-ylpyridine
-
-pair: 152
-LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0004 -- octan-1-amine
 LIGAND-0023 -- 1,10-phenanthroline
 
-pair: 153
+pair: 150
 LIGAND-0000 -- octanoic acid
-LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
 
-pair: 154
-LIGAND-0001 -- dodecanoic acid
-LIGAND-0012 -- N-butylbutan-1-amine
-
-pair: 155
+pair: 151
 LIGAND-0002 -- octadecanoic acid
 LIGAND-0004 -- octan-1-amine
 
-pair: 156
+pair: 152
+LIGAND-0004 -- octan-1-amine
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+
+pair: 153
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0008 -- octadecane-1-thiol
+
+pair: 154
 LIGAND-0003 -- (Z)-octadec-9-enoic acid
-LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0006 -- octadecan-1-amine
+
+pair: 155
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0008 -- octadecane-1-thiol
+
+pair: 156
+LIGAND-0000 -- octanoic acid
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
 
 pair: 157
-LIGAND-0004 -- octan-1-amine
-LIGAND-0005 -- dodecan-1-amine
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
 
 pair: 158
-LIGAND-0004 -- octan-1-amine
-LIGAND-0009 -- octylphosphonic acid
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
 
 pair: 159
-LIGAND-0004 -- octan-1-amine
-LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0008 -- octadecane-1-thiol
 
 pair: 160
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0013 -- N-octyloctan-1-amine
+
+pair: 161
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+
+pair: 162
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 163
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 164
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 165
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0005 -- dodecan-1-amine
+
+pair: 166
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0009 -- octylphosphonic acid
+
+pair: 167
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0010 -- dodecylphosphonic acid
+
+pair: 168
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+
+pair: 169
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 170
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 171
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0023 -- 1,10-phenanthroline
+
+pair: 172
+LIGAND-0000 -- octanoic acid
+LIGAND-0006 -- octadecan-1-amine
+
+pair: 173
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+
+pair: 174
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0006 -- octadecan-1-amine
+
+pair: 175
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+
+pair: 176
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+
+pair: 177
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0007 -- (Z)-octadec-9-en-1-amine
+
+pair: 178
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0008 -- octadecane-1-thiol
+
+pair: 179
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0009 -- octylphosphonic acid
+
+pair: 180
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0010 -- dodecylphosphonic acid
+
+pair: 181
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0013 -- N-octyloctan-1-amine
+
+pair: 182
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0014 -- N,N-dibutylbutan-1-amine
+
+pair: 183
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0015 -- N,N-dioctyloctan-1-amine
+
+pair: 184
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+
+pair: 185
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
+
+pair: 186
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 187
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0021 -- 2-pyridin-2-ylpyridine
+
+pair: 188
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
+
+pair: 189
+LIGAND-0006 -- octadecan-1-amine
+LIGAND-0023 -- 1,10-phenanthroline
+
+pair: 190
+LIGAND-0000 -- octanoic acid
+LIGAND-0012 -- N-butylbutan-1-amine
+
+pair: 191
+LIGAND-0001 -- dodecanoic acid
+LIGAND-0012 -- N-butylbutan-1-amine
+
+pair: 192
+LIGAND-0002 -- octadecanoic acid
+LIGAND-0012 -- N-butylbutan-1-amine
+
+pair: 193
+LIGAND-0003 -- (Z)-octadec-9-enoic acid
+LIGAND-0004 -- octan-1-amine
+
+pair: 194
+LIGAND-0004 -- octan-1-amine
+LIGAND-0006 -- octadecan-1-amine
+
+pair: 195
 LIGAND-0004 -- octan-1-amine
 LIGAND-0012 -- N-butylbutan-1-amine
 
-pair: 161
+pair: 196
 LIGAND-0004 -- octan-1-amine
-LIGAND-0013 -- N-octyloctan-1-amine
+LIGAND-0018 -- decane-1,10-diamine
 
-pair: 162
-LIGAND-0004 -- octan-1-amine
-LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+pair: 197
+LIGAND-0005 -- dodecan-1-amine
+LIGAND-0012 -- N-butylbutan-1-amine
 
-pair: 163
+pair: 198
 LIGAND-0007 -- (Z)-octadec-9-en-1-amine
 LIGAND-0012 -- N-butylbutan-1-amine
 
-pair: 164
+pair: 199
 LIGAND-0008 -- octadecane-1-thiol
 LIGAND-0012 -- N-butylbutan-1-amine
 
-pair: 165
-LIGAND-0011 -- octadecylphosphonic acid
+pair: 200
+LIGAND-0009 -- octylphosphonic acid
 LIGAND-0012 -- N-butylbutan-1-amine
 
-pair: 166
+pair: 201
+LIGAND-0010 -- dodecylphosphonic acid
+LIGAND-0012 -- N-butylbutan-1-amine
+
+pair: 202
+LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0013 -- N-octyloctan-1-amine
+
+pair: 203
 LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0014 -- N,N-dibutylbutan-1-amine
 
-pair: 167
+pair: 204
 LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0015 -- N,N-dioctyloctan-1-amine
 
-pair: 168
+pair: 205
+LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0017 -- 3,3-diphenylpropan-1-amine
+
+pair: 206
+LIGAND-0012 -- N-butylbutan-1-amine
+LIGAND-0020 -- decane-1,10-dithiol
+
+pair: 207
 LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0021 -- 2-pyridin-2-ylpyridine
 
-pair: 169
+pair: 208
 LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0022 -- 4-tert-butyl-2-(4-tert-butylpyridin-2-yl)pyridine
 
-pair: 170
+pair: 209
 LIGAND-0012 -- N-butylbutan-1-amine
 LIGAND-0023 -- 1,10-phenanthroline
 
