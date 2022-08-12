@@ -16,6 +16,8 @@ Y_DEFs = ["sa_score", "BertzCT", ]
 X_DEFs = ["mu", "uci", "std", "mu-top2%", "uci-top2%", "std-top2%mu", "std-top2%uci"]
 SMI_data = pkl_load("../SingleLigandCampaign/al_predict/vis_predictions/export_vis_data_ligands.pkl")
 
+_remove_isotope = True
+
 
 def get_df_by_fom(fom_name: str):
     df = pd.read_csv(f"../SingleLigandCampaign/al_predict/vis_predictions/predictions_{fom_name}.csv")
@@ -24,6 +26,9 @@ def get_df_by_fom(fom_name: str):
         values = [SMI_data[smi][ydef] for smi in smis]
         df[ydef] = values
     df["pool"] = [1, ] * len(df)
+    if _remove_isotope:
+        df = df[~df.smiles.str.contains("[2H]")]
+        df = df[~df.smiles.str.contains("13C")]
 
     df_learned = pd.read_csv(f"../SingleLigandCampaign/al_predict/vis_predictions/predictions_{fom_name}_learned.csv")
     smis = df_learned["smiles"].tolist()
@@ -49,7 +54,7 @@ app.layout = html.Div([
                 Available_FOMs[0],
                 id='fom_type'
             ),
-        ], style={'width': '30%', 'display': 'inline-block'}),
+        ], style={'width': '15%', 'display': 'inline-block'}),
         html.Div([
             html.P("y axis:"),
             dcc.Dropdown(
@@ -57,7 +62,7 @@ app.layout = html.Div([
                 Y_DEFs[0],
                 id='ydef'
             ),
-        ], style={'width': '30%', 'display': 'inline-block'}),
+        ], style={'width': '15%', 'display': 'inline-block'}),
         html.Div([
             html.P("x axis:"),
             dcc.Dropdown(
@@ -65,8 +70,7 @@ app.layout = html.Div([
                 X_DEFs[0],
                 id='xdef'
             ),
-        ], style={'width': '30%', 'display': 'inline-block'}),
-
+        ], style={'width': '15%', 'display': 'inline-block'}),
     ]),
     dcc.Graph(id='graph'),
 
