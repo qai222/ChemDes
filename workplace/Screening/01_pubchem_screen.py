@@ -14,11 +14,11 @@ def screen_pubchem(
         allowed_elements: set[str],
         mw_max: float = 400,
 ):
-    df = pd.read_csv(pubchem_csv)[["isosmiles", "inchi", "iupacname", "mf"]]
-    df.columns = ["smiles", "inchi", "iupacname", "formula"]
+    df = pd.read_csv(pubchem_csv)[["isosmiles", "inchi", "iupacname", "mf", "cid"]]
+    df.columns = ["smiles", "inchi", "iupacname", "formula", "cid"]
     good_tuples = []
     for t in tqdm(df.itertuples(index=False, name=None)):
-        smiles, inchi, iupacname, formula = t
+        smiles, inchi, iupacname, formula, cid = t
         # - more than one component
         if "." in smiles:
             continue
@@ -47,7 +47,7 @@ def screen_pubchem(
         if mw > mw_max:
             continue
         smiles = MolToSmiles(m)
-        good_tuples.append((smiles, inchi, iupacname, formula))
+        good_tuples.append((smiles, inchi, iupacname, formula, cid))
     df_screened = pd.DataFrame(good_tuples, columns=df.columns)
     return df_screened
 
