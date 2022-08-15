@@ -89,8 +89,7 @@ def task_3_functional_group_detection():
 if __name__ == "__main__":
     tasks = sorted(inspect_tasks(task_header='task_').items(), key=lambda x: x[0])
 
-    # perform_tasks = [0, 1, 2]
-    perform_tasks = [3, ]
+    perform_tasks = [0, 1, 2, 3]
 
     tasks = [tasks[i] for i in perform_tasks]
     logger.info(f"tasks loaded: {[t[0] for t in tasks]}")
