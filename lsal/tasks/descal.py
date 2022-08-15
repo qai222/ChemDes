@@ -1,12 +1,16 @@
+import glob
 import subprocess
+import time
 from functools import reduce
 from pathlib import Path
 from typing import Union
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 
-from lsal.utils import to_float, FilePath, file_exists
+from lsal.utils import chunks, combine_files
+from lsal.utils import to_float, FilePath, file_exists, get_timestamp, removefile, os
 
 """
 Three calculators are used:
@@ -37,23 +41,16 @@ dipole
 _cxcalc_descriptors = [l for l in _cxcalc_descriptors.strip().split("\n") if not l.startswith("#")]
 _cxcalc_descriptors = [l.split() for l in _cxcalc_descriptors]
 _cxcalc_descriptors = reduce(lambda x, y: x + y, _cxcalc_descriptors)
-_cxcalc_descriptors = tuple(_cxcalc_descriptors)
+_cxcalc_descriptors = list(_cxcalc_descriptors)
 
 
-def calculate_cxcalc_raw(bin="cxcalc.exe", mol_files: list = (), descriptors=_cxcalc_descriptors):
-    child_ps = []
-    for mf in mol_files:
-        out_file = mf + ".out"
-        cmd = [bin, ] + [mf, ] + descriptors
-        with open(out_file, "w") as f:
-            p = subprocess.Popen(cmd, stdout=f)
-            child_ps.append(p)
-    for cp in child_ps:
-        cp.wait()
-
-
-def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", mol_file="mols_test.smi",
-                     descriptors: list[str] = _cxcalc_descriptors) -> pd.DataFrame:
+def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", smis=list[str],
+                     descriptors: list[str] = _cxcalc_descriptors, remove_mol_file=True) -> pd.DataFrame:
+    mol_file = "cxcalc_tmp_{}.smi".format(get_timestamp())
+    s = "\n".join(smis)
+    assert not file_exists(mol_file)
+    with open(mol_file, "w") as f:
+        f.write(s)
     cmd = [bin, ] + [mol_file, ] + descriptors
     result = subprocess.run(cmd, capture_output=True)
     data = result.stdout.decode("utf-8").strip()
@@ -75,6 +72,8 @@ def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", mol_file="mols_test.s
     df = pd.DataFrame(data=values, columns=colnames)
     df.pop("id")
     assert not df.isnull().any().any()
+    if remove_mol_file:
+        removefile(mol_file)
     return df
 
 
@@ -129,3 +128,84 @@ def opera_pka(opera_output: Union[FilePath, pd.DataFrame] = "mols-smi_OPERA2.7Pr
             p = pka
         records.append({"is_acidic": is_acidic, "pKa": p})
     return pd.DataFrame.from_records(records)
+
+
+def calculate_cxcalc_raw(bin="cxcalc.exe", mol_files: list = (), descriptors=_cxcalc_descriptors):
+    child_ps = []
+    for mf in mol_files:
+        out_file = mf + ".out"
+        cmd = [bin, ] + [mf, ] + descriptors
+        with open(out_file, "w") as f:
+            p = subprocess.Popen(cmd, stdout=f)
+            child_ps.append(p)
+    for cp in child_ps:
+        cp.wait()
+
+
+def calculate_cxcalc_parallel(
+        logger,
+        bin: Union[Path, str] = "cxcalc.exe",
+        smis=list[str],
+        descriptors: list[str] = _cxcalc_descriptors,
+        workdir: FilePath = "./",
+        chunk_size=1000,
+        nproc=6,
+        input_template='smi_{0:03d}.smi',
+        combined_input='input.smi',
+):
+    assert len(glob.glob(f'{workdir}/*')) == 0, f'work dir is not empty!: {workdir}'
+
+    # write input files for cxcalc
+    input_files = []
+    for ichunk, smi_chunk in enumerate(chunks(smis, chunk_size)):
+        input_file = os.path.join(workdir, input_template.format(ichunk))
+        with open(input_file, 'w') as f:
+            f.write('\n'.join(smi_chunk))
+        input_files.append(input_file)
+    combine_files(input_files, combined_input)
+    input_files_chunks = list(chunks(input_files, nproc))
+
+    # run cxcalc in parallel
+    for chunk in tqdm(input_files_chunks, desc='cxcalc parallel'):
+        ts1 = time.perf_counter()
+        calculate_cxcalc_raw(bin=bin, mol_files=chunk, descriptors=descriptors)
+        ts2 = time.perf_counter()
+        logger.info('cxcalc batch cost: {:.3f} s'.format(ts2 - ts1))
+
+    # collect results
+    out_files = sorted(glob.glob(f"{workdir}/*.out"))
+    assert len(input_files) == len(out_files)
+    dfs = []
+    for out_file in out_files:
+        try:
+            df = chunk_out_to_df(out_file)
+        except Exception as e:
+            logger.critical(f'error in parsing: {out_file}')
+            raise e
+        dfs.append(df)
+    df = pd.concat(dfs, )
+    return df
+
+
+def chunk_out_to_df(out_file: FilePath, descriptors: list[str] = _cxcalc_descriptors) -> pd.DataFrame:
+    with open(out_file, "r") as f:
+        lines = f.readlines()
+    n_cols = len(lines[1].split())
+    colnames = ["id"] + descriptors.copy()
+    if "asa" in colnames:
+        asa_index = colnames.index("asa")
+        # accessible surface area given by positive (ASA+) and negative (ASA À ) partial charges on atoms
+        # and also surface area induced by hydrophobic (SA_H) and polar (SA_P) atoms
+        colnames = colnames[:asa_index] + ["ASA+", "ASA-", "ASA_H", "ASA_P"] + colnames[asa_index:]
+    assert len(colnames) == n_cols
+
+    lines = lines[1:]
+    values = np.zeros((len(lines), len(colnames)))
+    for i in range(0, len(lines)):
+        line = lines[i]
+        # print(len(line.split()), i, out_file)
+        values[i] = [float(v) for v in line.split()]
+    df = pd.DataFrame(data=values, columns=colnames)
+    df.pop("id")
+    assert not df.isnull().any().any()
+    return df
