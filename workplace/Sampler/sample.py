@@ -1,7 +1,10 @@
 import logging
 
+import pandas as pd
+from sklearn.metrics import pairwise_distances
+
 from lsal.tasks.sampler import MoleculeSampler, Molecule
-from lsal.utils import json_load, FilePath
+from lsal.utils import json_load, FilePath, scale_df, read_smi
 
 
 def write_molecules(mols: list[Molecule], outfile: FilePath):
@@ -19,31 +22,43 @@ def write_molecule_pairs(mps: list, outfile: FilePath):
             f.write("\n")
 
 
-if __name__ == '__main__':
-    # load dimred result
-    dimensionality_reduction_result = json_load("../Inventory/dimred.json")
-    distance_matrix = dimensionality_reduction_result["dmat"]  # this is the distmat after dimred
-    ligand_molecules = dimensionality_reduction_result["molecules"]
-    logging.warning("# of molecules loaded: {}".format(len(ligand_molecules)))
+def calculate_distance_matrix(descriptor_dataframe: pd.DataFrame, metric="manhattan", ):
+    descriptor_dataframe = descriptor_dataframe.select_dtypes('number')
+    df = scale_df(descriptor_dataframe)
+    distance_matrix = pairwise_distances(df.values, metric=metric)
+    return distance_matrix
 
-    # remove insoluble molecules
-    insoluble_inchis = [
-        "InChI=1S/C18H39O3P/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-22(19,20)21/h2-18H2,1H3,(H2,19,20,21)",
-        "InChI=1S/C9H11NO2/c10-8(9(11)12)6-7-4-2-1-3-5-7/h1-5,8H,6,10H2,(H,11,12)",
-        "InChI=1S/C10H24O6P2/c11-17(12,13)9-7-5-3-1-2-4-6-8-10-18(14,15)16/h1-10H2,(H2,11,12,13)(H2,14,15,16)"
-    ]
+
+def remove_inchi(ligands, descriptor_df, insoluble_inchis):
     ligand_indices_to_include = []
-    for i, m in enumerate(ligand_molecules):
+    for i, m in enumerate(ligands):
         if m.inchi not in insoluble_inchis:
             ligand_indices_to_include.append(i)
-    distance_matrix = distance_matrix[ligand_indices_to_include, :][:, ligand_indices_to_include]
-    ligand_molecules = [ligand_molecules[i] for i in ligand_indices_to_include]
-    logging.warning("# of molecules to sample: {}".format(len(ligand_molecules)))
-    assert distance_matrix.shape[0] == len(ligand_molecules)
-    write_molecules(ligand_molecules, "population.txt")
+    descriptor_df = descriptor_df.iloc[ligand_indices_to_include]
+    ligands = [ligands[i] for i in ligand_indices_to_include]
+    return ligands, descriptor_df
+
+
+if __name__ == '__main__':
+    # load ligands and descriptors
+    dataset_ligands = json_load("../MolecularInventory/seed_dataset/seed_dataset_ligand_list.json")
+    dataset_descriptor_df = pd.read_csv(
+        "../MolecularInventory/seed_dataset/seed_dataset_ligand_descriptor_2022_06_16.csv")
+    assert len(dataset_ligands) == len(dataset_descriptor_df)
+
+    # remove insoluble molecules
+    insoluble_inchis = read_smi("insoluble_inchi.txt")
+    soluble_ligands, soluble_descriptor_df = remove_inchi(dataset_ligands, dataset_descriptor_df,
+                                                          insoluble_inchis)
+
+    logging.warning("# of molecules loaded: {}".format(len(soluble_ligands)))
+    distmat = calculate_distance_matrix(soluble_descriptor_df)
+    logging.warning("# of molecules to sample: {}".format(len(soluble_ligands)))
+    assert distmat.shape[0] == len(soluble_ligands)
+    write_molecules(soluble_ligands, "population.txt")
 
     # init sampler
-    sampler = MoleculeSampler(ligand_molecules, distance_matrix)
+    sampler = MoleculeSampler(soluble_ligands, distmat)
     seed = 42
     # 1-ligand random sampling
     samples = sampler.sample_random(k=None, seed=seed, return_mol=True)
