@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import abc
+from collections import OrderedDict
 
 import pandas as pd
 from monty.json import MSONable
@@ -11,19 +12,18 @@ from lsal.utils import inchi2smiles, MolFromInchi, FilePath
 class Material(MSONable, abc.ABC):
 
     def __init__(
-            self, identifier: str, identifier_type: str, properties: dict = None, mat_type: str = None
+            self, identifier: str, identifier_type: str, properties: OrderedDict = None, mat_type: str = None
     ):
         """
         :param identifier: unique identifier for this material
         :param identifier_type: what does this identifier represent?
         :param properties: a dictionary
-        :param int_label: internal label
         :param mat_type: materials type
         """
         self.identifier = identifier
         self.identifier_type = identifier_type
         if properties is None:
-            properties = dict()
+            properties = OrderedDict()
         self.properties = properties
         self.mat_type = mat_type.upper()
 
@@ -49,7 +49,7 @@ class Material(MSONable, abc.ABC):
 
 class NanoCrystal(Material):
 
-    def __init__(self, identifier: str, properties: dict = None):
+    def __init__(self, identifier: str, properties: OrderedDict = None):
         super().__init__(identifier, "batch_number", properties, "NC")
         self.batch_number = self.identifier
 
@@ -118,3 +118,10 @@ class Molecule(Material):
             if getattr(m, field) == value:
                 return m
         raise ValueError("not found in the inventory: {} == {}".format(field, value))
+
+
+def featurize_molecules(molecules: list[Molecule], feature_dataframe: pd.DataFrame):
+    assert feature_dataframe.shape[0] == len(molecules)
+    assert not feature_dataframe.isnull().any().any()
+    for m, d in zip(molecules, feature_dataframe.to_dict(orient='records')):
+        m.properties['features'] = OrderedDict(d)
