@@ -1,10 +1,7 @@
 import abc
 
 import numpy as np
-import scipy.stats
-from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin
-
-_default_n_estimator = 100
+from sklearn.base import BaseEstimator, RegressorMixin
 
 
 def pair_augment_x(x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
@@ -78,26 +75,8 @@ class TwinEstimator(BaseEstimator, abc.ABC):
         pass
 
 
-class TwinClassifier(TwinEstimator, ClassifierMixin):
-
-    def predict(self, X):
-        mu, _ = self.twin_predict(X)
-        return (mu > 0.5).astype(int)
-
-
 class TwinRegressor(TwinEstimator, RegressorMixin):
 
     def predict(self, X):
         mu, _ = self.twin_predict(X)
         return mu
-
-
-def upper_confidence_interval(data: np.ndarray, confidence=0.95):
-    # TODO ubc algorithm uses sample size to penalize mean, we have a fixed plate, sample size stays the same
-    """ https://stackoverflow.com/questions/15033511/ """
-    assert data.ndim == 1 and len(data) >= 2
-    a = 1.0 * np.array(data)
-    n = len(a)
-    m, se = np.mean(a), scipy.stats.sem(a)
-    h = se * scipy.stats.t.ppf((1 + confidence) / 2., n - 1)
-    return m + h
