@@ -1,7 +1,7 @@
 import abc
-import logging
 
 import pandas as pd
+from loguru import logger
 
 from lsal.schema.material import Molecule
 from lsal.schema.reaction import LigandExchangeReaction
@@ -33,17 +33,17 @@ class FileLoader(abc.ABC):
         pass
 
     def load(self, fn: FilePath, *args, **kwargs):
-        logging.info("FILE LOADER: \n\t{}".format(self.__class__.__name__))
-        logging.info("FILE LOADER DETAILS: \n\t{}".format(self.__class__.__doc__.strip()))
-        logging.info("LOADING FILE: \n\t{}".format(fn))
+        logger.info("FILE LOADER: \n\t{}".format(self.__class__.__name__))
+        logger.info("FILE LOADER DETAILS: \n\t{}".format(self.__class__.__doc__.strip()))
+        logger.info("LOADING FILE: \n\t{}".format(fn))
         self.pre_check(fn)
 
         loaded = self.load_file(fn, *args, **kwargs)
         self.loaded = loaded
-        logging.info("LOADED: \n\t{}".format("\n\t".join([d.__repr__() for d in self.loaded])))
+        logger.info("LOADED: \n\t{}".format("\n\t".join([d.__repr__() for d in self.loaded])))
 
         self.post_check()
-        logging.info("LOADING FINISHED")
+        logger.info("LOADING FINISHED")
         return self.loaded
 
 
@@ -64,7 +64,7 @@ def get_ml_unknown_y_single_ligand(
             records.append(record)
             df_ligands.append(ligand)
     df_x = pd.DataFrame.from_records(records, columns=sorted(final_cols))
-    logging.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, None))
+    logger.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, None))
     return df_ligands, df_x, None
 
 
@@ -96,5 +96,5 @@ def get_ml_known_y_single_ligand(
     df_y = df["FigureOfMerit"]
     if fill_nan:
         df_y.fillna(0, inplace=True)
-    logging.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
+    logger.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
     return df_ligands, df_x, df_y
