@@ -113,8 +113,8 @@ class Molecule(Material):
         return d
 
     @staticmethod
-    def select_from_inventory(value, inventory: list[Molecule], field: str) -> Molecule:
-        for m in inventory:
+    def select_from_list(value, mol_list: list[Molecule], field: str) -> Molecule:
+        for m in mol_list:
             if getattr(m, field) == value:
                 return m
         raise ValueError("not found in the inventory: {} == {}".format(field, value))

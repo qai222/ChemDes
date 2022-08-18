@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import abc
 import itertools
-import logging
 from copy import deepcopy
-from typing import Tuple
+from typing import Tuple, List, Iterable, Union
 
+from loguru import logger
 from monty.json import MSONable
 
 from lsal.schema.material import Molecule, NanoCrystal
@@ -42,11 +42,11 @@ class ReactionInfo(MSONable, abc.ABC):
             if k.startswith("@"):
                 continue
             if v is None:
-                logging.warning("{}: {} is {}!".format(self.__repr__(), k, v))
+                logger.warning("{}: {} is {}!".format(self.__repr__(), k, v))
 
 
 class ReactionCondition(ReactionInfo):
-    def __init__(self, name: str, value: float or int, properties: dict = None):
+    def __init__(self, name: str, value: Union[float, int], properties: dict = None):
         super().__init__(properties)
         assert set(name).issuperset({"(", ")"}), "a bracketed unit should present in the name of a condition!"
         self.value = value
@@ -54,7 +54,8 @@ class ReactionCondition(ReactionInfo):
 
 
 class ReactantSolution(ReactionInfo):
-    def __init__(self, solute: NanoCrystal or Molecule, volume: float, concentration: float or None, solvent: Molecule,
+    def __init__(self, solute: Union[NanoCrystal, Molecule], volume: float, concentration: float or None,
+                 solvent: Molecule,
                  volume_unit: str, concentration_unit: str or None, properties: dict = None, ):
         super().__init__(properties)
         self.solute = solute
@@ -113,19 +114,34 @@ class GeneralReaction(MSONable, abc.ABC):
         return self.identifier == other.identifier
 
     def check(self):
-        logging.warning("checking reaction: {}".format(self.identifier))
+        logger.warning("checking reaction: {}".format(self.identifier))
         for r in self.reactants:
             r.check()
         for c in self.conditions:
             c.check()
 
+    @staticmethod
+    def group_reactions(reactions: Iterable[GeneralReaction], field: str):
+        """ group reactions by a field, the field can be dot-structured, e.g. "nc_solution.solute" """
+        groups = []
+        unique_keys = []
 
-class LigandExchangeReaction(GeneralReaction):
+        def keyfunc(x):
+            return rgetattr(x, field)
+
+        rs = sorted(reactions, key=keyfunc)
+        for k, g in itertools.groupby(rs, key=keyfunc):
+            groups.append(list(g))
+            unique_keys.append(k)
+        return unique_keys, groups
+
+
+class LXReaction(GeneralReaction):
 
     def __init__(
             self,
             identifier: str,
-            conditions: [ReactionCondition],
+            conditions: list[ReactionCondition],
             solvent: ReactantSolution = None,
             nc_solution: ReactantSolution = None,
             ligand_solutions: list[ReactantSolution] = None,
@@ -135,9 +151,10 @@ class LigandExchangeReaction(GeneralReaction):
         self.solvent = solvent
         self.nc_solution = nc_solution
         self.ligand_solutions = ligand_solutions
-        assert len(self.ligands) == len(
-            set(self.ligands)), "one solution for one ligand, but we have # solutions vs # ligands: {} vs {}".format(
-            len(set(self.ligands)), len(self.ligands))
+        assert len(self.ligand_tuple) == len(
+            set(self.ligand_tuple)), "one solution for one ligand, " \
+                                     "but we have # solutions vs # ligands: {} vs {}".format(
+            len(set(self.ligand_tuple)), len(self.ligand_tuple))
         assert self.solvent.is_solvent, "the solvent given is not really a solvent: {}".format(self.solvent)
 
     @property
@@ -164,32 +181,33 @@ class LigandExchangeReaction(GeneralReaction):
         return not self.is_reaction_blank_reference and not self.is_reaction_nc_reference
 
     @property
-    def ligands(self):
+    def ligand_tuple(self) -> Tuple[Molecule, ...]:
         return tuple(sorted([ls.solute for ls in self.ligand_solutions]))
 
     @property
-    def unique_ligands(self):
-        return tuple(sorted(set(self.ligands)))
-
-    @staticmethod
-    def group_reactions(reactions: list[GeneralReaction], field: str):
-        """ group reactions by a field, the field can be dot-structured, e.g. "nc_solution.solute" """
-        groups = []
-        unique_keys = []
-
-        def keyfunc(x):
-            return rgetattr(x, field)
-
-        rs = sorted(reactions, key=keyfunc)
-        for k, g in itertools.groupby(rs, key=keyfunc):
-            groups.append(list(g))
-            unique_keys.append(k)
-        return unique_keys, groups
+    def unique_ligands(self) -> Tuple[Molecule, ...]:
+        return tuple(sorted(set(self.ligand_tuple)))
 
 
-class ReactionCollection(MSONable):
+class L1XReaction(LXReaction):
+    @property
+    def ligand(self):
+        try:
+            return self.ligand_tuple[0]
+        except IndexError:
+            return None
+
+    @property
+    def ligand_solution(self):
+        try:
+            return self.ligand_solutions[0]
+        except IndexError:
+            return None
+
+
+class L1XReactionCollection(MSONable):
     # TODO the reactions in a collection should have something in common (e.g. solvent/mixing conditions)
-    def __init__(self, reactions: list[LigandExchangeReaction], properties: dict = None):
+    def __init__(self, reactions: List[L1XReaction], properties: dict = None):
         self.reactions = reactions
         if properties is None:
             properties = dict()
@@ -209,39 +227,33 @@ class ReactionCollection(MSONable):
                 continue
         return reactions
 
-    def get_reference_reactions(self, reaction: LigandExchangeReaction):
-        # map ref to each reaction
+    def get_reference_reactions(self, reaction: L1XReaction) -> list[L1XReaction]:
+        # given a reaction return its corresponding reference reactions
+        # i.e. same identifier
         refs = []
         for ref_r in self.ref_reactions:
             if ref_r.identifier.split("@@")[0] == reaction.identifier.split("@@")[0]:
                 refs.append(ref_r)
         return refs
 
-    def ligand_amounts(self, ligand: Molecule) -> list[float]:
-        # only works for single ligand system
-        reactions = self.get_lcomb_to_reactions()[(ligand,)]
-        reactions: list[LigandExchangeReaction]
-        assert len(reactions) > 0
-        return [r.ligand_solutions[0].amount for r in reactions]
-
     @property
     def ligand_amount_range(self):
         amounts = []
         amount_unit = []
         for r in self.real_reactions:
-            for ls in r.ligand_solutions:
-                amounts.append(ls.amount)
-                amount_unit.append(ls.amount_unit)
+            amounts.append(r.ligand_solution.amount)
+            amount_unit.append(r.ligand_solution.amount_unit)
         assert len(set(amount_unit)) == 1
         return min(amounts), max(amounts), amount_unit[0]
 
     @classmethod
-    def subset_by_lcombs(cls, campaign_reactions: ReactionCollection, lc_subset):
-        reactions = [r for r in campaign_reactions.real_reactions if r.ligands in lc_subset]
+    def subset_by_ligands(cls, campaign_reactions: L1XReactionCollection, allowed_ligands: List[Molecule]):
+        """ select real reactions by allowed ligands """
+        reactions = [r for r in campaign_reactions.real_reactions if r.ligand in allowed_ligands]
         return cls(reactions, properties=deepcopy(campaign_reactions.properties))
 
     @property
-    def real_reactions(self):
+    def real_reactions(self) -> list[L1XReaction]:
         reactions = []
         for r in self.reactions:
             if r.is_reaction_real:
@@ -251,30 +263,29 @@ class ReactionCollection(MSONable):
         return reactions
 
     @property
-    def unique_lcombs(self):
-        lcombs = set()
-        for r in self.real_reactions:
-            lcombs.add(r.unique_ligands)
-        return sorted(lcombs)
+    def ligands(self) -> List[Molecule]:
+        return [r.ligand for r in self.real_reactions]
+
+    @property
+    def unique_ligands(self) -> list:
+        return sorted(set(self.ligands))
 
     def __repr__(self):
         s = "{}\n".format(self.__class__.__name__)
         s += "\t# of reactions: {}\n".format(len(self.reactions))
-        s += "\t# of ligands/ligand-combinations: {}\n".format(len(self.get_lcomb_to_reactions()))
+        s += "\t# of ligands: {}\n".format(len(self.unique_ligands))
         return s
 
-    def get_lcomb_to_reactions(self, limit_to=None):
+    def ligand_to_reactions_mapping(self, limit_to: Iterable[Molecule] = None) -> dict[Molecule, list[L1XReaction]]:
         reactions = self.real_reactions
-
-        lcombs, grouped_reactions = LigandExchangeReaction.group_reactions(reactions, field="unique_ligands")
-        lcombs_to_reactions = dict(zip(lcombs, grouped_reactions))
+        ligands, grouped_reactions = L1XReaction.group_reactions(reactions, field="unique_ligands")
+        ligand_to_reactions = dict(zip(ligands, grouped_reactions))
         if limit_to is None:
-            return lcombs_to_reactions
-        else:
-            return {c: lcombs_to_reactions[c] for c in limit_to}
+            limit_to = ligands
+        return {c: ligand_to_reactions[c] for c in limit_to}
 
     @staticmethod
-    def assign_reaction_results(reactions: list[LigandExchangeReaction], peak_data: dict[str, dict]):
+    def assign_reaction_results(reactions: list[L1XReaction], peak_data: dict[str, dict]):
         assert len(peak_data) == len(reactions)
         for r in reactions:
             data = peak_data[r.identifier]
