@@ -5,6 +5,7 @@ import itertools
 from copy import deepcopy
 from typing import Tuple, List, Iterable, Union
 
+import pandas as pd
 from loguru import logger
 from monty.json import MSONable
 
@@ -54,8 +55,8 @@ class ReactionCondition(ReactionInfo):
 
 
 class ReactantSolution(ReactionInfo):
-    def __init__(self, solute: Union[NanoCrystal, Molecule], volume: float, concentration: float or None,
-                 solvent: Molecule,
+    def __init__(self, solute: Union[NanoCrystal, Molecule], volume: float, concentration: Union[float, None],
+                 solvent: Union[Molecule, None],
                  volume_unit: str, concentration_unit: str or None, properties: dict = None, ):
         super().__init__(properties)
         self.solute = solute
@@ -205,16 +206,19 @@ class L1XReaction(LXReaction):
             return None
 
 
-class L1XReactionCollection(MSONable):
+class LXReactionCollection(MSONable, abc.ABC):
     # TODO the reactions in a collection should have something in common (e.g. solvent/mixing conditions)
-    def __init__(self, reactions: List[L1XReaction], properties: dict = None):
+    def __init__(self, reactions, properties: dict = None):
         self.reactions = reactions
         if properties is None:
             properties = dict()
         self.properties = properties
 
+    def __len__(self):
+        return len(self.reactions)
+
     @property
-    def identifiers(self) -> Tuple[str]:
+    def identifiers(self):
         return tuple([r.identifier for r in self.reactions])
 
     @property
@@ -227,7 +231,7 @@ class L1XReactionCollection(MSONable):
                 continue
         return reactions
 
-    def get_reference_reactions(self, reaction: L1XReaction) -> list[L1XReaction]:
+    def get_reference_reactions(self, reaction: LXReaction):
         # given a reaction return its corresponding reference reactions
         # i.e. same identifier
         refs = []
@@ -235,6 +239,36 @@ class L1XReactionCollection(MSONable):
             if ref_r.identifier.split("@@")[0] == reaction.identifier.split("@@")[0]:
                 refs.append(ref_r)
         return refs
+
+    @property
+    def real_reactions(self):
+        reactions = []
+        for r in self.reactions:
+            if r.is_reaction_real:
+                reactions.append(r)
+            else:
+                continue
+        return reactions
+
+    def assign_reaction_results(self, peak_data: dict[str, dict]):
+        assert len(peak_data) == len(self.reactions)
+        for r in self.reactions:
+            data = peak_data[r.identifier]
+            r.properties.update(data)
+
+    @abc.abstractmethod
+    def __repr__(self):
+        pass
+
+    @abc.abstractmethod
+    def ligand_to_reactions_mapping(self, limit_to=None):
+        pass
+
+
+class L1XReactionCollection(LXReactionCollection):
+    # TODO the reactions in a collection should have something in common (e.g. solvent/mixing conditions)
+    def __init__(self, reactions: List[L1XReaction], properties: dict = None):
+        super().__init__(reactions, properties)
 
     @property
     def ligand_amount_range(self):
@@ -253,16 +287,6 @@ class L1XReactionCollection(MSONable):
         return cls(reactions, properties=deepcopy(campaign_reactions.properties))
 
     @property
-    def real_reactions(self) -> list[L1XReaction]:
-        reactions = []
-        for r in self.reactions:
-            if r.is_reaction_real:
-                reactions.append(r)
-            else:
-                continue
-        return reactions
-
-    @property
     def ligands(self) -> List[Molecule]:
         return [r.ligand for r in self.real_reactions]
 
@@ -278,15 +302,27 @@ class L1XReactionCollection(MSONable):
 
     def ligand_to_reactions_mapping(self, limit_to: Iterable[Molecule] = None) -> dict[Molecule, list[L1XReaction]]:
         reactions = self.real_reactions
-        ligands, grouped_reactions = L1XReaction.group_reactions(reactions, field="unique_ligands")
+        ligands, grouped_reactions = L1XReaction.group_reactions(reactions, field="ligand")
         ligand_to_reactions = dict(zip(ligands, grouped_reactions))
         if limit_to is None:
             limit_to = ligands
         return {c: ligand_to_reactions[c] for c in limit_to}
 
-    @staticmethod
-    def assign_reaction_results(reactions: list[L1XReaction], peak_data: dict[str, dict]):
-        assert len(peak_data) == len(reactions)
-        for r in reactions:
-            data = peak_data[r.identifier]
-            r.properties.update(data)
+    def l1_input(self, fom_def: str, fill_nan=False) -> Tuple[List[Molecule], pd.DataFrame, pd.DataFrame]:
+        assert all(lig.is_featurized for lig in self.ligands)
+        records = []
+        ligands = []
+        final_cols = set()
+        for r in self.real_reactions:
+            record = deepcopy(r.ligand.properties['features'])
+            ligands.append(r.ligand)
+            record.update({"ligand_amount": r.ligand_solution.amount, "FigureOfMerit": r.properties[fom_def], })
+            if len(final_cols) == 0:
+                final_cols.update(set(record.keys()))
+        df = pd.DataFrame.from_records(records, columns=sorted(final_cols))
+        df_x = df[[c for c in df.columns if c != "FigureOfMerit"]]
+        df_y = df["FigureOfMerit"]
+        if fill_nan:
+            df_y.fillna(0, inplace=True)
+        logger.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
+        return ligands, df_x, df_y
