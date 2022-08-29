@@ -166,7 +166,7 @@ def load_robot_input_l1(
     # load reagents
     reagent_df = robotinput_df.loc[:, reagent_columns]
     reagent_df.dropna(axis=0, inplace=True, how="all")
-    reagent_index_to_reactant = reagent_df_parser(
+    reagent_index_to_reactant = reagent_df_parser_l1(
         df=reagent_df, ligand_inventory=ligand_inventory,
         solvent_inventory=solvent_inventory,
         volume_unit=volume_unit,
@@ -209,7 +209,7 @@ def load_robot_input_l1(
     return reactions
 
 
-def reagent_df_parser(
+def reagent_df_parser_l1(
         df: pd.DataFrame, ligand_inventory: list[Molecule], solvent_inventory: list[Molecule],
         volume_unit: str, concentration_unit: str, used_solvents: Tuple[str],
 ) -> dict[str, ReactantSolution]:
@@ -252,7 +252,7 @@ def reagent_df_parser(
     # note the "ul" in keys here are hardcoded for robotinput files
 
 
-def load_reactions_from_expt_files(
+def load_reactions_from_expt_files_l1(
         experiment_input_files: list[FilePath],
         experiment_output_files: list[FilePath],
         ligand_inventory: list[Molecule],
