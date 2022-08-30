@@ -1,90 +1,32 @@
 from __future__ import annotations
 
-import logging
 import os
-from collections import OrderedDict
+import re
 from copy import deepcopy
-from typing import Tuple, List
+from typing import Any, Union
+from typing import Tuple, List, Callable
 
 import numpy as np
 import pandas as pd
 from loguru import logger
 
 from lsal.schema import Molecule, ReactionCondition, ReactantSolution, NanoCrystal, _EPS, L1XReactionCollection, \
-    featurize_molecules, L1XReaction
-from lsal.utils import FilePath, padding_vial_label, strip_extension, get_extension, file_exists, get_basename
+    L1XReaction, LXReaction, assign_reaction_results
+from lsal.utils import FilePath, padding_vial_label, strip_extension, get_extension, get_basename
+from lsal.utils import is_close_relative, file_exists
 
+"""
+expt properties
+od: `*_PL_OD390`
+plsum: `*_PL_sum`
 
-def load_molecules(
-        fn: FilePath, col_to_mol_kw: dict[str, str], mol_type: str = 'LIGAND',
-) -> list[Molecule]:
-    mol_type = mol_type.upper()
-
-    logger.info(f"LOADING: {mol_type} from {fn}")
-    assert file_exists(fn)
-    extension = get_extension(fn)
-    if extension == "csv":
-        df = pd.read_csv(fn)
-    elif extension == "xlsx":
-        ef = pd.ExcelFile(fn)
-        assert len(ef.sheet_names) == 1, "there should be only one sheet in the xlsx file"
-        df = ef.parse(ef.sheet_names[0])
-    else:
-        raise ValueError(f"extension not understood: {extension}")
-
-    required_columns = col_to_mol_kw.keys()
-    assert set(required_columns).issubset(set(df.columns)), f"csv does not have required columns: {required_columns}"
-
-    df = df[required_columns]
-    df = df.dropna(axis=0, how="all")
-
-    assign_label = not 'label' in df.columns
-    if assign_label:
-        logger.info(f'we WILL assign labels based on row index and mol_type=={mol_type}')
-
-    molecules = []
-    mol_kws = ['identifier', 'iupac_name', 'name']
-    for irow, row in enumerate(df.to_dict("records")):
-
-        if assign_label:
-            int_label = irow
-        else:
-            label = row['label']
-            mol_type, int_label = label.split('-')
-            int_label = int(int_label)
-
-        mol_kwargs = dict(
-            int_label=int_label,
-            mol_type=mol_type,
-            properties=OrderedDict({"load_from": get_basename(fn)})
-        )
-
-        for colname, value in row.items():
-            # TODO parse nested properties
-            try:
-                mol_kw = col_to_mol_kw[colname]
-                assert mol_kw in mol_kws
-                mol_kwargs[mol_kw] = value
-            except (AssertionError, KeyError) as e:
-                pass
-        m = Molecule(**mol_kwargs)
-        molecules.append(m)
-    return molecules
-
-
-def load_featurized_molecules(
-        inv_csv: FilePath,
-        des_csv: FilePath,
-        col_to_mol_kw: dict[str, str] = None,
-        mol_type: str = 'LIGAND',
-) -> list[Molecule]:
-    # load inv csv
-    molecules = load_molecules(inv_csv, col_to_mol_kw, mol_type)
-    des_df = pd.read_csv(des_csv)
-    assert des_df.shape[0] == len(molecules)
-    assert not des_df.isnull().values.any()
-    featurize_molecules(molecules, des_df)
-    return molecules
+possible figures of merit
+1. `*_PL_sum/OD390`
+2. `*_PL_sum/OD390 / mean(*_PL_sum/OD390)` of references (i.e. `*_PL_FOM`)
+3. `*_PL_sum/OD390 - mean(*_PL_sum/OD390)` of references
+4. `*_PL_sum/OD390 / first(*_PL_sum/OD390)` reaction with the lowest nonzero ligand concentration
+5. `*_PL_sum/OD390 - first(*_PL_sum/OD390)` reaction with the lowest nonzero ligand concentration
+"""
 
 
 def load_peak_info(fn: FilePath, identifier_prefix: str, vial_column: str = "wellLabel") -> dict[str, dict]:
@@ -166,7 +108,7 @@ def load_robot_input_l1(
     # load reagents
     reagent_df = robotinput_df.loc[:, reagent_columns]
     reagent_df.dropna(axis=0, inplace=True, how="all")
-    reagent_index_to_reactant = reagent_df_parser_l1(
+    reagent_index_to_reactant = reagent_df_parser(
         df=reagent_df, ligand_inventory=ligand_inventory,
         solvent_inventory=solvent_inventory,
         volume_unit=volume_unit,
@@ -179,7 +121,7 @@ def load_robot_input_l1(
     reactions = []
     for record in volume_df.to_dict(orient="records"):
         # vial
-        logging.info("loading reaction: {}".format(record))
+        logger.info("loading reaction: {}".format(record))
         vial = padding_vial_label(record[vial_column])
         identifier = "{}@@{}".format(robot_input_name, vial)
 
@@ -209,7 +151,7 @@ def load_robot_input_l1(
     return reactions
 
 
-def reagent_df_parser_l1(
+def reagent_df_parser(
         df: pd.DataFrame, ligand_inventory: list[Molecule], solvent_inventory: list[Molecule],
         volume_unit: str, concentration_unit: str, used_solvents: Tuple[str],
 ) -> dict[str, ReactantSolution]:
@@ -222,7 +164,7 @@ def reagent_df_parser_l1(
         reagent_concentration = record["Reagent Concentration (uM)"]
 
         if reagent_name.startswith("CPB") and pd.isnull(reagent_concentration):
-            logging.info("Found nanocrystal: {}".format(reagent_name))
+            logger.info("Found nanocrystal: {}".format(reagent_name))
             material = NanoCrystal(identifier=reagent_name)
             reactant = ReactantSolution(solute=material, volume=np.nan, concentration=None, solvent=None,
                                         properties={"definition": "nc"}, volume_unit=volume_unit,
@@ -263,7 +205,7 @@ def load_reactions_from_expt_files_l1(
     for ifile, ofile in zip(experiment_input_files, experiment_output_files):
         reactions = load_robot_input_l1(ifile, ligand_inventory, solvent_inventory, )
         peak_data = load_peak_info(ofile, identifier_prefix=strip_extension(get_basename(ifile)))
-        L1XReactionCollection.assign_reaction_results(reactions, peak_data)
+        assign_reaction_results(reactions, peak_data)
         all_reactions += reactions
 
     # remove suspicious reactions
@@ -280,9 +222,200 @@ def load_reactions_from_expt_files_l1(
             n_real += 1
         else:
             raise Exception("reaction type cannot be determined: {}".format(r))
-    logging.warning("REACTIONS LOADED: blank/ref/real: {}/{}/{}".format(n_blank, n_ref, n_real))
+    logger.warning("REACTIONS LOADED: blank/ref/real: {}/{}/{}".format(n_blank, n_ref, n_real))
     slc = L1XReactionCollection(reactions=all_reactions, properties=properties)
     slc.properties.update(
         dict(experiment_input_files=experiment_input_files, experiment_output_files=experiment_output_files,
              ligand_inventory=ligand_inventory, solvent_inventory=solvent_inventory, ))
     return slc
+
+
+def is_internal_fom(fom_name: str) -> bool:
+    """ does the fom calculation need reference experiments? """
+    if fom_name in ("fom2", "fom3"):
+        return True
+    return False
+
+
+class FomCalculator:
+    """
+    this is not limited to L1X reactions
+    """
+
+    def __init__(self, reaction_collection: L1XReactionCollection):
+        self.reaction_collection = reaction_collection
+        self.ligand_to_reactions = {k: v for k, v in reaction_collection.ligand_to_reactions_mapping().items()}
+
+    def get_average_ref(self, r: LXReaction, property_name: str):
+        return PropertyGetter.get_reference_value(r, self.reaction_collection, property_name, average=True)
+
+    def get_internal_ref(self, r: LXReaction, property_name: str):
+        reactions_same_ligand = self.ligand_to_reactions[r.ligand_tuple[0]]  # assuming single ligand
+        reactions_same_ligand: list[LXReaction]
+        amount_and_fom = [(rr.ligand_solutions[0].amount, PropertyGetter.get_property_value(rr, property_name)) for rr
+                          in
+                          reactions_same_ligand]
+        ref_fom = sorted(amount_and_fom, key=lambda x: x[0])[0][1]
+        return ref_fom
+
+    def fom1(self, r: LXReaction) -> float:
+        fom = PropertyGetter.get_property_value(r, "pPLQY")
+        return fom
+
+    def fom2(self, r: LXReaction) -> float:
+        fom = PropertyGetter.get_property_value(r, "pPLQY")
+        return fom / self.get_average_ref(r, "pPLQY")
+
+    def fom3(self, r: LXReaction) -> float:
+        fom = PropertyGetter.get_property_value(r, "pPLQY")
+        return fom - self.get_average_ref(r, "pPLQY")
+
+    def fom4(self, r: LXReaction) -> float:
+        fom = PropertyGetter.get_property_value(r, "pPLQY")
+        ref_fom = self.get_internal_ref(r, "pPLQY")
+        return fom / ref_fom
+
+    def fom5(self, r: LXReaction) -> float:
+        fom = PropertyGetter.get_property_value(r, "pPLQY")
+        ref_fom = self.get_internal_ref(r, "pPLQY")
+        return fom - ref_fom
+
+    @property
+    def fom_function_names(self):
+        function_names = []
+        for attr in dir(self):
+            if re.match("fom\d", attr):
+                function_names.append(attr)
+        return function_names
+
+    def update_foms(self):
+        for r in self.reaction_collection.reactions:
+            for fname in self.fom_function_names:
+                fom_func = getattr(self, fname)
+                if r.is_reaction_nc_reference:
+                    if fname == "fom4":
+                        fom = 1
+                    elif fname == "fom5":
+                        fom = 0
+                    else:
+                        fom = fom_func(r)
+                elif r.is_reaction_blank_reference:
+                    fom = np.nan
+                else:
+                    fom = fom_func(r)
+                r.properties[fname] = fom
+        return self.reaction_collection
+
+
+class PropertyGetter:
+    NameToSuffix = {
+        "OD": "_PL_OD390",
+        "PLSUM": "_PL_sum",
+        "pPLQY": "_PL_sum/OD390",
+        "fom1": "fom1",
+        "fom2": "fom2",
+        "fom3": "fom3",
+        "fom4": "fom4",
+        "fom5": "fom5",
+    }
+
+    @staticmethod
+    def get_property_value(r, property_name: str):
+        assert property_name in PropertyGetter.NameToSuffix
+        suffix = PropertyGetter.NameToSuffix[property_name]
+        value = PropertyGetter._get_reaction_property(r, suffix)
+        if property_name == "pPLQY":
+            value2_n = PropertyGetter._get_reaction_property(r, "_PL_sum")
+            value2_d = PropertyGetter._get_reaction_property(r, "_PL_OD390")
+            value2 = value2_n / value2_d
+            assert is_close_relative(value2, value, 1e-5) or pd.isna(value) or pd.isna(value2)
+        return value
+
+    @staticmethod
+    def _get_reaction_property(r: LXReaction, property_suffix: str) -> float:
+        possible_properties = [k for k in r.properties if k.strip("'").endswith(property_suffix)]
+        assert len(possible_properties) == 1
+        k = possible_properties[0]
+        v = r.properties[k]
+        try:
+            assert isinstance(v, float)
+        except AssertionError:
+            v = np.nan
+        return v
+
+    @staticmethod
+    def get_reference_value(
+            r: LXReaction, reaction_collection: L1XReactionCollection, property_name: str, average=True
+    ) -> Union[float, list[float]]:
+        ref_values = []
+        for ref_reaction in reaction_collection.get_reference_reactions(r):
+            ref_value = PropertyGetter.get_property_value(ref_reaction, property_name)
+            ref_values.append(ref_value)
+        if average:
+            return float(np.mean(ref_values))
+        else:
+            return ref_values
+
+    @staticmethod
+    def get_amount_property_data_l1(
+            reaction_collection: L1XReactionCollection, property_name: str
+    ) -> dict[Molecule, dict[str, Any]]:
+        ligand_to_reactions = reaction_collection.ligand_to_reactions_mapping()
+        data = dict()
+        for ligand, reactions in ligand_to_reactions.items():
+            amounts = []
+            amount_units = []
+            values = []
+            ref_values = []
+            identifiers = []
+            for r in reactions:
+                r: LXReaction
+                ref_values += PropertyGetter.get_reference_value(r, reaction_collection, property_name, average=False)
+                amount = r.ligand_solutions[0].amount
+                amount_unit = r.ligand_solutions[0].amount_unit
+                amount_units.append(amount_unit)
+                value = PropertyGetter.get_property_value(r, property_name)
+                amounts.append(amount)
+                values.append(value)
+                identifiers.append(r.identifier)
+            data[ligand] = {
+                "amount": amounts, "amount_unit": amount_units[0],
+                "values": values, "ref_values": ref_values,
+                "identifiers": identifiers
+            }
+        return data
+
+
+def collect_reactions_l1(
+        folder: FilePath,
+        ligand_inventory: list[Molecule],
+        solvent_inventory: list[Molecule],
+        exclude_reaction: Callable = None,
+) -> L1XReactionCollection:
+    """
+    load robotinput and peakinfo files to a `ReactionCollection`
+    there should be a `file_pairs.csv` in the folder describing the pairing between input and output files
+    """
+    pair_file: FilePath
+    pair_file = f"{folder}/file_pairs.csv"
+    assert file_exists(pair_file), f"the file describing pairing does not exist: {pair_file}"
+    df_file = pd.read_csv(pair_file)
+    experiment_input_files = [os.path.join(folder, fn) for fn in df_file.robotinput.tolist()]
+    experiment_output_files = [os.path.join(folder, fn) for fn in df_file.peakinfo.tolist()]
+    reaction_collection = load_reactions_from_expt_files_l1(
+        experiment_input_files=experiment_input_files,
+        experiment_output_files=experiment_output_files,
+        ligand_inventory=ligand_inventory,
+        solvent_inventory=solvent_inventory,
+    )
+    if exclude_reaction is None:
+        exclude_reaction = lambda x: False
+
+    final_reactions = []
+    for r in reaction_collection.reactions:
+        if exclude_reaction(r):
+            logger.warning(f"reaction is excluded: {r.identifier}")
+        else:
+            final_reactions.append(r)
+
+    return L1XReactionCollection(final_reactions, reaction_collection.properties)

@@ -1,16 +1,17 @@
 import glob
 import subprocess
 import time
+from collections import Counter
 from functools import reduce
 from pathlib import Path
 from typing import Union
 
 import numpy as np
 import pandas as pd
+from loguru import logger
 from tqdm import tqdm
 
-from lsal.utils import chunks, combine_files
-from lsal.utils import to_float, FilePath, file_exists, get_timestamp, removefile, os
+from lsal.utils import to_float, FilePath, file_exists, get_timestamp, removefile, os, chunks, combine_files, read_smi
 
 """
 Three calculators are used:
@@ -44,8 +45,52 @@ _cxcalc_descriptors = reduce(lambda x, y: x + y, _cxcalc_descriptors)
 _cxcalc_descriptors = list(_cxcalc_descriptors)
 
 
-def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", smis=list[str],
-                     descriptors: list[str] = _cxcalc_descriptors, remove_mol_file=True) -> pd.DataFrame:
+def parse_cxcalc_out(
+        out_string: str, descriptors: list[str] = _cxcalc_descriptors,
+        in_smis: Union[list[str], str] = None
+):
+    if isinstance(in_smis, str):
+        assert file_exists(in_smis)
+        in_smis = read_smi(in_smis)
+
+    lines = out_string.splitlines()
+    lines = lines[1:]
+    assert len(lines) >= 1
+
+    # descriptor column names
+    colnames = ["id"] + descriptors.copy()
+    if "asa" in colnames:
+        asa_index = colnames.index("asa")
+        # accessible surface area given by positive (ASA+) and negative (ASA À ) partial charges on atoms
+        # and also surface area induced by hydrophobic (SA_H) and polar (SA_P) atoms
+        colnames = colnames[:asa_index] + ["ASA+", "ASA-", "ASA_H", "ASA_P"] + colnames[asa_index:]
+
+    # check number of cells for each row
+    n_cells = [len(line.split()) for line in lines]
+    if len(set(n_cells)) > 1:
+        logger.critical(f"# of cells are not consistent: {Counter(n_cells)}")
+
+    values = np.zeros((len(lines), len(colnames)))
+    valid_indices = []
+    for i, line in enumerate(lines):
+        # print(len(line.split()), i, out_file)
+        try:
+            values[i] = [float(v) for v in line.split()]
+            valid_indices.append(i)
+        except ValueError:
+            logger.warning(f'the {i}th line is funny: {line}')
+
+    df = pd.DataFrame(data=values, columns=colnames)
+    df.pop("id")
+    if in_smis is None:
+        return df
+    else:
+        df = df.iloc[valid_indices]
+        return [in_smis[i] for i in valid_indices], df
+
+
+def calculate_cxcalc(smis: list[str], bin: Union[Path, str] = "cxcalc.exe",
+                     descriptors: list[str] = _cxcalc_descriptors, remove_mol_file=True):
     mol_file = "cxcalc_tmp_{}.smi".format(get_timestamp())
     s = "\n".join(smis)
     assert not file_exists(mol_file)
@@ -54,27 +99,11 @@ def calculate_cxcalc(bin: Union[Path, str] = "cxcalc.exe", smis=list[str],
     cmd = [bin, ] + [mol_file, ] + descriptors
     result = subprocess.run(cmd, capture_output=True)
     data = result.stdout.decode("utf-8").strip()
-    lines = data.split("\n")
-    n_cols = len(lines[1].split())
-    colnames = ["id"] + descriptors.copy()
-    if "asa" in colnames:
-        asa_index = colnames.index("asa")
-        # accessible surface area given by positive (ASA+) and negative (ASA À ) partial charges on atoms
-        # and also surface area induced by hydrophobic (SA_H) and polar (SA_P) atoms
-        colnames = colnames[:asa_index] + ["ASA+", "ASA-", "ASA_H", "ASA_P"] + colnames[asa_index:]
-    assert len(colnames) == n_cols
-
-    lines = lines[1:]
-    values = np.zeros((len(lines), len(colnames)))
-    for i in range(0, len(lines)):
-        line = lines[i]
-        values[i] = [float(v) for v in line.split()]
-    df = pd.DataFrame(data=values, columns=colnames)
-    df.pop("id")
+    final_input_smis, df = parse_cxcalc_out(data, descriptors, in_smis=smis)
     assert not df.isnull().any().any()
     if remove_mol_file:
         removefile(mol_file)
-    return df
+    return final_input_smis, df
 
 
 _mordred_descriptors = (
@@ -142,8 +171,43 @@ def calculate_cxcalc_raw(bin="cxcalc.exe", mol_files: list = (), descriptors=_cx
         cp.wait()
 
 
-def calculate_cxcalc_parallel(
-        logger,
+def cxcalc_parallel_input_write(
+        smis=list[str],
+        workdir: FilePath = "./",
+        chunk_size=1000,
+        nproc=6,
+        input_template='smi_{0:03d}.smi',
+):
+    input_smi_files = []
+    input_smi_chunks = []
+    for ichunk, smi_chunk in enumerate(chunks(smis, chunk_size)):
+        input_file = os.path.join(workdir, input_template.format(ichunk))
+        with open(input_file, 'w') as f:
+            f.write('\n'.join(smi_chunk))
+        input_smi_chunks.append(list(smi_chunk))
+        input_smi_files.append(input_file)
+    return input_smi_files, input_smi_chunks
+
+
+def cxcalc_parallel_collect_results(
+        input_files: list[FilePath],
+        out_files: list[FilePath],
+        descriptors: list[str] = _cxcalc_descriptors,
+):
+    # collect results
+    dfs = []
+    final_input_smis = []
+    for input_file, out_file in zip(input_files, out_files):
+        with open(out_file) as out:
+            out_string = out.read()
+        in_smis, df = parse_cxcalc_out(out_string, descriptors, in_smis=input_file)
+        final_input_smis += in_smis
+        dfs.append(df)
+    df = pd.concat(dfs)
+    return final_input_smis, df
+
+
+def cxcalc_parallel_calculate(
         bin: Union[Path, str] = "cxcalc.exe",
         smis=list[str],
         descriptors: list[str] = _cxcalc_descriptors,
@@ -154,17 +218,9 @@ def calculate_cxcalc_parallel(
         combined_input='input.smi',
 ):
     assert len(glob.glob(f'{workdir}/*')) == 0, f'work dir is not empty!: {workdir}'
-
-    # write input files for cxcalc
-    input_files = []
-    for ichunk, smi_chunk in enumerate(chunks(smis, chunk_size)):
-        input_file = os.path.join(workdir, input_template.format(ichunk))
-        with open(input_file, 'w') as f:
-            f.write('\n'.join(smi_chunk))
-        input_files.append(input_file)
-    combine_files(input_files, combined_input)
-    input_files_chunks = list(chunks(input_files, nproc))
-
+    input_smi_files, input_smi_chunks = cxcalc_parallel_input_write(smis, workdir, chunk_size, nproc, input_template)
+    combine_files(input_smi_files, combined_input)
+    input_files_chunks = list(chunks(input_smi_files, nproc))
     # run cxcalc in parallel
     for chunk in tqdm(input_files_chunks, desc='cxcalc parallel'):
         ts1 = time.perf_counter()
@@ -174,38 +230,6 @@ def calculate_cxcalc_parallel(
 
     # collect results
     out_files = sorted(glob.glob(f"{workdir}/*.out"))
-    assert len(input_files) == len(out_files)
-    dfs = []
-    for out_file in out_files:
-        try:
-            df = chunk_out_to_df(out_file)
-        except Exception as e:
-            logger.critical(f'error in parsing: {out_file}')
-            raise e
-        dfs.append(df)
-    df = pd.concat(dfs, )
-    return df
-
-
-def chunk_out_to_df(out_file: FilePath, descriptors: list[str] = _cxcalc_descriptors) -> pd.DataFrame:
-    with open(out_file, "r") as f:
-        lines = f.readlines()
-    n_cols = len(lines[1].split())
-    colnames = ["id"] + descriptors.copy()
-    if "asa" in colnames:
-        asa_index = colnames.index("asa")
-        # accessible surface area given by positive (ASA+) and negative (ASA À ) partial charges on atoms
-        # and also surface area induced by hydrophobic (SA_H) and polar (SA_P) atoms
-        colnames = colnames[:asa_index] + ["ASA+", "ASA-", "ASA_H", "ASA_P"] + colnames[asa_index:]
-    assert len(colnames) == n_cols
-
-    lines = lines[1:]
-    values = np.zeros((len(lines), len(colnames)))
-    for i in range(0, len(lines)):
-        line = lines[i]
-        # print(len(line.split()), i, out_file)
-        values[i] = [float(v) for v in line.split()]
-    df = pd.DataFrame(data=values, columns=colnames)
-    df.pop("id")
-    assert not df.isnull().any().any()
-    return df
+    assert len(input_smi_files) == len(out_files)
+    final_input_smis, df = cxcalc_parallel_collect_results(input_smi_files, out_files, descriptors)
+    return final_input_smis, df

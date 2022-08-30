@@ -7,10 +7,13 @@ import umap
 from lsal.utils import SEED
 
 
-def scatter2d(data_2d: np.ndarray) -> plt.Figure:
+def scatter2d(data_2d: np.ndarray, labels=None) -> plt.Figure:
     plot_kwds = {'alpha': 0.5, 's': 80, 'linewidth': 0}
     fig, ax = plt.subplots()
-    ax.scatter(data_2d.T[0], data_2d.T[1], color='gray', **plot_kwds)
+    if labels is None:
+        ax.scatter(data_2d.T[0], data_2d.T[1], color='gray', **plot_kwds)
+    else:
+        ax.scatter(data_2d.T[0], data_2d.T[1], c = labels, cmap='plasma', **plot_kwds)
     ax.set_xticks([])
     ax.set_yticks([])
     return fig

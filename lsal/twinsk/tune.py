@@ -5,9 +5,10 @@ from sklearn.model_selection import train_test_split
 from skopt import BayesSearchCV
 from skopt.space import Integer
 
-from lsal.twinsk.estimator import TwinRegressor, _default_n_estimator
+from lsal.twinsk.estimator import TwinRegressor
 from lsal.utils import SEED
 
+_default_n_estimator = 100
 
 def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, use_split=True):
     n_features = X.shape[1]

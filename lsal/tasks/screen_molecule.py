@@ -1,4 +1,3 @@
-import math
 import os.path
 
 import matplotlib.pyplot as plt
@@ -6,6 +5,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
+
 from lsal.utils import FilePath, json_dump, createdir, smiles2inchi
 
 sns.set_style("whitegrid")
@@ -44,7 +44,6 @@ def delta_feature_screen(delta: float, feature_lim_dict: dict, smis: list[str], 
     return screened_records, screened_smis, smis
 
 
-
 def smi2poolinv(smis):
     records = []
     for i, smi in tqdm(enumerate(smis)):
@@ -67,7 +66,8 @@ def delta_plot(
     ys = []
     createdir(wdir)
     for delta in xs:
-        rs, smis, all_smis = delta_feature_screen(delta, domain_lim, initial_smis, feature_df, available_features, logger)
+        rs, smis, all_smis = delta_feature_screen(delta, domain_lim, initial_smis, feature_df, available_features,
+                                                  logger)
         delta_str = "{:.2f}".format(delta)
         delta_data = rs, smis
         json_dump(delta_data, os.path.join(wdir, delta_str + ".json"))
@@ -76,13 +76,15 @@ def delta_plot(
     ax.plot(xs, ys, "ro-", label="# in domain")
     # ax.set_yscale("log")
     minmax_x = xmax - xmin
-    ax.hlines(len(all_smis), xmin-0.05*minmax_x, xmax+0.05*minmax_x, colors=["k"], linestyles="dotted", label="# total")
+    ax.hlines(len(all_smis), xmin - 0.05 * minmax_x, xmax + 0.05 * minmax_x, colors=["k"], linestyles="dotted",
+              label="# total")
     ax.set_xlim([xmin - 0.05 * minmax_x, xmax + 0.05 * minmax_x])
 
     ax.set_ylabel("# of molecules")
     ax.set_xlabel(r"$\Delta ({\mathrm{Feature}})$")
     ax.legend(loc="lower right")
     fig.savefig(out, dpi=600)
+
 
 # smi 2 record
 def get_smi2record(smis: list[str], df1: pd.DataFrame, df2: pd.DataFrame or None):

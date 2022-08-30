@@ -4,7 +4,7 @@ import subprocess
 from rdkit.Chem import MolFromSmiles, MolToMolFile
 from tqdm import tqdm
 
-from lsal.utils import FilePath, createdir, removefile, removefolder
+from lsal.utils import FilePath, createdir, removefile, removefolder, file_exists
 
 """
 use checkmol to detect functional groups given smiles
@@ -17,6 +17,7 @@ checkmol.exe should be in `lsal/bin/`
 """
 _checkmol_binary = os.path.dirname(os.path.abspath(__file__))
 _checkmol_binary = os.path.join(_checkmol_binary, "../bin/checkmol.exe")
+assert file_exists(_checkmol_binary), f"not such file: {_checkmol_binary}"
 
 
 def dfg(input_smis: list[str], tmp_folder: FilePath = "dfg_tmp", rmtmp=True):
