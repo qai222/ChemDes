@@ -5,6 +5,7 @@ import itertools
 from copy import deepcopy
 from typing import Tuple, List, Iterable, Union
 
+import numpy as np
 import pandas as pd
 from loguru import logger
 from monty.json import MSONable
@@ -250,12 +251,6 @@ class LXReactionCollection(MSONable, abc.ABC):
                 continue
         return reactions
 
-    def assign_reaction_results(self, peak_data: dict[str, dict]):
-        assert len(peak_data) == len(self.reactions)
-        for r in self.reactions:
-            data = peak_data[r.identifier]
-            r.properties.update(data)
-
     @abc.abstractmethod
     def __repr__(self):
         pass
@@ -280,6 +275,14 @@ class L1XReactionCollection(LXReactionCollection):
         assert len(set(amount_unit)) == 1
         return min(amounts), max(amounts), amount_unit[0]
 
+    def amount_lin_space(self, n_preds):
+        amin, amax, _ = self.ligand_amount_range
+        return np.linspace(amin, amax, n_preds)
+
+    def amount_geo_space(self, n_preds):
+        amin, amax, _ = self.ligand_amount_range
+        return np.geomspace(amin, amax, n_preds)
+
     @classmethod
     def subset_by_ligands(cls, campaign_reactions: L1XReactionCollection, allowed_ligands: List[Molecule]):
         """ select real reactions by allowed ligands """
@@ -298,6 +301,9 @@ class L1XReactionCollection(LXReactionCollection):
         s = "{}\n".format(self.__class__.__name__)
         s += "\t# of reactions: {}\n".format(len(self.reactions))
         s += "\t# of ligands: {}\n".format(len(self.unique_ligands))
+        for lig, reactions in self.ligand_to_reactions_mapping().items():
+            lig: Molecule
+            s += f"\t ligand: {lig.label} \t {len(reactions)} \t {lig.smiles}\n "
         return s
 
     def ligand_to_reactions_mapping(self, limit_to: Iterable[Molecule] = None) -> dict[Molecule, list[L1XReaction]]:
@@ -308,7 +314,7 @@ class L1XReactionCollection(LXReactionCollection):
             limit_to = ligands
         return {c: ligand_to_reactions[c] for c in limit_to}
 
-    def l1_input(self, fom_def: str, fill_nan=False) -> Tuple[List[Molecule], pd.DataFrame, pd.DataFrame]:
+    def l1_input(self, fom_def: str, fill_nan=True) -> Tuple[List[Molecule], pd.DataFrame, pd.DataFrame]:
         assert all(lig.is_featurized for lig in self.ligands)
         records = []
         ligands = []
@@ -319,10 +325,18 @@ class L1XReactionCollection(LXReactionCollection):
             record.update({"ligand_amount": r.ligand_solution.amount, "FigureOfMerit": r.properties[fom_def], })
             if len(final_cols) == 0:
                 final_cols.update(set(record.keys()))
+            records.append(record)
         df = pd.DataFrame.from_records(records, columns=sorted(final_cols))
         df_x = df[[c for c in df.columns if c != "FigureOfMerit"]]
         df_y = df["FigureOfMerit"]
         if fill_nan:
             df_y.fillna(0, inplace=True)
-        logger.info("ML INPUT:\n df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
+        logger.info("ML INPUT: df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
         return ligands, df_x, df_y
+
+
+def assign_reaction_results(reactions, peak_data: dict[str, dict]):
+    assert len(peak_data) == len(reactions)
+    for r in reactions:
+        data = peak_data[r.identifier]
+        r.properties.update(data)

@@ -1,6 +1,7 @@
 import base64
 import collections
 import functools
+import inspect
 import itertools
 import json
 import logging
@@ -9,23 +10,46 @@ import os.path
 import pathlib
 import pickle
 import re
+import sys
 import time
 import typing
 from datetime import datetime
 from io import BytesIO
-
+from itertools import zip_longest
+import gzip
 import monty.json
 import numpy as np
 import pandas as pd
+import scipy.stats
+from loguru import logger
 from monty.json import MSONable
 from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles, MolFromSmarts
 from rdkit.Chem.Draw import MolToImage
 from rdkit.Chem.inchi import MolFromInchi
 from sklearn import preprocessing
+from sklearn.metrics import pairwise_distances
 
 SEED = 42
 
 FilePath = typing.Union[pathlib.Path, os.PathLike, str]
+Xtype = typing.Union[np.ndarray, list[list[float]]]
+ytype = typing.Union[np.ndarray, list[float]]
+
+
+def inspect_tasks(task_header='task_') -> dict[str, typing.Callable]:
+    # https://stackoverflow.com/questions/139180/
+    return {f[0].replace(f'{task_header}', ''): f[1] for f in
+            inspect.getmembers(sys.modules['__main__'], inspect.isfunction) if
+            f[0].startswith(f'{task_header}')}
+
+
+def get_workplace_data_folder(f: str) -> FilePath:
+    absf = os.path.abspath(f)
+    assert 'workplace' in absf and absf.endswith('.py') and 'workplace_data' not in absf
+    absf = absf.replace('workplace', 'workplace_data', 1)
+    folder = get_folder(absf)
+    createdir(folder)
+    return folder
 
 
 def msonable_repr(msonable: MSONable, precision=5):
@@ -74,16 +98,24 @@ def to_float(x):
         return None
 
 
-def json_dump(o, fn: FilePath):
-    with open(fn, "w") as f:
-        json.dump(o, f, cls=monty.json.MontyEncoder)
+def json_dump(o, fn: FilePath, gz=False):
+    if gz:
+        with gzip.open(fn, 'wt') as f:
+            json.dump(o, f, cls=monty.json.MontyEncoder)
+    else:
+        with open(fn, "w") as f:
+            json.dump(o, f, cls=monty.json.MontyEncoder)
 
 
-def json_load(fn: FilePath, warning=False):
+def json_load(fn: FilePath, warning=False, gz=False):
     if warning:
         logging.warning("loading file: {}".format(fn))
-    with open(fn, "r") as f:
-        o = json.load(f, cls=monty.json.MontyDecoder)
+    if gz:
+        with gzip.open(fn, 'rt') as f:
+            o = json.load(f, cls=monty.json.MontyDecoder)
+    else:
+        with open(fn, "r") as f:
+            o = json.load(f, cls=monty.json.MontyDecoder)
     return o
 
 
@@ -190,7 +222,7 @@ def pkl_dump(o, fn: FilePath, print_timing=True) -> None:
         pickle.dump(o, f)
     ts2 = time.perf_counter()
     if print_timing:
-        print("dumped {} in: {:.4f} s".format(os.path.basename(fn), ts2 - ts1))
+        logger.info("dumped {} in: {:.4f} s".format(os.path.basename(fn), ts2 - ts1))
 
 
 def pkl_load(fn: FilePath, print_timing=True):
@@ -199,7 +231,7 @@ def pkl_load(fn: FilePath, print_timing=True):
         d = pickle.load(f)
     ts2 = time.perf_counter()
     if print_timing:
-        print("loaded {} in: {:.4f} s".format(os.path.basename(fn), ts2 - ts1))
+        logger.info("loaded {} in: {:.4f} s".format(os.path.basename(fn), ts2 - ts1))
     return d
 
 
@@ -326,3 +358,95 @@ def smi2imagestr(smi: str):
     encoded_image = base64.b64encode(buffered.getvalue())
     src_str = 'data:image/png;base64,{}'.format(encoded_image.decode())
     return src_str
+
+
+def plot_molcloud(smis: list[str], width: float, outfile: FilePath):
+    import matplotlib.pyplot as plt
+    import molcloud
+    bgc = "#f5f4e9"
+    node_size = 100
+    plt.figure(figsize=(width, width))
+    molcloud.plot_molcloud(smis, background_color=bgc, node_size=node_size)
+    plt.savefig(outfile, dpi=600)
+
+
+def split_file(
+        filename: FilePath, n=1000, outfile_template="outfile_{0:03d}.out",
+):
+    """
+    split a large file into smaller chunks
+    """
+
+    def grouper(n, iterable, fillvalue=None):
+        """Collect data into fixed-length chunks or blocks"""
+        # grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx
+        args = [iter(iterable)] * n
+        return zip_longest(fillvalue=fillvalue, *args)
+
+    with open(filename) as f:
+        for i, g in enumerate(grouper(n, f, fillvalue=''), 1):
+            with open(outfile_template.format(i), 'w') as fout:
+                fout.writelines(g)
+
+
+def combine_files(filenames: list[FilePath], outfile: FilePath):
+    c = ""
+    for filename in filenames:
+        with open(filename, "r") as f:
+            c += f.read()
+    with open(outfile, "w") as f:
+        f.write(c)
+
+
+def has_isotope(mol):
+    """ if any atom is an isotope """
+    if isinstance(mol, str):
+        mol = MolFromSmiles(mol)
+    atom_data = [(atom, atom.GetIsotope()) for atom in mol.GetAtoms()]
+    for atom, isotope in atom_data:
+        if isotope:
+            return True
+    return False
+
+
+def upper_confidence_interval(data: np.ndarray, confidence=0.95):
+    # TODO ubc algorithm uses sample size to penalize mean, we have a fixed plate, sample size stays the same
+    """ https://stackoverflow.com/questions/15033511/ """
+    assert data.ndim == 1 and len(data) >= 2
+    a = 1.0 * np.array(data)
+    n = len(a)
+    m, se = np.mean(a), scipy.stats.sem(a)
+    h = se * scipy.stats.t.ppf((1 + confidence) / 2., n - 1)
+    return m + h
+
+
+def log_time(method):
+    def timed(*args, **kw):
+        logger.info(f"WORKING ON: {method.__name__}")
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        logger.info("TIME COST: {:.3f} s".format(te - ts))
+        return result
+
+    return timed
+
+def get_date_ymd() -> str:
+    return datetime.now().strftime("%Y_%m_%d")
+
+
+def calculate_distance_matrix(descriptor_dataframe: pd.DataFrame, metric="manhattan", ):
+    descriptor_dataframe = descriptor_dataframe.select_dtypes('number')
+    df = scale_df(descriptor_dataframe)
+    distance_matrix = pairwise_distances(df.values, metric=metric)
+    return distance_matrix
+
+def size_report(o):
+    size = sys.getsizeof(o)
+    # size = dict()
+    # d = o.as_dict()
+    # for k, v in d.items():
+    #     s = sys.getsizeof(v)
+    #     s = f"{round(s / (1024 * 1024), 4)} MB"
+    #     size[k] = s
+    return size
