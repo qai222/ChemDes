@@ -89,7 +89,7 @@ class Molecule(Material):
 
     @property
     def label(self):
-        label_template = "-{0:0>4}"
+        label_template = "-{0:08d}"
         return self.mat_type + label_template.format(self.int_label)
 
     @property
