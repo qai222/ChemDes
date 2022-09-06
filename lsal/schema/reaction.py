@@ -319,13 +319,18 @@ class L1XReactionCollection(LXReactionCollection):
         records = []
         ligands = []
         final_cols = set()
-        for r in self.real_reactions:
-            record = deepcopy(r.ligand.properties['features'])
-            ligands.append(r.ligand)
-            record.update({"ligand_amount": r.ligand_solution.amount, "FigureOfMerit": r.properties[fom_def], })
-            if len(final_cols) == 0:
-                final_cols.update(set(record.keys()))
-            records.append(record)
+        # random state of model fitting depends on the order of input rows
+        # here ligands are sorted in `self.ligand_to_reactions_mapping()`
+        for lig, reactions in self.ligand_to_reactions_mapping().items():
+            records_of_this_ligand = []
+            for r in reactions:
+                record = {"ligand_amount": r.ligand_solution.amount, "FigureOfMerit": r.properties[fom_def], }
+                record.update(lig.properties['features'])
+                records_of_this_ligand.append(record)
+                ligands.append(lig)
+                if len(final_cols) == 0:
+                    final_cols.update(set(record.keys()))
+            records += records_of_this_ligand
         df = pd.DataFrame.from_records(records, columns=sorted(final_cols))
         df_x = df[[c for c in df.columns if c != "FigureOfMerit"]]
         df_y = df["FigureOfMerit"]
