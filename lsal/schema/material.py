@@ -9,7 +9,7 @@ import pandas as pd
 from loguru import logger
 from monty.json import MSONable
 
-from lsal.utils import inchi2smiles, MolFromInchi, FilePath, file_exists, get_extension, get_basename, np
+from lsal.utils import inchi2smiles, MolFromInchi, FilePath, file_exists, get_extension, get_basename, np, flatten_json
 
 
 class Material(MSONable, abc.ABC):
@@ -105,11 +105,11 @@ class Molecule(Material):
             return s
         elif output == "csv":
             records = []
+            nested_sep = "___"
             for m in mols:
-                r = {k: v for k, v in m.as_record().items() if not k.startswith("@") and k != "properties"}
-                for k in m.properties:
-                    # TODO add support for nested properties
-                    r["properties__{}".format(k)] = m.properties[k]
+                r = {k: v for k, v in m.as_record().items() if not k.startswith("@")}
+                r = flatten_json(r, sep=nested_sep)
+                r = {k.rstrip(nested_sep): v for k, v in r.items()}
                 records.append(r)
             df = pd.DataFrame.from_records(records)
             df.set_index(df.pop('label'), inplace=True)
