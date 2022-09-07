@@ -1,6 +1,6 @@
 from loguru import logger
 
-from lsal.schema import Worker, load_featurized_molecules, load_molecules
+from lsal.schema import Worker, load_featurized_molecules, load_molecules, Molecule
 from lsal.tasks import FomCalculator, collect_reactions_l1
 from lsal.utils import get_basename, get_folder, log_time, json_dump
 
@@ -19,7 +19,8 @@ class CollectReactions(Worker):
     @log_time
     def load_molecules(self):
         ligands = load_featurized_molecules(
-            "init_inv.csv", "init_des.csv", "LIGAND",
+            "init_inv.csv", "init_des.csv",
+            "LIGAND",
             col_to_mol_kw={
                 'label': 'label',
                 'identifier': 'identifier',
@@ -36,12 +37,19 @@ class CollectReactions(Worker):
             },
             mol_type='SOLVENT'
         )
+        ligands: list[Molecule]
+        solvents: list[Molecule]
         self.ligands = ligands
         self.solvents = solvents
 
     @log_time
     def load_reactions(self):
-        reaction_collection = collect_reactions_l1("sheets", self.ligands, self.solvents)
+        int_label_string_to_int_label = lambda x: int(x)
+        reaction_collection = collect_reactions_l1(
+            "sheets", self.ligands, self.solvents,
+            ligand_identifier_convert=int_label_string_to_int_label,
+            ligand_identifier_type='int_label',
+        )
         FomCalculator(reaction_collection).update_foms()
         json_dump(reaction_collection, 'reaction_collection.json', gz=False)
         logger.info(reaction_collection.__repr__())
