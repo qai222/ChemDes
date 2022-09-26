@@ -1,6 +1,7 @@
 import base64
 import collections
 import functools
+import gzip
 import inspect
 import itertools
 import json
@@ -10,13 +11,14 @@ import os.path
 import pathlib
 import pickle
 import re
+import shutil
 import sys
 import time
 import typing
 from datetime import datetime
 from io import BytesIO
 from itertools import zip_longest
-import gzip
+
 import monty.json
 import numpy as np
 import pandas as pd
@@ -313,7 +315,13 @@ def is_close(a: float, b: float, eps=1e-5):
 def is_close_relative(a: float, b: float, eps=1e-5):
     aa = abs(a)
     bb = abs(b)
-    return abs(a - b) / min([aa, bb]) < eps
+    try:
+        return abs(a - b) / min([aa, bb]) < eps
+    except ZeroDivisionError:
+        try:
+            return abs(a - b) / max([aa, bb]) < eps
+        except ZeroDivisionError:
+            return True
 
 
 def is_close_list(lst: list[float], eps=1e-5):
@@ -431,15 +439,40 @@ def log_time(method):
 
     return timed
 
+
 def get_date_ymd() -> str:
     return datetime.now().strftime("%Y_%m_%d")
 
 
-def calculate_distance_matrix(descriptor_dataframe: pd.DataFrame, metric="manhattan", ):
+def calculate_distance_matrix(descriptor_dataframe: pd.DataFrame, metric="manhattan", scale=True):
+    logger.warning(f"descriptor_dataframe shape: {descriptor_dataframe.shape}")
     descriptor_dataframe = descriptor_dataframe.select_dtypes('number')
-    df = scale_df(descriptor_dataframe)
+    logger.warning(f"descriptor_dataframe shape numbers only: {descriptor_dataframe.shape}")
+    if scale:
+        logger.warning("the columns of input dataframe are scaled to [0, 1] for distance matrix")
+        df = scale_df(descriptor_dataframe)
+    else:
+        df = descriptor_dataframe
     distance_matrix = pairwise_distances(df.values, metric=metric)
     return distance_matrix
+
+
+def get_file_size(fn: FilePath, unit="m"):
+    """
+    see https://stackoverflow.com/questions/6080477
+    improvement https://code.activestate.com/recipes/577081/
+    """
+    assert unit in ('b', 'k', 'm', 'g')
+    bsize = os.path.getsize(fn)
+    if unit == 'b':
+        return bsize
+    elif unit == 'k':
+        return bsize / 1024
+    elif unit == 'm':
+        return bsize / (1024 ** 2)
+    elif unit == 'g':
+        return bsize / (1024 ** 3)
+
 
 def size_report(o):
     size = sys.getsizeof(o)
@@ -450,3 +483,84 @@ def size_report(o):
     #     s = f"{round(s / (1024 * 1024), 4)} MB"
     #     size[k] = s
     return size
+
+
+def flatten_json(nested_json: dict, exclude: list = [''], sep: str = '___') -> dict:
+    """
+    directly taken from https://stackoverflow.com/questions/58442723
+    see also https://stackoverflow.com/questions/52795561
+    Flatten a list of nested dicts.
+    """
+    out = dict()
+
+    def flatten(x: (list, dict, str), name: str = '', exclude=exclude):
+        if type(x) is dict:
+            for a in x:
+                if a not in exclude:
+                    flatten(x[a], f'{name}{a}{sep}')
+        elif type(x) is list:
+            i = 0
+            for a in x:
+                flatten(a, f'{name}{i}{sep}')
+                i += 1
+        else:
+            out[name[:-1]] = x
+
+    flatten(nested_json)
+    return out
+
+
+def movefile(what, where):
+    """
+    shutil operation to move
+    :param what:
+    :param where:
+    :return:
+    """
+    try:
+        shutil.move(what, where)
+    except IOError:
+        os.chmod(where, 777)
+        shutil.move(what, where)
+
+
+def copyfile(what, where):
+    """
+    shutil operation to copy
+    :param what:
+    :param where:
+    :return:
+    """
+    try:
+        shutil.copy(what, where)
+    except IOError:
+        os.chmod(where, 777)
+        shutil.copy(what, where)
+
+
+def is_sorted_ascend(sample):
+    return all(sample[i] <= sample[i + 1] for i in range(len(sample) - 1))
+
+
+def is_sorted_descend(sample):
+    return all(sample[i] >= sample[i + 1] for i in range(len(sample) - 1))
+
+
+def cut_end(sample, delta_cutoff=0.05, return_n=False):
+    actual_delta = abs(sample[0] - sample[-1])
+    actual_delta_cutoff = delta_cutoff * actual_delta
+    assert is_sorted_ascend(sample) or is_sorted_descend(sample)
+    li_end = []
+    hi_end = []
+    i = 0
+    while abs(sample[i] - sample[0]) <= actual_delta_cutoff:
+        li_end.append(sample[i])
+        i += 1
+    i = len(sample) - 1
+    while abs(sample[i] - sample[-1]) <= actual_delta_cutoff:
+        hi_end.append(sample[i])
+        i -= 1
+    if return_n:
+        return len(li_end), len(hi_end)
+    else:
+        return li_end, hi_end
