@@ -25,7 +25,7 @@ def dfg(input_smis: list[str], tmp_folder: FilePath = "dfg_tmp", rmtmp=True):
     dfg_data = dict()
     for i, smi in tqdm(enumerate(input_smis)):
         m = MolFromSmiles(smi)
-        fn = "{0:06d}.mol".format(i)
+        fn = "{0:08d}.mol".format(i)
         fn = os.path.join(tmp_folder, fn)
         MolToMolFile(m, fn)
         cmd = [_checkmol_binary, "-e", "-c", fn]
