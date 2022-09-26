@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import random
 from copy import deepcopy
 from datetime import datetime
 from typing import Union
@@ -14,10 +13,9 @@ from skopt import BayesSearchCV
 
 from lsal.alearn.base import MetaLearner, TeachingRecord, QueryRecord
 from lsal.schema import L1XReactionCollection, Molecule
-from lsal.tasks import MoleculeSampler
 from lsal.twinsk import tune_twin_rf, _default_n_estimator, TwinRegressor
 from lsal.utils import FilePath, createdir, pkl_dump, truncate_distribution, upper_confidence_interval, \
-    unique_element_to_indices, calculate_distance_matrix
+    unique_element_to_indices
 
 
 class SingleLigandPrediction(MSONable):
@@ -100,6 +98,7 @@ class SingleLigandPrediction(MSONable):
             record = {
                 'ligand_label': lig.label,
                 'ligand_identifier': lig.identifier,
+                'ligand_smiles': lig.smiles,
                 'rank_average_pred_mu': float(np.mean(pred.pred_mu)),
                 'rank_average_pred_std': float(np.mean(pred.pred_std)),
                 'rank_average_pred_uci': float(np.mean(pred.pred_uci)),
@@ -112,17 +111,6 @@ class SingleLigandPrediction(MSONable):
             records.append(record)
             ligands.append(lig)
         df = pd.DataFrame.from_records(records)
-        # random sampling
-        random_idx_list = list(range(df.shape[0]))
-        random.Random(42).shuffle(random_idx_list)
-        df['rank_random_index'] = random_idx_list
-        # ks sampling in the feature space
-        _, feature_mat = Molecule.l1_input(ligands, None)
-        dmat_feature = calculate_distance_matrix(feature_mat)
-        ms = MoleculeSampler(ligands, dmat_feature)
-        ks_indices = ms.sample_ks(return_mol=False)
-        df['rank_ks_feature'] = ks_indices
-        # TODO ks sampling with fp distances
         return df
 
     @staticmethod
@@ -134,10 +122,22 @@ class SingleLigandPrediction(MSONable):
         if size is None:
             size = len(pool)
         query_results = dict()
+        ligand_label_to_ligand = {lig.label: lig for lig in pool}
         for col in ranking_df.columns:
             if col.startswith('rank_'):
-                query_results[col] = ranking_df.nlargest(size, col, keep='first')['ligand_label'].tolist()
-        qr = QueryRecord(datetime.now(), model_path, ranking_df, query_results)
+                sorted_df = ranking_df.nlargest(size, col, keep='first')
+                rrs = []
+                for record in sorted_df.to_dict("records"):
+                    lig = ligand_label_to_ligand[record['ligand_label']]
+                    rr = {
+                        'ligand_label': lig.label,
+                        'ligand_smiles': lig.smiles,
+                        'ligand_identifier': lig.identifier,
+                        col: record[col]
+                    }
+                    rrs.append(rr)
+                query_results[col] = pd.DataFrame.from_records(rrs)
+        qr = QueryRecord(datetime.now(), model_path, pool, ranking_df, query_results)
         return qr
 
 

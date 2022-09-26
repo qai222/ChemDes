@@ -103,12 +103,13 @@ class MetaLearner(MSONable, abc.ABC):
 
 
 class QueryRecord(ActiveLearningRecord):
-    def __init__(self, date: datetime, predictor_path: FilePath,
+    def __init__(self, date: datetime, predictor_path: FilePath, pool: list,
                  ranking_dataframe: pd.DataFrame, query_results: dict, properties: OrderedDict = None):
         """
         record a query event of an active learner
         """
         super().__init__(date, properties)
+        self.pool = pool
         self.predictor_path = predictor_path
         self.query_results = query_results
         self.ranking_dataframe = ranking_dataframe
