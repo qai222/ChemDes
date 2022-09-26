@@ -11,7 +11,7 @@ from loguru import logger
 from monty.json import MSONable
 
 from lsal.schema.material import Molecule, NanoCrystal
-from lsal.utils import msonable_repr, rgetattr
+from lsal.utils import msonable_repr, rgetattr, flatten_json
 
 _Precision = 5
 _EPS = 1 ** -_Precision
@@ -102,6 +102,14 @@ class GeneralReaction(MSONable, abc.ABC):
         for condition in self.conditions:
             s += "\t Condition: {}\n".format(condition.__repr__())
         return s
+
+    def as_flat_dict(
+            self, exclude_kw=(
+                    "@module", "@version", "@class", "properties___features"
+            ), sep="___",
+    ):
+        return {k.rstrip(sep): v for k, v in flatten_json(self.as_dict(), sep=sep).items() if
+                all(kw not in k for kw in exclude_kw)}
 
     def __hash__(self):
         return hash(self.identifier)
@@ -300,6 +308,9 @@ class L1XReactionCollection(LXReactionCollection):
     def __repr__(self):
         s = "{}\n".format(self.__class__.__name__)
         s += "\t# of reactions: {}\n".format(len(self.reactions))
+        s += f"\t# of real reactions: {len(self.real_reactions)}\n"
+        s += f"\t# of blank reactions: {len([r for r in self.reactions if r.is_reaction_blank_reference])}\n"
+        s += f"\t# of ref reactions: {len([r for r in self.reactions if r.is_reaction_nc_reference])}\n"
         s += "\t# of ligands: {}\n".format(len(self.unique_ligands))
         for lig, reactions in self.ligand_to_reactions_mapping().items():
             lig: Molecule
@@ -338,6 +349,13 @@ class L1XReactionCollection(LXReactionCollection):
             df_y.fillna(0, inplace=True)
         logger.info("ML INPUT: df_X: {}\t df_y: {}".format(df_x.shape, df_y.shape))
         return ligands, df_x, df_y
+
+    def as_dataframe(self):
+        rs = []
+        for r in self.real_reactions:
+            fr = r.as_flat_dict()
+            rs.append(fr)
+        return pd.DataFrame.from_records(rs)
 
 
 def assign_reaction_results(reactions, peak_data: dict[str, dict]):

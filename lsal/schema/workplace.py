@@ -46,6 +46,7 @@ class Worker(MSONable, abc.ABC):
         if len(self.collect_files) > 0:
             logger.info(f"Finally, copy the following files to: {self.code_dir}")
         for fn in self.collect_files:
+            logger.info(f"copying: {fn}")
             if get_file_size(fn, warning_file_size_unit) > warning_file_size:
                 logger.warning(
                     f"files size larger than {warning_file_size} {warning_file_size_unit}, please double check: {fn}")
