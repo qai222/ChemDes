@@ -26,7 +26,7 @@ FomNames = [n for n in PropertyGetter.NameToSuffix.keys() if n.startswith("fom")
 LigandData = {pname:
                   PropertyGetter.get_amount_property_data(reaction_collection, pname) for pname in FomNames
               }
-Ligands = sorted([lc[0] for lc in reaction_collection.unique_lcombs])
+Ligands = sorted([lc[0] for lc in reaction_collection.unique_ligand_tuples])
 
 point_methods = ["best", "top2%", "top5%", "mean"]
 
