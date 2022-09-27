@@ -1,6 +1,5 @@
 import glob
 
-import ChemScraper
 import numpy as np
 import pandas as pd
 from loguru import logger
@@ -243,6 +242,7 @@ class OneLigandWorker(Worker):
 
     @log_time
     def add_cas_number(self):
+        import ChemScraper
         inchi_field = 'ligand_identifier'
         for csv in glob.glob(f"{self.shortlist_dir}/rank_*.csv"):
             logger.info(f"working on: {csv}")
