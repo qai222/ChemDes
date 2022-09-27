@@ -8,3 +8,7 @@ Ligand Selection with Active Learning
   - [Sampling](./workplace/Sampler)
   - [Experiment results by ligands](http://161.35.50.78:8002/)
   - [FOM vs references](http://161.35.50.78:8003/)
+
+### Workplace data sync
+Content of [workplace/data](./workplace/data) is synced to
+a [shared drive](https://drive.google.com/drive/folders/0AOdERHOdV4xpUk9PVA) using `rclone`
