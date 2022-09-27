@@ -170,6 +170,9 @@ class LXReaction(GeneralReaction):
     @property
     def is_reaction_nc_reference(self) -> bool:
         """ whether the reaction is a reference reaction in which only NC solution and solvent were added """
+        # if `WallTag` is present, use the tag
+        if 'WallTag' in self.properties:
+            return self.properties['WallTag'] == 3
         nc_good = self.nc_solution is not None and self.nc_solution.volume > _EPS
         solvent_good = self.solvent is not None and self.solvent.volume > _EPS
         no_ligand = len(self.ligand_solutions) == 0 or all(
@@ -179,6 +182,9 @@ class LXReaction(GeneralReaction):
     @property
     def is_reaction_blank_reference(self) -> bool:
         """ whether the reaction is a reference reaction in which only solvent was added """
+        # if `WallTag` is present, use the tag
+        if 'WallTag' in self.properties:
+            return self.properties['WallTag'] == 2
         no_nc = self.nc_solution is None or self.nc_solution.volume < _EPS
         solvent_good = self.solvent is not None and self.solvent.volume > _EPS
         no_ligand = len(self.ligand_solutions) == 0 or all(
@@ -188,6 +194,9 @@ class LXReaction(GeneralReaction):
     @property
     def is_reaction_real(self) -> bool:
         """ whether the reaction is neither a blank nor a ref """
+        # if `WallTag` is present, use the tag
+        if 'WallTag' in self.properties:
+            return self.properties['WallTag'] == 1
         return not self.is_reaction_blank_reference and not self.is_reaction_nc_reference
 
     @property
@@ -197,6 +206,10 @@ class LXReaction(GeneralReaction):
     @property
     def unique_ligands(self) -> Tuple[Molecule, ...]:
         return tuple(sorted(set(self.ligand_tuple)))
+
+    @property
+    def batch_name(self):
+        return self.properties['batch_name']
 
 
 class L1XReaction(LXReaction):

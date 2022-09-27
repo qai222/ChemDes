@@ -83,8 +83,11 @@ class OneLigandWorker(Worker):
             shortlist_sample_size=40,
             shortlist_value_cutoff=None,
             complexity_descriptor='complexity_BertzCT',
+
+            test_predict:int=None,
     ):
         super().__init__(name=self.__class__.__name__, code_dir=code_dir, work_dir=work_dir)
+        self.test_predict = test_predict
         self.shortlist_value_cutoff = shortlist_value_cutoff
         self.prediction_ligand_pool_json = prediction_ligand_pool_json
         self.shortlist_sample_size = shortlist_sample_size
@@ -108,11 +111,11 @@ class OneLigandWorker(Worker):
         for rc_json in self.reaction_collection_json:
             rc = json_load(rc_json, gz=True)
             rc: L1XReactionCollection
-            reactions += rc.reactions
+            reactions += rc.real_reactions
         reaction_collection = L1XReactionCollection(reactions)
 
         learner = SingleLigandLearner.init_trfr(
-            teaching_figure_of_merit='fom2',
+            teaching_figure_of_merit='FigureOfMerit',
             wdir=self.learner_wdir,
         )
 
@@ -122,6 +125,8 @@ class OneLigandWorker(Worker):
     @log_time
     def predict(self):
         ligand_pool = json_load(self.prediction_ligand_pool_json, gz=True)
+        if self.test_predict:
+            ligand_pool = ligand_pool[:self.test_predict]
         npreds = 200
 
         learner = json_load(self.learner_json, gz=True)

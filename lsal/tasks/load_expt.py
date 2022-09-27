@@ -1,12 +1,12 @@
 from __future__ import annotations
 
+import dataclasses
 import functools
 import inspect
 import os
 import pprint
-import re
 from copy import deepcopy
-from typing import Any, Union, Tuple, List, Callable
+from typing import Any, Tuple, List, Callable
 
 import numpy as np
 import pandas as pd
@@ -14,25 +14,40 @@ from loguru import logger
 from monty.json import MSONable
 
 from lsal.schema import Molecule, ReactionCondition, ReactantSolution, NanoCrystal, _EPS, L1XReactionCollection, \
-    L1XReaction, LXReaction, assign_reaction_results
+    L1XReaction, assign_reaction_results
 from lsal.utils import FilePath, padding_vial_label, strip_extension, get_extension, get_basename, \
-    is_close_relative, file_exists
-
-"""
-expt properties
-od: `*_PL_OD390`
-plsum: `*_PL_sum`
-
-possible figures of merit
-1. `*_PL_sum/OD390`
-2. `*_PL_sum/OD390 / mean(*_PL_sum/OD390)` of references (i.e. `*_PL_FOM`)
-3. `*_PL_sum/OD390 - mean(*_PL_sum/OD390)` of references
-4. `*_PL_sum/OD390 / first(*_PL_sum/OD390)` reaction with the lowest nonzero ligand concentration
-5. `*_PL_sum/OD390 - first(*_PL_sum/OD390)` reaction with the lowest nonzero ligand concentration
-"""
+    file_exists
 
 
-class ExptLoader(MSONable):
+@dataclasses.dataclass
+class BatchParams:
+    # identify ligands
+    ligand_identifier_convert: dict[Any, Any]
+    ligand_identifier_type: str  # this is the identifier type after conversion
+
+    # robot input file specifications
+    expt_input_columns: Tuple[str, ...]
+    expt_input_reagent_columns: Tuple[str, ...]
+    expt_input_condition_columns: Tuple[str, str]
+    expt_input_vial_column: str
+    reagent_volume_unit: str
+    reagent_concentration_unit: str
+    reagent_possible_solvent: Tuple[str, ...]
+
+    # peak file specification
+    expt_output_vial_column: str
+    expt_output_wall_tag_column_suffix: str
+    expt_output_od_column_suffix: str
+    expt_output_fom_column_suffix: str
+
+    def as_dict(self):
+        return dataclasses.asdict(self)
+
+
+class BatchLoader:
+    """
+    load a batch (plate) of reactions, usually two ligands
+    """
 
     def __init__(
             self,
@@ -47,26 +62,27 @@ class ExptLoader(MSONable):
 
             # identify ligands
             ligand_identifier_convert: dict[Any, Any],
-            ligand_identifier_type: str,
+            ligand_identifier_type: str,  # this is the identifier type after conversion
 
             # robot input file specifications
-            expt_input_columns: Tuple[str] = (
-                    'Vial Site', 'Reagent1 (ul)', 'Reagent2 (ul)', 'Reagent3 (ul)', 'Reagent4 (ul)',
-                    'Reagent5 (ul)', 'Reagent6 (ul)', 'Reagent7 (ul)', 'Reagent8 (ul)', 'Reagent9 (ul)',
-                    'Reagent10 (ul)', 'Labware ID:', 'Reaction Parameters', 'Parameter Values', 'Reagents',
-                    'Reagent Name', 'Reagent Identity', 'Reagent Concentration (uM)', 'Liquid Class',
-            ),
-            expt_input_reagent_columns: Tuple[str] = (
-                    "Reagents", "Reagent Name", "Reagent Identity", "Reagent Concentration (uM)"
-            ),
-            expt_input_vial_column: str = 'Vial Site',
-            reagent_volume_unit: str = 'ul',
-            reagent_concentration_unit: str = 'uM',
-            reagent_possible_solvent: Tuple[str] = ('m-xylene',),
+            expt_input_columns: Tuple[str, ...],
+            expt_input_reagent_columns: Tuple[str, ...],
+            expt_input_condition_columns: Tuple[str, str],
+            expt_input_vial_column: str,
+            reagent_volume_unit: str,
+            reagent_concentration_unit: str,
+            reagent_possible_solvent: Tuple[str, ...],
 
             # peak file specification
-            expt_output_vial_column: str = "wellLabel",
+            expt_output_vial_column: str,
+            expt_output_wall_tag_column_suffix: str,
+            expt_output_od_column_suffix: str,
+            expt_output_fom_column_suffix: str,
     ):
+        self.expt_input_condition_columns = expt_input_condition_columns
+        self.expt_output_fom_column_suffix = expt_output_fom_column_suffix
+        self.expt_output_od_column_suffix = expt_output_od_column_suffix
+        self.expt_output_wall_tag_column_suffix = expt_output_wall_tag_column_suffix
         self.expt_input = expt_input
         self.expt_output = expt_output
         self.ligand_inventory = ligand_inventory
@@ -81,52 +97,77 @@ class ExptLoader(MSONable):
         self.reagent_concentration_unit = reagent_concentration_unit
         self.reagent_possible_solvent = reagent_possible_solvent
 
-    def load_peak_info(self) -> dict[str, dict]:
-        peak_df = pd.read_csv(self.expt_output)
-        peak_df.drop(peak_df.filter(regex="Unnamed"), axis=1, inplace=True)
+    @staticmethod
+    def init_keys() -> list[str]:
+        signature = inspect.signature(BatchLoader.__init__).parameters
+        return [n.name for n in signature.values() if n.name != 'self']
+
+    @property
+    def params(self) -> dict:
+        return {
+            n: getattr(self, n) for n in self.init_keys()
+            if n not in ['self', 'ligand_inventory', 'solvent_inventory']
+        }
+
+    @property
+    def batch_identifier(self) -> str:
+        return strip_extension(get_basename(self.expt_input))
+
+    @staticmethod
+    def get_column_with_suffix(df: pd.DataFrame, suffix: str):
+        possible_columns = [c for c in df.columns if c.endswith(suffix)]
+        if len(possible_columns) > 1:
+            possible_columns = [c for c in possible_columns if "_ref_" not in c.lower()]
+        assert len(possible_columns) == 1
+        return possible_columns[0]
+
+    def load_peak_info(self) -> dict[str, dict[str, Any]]:
+        peak_df = pd.read_csv(self.expt_output, low_memory=False)
+
+        # remove excess cells
         peak_df.dropna(axis=0, inplace=True, how="all")
 
-        identifier_prefix = strip_extension(get_basename(self.expt_input))
+        wall_tag_column = self.get_column_with_suffix(peak_df, self.expt_output_wall_tag_column_suffix)
+        od_column = self.get_column_with_suffix(peak_df, self.expt_output_od_column_suffix)
+        fom_column = self.get_column_with_suffix(peak_df, self.expt_output_fom_column_suffix)
 
-        vial_col = [c for c in peak_df.columns if self.expt_output_vial_column in c]
-        assert len(vial_col) == 1, "`{}` can only appear once in the columns of: {}".format(
-            self.expt_output_vial_column, self.expt_output
-        )
-        vial_col = vial_col[0]
-
+        # collect peak info
         data = dict()
         for record in peak_df.to_dict(orient="records"):
-            vial = identifier_prefix + "@@" + padding_vial_label(record[vial_col])
-            data[vial] = dict()
-            data[vial]["peak_file"] = os.path.basename(self.expt_output)
-            data[vial].update(record)
+            reaction_name = f"{self.batch_identifier}@@{padding_vial_label(record[self.expt_output_vial_column])}"
+            reaction_peak_info = {
+                "PeakFile": get_basename(self.expt_output),
+                "OpticalDensity": record[od_column],
+                "FigureOfMerit": record[fom_column],
+                "WallTag": record[wall_tag_column],
+            }
+            data[reaction_name] = reaction_peak_info
         return data
 
     def load_robot_input_l1(self, ) -> List[L1XReaction]:
         # load dataframe
-        robot_input_name = strip_extension(os.path.basename(self.expt_input))
         ext = get_extension(self.expt_input)
         if ext == "csv":
-            robotinput_df = pd.read_csv(self.expt_input)
+            robotinput_df = pd.read_csv(self.expt_input, low_memory=False)
         elif ext == "xls":
             robotinput_df = pd.read_excel(self.expt_input, 0)
         else:
             raise NotImplementedError
 
         # remove excess cells
-        robotinput_df.drop(robotinput_df.filter(regex="Unnamed"), axis=1, inplace=True)
         robotinput_df.dropna(axis=0, inplace=True, how="all")
 
         # sanity check
         assert set(self.expt_input_reagent_columns).issubset(
             set(self.expt_input_columns)
         ), "`reagent_columns` is not a subset of `input_columns`!"
-        assert set(robotinput_df.columns) == set(
-            self.expt_input_columns
-        ), "`input_columns` is not identical to what we read from: {}".format(self.expt_input)
+        # assert set(robotinput_df.columns) == set(
+        #     self.expt_input_columns
+        # ), "`input_columns` is not identical to what we read from: {}".format(self.expt_input)
 
         # load general reaction conditions
-        condition_df = robotinput_df.loc[:, ["Reaction Parameters", "Parameter Values"]]
+        condition_df = robotinput_df.loc[:, self.expt_input_condition_columns]
+        assert len(self.expt_input_condition_columns) == 2, "should only have 2 condition columns"
         condition_df = condition_df.dropna(axis=0, how="all")
         reaction_conditions = []
         for k, v in zip(condition_df.iloc[:, 0], condition_df.iloc[:, 1]):
@@ -137,7 +178,8 @@ class ExptLoader(MSONable):
         reagent_df = robotinput_df.loc[:, self.expt_input_reagent_columns]
         reagent_df.dropna(axis=0, inplace=True, how="all")
         reagent_index_to_reactant = self.reagent_df_parser(
-            df=reagent_df, ligand_inventory=self.ligand_inventory,
+            df=reagent_df,
+            ligand_inventory=self.ligand_inventory,
             solvent_inventory=self.solvent_inventory,
             volume_unit=self.reagent_volume_unit,
             concentration_unit=self.reagent_concentration_unit,
@@ -147,13 +189,13 @@ class ExptLoader(MSONable):
         )
 
         # load volumes
-        volume_df = robotinput_df.loc[:, ["Vial Site", ] + list(reagent_index_to_reactant.keys())]
+        volume_df = robotinput_df.loc[:, [self.expt_input_vial_column, ] + list(reagent_index_to_reactant.keys())]
         reactions = []
         for record in volume_df.to_dict(orient="records"):
             # vial
             logger.info("loading reaction: {}".format(record))
             vial = padding_vial_label(record[self.expt_input_vial_column])
-            identifier = "{}@@{}".format(robot_input_name, vial)
+            identifier = "{}@@{}".format(self.batch_identifier, vial)
 
             ligand_reactants = []
             solvent_reactant, nc_reactant = None, None
@@ -175,7 +217,8 @@ class ExptLoader(MSONable):
 
             reaction = L1XReaction(
                 identifier=identifier, conditions=reaction_conditions, solvent=solvent_reactant,
-                nc_solution=nc_reactant, ligand_solutions=ligand_reactants, properties=None,
+                nc_solution=nc_reactant, ligand_solutions=ligand_reactants,
+                properties=dict(batch_name=self.batch_identifier),
             )
             reactions.append(reaction)
         return reactions
@@ -232,245 +275,84 @@ class ExptLoader(MSONable):
         # note the "ul" in keys here are hardcoded for robotinput files
 
     def load_l1(self) -> L1XReactionCollection:
-        logger.info(">>> start loading l1 reactions with loader params:")
-        logger.info(
-            pprint.pformat({k: v for k, v in self.as_dict().items() if isinstance(v, str) or isinstance(v, float)},
-                           indent=4))
+        logger.warning(f"{self.__class__.__name__}: LOADING BATCH=={self.batch_identifier}")
+        logger.info(pprint.pformat(self.params, indent=4))
         reactions = self.load_robot_input_l1()
         peak_data = self.load_peak_info()
         assign_reaction_results(reactions, peak_data)
-        rc = L1XReactionCollection(reactions=reactions)
-        FomCalculator(rc).update_foms()
+        rc = L1XReactionCollection(reactions=reactions, properties=dict(batch_name=self.batch_identifier))
         logger.info(rc.__repr__())
         return rc
 
-    @staticmethod
-    def collect_reactions_l1(
-            # file path
-            folder: FilePath,
 
-            # inventory
+class CampaignLoader:
+    """
+    a campaign is just a set of batches
+    """
+
+    def __init__(
+            self,
+            campaign_name: str, campaign_folder: FilePath,
             ligand_inventory: list[Molecule],
             solvent_inventory: list[Molecule],
+            batch_params: BatchParams,
+    ):
+        self.batch_params = batch_params.as_dict()
+        self.solvent_inventory = solvent_inventory
+        self.ligand_inventory = ligand_inventory
+        self.campaign_folder = campaign_folder
+        self.campaign_name = campaign_name
 
-            # identify ligands
-            ligand_identifier_convert: dict[Any, Any],
-            ligand_identifier_type: str,
+        batch_params_defined_in_campaign = {'expt_input', 'expt_output', 'ligand_inventory', 'solvent_inventory', }
+        defined_batch_params = set(self.batch_params.keys()).union(batch_params_defined_in_campaign)
+        assert defined_batch_params == set(BatchLoader.init_keys())
 
-            # robot input file specifications
-            expt_input_columns: Tuple[str] = (
-                    'Vial Site', 'Reagent1 (ul)', 'Reagent2 (ul)', 'Reagent3 (ul)', 'Reagent4 (ul)',
-                    'Reagent5 (ul)', 'Reagent6 (ul)', 'Reagent7 (ul)', 'Reagent8 (ul)', 'Reagent9 (ul)',
-                    'Reagent10 (ul)', 'Labware ID:', 'Reaction Parameters', 'Parameter Values', 'Reagents',
-                    'Reagent Name', 'Reagent Identity', 'Reagent Concentration (uM)', 'Liquid Class',
-            ),
-            expt_input_reagent_columns: Tuple[str] = (
-                    "Reagents", "Reagent Name", "Reagent Identity", "Reagent Concentration (uM)"
-            ),
-            expt_input_vial_column: str = 'Vial Site',
-            reagent_volume_unit: str = 'ul',
-            reagent_concentration_unit: str = 'uM',
-            reagent_possible_solvent: Tuple[str] = ('m-xylene',),
-
-            # peak file specification
-            expt_output_vial_column: str = "wellLabel",
-
-            checker: ReactionCheckerL1 = None,
-    ) -> L1XReactionCollection:
-        """
-        load robotinput and peakinfo files to a `ReactionCollection`
-        there should be a `file_pairs.csv` in the folder describing the pairing between input and output files
-        """
+    @property
+    def io_dict(self):
         pair_file: FilePath
-        pair_file = f"{folder}/file_pairs.csv"
+        pair_file = f"{self.campaign_folder}/file_pairs.csv"
         assert file_exists(pair_file), f"the file describing pairing does not exist: {pair_file}"
         df_file = pd.read_csv(pair_file)
         assert "robotinput" in df_file.columns
         assert "peakinfo" in df_file.columns
-        experiment_input_files = [os.path.join(folder, fn) for fn in df_file.robotinput.tolist()]
-        experiment_output_files = [os.path.join(folder, fn) for fn in df_file.peakinfo.tolist()]
-
-        all_reactions = []
-        discarded = []
-        for input_file, output_file in zip(experiment_input_files, experiment_output_files):
-            loader = ExptLoader(
-                input_file, output_file, ligand_inventory, solvent_inventory,
-                ligand_identifier_convert, ligand_identifier_type,
-                expt_input_columns, expt_input_reagent_columns, expt_input_vial_column, reagent_volume_unit,
-                reagent_concentration_unit, reagent_possible_solvent, expt_output_vial_column,
-            )
-            batch_collection = loader.load_l1()
-            if checker is None:
-                checker = ReactionCheckerL1()
-
-            logger.info(f">>> Checking reactions with a checker:\n{checker.__repr__()}")
-            checker.batch_reactions = batch_collection
-            for r in batch_collection.reactions:
-                checker.check(r)
-                if checker.is_passed:
-                    all_reactions.append(r)
-                else:
-                    discarded.append((r, checker.msgs))
-                    logger.warning(f"DISCARD reaction: {r.identifier}")
-        for discarded_reaction, msgs in discarded:
-            msg = '\n'.join([m for m in msgs if m.startswith('CHECK FAILED')])
-            logger.warning(f"discard reaction: {discarded_reaction.identifier}\nCHECK MSGS:\n{msg}")
-        logger.critical(f"Loading finished: # of reaction passed checks=={len(all_reactions)}")
-        logger.critical(f"# of reactions discarded=={len(discarded)}")
-        return L1XReactionCollection(all_reactions)
-
-
-class FomCalculator:
-    """
-    this is not limited to L1X reactions
-    """
-
-    def __init__(self, reaction_collection: L1XReactionCollection):
-        self.reaction_collection = reaction_collection
-        self.ligand_to_reactions = {k: v for k, v in reaction_collection.ligand_to_reactions_mapping().items()}
-
-    def get_average_ref(self, r: LXReaction, property_name: str):
-        return PropertyGetter.get_reference_value(r, self.reaction_collection, property_name, average=True)
-
-    def get_internal_ref(self, r: LXReaction, property_name: str):
-        reactions_same_ligand = self.ligand_to_reactions[r.ligand_tuple[0]]  # assuming single ligand
-        reactions_same_ligand: list[LXReaction]
-        amount_and_fom = [(rr.ligand_solutions[0].amount, PropertyGetter.get_property_value(rr, property_name)) for rr
-                          in
-                          reactions_same_ligand]
-        ref_fom = sorted(amount_and_fom, key=lambda x: x[0])[0][1]
-        return ref_fom
-
-    def fom1(self, r: LXReaction) -> float:
-        fom = PropertyGetter.get_property_value(r, "pPLQY")
-        return fom
-
-    def fom2(self, r: LXReaction) -> float:
-        fom = PropertyGetter.get_property_value(r, "pPLQY")
-        return fom / self.get_average_ref(r, "pPLQY")
-
-    def fom3(self, r: LXReaction) -> float:
-        fom = PropertyGetter.get_property_value(r, "pPLQY")
-        return fom - self.get_average_ref(r, "pPLQY")
-
-    def fom4(self, r: LXReaction) -> float:
-        fom = PropertyGetter.get_property_value(r, "pPLQY")
-        ref_fom = self.get_internal_ref(r, "pPLQY")
-        return fom / ref_fom
-
-    def fom5(self, r: LXReaction) -> float:
-        fom = PropertyGetter.get_property_value(r, "pPLQY")
-        ref_fom = self.get_internal_ref(r, "pPLQY")
-        return fom - ref_fom
+        experiment_input_files = [os.path.join(self.campaign_folder, fn) for fn in df_file.robotinput.tolist()]
+        experiment_output_files = [os.path.join(self.campaign_folder, fn) for fn in df_file.peakinfo.tolist()]
+        return dict(zip(experiment_input_files, experiment_output_files))
 
     @property
-    def fom_function_names(self):
-        function_names = []
-        for attr in dir(self):
-            if re.match("fom\d", attr):
-                function_names.append(attr)
-        return function_names
+    def batch_names(self):
+        return [strip_extension(get_basename(input_file)) for input_file in self.io_dict.keys()]
 
-    def update_foms(self):
-        for r in self.reaction_collection.reactions:
-            for fname in self.fom_function_names:
-                fom_func = getattr(self, fname)
-                if r.is_reaction_nc_reference:
-                    if fname == "fom4":
-                        fom = 1
-                    elif fname == "fom5":
-                        fom = 0
-                    else:
-                        fom = fom_func(r)
-                elif r.is_reaction_blank_reference:
-                    fom = np.nan
-                else:
-                    fom = fom_func(r)
-                r.properties[fname] = fom
-        return self.reaction_collection
+    def load(
+            self,
+            batch_checkers: dict[str, BatchCheckerL1]
+    ):
+        logger.warning(f"{self.__class__.__name__}: {self.campaign_name} @ {self.campaign_folder}")
+        check_msgs = dict()
+        reactions_campaign = []
+        reactions_campaign_passed = []
+        reactions_campaign_discarded = []
+        for input_file, output_file in self.io_dict.items():
+            batch_loader = BatchLoader(
+                expt_input=input_file,
+                expt_output=output_file,
+                ligand_inventory=self.ligand_inventory,
+                solvent_inventory=self.solvent_inventory,
+                **self.batch_params
+            )
+            batch_collection = batch_loader.load_l1()
 
+            batch_name = batch_collection.properties['batch_name']
+            batch_checker = batch_checkers[batch_name]
+            passed_reactions, discarded_reactions = batch_checker.check_batch(batch_collection)
 
-class PropertyGetter:
-    NameToSuffix = {
-        "OD": "_PL_OD390",
-        "PLSUM": "_PL_sum",
-        "pPLQY": "_PL_sum/OD390",
-        "fom1": "fom1",
-        "fom2": "fom2",
-        "fom3": "fom3",
-        "fom4": "fom4",
-        "fom5": "fom5",
-    }
-
-    @staticmethod
-    def get_property_value(r, property_name: str):
-        assert property_name in PropertyGetter.NameToSuffix
-        suffix = PropertyGetter.NameToSuffix[property_name]
-        value = PropertyGetter._get_reaction_property(r, suffix)
-        if property_name == "pPLQY":
-            value2_n = PropertyGetter._get_reaction_property(r, "_PL_sum")
-            value2_d = PropertyGetter._get_reaction_property(r, "_PL_OD390")
-            try:
-                value2 = value2_n / value2_d
-            except ZeroDivisionError:
-                assert abs(value) < 1e-5  # pPLQY should be padded zero if PL_OD390 is zero
-                value2 = 0.0
-            assert is_close_relative(value2, value, 1e-5) or pd.isna(value) or pd.isna(value2)
-        return value
-
-    @staticmethod
-    def _get_reaction_property(r: LXReaction, property_suffix: str) -> float:
-        possible_properties = [k for k in r.properties if k.strip("'").endswith(property_suffix)]
-        assert len(possible_properties) == 1, f"possible property ends with {property_suffix}: {possible_properties}"
-        k = possible_properties[0]
-        v = r.properties[k]
-        try:
-            assert isinstance(v, float)
-        except AssertionError:
-            v = np.nan
-        return v
-
-    @staticmethod
-    def get_reference_value(
-            r: LXReaction, reaction_collection: L1XReactionCollection, property_name: str, average=True
-    ) -> Union[float, list[float]]:
-        ref_values = []
-        for ref_reaction in reaction_collection.get_reference_reactions(r):
-            ref_value = PropertyGetter.get_property_value(ref_reaction, property_name)
-            ref_values.append(ref_value)
-        if average:
-            return float(np.mean(ref_values))
-        else:
-            return ref_values
-
-    @staticmethod
-    def get_amount_property_data_l1(
-            reaction_collection: L1XReactionCollection, property_name: str
-    ) -> dict[Molecule, dict[str, Any]]:
-        ligand_to_reactions = reaction_collection.ligand_to_reactions_mapping()
-        data = dict()
-        for ligand, reactions in ligand_to_reactions.items():
-            amounts = []
-            amount_units = []
-            values = []
-            ref_values = []
-            identifiers = []
-            for r in reactions:
-                r: LXReaction
-                ref_values += PropertyGetter.get_reference_value(r, reaction_collection, property_name, average=False)
-                amount = r.ligand_solutions[0].amount
-                amount_unit = r.ligand_solutions[0].amount_unit
-                amount_units.append(amount_unit)
-                value = PropertyGetter.get_property_value(r, property_name)
-                amounts.append(amount)
-                values.append(value)
-                identifiers.append(r.identifier)
-            data[ligand] = {
-                "amount": amounts, "amount_unit": amount_units[0],
-                "values": values, "ref_values": ref_values,
-                "identifiers": identifiers
-            }
-        return data
+            check_msgs.update(batch_checker.check_msgs)
+            reactions_campaign += batch_collection.reactions
+            reactions_campaign_passed += passed_reactions
+            reactions_campaign_discarded += discarded_reactions
+        logger.info(f"Campaign reactions:\n {L1XReactionCollection(reactions_campaign).__repr__()}")
+        logger.info(f"Campaign reactions passed:\n {L1XReactionCollection(reactions_campaign_passed).__repr__()}")
+        return check_msgs, reactions_campaign, reactions_campaign_passed, reactions_campaign_discarded
 
 
 def reaction_checker_l1(func: Callable[[L1XReaction, ...], Tuple[bool, dict]]) -> Callable[
@@ -486,13 +368,23 @@ def reaction_checker_l1(func: Callable[[L1XReaction, ...], Tuple[bool, dict]]) -
     return wrapper_checker
 
 
-class ReactionCheckerL1:
-    def __init__(self, exclude_reaction_specifications: list[Tuple[Any, Any]] = None):
-        if exclude_reaction_specifications is None:
-            exclude_reaction_specifications = []
-        self.exclude_reaction_specifications = exclude_reaction_specifications
-        self.batch_reactions = None
-        self.msgs = []
+class BatchCheckerL1(MSONable):
+    def __init__(
+            self,
+            exclude_ligand_identifiers: list[str] = None,
+            check_msgs: dict[str, list[str]] = None,
+            check_results: dict[str, bool] = None,
+    ):
+        if check_results is None:
+            check_results = dict()
+        self.check_results = check_results
+        if check_msgs is None:
+            check_msgs = dict()
+        self.check_msgs = check_msgs
+        if exclude_ligand_identifiers is None:
+            exclude_ligand_identifiers = []
+        self.exclude_ligand_identifiers = exclude_ligand_identifiers
+        self.batch_rc = None
 
     @property
     def checker_methods(self) -> list[Callable[[L1XReaction], str]]:
@@ -511,82 +403,63 @@ class ReactionCheckerL1:
 
     def check(self, r: L1XReaction):
         logger.warning(f">>> CHECKING REACTION: {r.identifier}")
-        logger.info(f"reaction properties: {pprint.pformat({k: v for k, v in r.properties.items() if k != 'loader'})}")
-        assert self.batch_reactions is not None
-        self.msgs = []
+        logger.info(f"reaction properties: {pprint.pformat(r.properties)}")
+        assert self.batch_rc is not None
+        msgs = []
+        passed = True
         for cf in self.checker_methods:
             msg = cf(r)
             if msg.startswith("CHECK FAILED"):
                 logger.critical(msg)
+                passed = False
             else:
                 logger.info(msg)
-            self.msgs.append(msg)
+            msgs.append(msg)
+        self.check_msgs[r.identifier] = msgs
+        self.check_results[r.identifier] = passed
 
-    @property
-    def is_passed(self):
-        assert len(self.msgs) > 0, "no msg, did you call `self.check()`?"
-        return all(m.startswith("CHECK PASSED") for m in self.msgs)
+    def check_batch(self, batch_rc: L1XReactionCollection) -> Tuple[list[L1XReaction], list[L1XReaction]]:
+        assert len(self.check_msgs) == 0
+        assert len(self.check_results) == 0
+        self.batch_rc = batch_rc
+        passed = []
+        discarded = []
+        for r in self.batch_rc.reactions:
+            self.check(r)
+            if self.check_results[r.identifier]:
+                passed.append(r)
+            else:
+                discarded.append(r)
+        return passed, discarded
 
     @reaction_checker_l1
     def checker__dummy(self, r: L1XReaction):
         """ dummy checker, always pass """
         return True, dict()
 
-    # @reaction_checker_l1
-    # def checker__real_reaction(self, r: L1XReaction):
-    #     """ if this reaction is a non-blank/reference reaction """
-    #     return r.is_reaction_real, dict(is_blank=r.is_reaction_blank_reference, is_ref=r.is_reaction_nc_reference)
-
     @reaction_checker_l1
-    def checker__fom2(self, r: L1XReaction):
-        """ fom2 should be in (3.5, -1e-5) """
-        return 3.5 > r.properties['fom2'] > -1e-5, dict(fom2=r.properties['fom2'])
-
-    @reaction_checker_l1
-    def checker__reaction_specification(self, r: L1XReaction):
-        """ if this reaction contains specific ligand and substring in its identifier """
-        if not r.is_reaction_real:
-            return True, dict(not_real_reaction=True)
-
-        check_pass = True
-        ligand = r.ligand_tuple[0]
-        ligand: Molecule
-        for exclude_ligand_identifier, exclude_reaction_identifier_substring in self.exclude_reaction_specifications:
-            assert exclude_ligand_identifier is not None or exclude_reaction_identifier_substring is not None
-            if exclude_ligand_identifier is None:
-                if exclude_reaction_identifier_substring in r.identifier:
-                    check_pass = False
-            elif exclude_reaction_identifier_substring is None:
-                if ligand.identifier == exclude_ligand_identifier:
-                    check_pass = False
-            else:
-                if ligand.identifier == exclude_ligand_identifier and exclude_reaction_identifier_substring in r.identifier:
-                    check_pass = False
-        return check_pass, dict(ligand_identifier=ligand.identifier, reaction_identifier=r.identifier)
-
-    @reaction_checker_l1
-    def checker__od(self, r: L1XReaction):
-        """ optical density should be in [0.6x, 1.4x] where x==<avg ref OD>  """
-        actual_od = PropertyGetter().get_property_value(r, 'OD')
-        ref_od = PropertyGetter().get_reference_value(r, self.batch_reactions, 'OD', average=True)
-        assert ref_od > 0
-
-        od_valid = 0.6 * ref_od < actual_od < 1.4 * ref_od
-        info_dict = dict(actual_od=actual_od, ref_od=ref_od)
-
+    def checker__fom_and_od(self, r: L1XReaction):
+        """ figure of merit for real reactions should be in (3.5, -1e-5) or NaN (iff OD is NaN) """
+        assert self.batch_rc is not None
+        ref_reactions = [ref_r for ref_r in self.batch_rc.reactions if ref_r.is_reaction_nc_reference]
+        ref_od = np.mean([rr.properties['OpticalDensity'] for rr in ref_reactions])
+        fom = r.properties['FigureOfMerit']
+        od = r.properties['OpticalDensity']
         if r.is_reaction_real:
-            logger.warning(
-                f"{r.ligand.label}: {r.ligand_solution.amount}\nOD-FOM2: {actual_od} - {r.properties['fom2']}"
-            )
-            if od_valid:
-                return True, info_dict
-            else:
-                logger.warning(
-                    f"this reaction is a real reaction but it has invalid OD: {actual_od} "
-                    f"comparing with its reference OD: {ref_od}"
-                    "\nThis check is forced to pass and its fom2 is set to zero."
-                )
-                r.properties['fom2'] = 0.0
-                return True, info_dict
+            info = dict(is_real=True, ref_od=ref_od, od=od, fom=fom)
+            return 3.5 > fom > 1e-5 or (pd.isna(fom) and pd.isna(od)) or (abs(od) < 1e-5 and abs(fom) < 1e-5), info
         else:
-            return od_valid, info_dict
+            info = dict(is_real=False, ref_od=ref_od, od=od, fom=fom)
+            return True, info
+
+    @reaction_checker_l1
+    def checker__wanted_ligand(self, r: L1XReaction):
+        """ if this reaction contains wanted ligand """
+        check_pass = True
+        if r.is_reaction_real:
+            info = dict(ligand=r.ligand)
+            if r.ligand.identifier in self.exclude_ligand_identifiers:
+                check_pass = False
+        else:
+            info = dict(ligand=None)
+        return check_pass, info
