@@ -175,7 +175,7 @@ class ExptLoader(MSONable):
 
             reaction = L1XReaction(
                 identifier=identifier, conditions=reaction_conditions, solvent=solvent_reactant,
-                nc_solution=nc_reactant, ligand_solutions=ligand_reactants, properties=dict(loader=self.as_dict()),
+                nc_solution=nc_reactant, ligand_solutions=ligand_reactants, properties=None,
             )
             reactions.append(reaction)
         return reactions
