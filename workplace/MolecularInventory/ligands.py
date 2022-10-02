@@ -37,11 +37,11 @@ if __name__ == '__main__':
     logger.add(sink=f'{__file__}.log')
     init_dataset_smiles = [remove_stereo(m.smiles) for m in init_dataset]
     pubchem_dataset = [m for m in pubchem_dataset if remove_stereo(m.smiles) not in init_dataset_smiles]
-    ligands = init_dataset + pubchem_dataset
 
     # add complexity and cas number
     # only these with cas rn are included
-    for lig in tqdm.tqdm(set(ligands)):
+    ligands = []
+    for lig in tqdm.tqdm(set(init_dataset + pubchem_dataset)):
         try:
             cas_rn = inchi_to_cas[lig.identifier]
             assert cas_rn is not None
@@ -52,5 +52,6 @@ if __name__ == '__main__':
         lig.properties['complexity_sa_score'] = complexity['sa_score']
         lig.properties['complexity_BertzCT'] = complexity['BertzCT']
         lig.properties['cas_number'] = cas_rn
+        ligands.append(lig)
 
     json_dump(ligands, "ligands.json.gz", gz=True)
