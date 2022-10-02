@@ -17,6 +17,23 @@ from lsal.twinsk import tune_twin_rf, _default_n_estimator, TwinRegressor
 from lsal.utils import FilePath, createdir, pkl_dump, truncate_distribution, upper_confidence_interval, \
     unique_element_to_indices
 
+RankMethodDocs = """## Ranking parameters
+- for each ligand, several ranking parameters are defined 
+  - predicted FOM value is a function of (ligand, concentration, pair) 
+  - the distribution of predicted FOM values at (ligand=l, concentration=c) is D_lc
+  - ranking parameters are calculated based on the distributions of predicted FOM 
+    over a set of concentrations, which can be
+    - C: 200 evenly distributed concentrations over the limits defined by input reactions
+    - C2mu: top 4 (2%) of C sorted by mean(D_lc)
+    - C2uci: top 4 (2%) of C sorted by uci(D_lc)
+- ranking parameters are named as `rank_average_pred_*` where the * can be
+    - `mu`: mean({mean(D_lx) | x \in C})
+    - `std`: mean({std(D_lx) | x \in C}) 
+    - `uci`: mean({uci(D_lx) | x \in C})
+    - `mu_top2%mu`: mean({mean(D_lx) | x \in C2mu})
+    - `std_top2%mu`: mean({std(D_lx) | x \in C2mu})
+    - `uci_top2%uci`: mean({uci(D_lx) | x \in C2uci})"""
+
 
 class SingleLigandPrediction(MSONable):
 
