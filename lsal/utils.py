@@ -7,7 +7,6 @@ import itertools
 import json
 import logging
 import os
-import os.path
 import pathlib
 import pickle
 import re
@@ -18,6 +17,8 @@ import typing
 from datetime import datetime
 from io import BytesIO
 from itertools import zip_longest
+from urllib.error import HTTPError, URLError
+from urllib.request import urlretrieve
 
 import monty.json
 import numpy as np
@@ -30,6 +31,7 @@ from rdkit.Chem.Draw import MolToImage
 from rdkit.Chem.inchi import MolFromInchi
 from sklearn import preprocessing
 from sklearn.metrics import pairwise_distances
+from tqdm import tqdm
 
 SEED = 42
 
@@ -564,3 +566,27 @@ def cut_end(sample, delta_cutoff=0.05, return_n=False):
         return len(li_end), len(hi_end)
     else:
         return li_end, hi_end
+
+
+def download_file(url: str, destination: FilePath = None, progress_bar=True):
+    def my_hook(t):
+        last_b = [0]
+
+        def inner(b=1, bsize=1, tsize=None):
+            if tsize is not None:
+                t.total = tsize
+            if b > 0:
+                t.update((b - last_b[0]) * bsize)
+            last_b[0] = b
+
+        return inner
+
+    try:
+        if progress_bar:
+            with tqdm(unit='B', unit_scale=True, miniters=1, desc=destination) as t:
+                filename, _ = urlretrieve(url, filename=destination, reporthook=my_hook(t))
+        else:
+            filename, _ = urlretrieve(url, filename=destination)
+    except (HTTPError, URLError, ValueError) as e:
+        raise e
+    return filename
