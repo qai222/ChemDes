@@ -228,7 +228,7 @@ class OneLigandWorker(Worker):
                 ranking_dataframe=ranking_dataframe,
                 percentile=2,
                 percentile_from=percentile_from,
-                batch_size=30,
+                batch_size=8,
                 diversity_space=diversity,
                 ranking_parameter=rank_method,
             )

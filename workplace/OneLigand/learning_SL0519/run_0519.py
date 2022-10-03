@@ -17,9 +17,9 @@ if __name__ == '__main__':
     )
     worker.run(
         [
-            'teach',
-            'predict',
-            "query",
+            # 'teach',
+            # 'predict',
+            # "query",
             "ranking_dataframe",
             "suggestions",
         ]
