@@ -1,61 +1,24 @@
 import glob
+from os.path import abspath
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from loguru import logger
+from matplotlib import patches
 from tqdm import tqdm
 
 from lsal.alearn import SingleLigandLearner, SingleLigandPrediction, QueryRecord
-from lsal.schema import Worker, Molecule, L1XReactionCollection
-from lsal.tasks import MoleculeSampler
+from lsal.schema import Worker, L1XReactionCollection
 from lsal.utils import log_time, json_load, json_dump, pkl_dump, \
-    pkl_load, chunks, createdir, calculate_distance_matrix, cut_end
+    pkl_load, chunks, createdir
 
 
-def ks_sample_ligand_dataframe(
-        df: pd.DataFrame, id_to_lig: dict[str, Molecule], id_field='ligand_identifier', sample_size: int = 40
-):
-    ligand_col = [id_to_lig[i] for i in df[id_field]]
-    _, descriptor_df = Molecule.l1_input(ligand_col, amounts=None)
-    ms = MoleculeSampler(ligand_col, dmat=calculate_distance_matrix(descriptor_dataframe=descriptor_df))
-    indices = ms.sample_ks(k=sample_size, return_mol=False)
-    return df.iloc[indices]
-
-
-def get_shortlist(
-        ranking_dataframe: pd.DataFrame, rank_method: str,
-        cut_length: int, ks_sample_size: int,
-        id_to_lig: dict[str, Molecule],
-        use_head: bool, delta_cutoff: float = None,
-        already_taught_label: list[str] = None,
-) -> pd.DataFrame:
-    ligand_fields = [m for m in ranking_dataframe.columns if m.startswith("ligand_")]
-    df = ranking_dataframe.sort_values(by=rank_method, inplace=False, ascending=False)
-    df = df[ligand_fields + [rank_method, ]]
-
-    if delta_cutoff is None:
-        n_li_end, n_hi_end = len(df), len(df)
-    else:
-        n_li_end, n_hi_end = cut_end(df[rank_method], delta_cutoff=delta_cutoff, return_n=True)
-
-    if use_head:
-        cut_length = min([n_li_end, cut_length, ])
-        if cut_length < ks_sample_size:
-            cut_length = ks_sample_size
-        df_cut = df.head(cut_length)
-    else:
-        cut_length = min([n_hi_end, cut_length, ])
-        if cut_length < ks_sample_size:
-            cut_length = ks_sample_size
-        df_cut = df.tail(cut_length)
-    logger.info(f"cut ends li/hi: {n_li_end}/{n_hi_end}")
-    logger.info(f"short list from ranking df {df.shape} with cut length {cut_length}")
-    df_cut_ks = ks_sample_ligand_dataframe(df_cut, id_to_lig, sample_size=ks_sample_size)
-    if already_taught_label is None:
-        already_taught_label = []
-    if len(already_taught_label) > 0:
-        df_cut_ks = df_cut_ks.assign(if_taught=[lab in already_taught_label for lab in df_cut_ks['ligand_label']])
-    return df_cut_ks
+def _fix_hist_step_vertical_line_at_end(ax):
+    """ https://stackoverflow.com/questions/39728723/ """
+    axpolygons = [poly for poly in ax.get_children() if isinstance(poly, patches.Polygon)]
+    for poly in axpolygons:
+        poly.set_xy(poly.get_xy()[:-1])
 
 
 class OneLigandWorker(Worker):
@@ -70,31 +33,26 @@ class OneLigandWorker(Worker):
 
             learner_wdir="./",
             prediction_dir="./prediction/",
-            shortlist_dir="./shortlist/",
+            ranking_df_dir="./ranking_df/",
+            suggestion_dir="./suggestion/",
 
             model_path="./TwinRF_model.pkl",
             learner_json="./learner.json.gz",
             query_json=f"query_record.json.gz",
-            ranking_dataframe_csv="./shortlist/qr_ranking.csv",
+            ranking_dataframe_csv="./ranking_df/qr_ranking.csv",
 
-            complexity_percentile_cutoff=25,
-            shortlist_cut_length=200,
-            shortlist_sample_size=40,
-            shortlist_value_cutoff=None,
+            # complexity cutoff becomes inappropriate when found cas/total == 29926/43724
             complexity_descriptor='complexity_BertzCT',
 
-            test_predict:int=None,
+            test_predict: int = None,
     ):
         super().__init__(name=self.__class__.__name__, code_dir=code_dir, work_dir=work_dir)
+        self.ranking_df_dir = ranking_df_dir
         self.test_predict = test_predict
-        self.shortlist_value_cutoff = shortlist_value_cutoff
         self.prediction_ligand_pool_json = prediction_ligand_pool_json
-        self.shortlist_sample_size = shortlist_sample_size
-        self.shortlist_cut_length = shortlist_cut_length
         self.ranking_dataframe_csv = ranking_dataframe_csv
         self.complexity_descriptor = complexity_descriptor
-        self.complexity_percentile_cutoff = complexity_percentile_cutoff
-        self.shortlist_dir = shortlist_dir
+        self.suggestion_dir = suggestion_dir
         self.query_json = query_json
         self.prediction_dir = prediction_dir
         self.learner_json = learner_json
@@ -155,10 +113,14 @@ class OneLigandWorker(Worker):
         rkdf = pd.concat(rkdfs, axis=0, ignore_index=True)
         qr = SingleLigandPrediction.query(ligands, rkdf, self.model_path)
         json_dump(qr, self.query_json, gz=True)
+        # self.collect_files.append(abspath(self.query_json))
 
     @log_time
-    def shortlist(self):
-        createdir(self.shortlist_dir)
+    def ranking_dataframe(self):
+        createdir(self.ranking_df_dir)
+
+        top_percentile = 2
+        top_percent = top_percentile * 0.01
 
         # mark already taught ligands
         reactions = []
@@ -167,98 +129,121 @@ class OneLigandWorker(Worker):
             rc: L1XReactionCollection
             reactions += rc.reactions
         reaction_collection = L1XReactionCollection(reactions)
-        taught_ligand_labels = [lig.label for lig in reaction_collection.ligands]
+        taught_ligand_identifiers = [lig.identifier for lig in reaction_collection.ligands]
 
         # load query record
         qr = json_load(self.query_json, gz=True)
         qr: QueryRecord
+        ligand_pool = {lig.identifier: lig for lig in qr.pool}
 
-        # calculate complexity cutoff
-        comp_values = [lig.properties[self.complexity_descriptor] for lig in qr.pool]
-        self.complexity_cutoff = float(np.percentile(comp_values, self.complexity_percentile_cutoff))
-        logger.info("complexity cutoff: {} <= {:.4f} {:.2f}%".format(self.complexity_descriptor, self.complexity_cutoff,
-                                                                     self.complexity_percentile_cutoff))
-        logger.info(f"this cutoff was calculated using a pool of size: {len(qr.pool)}")
-
-        # apply complexity cutoff to the pool and ranking dataframe
-        ligand_pool = [lig for lig in qr.pool if lig.properties[self.complexity_descriptor] <= self.complexity_cutoff]
-        logger.info(f"pool length after complexity cutoff: {len(ligand_pool)}")
-        id_to_lig = {lig.identifier: lig for lig in ligand_pool}
-        ligand_pool_inchis = [lig.identifier for lig in ligand_pool]
-        Molecule.write_molecules(ligand_pool, f"{self.shortlist_dir}/ligand_pool.csv", "csv")
+        # Molecule.write_molecules(list(ligand_pool.values()), f"{self.ranking_df_dir}/ligand_pool.csv", "csv")
 
         ranking_dataframe = qr.ranking_dataframe
         ranking_dataframe: pd.DataFrame
-        ranking_dataframe = ranking_dataframe.loc[ranking_dataframe['ligand_identifier'].isin(ligand_pool_inchis)]
-        assert ligand_pool_inchis == ranking_dataframe['ligand_identifier'].tolist()
-        complexity_series = pd.Series(
-            [id_to_lig[i].properties[self.complexity_descriptor] for i in ranking_dataframe['ligand_identifier']]
-        )
-        ranking_dataframe = ranking_dataframe.assign(**{self.complexity_descriptor: complexity_series.values})
-        ranking_dataframe.to_csv(self.ranking_dataframe_csv)
 
-        # shortlists from ranking dataframe
-        get_shortlist(
-            ranking_dataframe=ranking_dataframe,
-            rank_method="rank_average_pred_mu_top2%mu",
-            cut_length=self.shortlist_cut_length,
-            ks_sample_size=self.shortlist_sample_size,
-            id_to_lig=id_to_lig,
-            use_head=True,
-            delta_cutoff=self.shortlist_value_cutoff,
-            already_taught_label=taught_ligand_labels
-        ).to_csv(
-            f"{self.shortlist_dir}/rank_average_pred_mu_top2%mu_HEAD{self.shortlist_cut_length}_KS{self.shortlist_sample_size}.csv",
-            index=False
-        )
+        ranking_dataframe = ranking_dataframe.loc[ranking_dataframe['ligand_identifier'].isin(list(ligand_pool.keys()))]
+        new_records = []
+        for record in ranking_dataframe.to_dict(orient='records'):
+            identifier = record['ligand_identifier']
+            record.update(
+                {
+                    self.complexity_descriptor: ligand_pool[identifier].properties[self.complexity_descriptor],
+                    'is_taught': identifier in taught_ligand_identifiers,
+                    'cas_number': ligand_pool[identifier].properties['cas_number']
+                }
+            )
+            new_records.append(record)
+        ranking_dataframe = pd.DataFrame.from_records(new_records)
+        ranking_dataframe.to_csv(self.ranking_dataframe_csv, index=False)
+        self.collect_files.append(abspath(self.ranking_dataframe_csv))
 
-        get_shortlist(
-            ranking_dataframe=ranking_dataframe,
-            rank_method="rank_average_pred_mu_top2%mu",
-            cut_length=self.shortlist_cut_length,
-            ks_sample_size=self.shortlist_sample_size,
-            id_to_lig=id_to_lig,
-            use_head=False,
-            delta_cutoff=self.shortlist_value_cutoff,
-            already_taught_label=taught_ligand_labels
-        ).to_csv(
-            f"{self.shortlist_dir}/rank_average_pred_mu_top2%mu_TAIL{self.shortlist_cut_length}_KS{self.shortlist_sample_size}.csv",
-            index=False
-        )
-
-        get_shortlist(
-            ranking_dataframe=ranking_dataframe,
-            rank_method="rank_average_pred_std",
-            cut_length=self.shortlist_cut_length,
-            ks_sample_size=self.shortlist_sample_size,
-            id_to_lig=id_to_lig,
-            use_head=True,
-            delta_cutoff=self.shortlist_value_cutoff,
-            already_taught_label=taught_ligand_labels
-        ).to_csv(
-            f"{self.shortlist_dir}/rank_average_pred_std_HEAD{self.shortlist_cut_length}_KS{self.shortlist_sample_size}.csv",
-            index=False
-        )
+        for rank_method in [c for c in ranking_dataframe.columns if c.startswith('rank_')]:
+            fig, ax = plt.subplots()
+            ax.set_xlabel(rank_method)
+            ax.set_ylabel("Count")
+            ax.set_yscale("log")
+            ax_cumu = ax.twinx()
+            pd.DataFrame.hist(ranking_dataframe, column=rank_method, bins=100, alpha=0.5, ax=ax)
+            rank_series = ranking_dataframe[rank_method].copy().sort_values(ascending=False)
+            rank_series.hist(
+                bins=100, density=True, ax=ax_cumu,
+                cumulative=True, histtype='step', alpha=0.4, color='r',
+            )
+            _fix_hist_step_vertical_line_at_end(ax_cumu)
+            ax.set_title(f"# of molecules: {len(ranking_dataframe)}")
+            hline_value = np.percentile(rank_series, 100 - top_percentile)
+            ax_cumu.axhline(
+                y=1 - top_percent,
+                color='k',
+                label='TOP {:.1f}%\nvalue: {:.2f}\n# of ligands: {}'.format(
+                    top_percentile,
+                    hline_value,
+                    len([v for v in rank_series if v > hline_value])
+                )
+            )
+            ax_cumu.legend()
+            fig.savefig(f"{self.ranking_df_dir}/{rank_method}_dist.png", dpi=600)
 
     @log_time
-    def add_cas_number(self):
-        import ChemScraper
-        inchi_field = 'ligand_identifier'
-        for csv in glob.glob(f"{self.shortlist_dir}/rank_*.csv"):
-            logger.info(f"working on: {csv}")
-            shortlist = pd.read_csv(csv)
-            if "cas_number" in shortlist.columns:
+    def suggestions(self):
+        createdir(self.suggestion_dir)
+
+        from lsal.tasks.suggestor import DiversitySuggestor
+        ranking_dataframe = pd.read_csv(self.ranking_dataframe_csv)
+
+        taught_ligands = ranking_dataframe[ranking_dataframe['is_taught'] == True]['ligand_identifier'].tolist()
+        include_taught = False
+
+        main_pool = {lig.identifier: lig for lig in json_load(self.prediction_ligand_pool_json, gz=True)}
+        suggestion_pool = dict()
+        ranking_records = []
+        for r in ranking_dataframe.to_dict(orient='records'):
+            lig_id = r['ligand_identifier']
+            if lig_id in suggestion_pool:
                 continue
-            inchis = shortlist[inchi_field].tolist()
-            inchi_to_cid = ChemScraper.request_convert_identifiers(identifiers=inchis, input_type='inchi',
-                                                                   output_type='cid')
-            records = shortlist.to_dict(orient="records")
-            for r in records:
-                inchi = r[inchi_field]
-                cid = inchi_to_cid[inchi]
-                cas_number = ChemScraper.get_cas_number(cid)
-                if cas_number is None:
-                    logger.warning(f"cannot find cas number from pubchem compound, cid: {cid}")
-                r.update({"cid": cid, "cas_number": cas_number, })
-            shortlist = pd.DataFrame.from_records(records)
-            shortlist.to_csv(csv, index=False)
+            if lig_id in taught_ligands and not include_taught:
+                continue
+            suggestion_pool[lig_id] = main_pool[lig_id]
+            ranking_records.append(r)
+
+        ranking_dataframe = pd.DataFrame.from_records(ranking_records)
+
+        for rank_method, diversity, percentile_from in [
+            # ('rank_average_pred_mu_top2%mu', 'chemistry', 'top'),
+            # ('rank_average_pred_mu_top2%mu', 'chemistry', 'bottom'),
+            ('rank_average_pred_mu_top2%mu', 'feature', 'top'),
+            ('rank_average_pred_mu_top2%mu', 'feature', 'bottom'),
+
+            # ('rank_average_pred_std', 'chemistry', 'top'),
+            ('rank_average_pred_std', 'feature', 'top'),
+
+            # ('rank_average_pred_std_top2%mu', 'chemistry', 'top'),
+            ('rank_average_pred_std_top2%mu', 'feature', 'top'),
+        ]:
+            rank_method_short_name = rank_method.replace("rank_average_pred_", "")
+            suggestor_name = f"{rank_method_short_name}__{diversity}__{percentile_from}"
+            ds = DiversitySuggestor(
+                suggestor_name=suggestor_name,
+                pool=suggestion_pool,
+                ranking_dataframe=ranking_dataframe,
+                percentile=2,
+                percentile_from=percentile_from,
+                batch_size=30,
+                diversity_space=diversity,
+                ranking_parameter=rank_method,
+            )
+            logfile = f'{self.suggestion_dir}/suggestion__{ds.suggestor_name}.log'
+            csv_file = f'{self.suggestion_dir}/suggestion__{ds.suggestor_name}.csv'
+            sink_id = logger.add(logfile)
+            cluster_dfs = ds.suggest()
+            logger.warning(ds.details)
+            logger.remove(sink_id)
+
+            readable_records = []
+            for cdf in cluster_dfs:
+                readable_records += cdf.to_dict(orient='records')
+                readable_records.append(dict())
+            readable_df = pd.DataFrame.from_records(readable_records)
+            readable_df.to_csv(csv_file, index=False)
+            self.collect_files.append(abspath(csv_file))
+            self.collect_files.append(abspath(logfile))
