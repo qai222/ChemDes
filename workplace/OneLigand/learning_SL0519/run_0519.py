@@ -13,14 +13,15 @@ if __name__ == '__main__':
             f"{_work_folder}/../collect/reaction_collection_SL0519.json.gz",
         ],
         prediction_ligand_pool_json=f"{_code_folder}/../../MolecularInventory/ligands.json.gz",
-        # test_predict=500,  # uncomment for test
+        # test_predict=500,  # uncomment for test `predict`
     )
     worker.run(
         [
             'teach',
             'predict',
             "query",
-            "shortlist",
-            "add_cas_number",
+            "ranking_dataframe",
+            "suggestions",
         ]
     )
+    # worker.final_collect()

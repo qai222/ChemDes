@@ -1,0 +1,15 @@
+2022-10-03 05:04:11.909 | INFO     | lsal.tasks.suggestor:suggest:77 - SUGGEST based on self.ranking_parameter: rank_average_pred_mu_top2%mu
+2022-10-03 05:04:11.909 | INFO     | lsal.tasks.suggestor:suggest:78 - the pool size is: 29907
+2022-10-03 05:04:11.912 | INFO     | lsal.tasks.suggestor:suggest:80 - ranking parameter range: [1.0484, 1.9128]
+2022-10-03 05:04:11.913 | INFO     | lsal.tasks.suggestor:suggest:91 - use TOP percentile: 2%
+2022-10-03 05:04:11.914 | INFO     | lsal.tasks.suggestor:suggest:99 - cutoff value: 1.7998005581720002
+2022-10-03 05:04:11.915 | INFO     | lsal.tasks.suggestor:suggest:100 - size after pre-filtering: 599
+2022-10-03 05:04:11.915 | INFO     | lsal.tasks.suggestor:suggest:101 - range after pre-filtering: [1.7998, 1.9128]
+2022-10-03 05:04:12.093 | WARNING  | lsal.alearn.one_ligand_worker:suggestions:239 - DiversitySuggestor: mu_top2%mu__feature__top
+        >> Parameters
+        ranking parameter is: rank_average_pred_mu_top2%mu
+        original ligand pool has size: 29907
+        original ligand pool has ranking parameter range: [1.0484, 1.9128]
+        prefilter ligand pool from: top 2%
+        on which space will clustering be performed?: feature
+        how many intended clusters?: 30
