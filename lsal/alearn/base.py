@@ -76,12 +76,15 @@ class MetaLearner(MSONable, abc.ABC):
     def model_paths(self) -> list[FilePath]:
         return [tr.model_path for tr in self.teaching_records]
 
-    def load_model(self, model_index=-1):
+    def load_model(self, model_index=-1, model_path: FilePath =None):
         assert len(self.teaching_records) > 0
-        if model_index == -1:
-            model_index = len(self.teaching_records) - 1
-        mpath = self.model_paths[model_index]
-        logger.info(f"loading the ** {model_index} **th model of {self.__class__.__name__}")
+        if model_path is not None:
+            mpath = model_path
+        else:
+            if model_index == -1:
+                model_index = len(self.teaching_records) - 1
+            mpath = self.model_paths[model_index]
+            logger.info(f"loading the ** {model_index} **th model of {self.__class__.__name__}")
         self.current_model = pkl_load(mpath)
 
     @classmethod
