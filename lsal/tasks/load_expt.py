@@ -118,7 +118,8 @@ class BatchLoader:
         possible_columns = [c for c in df.columns if c.endswith(suffix)]
         if len(possible_columns) > 1:
             possible_columns = [c for c in possible_columns if "_ref_" not in c.lower()]
-        assert len(possible_columns) == 1
+        assert len(possible_columns) > 0, f"no possible column found for suffix: {suffix}"
+        assert len(possible_columns) == 1, f"multiple possible columns: {possible_columns}"
         return possible_columns[0]
 
     def load_peak_info(self) -> dict[str, dict[str, Any]]:
