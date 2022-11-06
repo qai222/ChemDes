@@ -89,19 +89,19 @@ class Molecule(Material):
 
     @property
     def label(self):
-        label_template = "-{0:08d}"
-        return self.mat_type + label_template.format(self.int_label)
+        return get_molecule_label(self.mat_type, self.int_label)
 
     @property
     def rdmol(self):
         return MolFromInchi(self.inchi)
 
     @staticmethod
-    def write_molecules(mols: list[Molecule], fn: FilePath, output="smi"):
+    def write_molecules(mols: list[Molecule], fn: FilePath=None, output="smi"):
         if output == "smi":
             s = "\n".join([m.smiles for m in mols])
-            with open(fn, "w") as f:
-                f.write(s)
+            if fn is not None:
+                with open(fn, "w") as f:
+                    f.write(s)
             return s
         elif output == "csv":
             records = []
@@ -114,7 +114,8 @@ class Molecule(Material):
             df = pd.DataFrame.from_records(records)
             df.set_index(df.pop('label'), inplace=True)
             df.reset_index(inplace=True)
-            df.to_csv(fn, index=False)
+            if fn is not None:
+                df.to_csv(fn, index=False)
             return df
         else:
             raise ValueError("Unknown output extension: {}".format(output))
@@ -238,3 +239,8 @@ def load_featurized_molecules(
     assert not des_df.isnull().values.any()
     featurize_molecules(molecules, des_df)
     return molecules
+
+
+def get_molecule_label(mat_type, int_label):
+    label_template = "-{0:08d}"
+    return mat_type + label_template.format(int_label)
