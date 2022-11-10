@@ -10,7 +10,7 @@ if __name__ == '__main__':
         code_dir=_code_folder,
         work_dir=_work_folder,
         reaction_collection_json=[
-            f"{_work_folder}/../collect/reaction_collection_SL0519.json.gz",
+            f"{_code_folder}/reaction_collection_train_SL0519.json.gz",
         ],
         prediction_ligand_pool_json=f"{_code_folder}/../../MolecularInventory/ligands.json.gz",
         # test_predict=500,  # uncomment for test `predict`
