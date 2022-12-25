@@ -29,18 +29,15 @@ reactions_from_0907 = [
 ]
 rc0907 = L1XReactionCollection(reactions_from_0907)
 rc_train = L1XReactionCollection(rc0519.reactions + rc1026.reactions + rc0907.reactions)
-rc_train_json = f"{_code_folder}/reaction_collection_train_1026.json.gz"
+rc_train_json = f"{_code_folder}/reaction_collection_train_AL1026.json.gz"
 json_dump(rc_train, rc_train_json, gz=True)
 
 if __name__ == '__main__':
     worker = OneLigandWorker(
         code_dir=_code_folder,
         work_dir=_work_folder,
-        reaction_collection_json=[
-            rc_train_json,
-        ],
+        reaction_collection_json=[rc_train_json,],
         prediction_ligand_pool_json=f"{_code_folder}/../../MolecularInventory/ligands.json.gz",
-        # test_predict=500,  # uncomment for test `predict`
     )
     worker.run(
         [
