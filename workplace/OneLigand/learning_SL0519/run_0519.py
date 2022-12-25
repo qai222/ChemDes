@@ -5,6 +5,7 @@ from lsal.utils import get_basename, get_workplace_data_folder, get_folder
 _work_folder = get_workplace_data_folder(__file__)
 _code_folder = get_folder(__file__)
 _basename = get_basename(__file__)
+
 if __name__ == '__main__':
     worker = OneLigandWorker(
         code_dir=_code_folder,
@@ -17,11 +18,11 @@ if __name__ == '__main__':
     )
     worker.run(
         [
-            # 'teach',
-            # 'predict',
-            # "query",
+            'teach',
+            'predict',
+            "query",
             "ranking_dataframe",
             "suggestions",
         ]
     )
-    # worker.final_collect()
+    worker.final_collect()
