@@ -329,6 +329,90 @@ st0013,std-top2-true,3-Bromobenzoic acid,17,_04,,,,,1024,585-76-2"""
             )
         )
 
+    @log_time
+    def load_reactions_al1213(self):
+
+        campaign_name = "AL1213"
+
+        al_1213_identities = """st0021,std-true,Pyroquilon,3,001,,,,,1212,57369-32-1
+st0023,std-top2-true,3-(Hydroxymethyl)-1-adamantol,6,001,,,,,1212,38584-37-1
+st0025,std-top2-true,"2,6-Diphenylphenol",8,002,,,,,1212,2432-11-3
+mt0020,mu-top2-true,"2,2'-Dihydroxy-4,4'-dimethoxybenzophenone",9,002,,,,,1212,131-54-4
+mt0022,mu-top2-true,"2,2-Bis(4-hydroxy-3,5-dimethylphenyl)propane",11,003,,,,,1212,5613-46-7
+mt0025,mu-top2-true,2-Bromobenzoic Acid,14,003,,,,,1212,88-65-3
+mf0012,mu-top2-false,Dodecyl Methacrylate (stabilized with MEHQ),16,004,,,,,1212,142-90-5
+mf0013,mu-top2-false,"2,3,4-(Trimethoxy)bromobenzene ",17,004,,,,,1212,10385-36-1
+mf0011,mu-top2-false,"2,2,3,4,4,4-Hexafluorobutyl methacrylate",15,005,,,,,1212,36405-47-7"""
+        id_to_cas = {row.split(',')[0].strip(): row.split(',')[-1].strip() for row in
+                     al_1213_identities.split("\n")}
+
+        cas_to_smiles = dict()
+        for lig in self.ligand_library:
+            for cas in lig.properties['cas_number']:
+                cas_to_smiles[cas] = lig.smiles
+        id_to_smiles = {k: cas_to_smiles[v] for k, v in id_to_cas.items()}
+
+        # smiles_to_label = {lig.smiles: lig.label for lig in self.ligand_library}
+        # id_to_label = {i: smiles_to_label[id_to_smiles[i]] for i in id_to_smiles}
+        # import pprint
+        # logger.critical(pprint.pformat(id_to_label))
+
+        batch_params = BatchParams(
+            ligand_identifier_convert=id_to_smiles,
+            ligand_identifier_type='smiles',
+            expt_input_columns=(
+                'Vial Site', 'Reagent1 (ul)', 'Reagent2 (ul)', 'Reagent3 (ul)', 'Reagent4 (ul)', 'Reagent5 (ul)',
+                'Reagent6 (ul)', 'Reagent7 (ul)', 'Reagent8 (ul)', 'Reagent9 (ul)', 'Reagent10 (ul)', 'Labware ID:',
+                'Reaction Parameters', 'Parameter Values', 'Reagents', 'Reagent Name', 'Reagent Identity',
+                'Reagent Concentration (uM)', 'Liquid Class',
+            ),
+            expt_input_reagent_columns=(
+                "Reagents", "Reagent Name", "Reagent Identity", "Reagent Concentration (uM)",
+            ),
+            expt_input_condition_columns=(
+                "Reaction Parameters", "Parameter Values",
+            ),
+            expt_input_vial_column="Vial Site",
+            reagent_volume_unit='ul',
+            reagent_concentration_unit='uM',
+            reagent_possible_solvent=('m-xylene',),
+            expt_output_vial_column="Unnamed: 0",
+            expt_output_wall_tag_column_suffix="_wallTag",
+            expt_output_od_column_suffix="_PL_OD",  # this is different from previous collectors
+            expt_output_fom_column_suffix="_FOM"
+        )
+
+        campaign_loader = CampaignLoader(
+            campaign_name=campaign_name,
+            campaign_folder=f"{_work_folder}/{campaign_name}/",
+            ligand_inventory=self.pool_ligands,
+            solvent_inventory=self.solvent_library,
+            batch_params=batch_params,
+        )
+
+        batch_checkers = dict()
+        for bn in campaign_loader.batch_names:
+            bc = BatchCheckerL1()
+            batch_checkers[bn] = bc
+
+        check_msgs, reactions_campaign, reactions_campaign_passed, reactions_campaign_discarded = campaign_loader.load(
+            batch_checkers=batch_checkers
+        )
+
+        outlier_reactions = [
+            # '2022_1024_AL1_04_st0009_st0013_robotinput@@G11',
+        ]
+        n_before_exclusion = len(reactions_campaign_passed)
+        reactions_campaign_passed = [r for r in reactions_campaign_passed if r.identifier not in outlier_reactions]
+        logger.critical(f"excluded reactions: {n_before_exclusion} --> {len(reactions_campaign_passed)}")
+
+        rc = L1XReactionCollection(reactions_campaign_passed)
+        self.collect_files += self.write_outputs(
+            campaign_name, rc, dict(
+                check_msgs=check_msgs, reactions_campaign_discarded=reactions_campaign_discarded
+            )
+        )
+
 
 if __name__ == "__main__":
     worker = ReactionCollector()
@@ -336,6 +420,7 @@ if __name__ == "__main__":
         'load_reactions_sl0519',
         'load_reactions_al0907',
         'load_reactions_al1026',
+        'load_reactions_al1213',
     ]:
         log_file = f"{worker.code_dir}/{worker.name}-{load_method}-{get_timestamp()}.log"
         worker.run(
