@@ -1,0 +1,7 @@
+#PBS -q skylm
+#PBS -l select=1:ncpus=24:mem=200gb,walltime=96:00:00
+#PBS -j oe
+echo $PWD
+export PYTHONPATH=$PYTHONPATH:/scratch1/qianxiangai/ALLiS
+cd /scratch1/qianxiangai/ALLiS/workplace/OneLigand/learning_AL1222
+/home/qianxiangai/miniconda3/envs/allis/bin/python run_1222.py
