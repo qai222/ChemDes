@@ -96,7 +96,7 @@ class Molecule(Material):
         return MolFromInchi(self.inchi)
 
     @staticmethod
-    def write_molecules(mols: list[Molecule], fn: FilePath=None, output="smi"):
+    def write_molecules(mols: list[Molecule], fn: FilePath = None, output="smi"):
         if output == "smi":
             s = "\n".join([m.smiles for m in mols])
             if fn is not None:

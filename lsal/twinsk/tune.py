@@ -10,6 +10,7 @@ from lsal.utils import SEED
 
 _default_n_estimator = 100
 
+
 def tune_twin_rf(X: pd.DataFrame, y: pd.DataFrame, use_split=True):
     n_features = X.shape[1]
 
