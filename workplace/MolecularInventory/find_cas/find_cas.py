@@ -1,14 +1,13 @@
 import gzip
 import re
 from collections import defaultdict
-import csv
-import ChemScraper
-import pandas as pd
+
 from loguru import logger
 from tqdm import tqdm
-from lsal.schema import Molecule, load_molecules, Worker
-from lsal.tasks import calculate_cxcalc, calculate_mordred, dfg
-from lsal.utils import get_basename, get_workplace_data_folder, get_folder, plot_molcloud, log_time, json_dump, FilePath, file_exists, download_file, get_file_size, json_load
+
+from lsal.schema import Worker
+from lsal.utils import get_basename, get_workplace_data_folder, get_folder, log_time, json_dump, \
+    FilePath, file_exists, download_file, get_file_size, json_load
 
 """
 Find CAS RN using PubChem
@@ -24,8 +23,8 @@ class CasFinder(Worker):
     def __init__(
             self,
             inchis: list[str],
-            pubchem_synonym_file: FilePath= f'{_work_folder}/CID-Synonym-filtered.gz',
-            output: FilePath='cid_to_cas.json'
+            pubchem_synonym_file: FilePath = f'{_work_folder}/CID-Synonym-filtered.gz',
+            output: FilePath = 'cid_to_cas.json'
     ):
         super().__init__(name=self.__class__.__name__, code_dir=_code_folder, work_dir=_work_folder)
         self.inchis = inchis
@@ -44,7 +43,8 @@ class CasFinder(Worker):
                 progress_bar=True
             )
         else:
-            logger.warning(f'Found synonym file: {self.pubchem_synonym_file} of size {get_file_size(self.pubchem_synonym_file, unit="g")} GB')
+            logger.warning(
+                f'Found synonym file: {self.pubchem_synonym_file} of size {get_file_size(self.pubchem_synonym_file, unit="g")} GB')
 
     @log_time
     def find_cids(self):
@@ -105,13 +105,14 @@ class CasFinder(Worker):
             except KeyError:
                 inchi_to_cas[inchi] = None
         json_dump(inchi_to_cas, self.inchi_to_cas_json, gz=True)
-        logger.warning(f"found cas/total: {len([v for v in inchi_to_cas.values() if v is not None])}/{len(inchi_to_cas)}")
+        logger.warning(
+            f"found cas/total: {len([v for v in inchi_to_cas.values() if v is not None])}/{len(inchi_to_cas)}")
         self.collect_files.append(self.inchi_to_cas_json)
 
 
 if __name__ == "__main__":
     worker = CasFinder(
-        inchis = [lig.identifier for lig in json_load("../ligands.json.gz", gz=True)],
+        inchis=[lig.identifier for lig in json_load("../ligands.json.gz", gz=True)],
     )
     worker.run(
         [
