@@ -100,6 +100,19 @@ class SingleLigandPrediction(MSONable):
             ligand_learner_predictions.append(llp)
         return ligand_learner_predictions
 
+    def calculate_utility_scores(self):
+        record = {
+            'rank_average_pred_mu': float(np.mean(self.pred_mu)),
+            'rank_average_pred_std': float(np.mean(self.pred_std)),
+            'rank_average_pred_uci': float(np.mean(self.pred_uci)),
+            'rank_average_pred_mu_top2%mu': float(np.mean(truncate_distribution(self.pred_mu, "top", 0.02, False))),
+            'rank_average_pred_uci_top2%uci': float(
+                np.mean(truncate_distribution(self.pred_uci, "top", 0.02, False))),
+            'rank_average_pred_std_top2%mu': float(
+                np.mean(self.pred_std[truncate_distribution(self.pred_mu, "top", 0.02, True)])),
+        }
+        return record
+
     @staticmethod
     def calculate_ranking(
             pool: list[Molecule], predictions: list[SingleLigandPrediction]
@@ -116,15 +129,8 @@ class SingleLigandPrediction(MSONable):
                 'ligand_label': lig.label,
                 'ligand_identifier': lig.identifier,
                 'ligand_smiles': lig.smiles,
-                'rank_average_pred_mu': float(np.mean(pred.pred_mu)),
-                'rank_average_pred_std': float(np.mean(pred.pred_std)),
-                'rank_average_pred_uci': float(np.mean(pred.pred_uci)),
-                'rank_average_pred_mu_top2%mu': float(np.mean(truncate_distribution(pred.pred_mu, "top", 0.02, False))),
-                'rank_average_pred_uci_top2%uci': float(
-                    np.mean(truncate_distribution(pred.pred_uci, "top", 0.02, False))),
-                'rank_average_pred_std_top2%mu': float(
-                    np.mean(pred.pred_std[truncate_distribution(pred.pred_mu, "top", 0.02, True)])),
             }
+            record.update(pred.calculate_utility_scores())
             records.append(record)
             ligands.append(lig)
         df = pd.DataFrame.from_records(records)
@@ -222,6 +228,25 @@ class SingleLigandLearner(MetaLearner):
         )
         learner.current_model = model
         return learner
+
+    def eval_against_reactions(self, reaction_collection: L1XReactionCollection, ):
+        ligands, X, y = reaction_collection.l1_input(fom_def=self.teaching_figure_of_merit)
+        logger.info(f"evaluate inferences for # of ligands=={len(ligands)}, # of reactions=={len(y)}")
+        assert self.current_model is not None
+        assert len(self.latest_teaching_record.reaction_collection) > 0
+        pred_y_mu, pred_y_std = self.current_model.twin_predict(X.values)
+        result = []
+        for i in range(len(y)):
+            result.append({
+                "ligand": ligands[i].label,
+                "amount": X['ligand_amount'].tolist()[i],
+                "x": X.values[i],
+                "y_pred_mu": pred_y_mu[i],
+                "y_pred_std": pred_y_std[i],
+                "y": y.values[i],
+            }
+            )
+        return result
 
     def teach_reactions(
             self, reaction_collection: L1XReactionCollection,

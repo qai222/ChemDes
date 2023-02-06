@@ -42,7 +42,7 @@ def seed_one_by_one(
     taught_ligs = [init_lig, ]
     learner = SingleLigandLearner.init_trfr('FigureOfMerit', wdir=wdir)
     learner.teach_reactions(L1XReactionCollection(L2Rs[init_lig]), f"{wdir}/t__{len(taught_ligs)}.pkl")
-    ligand_amounts = learner.latest_teaching_record.reaction_collection.amount_geo_space(200)
+    ligand_amounts = learner.latest_teaching_record.reaction_ids.amount_geo_space(200)
     obo_data = []
     while len(taught_ligs) < len(LigPool):
         slps = learner.predict(LigPool, ligand_amounts)
@@ -50,7 +50,7 @@ def seed_one_by_one(
 
         df_all = SingleLigandPrediction.calculate_ranking(LigPool, slps)
         not_taught = [lig for lig in LigPool if
-                      lig not in learner.latest_teaching_record.reaction_collection.unique_ligands]
+                      lig not in learner.latest_teaching_record.reaction_ids.unique_ligands]
         eval_result_all = learner.eval_against_reactions(RC)
         rc_not_taught = []
         for li in L2Rs:
