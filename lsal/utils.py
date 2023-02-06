@@ -15,6 +15,7 @@ import sys
 import time
 import typing
 from datetime import datetime
+from functools import wraps
 from io import BytesIO
 from itertools import zip_longest
 from urllib.error import HTTPError, URLError
@@ -24,10 +25,12 @@ import monty.json
 import numpy as np
 import pandas as pd
 import scipy.stats
+from exmol import stoned, BulkTanimotoSimilarity, smi2mol
 from loguru import logger
 from monty.json import MSONable
 from rdkit.Chem import MolToSmiles, MolToInchi, MolFromSmiles, MolFromSmarts
 from rdkit.Chem.Draw import MolToImage
+from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.inchi import MolFromInchi
 from sklearn import preprocessing
 from sklearn.metrics import pairwise_distances
@@ -111,15 +114,25 @@ def json_dump(o, fn: FilePath, gz=False):
             json.dump(o, f, cls=monty.json.MontyEncoder)
 
 
-def json_load(fn: FilePath, warning=False, gz=False):
+def json_load(fn: FilePath, warning=False, gz=False, disable_monty=False):
     if warning:
         logging.warning("loading file: {}".format(fn))
+    if disable_monty:
+        decoder = None
+    else:
+        decoder = monty.json.MontyDecoder
+
+    if fn.endswith(".gz"):
+        gz = True
+    else:
+        gz = False
+
     if gz:
         with gzip.open(fn, 'rt') as f:
-            o = json.load(f, cls=monty.json.MontyDecoder)
+            o = json.load(f, cls=decoder)
     else:
         with open(fn, "r") as f:
-            o = json.load(f, cls=monty.json.MontyDecoder)
+            o = json.load(f, cls=decoder)
     return o
 
 
@@ -360,9 +373,9 @@ def chunks(lst, n):
         yield lst[i:i + n]
 
 
-def smi2imagestr(smi: str):
+def smi2imagestr(smi: str, size=(300, 300)):
     m = MolFromSmiles(smi)
-    img = MolToImage(m)
+    img = MolToImage(m, size=size)
     buffered = BytesIO()
     img.save(buffered, format="JPEG")
     encoded_image = base64.b64encode(buffered.getvalue())
@@ -431,6 +444,7 @@ def upper_confidence_interval(data: np.ndarray, confidence=0.95):
 
 
 def log_time(method):
+    @wraps(method)
     def timed(*args, **kw):
         logger.info(f"WORKING ON: {method.__name__}")
         ts = time.time()
@@ -590,3 +604,39 @@ def download_file(url: str, destination: FilePath = None, progress_bar=True):
     except (HTTPError, URLError, ValueError) as e:
         raise e
     return filename
+
+
+def draw_svg(smi: str, fn: FilePath = None) -> str:
+    """ export svg string given molecule smiles """
+    mol = MolFromSmiles(smi)
+    drawer = rdMolDraw2D.MolDraw2DSVG(200, 200)
+    drawer.DrawMolecule(mol)
+    drawer.FinishDrawing()
+    svg = drawer.GetDrawingText()
+    if fn:
+        with open(fn, 'w') as f:
+            f.write(svg)
+    return svg
+
+
+def similarity_matrix(smiles: list[str], fp_type="ECFP4") -> np.ndarray:
+    """ AP/PHCO/BPF,BTF,PAT,ECFP4,ECFP6,FCFP4,FCFP6 """
+    nmol = len(smiles)
+    fps = []
+    for smi in tqdm(smiles, desc='calculate fingerprint'):
+        fp = stoned.get_fingerprint(smi2mol(smi), fp_type)
+        fps.append(fp)
+
+    condensed = []
+    for i in tqdm(range(1, nmol), desc='calculate Tanimoto similarity'):
+        sims = BulkTanimotoSimilarity(fps[i], fps[:i])
+        condensed.extend(sims)
+
+    sim_mat = np.ones((nmol, nmol))
+    niter = 0
+    for i in range(1, nmol):
+        for j in range(i):
+            sim_mat[i][j] = condensed[niter]
+            sim_mat[j][i] = condensed[niter]
+            niter += 1
+    return sim_mat
