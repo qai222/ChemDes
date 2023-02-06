@@ -243,8 +243,13 @@ class BatchLoader:
             reagent_name = record["Reagent Name"]
             reagent_identity = record["Reagent Identity"]
             reagent_concentration = record["Reagent Concentration (uM)"]
-
-            if reagent_name.startswith("CPB") and pd.isnull(reagent_concentration):
+            if pd.isna(reagent_name):
+                if not pd.isna(reagent_identity) and not pd.isna(reagent_concentration):
+                    logger.warning(f"found a reagent without name: {reagent_identity}")
+                    reagent_name = reagent_identity
+                else:
+                    continue
+            if reagent_name.startswith("CPB") and pd.isna(reagent_concentration):
                 logger.info("Found nanocrystal: {}".format(reagent_name))
                 material = NanoCrystal(identifier=reagent_name)
                 reactant = ReactantSolution(solute=material, volume=np.nan, concentration=None, solvent=None,
