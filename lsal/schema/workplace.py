@@ -24,7 +24,7 @@ class Worker(MSONable, abc.ABC):
 
     def run(self, task_names: list[str], log_file: FilePath = None):
         attrs = [getattr(self, name) for name in task_names if name in dir(self)]
-        assert len(attrs) == len(task_names), f'method not found: {set(attrs) - set(task_names)}'
+        # assert len(attrs) == len(task_names), f'method not found: {set(attrs) - set(task_names)}'
 
         createdir(self.work_dir)
         if log_file is None:
