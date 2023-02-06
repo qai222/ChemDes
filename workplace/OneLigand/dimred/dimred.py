@@ -79,7 +79,9 @@ class DimRed(Worker):
                     n_neighbors=nn, min_dist=md, metric="precomputed", random_state=SEED)
                 data_2d = transformer.fit_transform(dmat)
                 values_space.append(data_2d)
-                columns += [f"DIMRED_{space}_{nnmd}_x", f"DIMRED_{space}_{nnmd}_y", ]
+                # to comply with mongo convention
+                columns += [f"DIMRED_{space}_{nnmd}_x".replace(".", "[dot]"),
+                            f"DIMRED_{space}_{nnmd}_y".replace(".", "[dot]"), ]
             values_space = np.concatenate(values_space, axis=1)
             assert values_space.shape == (len(self.ligands), 2 * len(self.dimred_params))
             values.append(values_space)
