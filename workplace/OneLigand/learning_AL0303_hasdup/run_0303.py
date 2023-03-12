@@ -25,11 +25,11 @@ if __name__ == '__main__':
     )
     worker.run(
         [
-            'teach',
-            'predict',
-            "query",
-            "ranking_dataframe",
-            "suggestions",
+            # 'teach',
+            # 'predict',
+            # "query",
+            # "ranking_dataframe",
+            # "suggestions",
         ]
     )
     worker.final_collect()
