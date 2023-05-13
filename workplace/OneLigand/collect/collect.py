@@ -746,6 +746,92 @@ mf0011,mu-top2-false,"2,2,3,4,4,4-Hexafluorobutyl methacrylate",15,005,,,,,1212,
         )
 
 
+
+    @log_time
+    def load_reactions_al0503(self):
+
+        campaign_name = "AL0503"
+
+        al_0503_identities = """07-004,88-26-6
+07-008,24673-56-1
+07-011,636-44-2
+07-006,7148-07-4
+07-018,34421-94-8
+07-000,605-71-0
+07-016,724-98-1
+07-001,484-11-7
+07-005,133739-70-5
+07-009,42032-30-4
+07-019,3762-25-2"""
+        id_to_cas = {row.split(',')[0].strip(): row.split(',')[-1].strip() for row in al_0503_identities.split("\n")}
+
+        cas_to_smiles = dict()
+        for lig in self.ligand_library:
+            for cas in lig.properties['cas_number']:
+                cas_to_smiles[cas] = lig.smiles
+        id_to_smiles = {k: cas_to_smiles[v] for k, v in id_to_cas.items()}
+        # smiles_to_label = {lig.smiles: lig.label for lig in self.ligand_library}
+        # id_to_label = {i: smiles_to_label[id_to_smiles[i]] for i in id_to_smiles}
+        # import pprint
+        # logger.critical(pprint.pformat(id_to_label))
+
+        batch_params = BatchParams(
+            ligand_identifier_convert=id_to_smiles,
+            ligand_identifier_type='smiles',
+            expt_input_columns=(
+                'Vial Site', 'Reagent1 (ul)', 'Reagent2 (ul)', 'Reagent3 (ul)', 'Reagent4 (ul)', 'Reagent5 (ul)',
+                'Reagent6 (ul)', 'Reagent7 (ul)', 'Reagent8 (ul)', 'Reagent9 (ul)', 'Reagent10 (ul)', 'Labware ID:',
+                'Reaction Parameters', 'Parameter Values', 'Reagents', 'Reagent Name', 'Reagent Identity',
+                'Reagent Concentration (uM)', 'Liquid Class',
+            ),
+            expt_input_reagent_columns=(
+                "Reagents", "Reagent Name", "Reagent Identity", "Reagent Concentration (uM)",
+            ),
+            expt_input_condition_columns=(
+                "Reaction Parameters", "Parameter Values",
+            ),
+            expt_input_vial_column="Vial Site",
+            reagent_volume_unit='ul',
+            reagent_concentration_unit='uM',
+            reagent_possible_solvent=('m-xylene',),
+            expt_output_vial_column="Unnamed: 0",
+            expt_output_wall_tag_column_suffix="_wallTag",
+            expt_output_od_column_suffix="_PL_OD",  # this is different from previous collectors
+            expt_output_fom_column_suffix="_FOM"
+        )
+
+        campaign_loader = CampaignLoader(
+            campaign_name=campaign_name,
+            campaign_folder=f"{_work_folder}/{campaign_name}/",
+            ligand_inventory=self.pool_ligands,
+            solvent_inventory=self.solvent_library,
+            batch_params=batch_params,
+        )
+
+        batch_checkers = dict()
+        for bn in campaign_loader.batch_names:
+            bc = BatchCheckerL1()
+            batch_checkers[bn] = bc
+
+        check_msgs, reactions_campaign, reactions_campaign_passed, reactions_campaign_discarded = campaign_loader.load(
+            batch_checkers=batch_checkers
+        )
+
+        outlier_reactions = [
+            # '2022_1024_AL1_04_st0009_st0013_robotinput@@G11',
+        ]
+        n_before_exclusion = len(reactions_campaign_passed)
+        reactions_campaign_passed = [r for r in reactions_campaign_passed if r.identifier not in outlier_reactions]
+        logger.critical(f"excluded reactions: {n_before_exclusion} --> {len(reactions_campaign_passed)}")
+
+        rc = L1XReactionCollection(reactions_campaign_passed)
+        self.collect_files += self.write_outputs(
+            campaign_name, rc, dict(
+                check_msgs=check_msgs, reactions_campaign_discarded=reactions_campaign_discarded
+            )
+        )
+
+
 if __name__ == "__main__":
     worker = ReactionCollector()
     for load_method in [
@@ -756,7 +842,8 @@ if __name__ == "__main__":
         # 'load_reactions_al1222',
         # 'load_reactions_al0130',
         # 'load_reactions_al0303',
-        'load_reactions_al0331',
+        # 'load_reactions_al0331',
+        'load_reactions_al0503',
     ]:
         log_file = f"{worker.code_dir}/{worker.name}-{load_method}-{get_timestamp()}.log"
         worker.run(
