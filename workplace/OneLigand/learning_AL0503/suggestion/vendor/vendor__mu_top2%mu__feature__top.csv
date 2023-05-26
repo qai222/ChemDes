@@ -1,0 +1,726 @@
+ligand_label,ligand_identifier,ligand_smiles,complexity_BertzCT,is_taught,cas_number,rank_average_pred_mu_top2%mu,cluster,sigma-price,sigma-avail,sigma-url
+POOL-00036229,"InChI=1S/C10H8N2O/c11-6-5-8-7-3-1-2-4-9(7)12-10(8)13/h1-4,8H,5H2,(H,12,13)",N#CCC1C(O)=Nc2ccccc21,403.6309271773191,False,['54744-66-0'],1.8567826137,0,,,
+POOL-00007388,"InChI=1S/C9H8N2O2/c1-11-8-4-6(9(12)13)2-3-7(8)5-10-11/h2-5H,1H3,(H,12,13)",Cn1ncc2ccc(C(=O)O)cc21,473.4194793183052,False,['1031417-77-2'],1.8572154556,0,,,
+POOL-00033711,"InChI=1S/C9H8N2O2/c1-13-9(12)6-2-3-7-5-10-11-8(7)4-6/h2-5H,1H3,(H,10,11)",COC(=O)c1ccc2c[nH]nc2c1,447.5663570551784,False,['170487-40-8'],1.8429570302,0,,,
+POOL-00008782,"InChI=1S/C9H8N2O2/c1-13-9(12)7-4-2-3-6-5-10-11-8(6)7/h2-5H,1H3,(H,10,11)",COC(=O)c1cccc2c[nH]nc12,447.5663570551784,False,"['755752-82-0', '952479-65-1']",1.8568947654,0,$172.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/syx00166
+POOL-00007220,"InChI=1S/C9H8N2O2/c1-13-9(12)7-5-11-8-6(7)3-2-4-10-8/h2-5H,1H3,(H,10,11)",COC(=O)c1c[nH]c2ncccc12,447.5663570551784,False,['808137-94-2'],1.8470890889,0,,,
+POOL-00031666,"InChI=1S/C9H8N2O2/c1-13-9(12)8-6-4-2-3-5-7(6)10-11-8/h2-5H,1H3,(H,10,11)",COC(=O)c1n[nH]c2ccccc12,447.5663570551784,False,"['43120-28-1', '863637-26-7']",1.852423879,0,,,
+POOL-00032089,"InChI=1S/C9H8N2O2/c1-6(12)8-9(13)10-7-4-2-3-5-11(7)8/h2-5,13H,1H3",CC(=O)c1c(O)nc2ccccn12,473.41947931830526,False,['329228-22-0'],1.8409476825,0,,,
+POOL-00014101,"InChI=1S/C9H8N2O2/c1-13-9(12)6-3-2-4-8-7(6)5-10-11-8/h2-5H,1H3,(H,10,11)",COC(=O)c1cccc2[nH]ncc12,447.5663570551784,False,['192945-49-6'],1.8569274305,0,"$97.50
+$29.25/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/729744
+POOL-00009757,"InChI=1S/C9H8N2O/c1-6(12)9-7-4-2-3-5-8(7)10-11-9/h2-5H,1H3,(H,10,11)",CC(=O)c1n[nH]c2ccccc12,430.7760853370335,False,['4498-72-0'],1.8234999523,0,,,
+POOL-00013425,"InChI=1S/C9H8N2O2/c1-13-6-2-3-8-7(4-6)9(5-12)11-10-8/h2-5H,1H3,(H,10,11)",COc1ccc2[nH]nc(C=O)c2c1,447.8114695530149,False,['169789-37-1'],1.8648319236,0,,,
+POOL-00032951,"InChI=1S/C10H8N2O/c11-7-12-9-4-2-1-3-8(9)5-6-10(12)13/h1-6,10,13H",N#CN1c2ccccc2C=CC1O,392.1563736409662,False,['941-87-7'],1.8315038806,0,,,
+POOL-00035556,"InChI=1S/C9H8N2O2/c1-6-8(9(12)13)11-5-3-2-4-7(11)10-6/h2-5H,1H3,(H,12,13)",Cc1nc2ccccn2c1C(=O)O,473.4194793183052,False,['21801-79-6'],1.8437529191,0,,,
+POOL-00003873,"InChI=1S/C9H10N2O/c1-6-5-8(12-2)11-7-3-4-10-9(6)7/h3-5,10H,1-2H3",COc1cc(C)c2[nH]ccc2n1,405.8207819124433,False,['171780-79-3'],1.8375879893,0,,,
+POOL-00009573,"InChI=1S/C8H7BrN2O/c1-12-8-3-7-5(2-6(8)9)4-10-11-7/h2-4H,1H3,(H,10,11)",COc1cc2[nH]ncc2cc1Br,410.3501069254241,False,['152626-78-3'],1.8603480372,0,$512.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/syx00190
+POOL-00000274,"InChI=1S/C8H5BrN2O/c9-5-1-2-6-7(3-5)10-4-11-8(6)12/h1-4H,(H,10,11,12)",Oc1ncnc2cc(Br)ccc12,430.327416202102,False,['194851-16-6'],1.8303404618,0,,,
+POOL-00003531,"InChI=1S/C8H5BrN2O/c9-6-1-7-8(11-3-6)5(4-12)2-10-7/h1-4,10H",O=Cc1c[nH]c2cc(Br)cnc12,435.5505228478508,False,['1190312-27-6'],1.8310171091,0,,,
+POOL-00006800,"InChI=1S/C9H8N2O2/c1-11-5-7-6(9(12)13)3-2-4-8(7)10-11/h2-5H,1H3,(H,12,13)",Cn1cc2c(C(=O)O)cccc2n1,473.41947931830526,False,['1071433-06-1'],1.8521926844,0,,,
+POOL-00006957,"InChI=1S/C9H8N2O2/c1-6-4-11-5-7(9(12)13)2-3-8(11)10-6/h2-5H,1H3,(H,12,13)",Cc1cn2cc(C(=O)O)ccc2n1,473.41947931830526,False,['129912-22-7'],1.8672354746,0,$104.65/100 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh9614fac5?context=bbe
+POOL-00006260,"InChI=1S/C8H5BrN2O/c9-8-6-3-5(4-12)1-2-7(6)10-11-8/h1-4H,(H,10,11)",O=Cc1ccc2[nH]nc(Br)c2c1,435.5505228478508,False,['1086391-08-3'],1.8464158275,0,,,
+POOL-00007638,"InChI=1S/C9H8N2O2/c1-13-9(12)6-2-3-8-7(4-6)5-10-11-8/h2-5H,1H3,(H,10,11)",COC(=O)c1ccc2n[nH]cc2c1,447.5663570551784,False,['473416-12-5'],1.8499764757,0,,,
+POOL-00005431,"InChI=1S/C9H8N2O2/c1-6-5-11-3-2-7(9(12)13)4-8(11)10-6/h2-5H,1H3,(H,12,13)",Cc1cn2ccc(C(=O)O)cc2n1,473.4194793183052,False,['1175928-10-5'],1.8578659197,0,,,
+POOL-00000138,"InChI=1S/C8H5BrN2O/c9-5-1-2-7-6(3-5)8(12)11-4-10-7/h1-4H,(H,10,11,12)",Oc1ncnc2ccc(Br)cc12,430.327416202102,False,['32084-59-6'],1.83205376,0,,,
+POOL-00010926,"InChI=1S/C10H10N2/c1-7-6-8-4-2-3-5-9(8)12-10(7)11/h2-6H,1H3,(H2,11,12)",Cc1cc2ccccc2[nH]c1=N,468.4674283486556,False,['74844-99-8'],1.833580054,0,,,
+POOL-00010669,"InChI=1S/C10H6N2O/c11-4-7-1-2-9-8(6-13)5-12-10(9)3-7/h1-3,5-6,12H",N#Cc1ccc2c(C=O)c[nH]c2c1,505.109369777646,False,['83783-33-9'],1.8332969138,0,$81.60/1 G,"Estimated to ship on June 30, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/phb00304
+POOL-00012273,"InChI=1S/C8H5BrN2O/c9-6-3-5-1-2-7(12)11-8(5)10-4-6/h1-4H,(H,10,11,12)",Oc1ccc2cc(Br)cnc2n1,389.0774162021019,False,['72754-05-3'],1.835661079,0,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade000844
+POOL-00032626,"InChI=1S/C9H10N2O/c1-12-6-9-10-7-4-2-3-5-8(7)11-9/h2-5H,6H2,1H3,(H,10,11)",COCc1nc2ccccc2[nH]1,347.6639128453302,False,['7146-97-6'],1.8321486418,0,,,
+POOL-00014749,"InChI=1S/C9H8N2O2/c1-11-8(9(12)13)6-4-2-3-5-7(6)10-11/h2-5H,1H3,(H,12,13)",Cn1nc2ccccc2c1C(=O)O,473.4194793183052,False,['34252-44-3'],1.8429701356,0,,,
+POOL-00038383,"InChI=1S/C10H10N2/c1-7-6-10(11)12-9-5-3-2-4-8(7)9/h2-6H,1H3,(H2,11,12)",Cc1cc(=N)[nH]c2ccccc12,468.4674283486557,False,['27063-27-0'],1.8547457332,0,,,
+POOL-00007548,"InChI=1S/C8H5BrN2O2/c9-5-1-2-7-10-3-6(8(12)13)11(7)4-5/h1-4H,(H,12,13)",O=C(O)c1cnc2ccc(Br)cn12,477.94880433128606,False,['944896-42-8'],1.8422568095,0,,,
+POOL-00028611,"InChI=1S/C9H10N2O/c10-9(12)11-6-5-7-3-1-2-4-8(7)11/h1-4H,5-6H2,(H2,10,12)",N=C(O)N1CCc2ccccc21,322.0595034459553,False,['56632-33-8'],1.8462241929,0,$138.00/5MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t325570
+POOL-00010296,"InChI=1S/C10H10N2/c1-7-3-2-4-8-9(11)5-6-12-10(7)8/h2-6H,1H3,(H2,11,12)",Cc1cccc2c(=N)cc[nH]c12,468.4674283486557,False,['893762-15-7'],1.8251042905,0,,,
+POOL-00004334,"InChI=1S/C9H8N2O2/c1-11-8-6(5-10-11)3-2-4-7(8)9(12)13/h2-5H,1H3,(H,12,13)",Cn1ncc2cccc(C(=O)O)c21,473.4194793183052,False,['1221288-23-8'],1.8338048356,0,,,
+POOL-00035110,"InChI=1S/C9H8N2O2/c1-6-10-8-5-3-2-4-7(8)9(12)11(6)13/h2-5,13H,1H3",Cc1nc2ccccc2c(=O)n1O,516.493895503199,False,"['1010-70-4', '54518-07-9']",1.8320606343,0,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r245895
+POOL-00011805,"InChI=1S/C10H10N2/c11-6-9-3-1-2-8-4-5-12-7-10(8)9/h1-5,7H,6,11H2",NCc1cccc2ccncc12,390.4656418352572,False,['362606-12-0'],1.835662828,0,,,
+POOL-00032044,"InChI=1S/C9H8N2O2/c1-11-7-5-3-2-4-6(7)8(10-11)9(12)13/h2-5H,1H3,(H,12,13)",Cn1nc(C(=O)O)c2ccccc21,473.41947931830526,False,['50890-83-0'],1.8653848453,0,,,
+POOL-00029024,"InChI=1S/C9H10N2O/c1-7-3-2-4-9-10-8(6-12)5-11(7)9/h2-5,12H,6H2,1H3",Cc1cccc2nc(CO)cn12,405.8207819124433,False,['872363-02-5'],1.8343574398,0,,,
+POOL-00025954,"InChI=1S/C9H10N2O/c1-2-9-11-7-4-3-6(10)5-8(7)12-9/h3-5H,2,10H2,1H3",CCc1nc2ccc(N)cc2o1,405.8207819124433,False,['855423-35-7'],1.8440204369,0,$117.60/500 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/matrixscientific/mat238926050?context=bbe
+POOL-00008769,"InChI=1S/C8H5BrN2O/c9-5-1-2-6-7(3-5)10-11-8(6)4-12/h1-4H,(H,10,11)",O=Cc1n[nH]c2cc(Br)ccc12,435.5505228478508,False,['885271-72-7'],1.8319407695,0,,,
+POOL-00011804,"InChI=1S/C10H10N2/c11-7-8-3-1-5-10-9(8)4-2-6-12-10/h1-6H,7,11H2",NCc1cccc2ncccc12,390.4656418352572,False,['58123-57-2'],1.8339745078,0,$139.05/100 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/chemimpexinternationalinc/ch6371382821?context=bbe
+POOL-00004812,"InChI=1S/C8H5BrN2O2/c9-6-4-10-7-3-5(8(12)13)1-2-11(6)7/h1-4H,(H,12,13)",O=C(O)c1ccn2c(Br)cnc2c1,477.94880433128606,False,['1315360-75-8'],1.8494355253,0,,,
+POOL-00027216,"InChI=1S/C10H10N2/c11-7-10-9-4-2-1-3-8(9)5-6-12-10/h1-6H,7,11H2",NCc1nccc2ccccc12,390.4656418352572,False,['40615-08-5'],1.8336813746,0,,,
+POOL-00007869,"InChI=1S/C9H8N2O2/c1-13-9(12)7-3-5-11-8-6(7)2-4-10-8/h2-5H,1H3,(H,10,11)",COC(=O)c1cc[nH]c2nccc1-2,408.0823672357702,False,['351439-07-1'],1.8514118136,0,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade000950
+POOL-00004326,"InChI=1S/C8H7BrN2O/c1-12-8-2-5-4-10-11-7(5)3-6(8)9/h2-4H,1H3,(H,10,11)",COc1cc2c[nH]nc2cc1Br,410.3501069254241,False,['1206800-17-0'],1.8475752251,0,$64.60/500 MG,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/775150
+POOL-00006246,"InChI=1S/C8H5BrN2O2/c9-6-4-10-11-2-1-5(8(12)13)3-7(6)11/h1-4H,(H,12,13)",O=C(O)c1ccn2ncc(Br)c2c1,477.94880433128606,False,['876379-79-2'],1.8520289705,0,,,
+POOL-00003074,"InChI=1S/C8H5BrN2O/c9-6-1-5(4-12)7-3-10-11-8(7)2-6/h1-4H,(H,10,11)",O=Cc1cc(Br)cc2n[nH]cc12,435.5505228478508,False,['1444616-24-3'],1.8492370668,0,,,
+POOL-00036104,"InChI=1S/C10H10N2/c1-7-5-6-12-10-8(7)3-2-4-9(10)11/h2-6H,11H2,1H3",Cc1ccnc2c(N)cccc12,379.8581352532283,False,['62748-01-0'],1.835751728,0,,,
+POOL-00038112,"InChI=1S/C9H10N2O/c12-9-5-6-10-7-3-1-2-4-8(7)11-9/h1-4,10H,5-6H2,(H,11,12)",OC1=Nc2ccccc2NCC1,320.05950344595533,False,['5755-07-7'],1.8449450379,0,$138.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t324922
+POOL-00006253,"InChI=1S/C9H7BrN2/c10-8-2-1-6-5-12-9(11)4-7(6)3-8/h1-5H,(H2,11,12)",Nc1cc2cc(Br)ccc2cn1,389.0480911891211,False,['891785-28-7'],1.8646566494,0,,,
+POOL-00007781,"InChI=1S/C9H7BrN2/c10-7-1-2-8-6(5-7)3-4-12-9(8)11/h1-5H,(H2,11,12)",Nc1nccc2cc(Br)ccc12,425.7980911891212,False,['215453-26-2'],1.8512886408,0,,,
+POOL-00018225,"InChI=1S/C10H10N2/c1-7-8-4-2-3-5-10(8)12-6-9(7)11/h2-6H,11H2,1H3",Cc1c(N)cnc2ccccc12,421.10813525322834,False,['50878-90-5'],1.8528554056,0,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r262064
+POOL-00031519,"InChI=1S/C9H7BrN2/c10-9-8(11)7-4-2-1-3-6(7)5-12-9/h1-5H,11H2",Nc1c(Br)ncc2ccccc12,425.7980911891212,False,['40073-37-8'],1.849946042,0,$44.85/100 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh2d6f0217?context=bbe
+POOL-00040783,"InChI=1S/C9H10N2O/c12-6-5-9-10-7-3-1-2-4-8(7)11-9/h1-4,12H,5-6H2,(H,10,11)",OCCc1nc2ccccc2[nH]1,347.6639128453302,False,['4857-01-6'],1.8504977792,0,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s358088
+POOL-00007702,"InChI=1S/C8H5FN2O2/c9-5-1-2-7-10-6(8(12)13)4-11(7)3-5/h1-4H,(H,12,13)",O=C(O)c1cn2cc(F)ccc2n1,477.94880433128606,False,"['367500-94-5', '367900-94-5']",1.8279609268,0,$55.00/100 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/synthonixcorporation/sy3h95ecd84a?context=bbe
+POOL-00041057,"InChI=1S/C10H10N2/c1-7-6-9(11)8-4-2-3-5-10(8)12-7/h2-6H,1H3,(H2,11,12)",Cc1cc(=N)c2ccccc2[nH]1,468.4674283486557,False,['6628-04-2'],1.8525948815,0,$77.20/5 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/a79000
+POOL-00001727,"InChI=1S/C10H10N2/c1-7-2-3-8-5-9(11)6-12-10(8)4-7/h2-6H,11H2,1H3",Cc1ccc2cc(N)cnc2c1,379.8581352532283,False,['1297654-73-9'],1.8442601232,0,$183.30/100 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/enamine/enah31551dbb?context=bbe
+POOL-00011802,"InChI=1S/C10H10N2/c11-7-8-5-6-12-10-4-2-1-3-9(8)10/h1-6H,7,11H2",NCc1ccnc2ccccc12,390.4656418352572,False,['5632-13-3'],1.8420203108,0,,,
+POOL-00005785,"InChI=1S/C9H10N2O/c1-11-9-3-2-7(6-12)4-8(9)5-10-11/h2-5,12H,6H2,1H3",Cn1ncc2cc(CO)ccc21,405.8207819124433,False,['1092961-11-9'],1.8356765321,0,,,
+POOL-00033776,"InChI=1S/C9H7BrN2/c10-9-7-4-2-1-3-6(7)5-8(11)12-9/h1-5H,(H2,11,12)",Nc1cc2ccccc2c(Br)n1,425.7980911891212,False,['13130-79-5'],1.8548382065,0,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph009726
+POOL-00008773,"InChI=1S/C8H7BrN2O/c1-12-8-3-5(9)2-7-6(8)4-10-11-7/h2-4H,1H3,(H,10,11)",COc1cc(Br)cc2n[nH]cc12,410.3501069254241,False,['885519-21-1'],1.8455371959,0,,,
+POOL-00037207,"InChI=1S/C10H10N2/c1-7-5-6-8-3-2-4-9(11)10(8)12-7/h2-6H,11H2,1H3",Cc1ccc2cccc(N)c2n1,421.10813525322834,False,['18978-78-4'],1.8575003459,0,$68.10/50 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds000034
+POOL-00010156,"InChI=1S/C8H5BrN2O2/c9-6-3-10-7-2-1-5(8(12)13)4-11(6)7/h1-4H,(H,12,13)",O=C(O)c1ccc2ncc(Br)n2c1,477.94880433128606,False,['886362-00-1'],1.8651724246,0,,,
+POOL-00005392,"InChI=1S/C9H7BrN2/c10-8-3-1-2-7-6(8)4-5-12-9(7)11/h1-5H,(H2,11,12)",N=c1[nH]ccc2c(Br)cccc12,473.1573842845486,False,['852570-80-0'],1.851023929,0,,,
+POOL-00028959,"InChI=1S/C9H7BrN2/c10-7-5-12-8-4-2-1-3-6(8)9(7)11/h1-5H,(H2,11,12)",N=c1c(Br)c[nH]c2ccccc12,473.1573842845486,False,['36825-36-2'],1.852187615,0,$15.40/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh2d6f9c4e?context=bbe
+POOL-00031578,"InChI=1S/C8H8N2OS/c1-2-5-3-6-7(11)9-4-10-8(6)12-5/h3-4H,2H2,1H3,(H,9,10,11)",CCc1cc2c(O)ncnc2s1,410.3501069254241,False,['18593-51-6'],1.8316116082,0,,,
+POOL-00010491,"InChI=1S/C10H10N2/c1-7-2-3-10-8(6-7)9(11)4-5-12-10/h2-6H,1H3,(H2,11,12)",Cc1ccc2nccc(N)c2c1,421.10813525322834,False,['874589-77-2'],1.8522064733,0,,,
+POOL-00006521,"InChI=1S/C10H10N2/c11-7-8-3-4-9-2-1-5-12-10(9)6-8/h1-6H,7,11H2",NCc1ccc2cccnc2c1,395.7156418352572,False,['773092-54-9'],1.8417314834,0,,,
+POOL-00011278,"InChI=1S/C9H7BrN2/c10-7-2-3-8-6(5-7)1-4-9(11)12-8/h1-5H,(H2,11,12)",N=c1ccc2cc(Br)ccc2[nH]1,473.1573842845486,False,['791626-58-9'],1.8558263703,0,$41.40/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh97f079f4?context=bbe
+POOL-00007586,"InChI=1S/C9H8N2O2/c12-8(13)6-11-5-3-7-2-1-4-10-9(7)11/h1-5H,6H2,(H,12,13)",O=C(O)Cn1ccc2cccnc21,447.5663570551784,False,['1048913-13-8'],1.8302401511,0,,,
+POOL-00004377,"InChI=1S/C8H5BrN2O2/c9-6-4-10-7-5(8(12)13)2-1-3-11(6)7/h1-4H,(H,12,13)",O=C(O)c1cccn2c(Br)cnc12,477.94880433128606,False,['1116691-26-9'],1.86611665,0,,,
+POOL-00041483,"InChI=1S/C9H8N2O2/c12-9(13)5-7-6-10-8-3-1-2-4-11(7)8/h1-4,6H,5H2,(H,12,13)",O=C(O)Cc1cnc2ccccn12,447.5663570551784,False,['17745-04-9'],1.8369021211,0,,,
+POOL-00004089,"InChI=1S/C9H10N2O/c1-7-10-8(6-12)9-4-2-3-5-11(7)9/h2-5,12H,6H2,1H3",Cc1nc(CO)c2ccccn12,405.8207819124433,False,['1315368-40-1'],1.8244664957,0,,,
+POOL-00012194,"InChI=1S/C9H6N2O2/c12-9(13)8-4-3-6-7(11-8)2-1-5-10-6/h1-5H,(H,12,13)",O=C(O)c1ccc2ncccc2n1,467.8762845243794,False,['49850-62-6'],1.8355051875,0,,,
+POOL-00025963,"InChI=1S/C9H10N2O/c1-2-9-11-7-5-6(10)3-4-8(7)12-9/h3-5H,2,10H2,1H3",CCc1nc2cc(N)ccc2o1,405.8207819124433,False,['204771-75-5'],1.8499629962,0,,,
+POOL-00025518,"InChI=1S/C9H7BrN2/c10-6-1-2-9-7(5-6)8(11)3-4-12-9/h1-5H,(H2,11,12)",Nc1ccnc2ccc(Br)cc12,425.7980911891212,False,['65340-73-0'],1.8745428303,0,$308.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/bbo000153
+POOL-00006876,"InChI=1S/C9H10N2O/c1-7-3-2-4-11-5-8(6-12)10-9(7)11/h2-5,12H,6H2,1H3",Cc1cccn2cc(CO)nc12,405.8207819124433,False,['872362-98-6'],1.8311803244,0,,,
+POOL-00006446,"InChI=1S/C8H5BrN2O2/c9-5-3-6(8(12)13)7-10-1-2-11(7)4-5/h1-4H,(H,12,13)",O=C(O)c1cc(Br)cn2ccnc12,477.94880433128606,False,['903129-78-2'],1.8470474894,0,,,
+POOL-00025960,"InChI=1S/C9H10N2O/c1-6-9(12)11-8-5-3-2-4-7(8)10-6/h2-6,10H,1H3,(H,11,12)",CC1Nc2ccccc2N=C1O,333.05534964618334,False,['34070-68-3'],1.8568050535,0,$28.60/10MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r227021
+POOL-00006380,"InChI=1S/C9H8N2O2/c1-13-9(12)7-5-6-3-2-4-10-8(6)11-7/h2-5H,1H3,(H,10,11)",COC(=O)c1cc2cccnc2[nH]1,414.5663570551784,False,['394223-02-0'],1.8352112959,0,,,
+POOL-00043595,"InChI=1S/C8H8N2OS/c1-11-5-3-2-4-6-7(5)10-8(9)12-6/h2-4H,1H3,(H2,9,10)",COc1cccc2sc(=N)[nH]c12,457.2709542723538,False,['5464-79-9'],1.8536250224,0,,,
+POOL-00006777,"InChI=1S/C9H6N2O2/c12-9(13)8-10-5-6-3-1-2-4-7(6)11-8/h1-5H,(H,12,13)",O=C(O)c1ncc2ccccc2n1,467.8762845243794,False,['568630-14-8'],1.8520835018,0,,,
+POOL-00028237,"InChI=1S/C9H6N2O2/c12-9(13)8-2-1-6-5-10-4-3-7(6)11-8/h1-5H,(H,12,13)",O=C(O)c1ccc2cnccc2n1,467.8762845243794,False,['197507-59-8'],1.83459842,0,,,
+POOL-00035773,"InChI=1S/C9H7BrN2/c10-7-4-6-2-1-3-12-9(6)8(11)5-7/h1-5H,11H2",Nc1cc(Br)cc2cccnc12,425.7980911891212,False,['57339-57-8'],1.8671802805,0,$44.00/100 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/chemscenellc/ciah9884f546?context=bbe
+POOL-00037798,"InChI=1S/C9H10N2O/c1-6(12)9-10-7-4-2-3-5-8(7)11-9/h2-6,12H,1H3,(H,10,11)",CC(O)c1nc2ccccc2[nH]1,359.082794894873,False,"['19018-24-7', '860187-76-4']",1.8449431445,0,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s30148
+POOL-00005228,"InChI=1S/C9H10N2O/c1-6-3-2-4-7-9(6)11-8(5-10)12-7/h2-4H,5,10H2,1H3",Cc1cccc2oc(CN)nc12,405.8207819124433,False,['1177323-15-7'],1.8598806056,0,,,
+POOL-00004325,"InChI=1S/C7H6N2O2S/c1-4-5(6(10)11)12-7-8-2-3-9(4)7/h2-3H,1H3,(H,10,11)",Cc1c(C(=O)O)sc2nccn12,443.13180607185245,False,['1017273-59-4'],1.8388851878,0,,,
+POOL-00006245,"InChI=1S/C8H5BrN2O2/c9-6-5-3-1-2-4-11(5)10-7(6)8(12)13/h1-4H,(H,12,13)",O=C(O)c1nn2ccccc2c1Br,477.94880433128606,False,['876379-77-0'],1.863584737,0,,,
+POOL-00007494,"InChI=1S/C8H10N2O2/c11-8(12)6-5-9-10-4-2-1-3-7(6)10/h5H,1-4H2,(H,11,12)",O=C(O)c1cnn2c1CCCC2,316.857803832792,False,['307307-97-7'],1.8306777617,0,,,
+POOL-00028208,"InChI=1S/C9H6N2O2/c12-9(13)7-4-3-6-2-1-5-10-8(6)11-7/h1-5H,(H,12,13)",O=C(O)c1ccc2cccnc2n1,467.8762845243794,False,['215523-34-5'],1.8408704609,0,,,
+POOL-00007693,"InChI=1S/C9H10N2O/c12-9-6-10-8-4-2-1-3-7(8)5-11-9/h1-4,10H,5-6H2,(H,11,12)",OC1=NCc2ccccc2NC1,320.05950344595533,False,['168080-43-1'],1.8650192788,0,,,
+POOL-00034775,"InChI=1S/C9H8N2O2/c12-9(13)5-7-6-11-4-2-1-3-8(11)10-7/h1-4,6H,5H2,(H,12,13)",O=C(O)Cc1cn2ccccc2n1,414.5663570551784,False,['19741-30-1'],1.8333299269,0,,,
+POOL-00036066,"InChI=1S/C9H6N2O2/c12-9(13)8-5-10-6-3-1-2-4-7(6)11-8/h1-5H,(H,12,13)",O=C(O)c1cnc2ccccc2n1,467.8762845243794,False,['879-65-2'],1.8456903008,0,$110.00/500 MG,"Only 4 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/293407
+POOL-00031863,"InChI=1S/C9H10N2O/c1-6-2-3-7-8(4-6)11-9(5-12)10-7/h2-4,12H,5H2,1H3,(H,10,11)",Cc1ccc2nc(CO)[nH]c2c1,405.8207819124433,False,['20034-02-0'],1.8673779613,0,,,
+POOL-00012153,"InChI=1S/C10H6N2O/c11-5-7-6-12-10(13)9-4-2-1-3-8(7)9/h1-4,6H,(H,12,13)",N#Cc1c[nH]c(=O)c2ccccc12,548.5886805642934,False,['53000-96-7'],1.8225970003,0,$81.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph009623
+POOL-00023552,"InChI=1S/C10H10N2/c11-7-9-6-5-8-3-1-2-4-10(8)12-9/h1-6H,7,11H2",NCc1ccc2ccccc2n1,395.7156418352572,False,['5760-20-3'],1.8407615822,0,$90.00/250 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/lifechemicalsinc/lif432341540?context=bbe
+POOL-00009875,"InChI=1S/C8H5BrN2O2/c9-7-6(8(12)13)10-5-3-1-2-4-11(5)7/h1-4H,(H,12,13)",O=C(O)c1nc2ccccn2c1Br,477.94880433128606,False,['354548-73-5'],1.862843415,0,,,
+POOL-00010698,"InChI=1S/C8H5F3N2O/c9-8(10,11)5-3-1-2-4-6(5)14-13-7(4)12/h1-3H,(H2,12,13)",N=c1[nH]oc2c(C(F)(F)F)cccc12,523.1012929492241,False,['229623-52-3'],1.830141395,0,,,
+POOL-00024639,"InChI=1S/C10H10N2/c1-11-6-8-7-12-10-5-3-2-4-9(8)10/h2-7,12H,1H3",CN=Cc1c[nH]c2ccccc12,412.4507302664076,False,['22980-06-9'],1.8266780048,0,$134.00/1 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph003895
+POOL-00006705,"InChI=1S/C9H6N2O2/c12-9(13)6-4-8-7(11-5-6)2-1-3-10-8/h1-5H,(H,12,13)",O=C(O)c1cnc2cccnc2c1,467.8762845243794,False,['90418-64-7'],1.8416376211,0,,,
+POOL-00038986,"InChI=1S/C8H8N2OS/c1-11-5-2-3-7-6(4-5)10-8(9)12-7/h2-4H,1H3,(H2,9,10)",COc1ccc2sc(=N)[nH]c2c1,457.2709542723538,False,['54346-87-1'],1.8574115993,0,,,
+POOL-00031778,"InChI=1S/C9H6N2O2/c12-9(13)6-1-2-7-8(5-6)11-4-3-10-7/h1-5H,(H,12,13)",O=C(O)c1ccc2nccnc2c1,467.8762845243794,False,['6925-00-4'],1.8306582277,0,,,
+POOL-00028364,"InChI=1S/C8H8N2OS/c9-3-6-5-1-2-11-4-7(5)12-8(6)10/h1-2,4,10H2",N#Cc1c(N)sc2c1CCOC2,350.67521303611494,False,['150986-82-6'],1.8426094602,0,,,
+POOL-00011972,"InChI=1S/C9H8N2O2/c12-9(13)6-11-5-7-3-1-2-4-8(7)10-11/h1-5H,6H2,(H,12,13)",O=C(O)Cn1cc2ccccc2n1,414.5663570551784,False,['58037-05-1'],1.833237289,0,,,
+POOL-00020859,"InChI=1S/C8H7BrN2O/c9-5-1-2-6-7(3-5)11-8(4-12)10-6/h1-3,12H,4H2,(H,10,11)",OCc1nc2ccc(Br)cc2[nH]1,410.3501069254241,False,['540516-28-7'],1.8503314866,0,$67.10/1 g,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/chemscenellc/ciah987ee68a?context=bbe
+POOL-00006898,"InChI=1S/C9H6N2O2/c12-9(13)7-3-6-4-10-2-1-8(6)11-5-7/h1-5H,(H,12,13)",O=C(O)c1cnc2ccncc2c1,467.8762845243794,False,['1017793-59-7'],1.8345715146,0,,,
+POOL-00007931,"InChI=1S/C9H10N2O/c10-6-5-9-11-7-3-1-2-4-8(7)12-9/h1-4H,5-6,10H2",NCCc1nc2ccccc2o1,347.6639128453302,False,['623553-29-7'],1.8257093734,0,,,
+POOL-00015991,"InChI=1S/C9H8N2O2/c12-9(13)6-11-8-4-2-1-3-7(8)5-10-11/h1-5H,6H2,(H,12,13)",O=C(O)Cn1ncc2ccccc21,447.5663570551784,False,['32829-25-7'],1.8332962796,0,,,
+POOL-00043136,"InChI=1S/C8H8N2OS/c1-11-5-2-3-6-7(4-5)12-8(9)10-6/h2-4H,1H3,(H2,9,10)",COc1ccc2[nH]c(=N)sc2c1,457.2709542723538,False,['1747-60-0'],1.8525785985,0,,,
+POOL-00007522,"InChI=1S/C9H6N2O3/c12-5-7-3-6-4-8(11(13)14)1-2-9(6)10-7/h1-5,10H",O=Cc1cc2cc([N+](=O)[O-])ccc2[nH]1,515.7514657886744,False,['41019-02-7'],1.8373397921,0,$134.00/25 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph007996
+POOL-00029033,"InChI=1S/C9H6N2S/c10-5-8-9(11)6-3-1-2-4-7(6)12-8/h1-4H,11H2",N#Cc1sc2ccccc2c1N,464.823537986798,False,['34761-14-3'],1.8523238208,0,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t138746
+POOL-00007298,"InChI=1S/C8H5F3N2/c9-8(10,11)6-1-2-7-5(3-6)4-12-13-7/h1-4H,(H,12,13)",FC(F)(F)c1ccc2[nH]ncc2c1,430.12691417070425,False,['885271-64-7'],1.8271387004,0,,,
+POOL-00013938,"InChI=1S/C10H10N2/c11-6-8-5-9-3-1-2-4-10(9)12-7-8/h1-5,7H,6,11H2",NCc1cnc2ccccc2c1,395.7156418352572,False,['7521-70-2'],1.8252860019,0,,,
+POOL-00034759,"InChI=1S/C9H8N2O2/c10-9(12)5-7-6-3-1-2-4-8(6)13-11-7/h1-4H,5H2,(H2,10,12)",N=C(O)Cc1noc2ccccc12,447.5663570551784,False,['23008-68-6'],1.8451817857,0,,,
+POOL-00001656,"InChI=1S/C8H5BrN2O2/c9-5-1-2-11-6(3-5)4-7(10-11)8(12)13/h1-4H,(H,12,13)",O=C(O)c1cc2cc(Br)ccn2n1,477.94880433128606,False,['1363381-10-5'],1.8355113522,0,"$1,130.00/1 G","Estimated to ship on June 30, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/phb00208
+POOL-00007650,"InChI=1S/C9H8N2O2/c1-13-9(12)8-5-7-6(11-8)3-2-4-10-7/h2-5,11H,1H3",COC(=O)c1cc2ncccc2[nH]1,414.5663570551784,False,['394223-19-9'],1.8352001327,0,,,
+POOL-00029588,"InChI=1S/C8H8N2OS/c1-4-3-6-7(11)9-5(2)10-8(6)12-4/h3H,1-2H3,(H,9,10,11)",Cc1nc(O)c2cc(C)sc2n1,435.7956353456874,False,['79927-75-6'],1.8265936227,0,$138.00/5MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t324116
+POOL-00012306,"InChI=1S/C9H6N2O2/c12-9(13)8-6-2-1-4-10-7(6)3-5-11-8/h1-5H,(H,12,13)",O=C(O)c1nccc2ncccc12,462.6262845243794,False,['74048-24-1'],1.8413131393,0,,,
+POOL-00026868,"InChI=1S/C7H4N2O2S/c10-7(11)4-2-1-3-5-6(4)9-12-8-5/h1-3H,(H,10,11)",O=C(O)c1cccc2nsnc12,437.653925895611,False,"['3529-57-5', '118514-40-2']",1.8241034722,0,$208.75/250 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/astatechinc/ate428007114?context=bbe
+POOL-00010870,"InChI=1S/C7H4N2O2S/c10-7(11)4-2-1-3-5-6(4)12-9-8-5/h1-3H,(H,10,11)",O=C(O)c1cccc2nnsc12,437.653925895611,False,['35272-27-6'],1.8268682094,0,$295.00/50 MG,"Only 2 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/sial/35371
+POOL-00027758,"InChI=1S/C7H5BrN2S/c8-4-2-1-3-5-6(4)10-7(9)11-5/h1-3H,(H2,9,10)",N=c1[nH]c2c(Br)cccc2s1,442.88245407860506,False,['20358-02-5'],1.8389306065,0,,,
+POOL-00010482,"InChI=1S/C9H7BrN2/c10-7-1-2-9-6(3-7)4-8(11)5-12-9/h1-5H,11H2",Nc1cnc2ccc(Br)cc2c1,389.0480911891211,False,['930570-31-3'],1.8624888041,0,$142.80/50 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/jwpharmlabllc/jwph3249eb65?context=bbe
+POOL-00024054,"InChI=1S/C7H8N2O2S/c1-4-5(6(10)11)12-7-8-2-3-9(4)7/h2-3H2,1H3,(H,10,11)",CC1=C(C(=O)O)SC2=NCCN21,308.5282367982369,False,['762178-13-2'],1.8290743517,0,,,
+POOL-00031198,"InChI=1S/C7H4N2O2S/c10-7(11)4-1-2-5-6(3-4)9-12-8-5/h1-3H,(H,10,11)",O=C(O)c1ccc2nsnc2c1,437.653925895611,False,['16405-98-4'],1.8230999611,0,$115.00/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/accelachembioinc/ac5947208239?context=bbe
+POOL-00023113,"InChI=1S/C8H9F3N2/c9-8(10,11)7-5-3-1-2-4-6(5)12-13-7/h1-4H2,(H,12,13)",FC(F)(F)c1n[nH]c2c1CCCC2,313.67930765348194,False,"['35179-55-6', '890005-22-8']",1.8447186684,0,,,
+POOL-00031699,"InChI=1S/C8H8N2OS/c1-11-5-2-3-6-7(4-5)10-8(12)9-6/h2-4H,1H3,(H2,9,10,12)",COc1ccc2nc(S)[nH]c2c1,410.3501069254241,False,['37052-78-1'],1.8703231568,0,$556.00/30 MG,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/sial/phr1986
+POOL-00013096,"InChI=1S/C7H5BrN2S/c8-4-1-2-6-5(3-4)10-7(9)11-6/h1-3H,(H2,9,10)",N=c1[nH]c2cc(Br)ccc2s1,442.88245407860506,False,['20358-03-6'],1.8339533062,0,$39.50/1 G,"Estimated to ship on June 22, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/647683
+POOL-00003579,"InChI=1S/C10H10N2/c1-2-8-6-9(7-3-4-7)12-10(8)11-5-1/h1-2,5-7H,3-4H2,(H,11,12)",c1cnc2[nH]c(C3CC3)cc2c1,379.4507302664077,False,['1014613-50-3'],1.8279043433,0,,,
+POOL-00022668,"InChI=1S/C7H4BrFN2S/c8-3-1-4(9)6-5(2-3)12-7(10)11-6/h1-2H,(H2,10,11)",N=c1[nH]c2c(F)cc(Br)cc2s1,487.60229983295005,False,['383131-45-1'],1.8580337871,0,$463.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cbr00095
+POOL-00041359,"InChI=1S/C7H5BrN2S/c8-4-1-2-5-6(3-4)11-7(9)10-5/h1-3H,(H2,9,10)",N=c1[nH]c2ccc(Br)cc2s1,442.88245407860506,False,['15864-32-1'],1.8334839494,0,$28.60/1 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/538507
+POOL-00039362,"InChI=1S/C11H8N2/c1-2-4-10-8(3-1)9-5-6-12-7-11(9)13-10/h1-7,13H",c1ccc2c(c1)[nH]c1cnccc12,515.8499381135529,False,"['244-63-3', '244-66-6']",1.825151119,0,$45.90/100 MG,"Only 4 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/sigma/n6252
+POOL-00036909,"InChI=1S/C11H8N2/c1-2-4-10-8(3-1)9-7-12-6-5-11(9)13-10/h1-7,13H",c1ccc2c(c1)[nH]c1ccncc12,515.8499381135529,False,['244-69-9'],1.8293592537,0,$134.00/1 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph002886
+POOL-00039565,"InChI=1S/C11H8N2/c1-2-6-10-8(4-1)9-5-3-7-12-11(9)13-10/h1-7H,(H,12,13)",c1ccc2c(c1)[nH]c1ncccc12,515.8499381135529,False,['244-76-8'],1.8231470895,0,$134.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph007339
+POOL-00014853,"InChI=1S/C7H4N2O2S/c10-7(11)5-3-4-6(12-5)9-2-1-8-4/h1-3H,(H,10,11)",O=C(O)c1cc2nccnc2s1,404.653925895611,False,['59944-79-5'],1.8241795492,0,,,
+POOL-00016063,"InChI=1S/C11H8N2/c1-2-5-9-8(4-1)11-10(13-9)6-3-7-12-11/h1-7,13H",c1ccc2c(c1)[nH]c1cccnc12,515.8499381135529,False,['245-08-9'],1.8231270713,0,,,
+POOL-00032412,"InChI=1S/C8H8N2S/c1-5-2-3-6-7(4-5)10-8(11)9-6/h2-4H,1H3,(H2,9,10,11)",Cc1ccc2nc(S)[nH]c2c1,391.8914302020468,False,"['27231-36-3', '2360-37-4']",1.8230843936,0,$195.50/100 g,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/synthonixcorporation/sy3h6e415843?context=bbe
+POOL-00029097,"InChI=1S/C7H6N2OS2/c1-3-2-4-5(10)8-7(11)9-6(4)12-3/h2H,1H3,(H2,8,9,10,11)",Cc1cc2c(O)nc(S)nc2s1,438.14415089128414,False,['38201-63-7'],1.871642543,0,,,
+POOL-00029379,"InChI=1S/C13H12FNO2S/c1-10-2-8-13(9-3-10)18(16,17)15-12-6-4-11(14)5-7-12/h2-9,15H,1H3",Cc1ccc(S(=O)(=O)Nc2ccc(F)cc2)cc1,633.6963912229312,False,['727-31-1'],1.8417798748,1,$28.60/25MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r175323
+POOL-00012700,"InChI=1S/C14H10F3NO/c15-14(16,17)10-6-7-12(18)11(8-10)13(19)9-4-2-1-3-5-9/h1-8H,18H2",Nc1ccc(C(F)(F)F)cc1C(=O)c1ccccc1,605.8332962041515,False,['732-34-3'],1.8336884902,1,$134.00/5 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph006459
+POOL-00033470,"InChI=1S/C14H10F3NO/c15-14(16,17)11-6-2-3-7-12(11)18-9-10-5-1-4-8-13(10)19/h1-9,19H",Oc1ccccc1C=Nc1ccccc1C(F)(F)F,605.6352264399749,False,['35717-67-0'],1.833451219,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s583952
+POOL-00003817,"InChI=1S/C15H13NO3/c1-16-14(17)11-6-4-5-10(9-11)12-7-2-3-8-13(12)15(18)19/h2-9H,1H3,(H,16,17)(H,18,19)",CN=C(O)c1cccc(-c2ccccc2C(=O)O)c1,647.3438758768984,False,['1261941-21-2'],1.8981630347,1,,,
+POOL-00010379,"InChI=1S/C13H10BrNO4/c1-15(12(16)10-6-7-11(14)19-10)9-5-3-2-4-8(9)13(17)18/h2-7H,1H3,(H,17,18)",CN(C(=O)c1ccc(Br)o1)c1ccccc1C(=O)O,635.0783839270039,False,['953717-14-1'],1.8465820095,1,,,
+POOL-00034018,"InChI=1S/C16H15NO3/c1-10-7-8-14(11(2)9-10)17-15(18)12-5-3-4-6-13(12)16(19)20/h3-9H,1-2H3,(H,17,18)(H,19,20)",Cc1ccc(N=C(O)c2ccccc2C(=O)O)c(C)c1,689.8713823028047,False,['19368-16-2'],1.8296776707,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s717428
+POOL-00010411,"InChI=1S/C12H7BrFNO3/c13-9-6-7(14)3-4-10(9)18-11-8(12(16)17)2-1-5-15-11/h1-6H,(H,16,17)",O=C(O)c1cccnc1Oc1ccc(F)cc1Br,603.626436257062,False,['954563-46-3'],1.8485037599,1,,,
+POOL-00003818,"InChI=1S/C16H15NO3/c1-2-17-15(18)12-7-5-6-11(10-12)13-8-3-4-9-14(13)16(19)20/h3-10H,2H2,1H3,(H,17,18)(H,19,20)",CCN=C(O)c1cccc(-c2ccccc2C(=O)O)c1,662.2764902860007,False,['1261915-41-6'],1.8866954609,1,,,
+POOL-00034019,"InChI=1S/C14H10FNO3/c15-11-7-3-4-8-12(11)16-13(17)9-5-1-2-6-10(9)14(18)19/h1-8H,(H,16,17)(H,18,19)",O=C(O)c1ccccc1C(O)=Nc1ccccc1F,652.6442659022198,False,['19336-75-5'],1.8854777927,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s555339
+POOL-00022789,"InChI=1S/C15H12F3NO2/c16-15(17,18)13(11-7-3-1-4-8-11)21-14(20)19-12-9-5-2-6-10-12/h1-10,13H,(H,19,20)",OC(=Nc1ccccc1)OC(c1ccccc1)C(F)(F)F,597.320724306083,False,['2648-11-5'],1.8226214175,1,$28.60/25MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s184691
+POOL-00028055,"InChI=1S/C13H11NO2S/c1-9-4-6-10(7-5-9)17-12-11(13(15)16)3-2-8-14-12/h2-8H,1H3,(H,15,16)",Cc1ccc(Sc2ncccc2C(=O)O)cc1,537.3706554225115,False,['955-53-3'],1.8254998179,1,,,
+POOL-00036812,"InChI=1S/C14H12F3NOS/c1-7-8(2)20-13(18)11(7)12(19)9-4-3-5-10(6-9)14(15,16)17/h3-6H,18H2,1-2H3",Cc1sc(N)c(C(=O)c2cccc(C(F)(F)F)c2)c1C,673.5439190102028,False,['132861-87-1'],1.8310942897,1,,,
+POOL-00030292,"InChI=1S/C15H14FNO3/c1-19-10-7-8-14(20-2)13(9-10)17-15(18)11-5-3-4-6-12(11)16/h3-9H,1-2H3,(H,17,18)",COc1ccc(OC)c(N=C(O)c2ccccc2F)c1,640.7657944113673,False,['198139-95-6'],1.8378605622,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s694754
+POOL-00020746,"InChI=1S/C14H9F2NO3/c15-8-5-6-12(11(16)7-8)17-13(18)9-3-1-2-4-10(9)14(19)20/h1-7H,(H,17,18)(H,19,20)",O=C(O)c1ccccc1C(O)=Nc1ccc(F)cc1F,698.5684133939982,False,['198124-09-3'],1.8429566207,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s739855
+POOL-00024694,"InChI=1S/C12H10FNO2S/c1-7-14-12(10(17-7)6-11(15)16)8-2-4-9(13)5-3-8/h2-5H,6H2,1H3,(H,15,16)",Cc1nc(-c2ccc(F)cc2)c(CC(=O)O)s1,548.1333138297032,False,['568543-71-5'],1.8923023147,1,,,
+POOL-00029039,"InChI=1S/C16H14FNO3/c1-2-21-16(20)11-7-9-12(10-8-11)18-15(19)13-5-3-4-6-14(13)17/h3-10H,2H2,1H3,(H,18,19)",CCOC(=O)c1ccc(NC(=O)c2ccccc2F)cc1,652.8265942666073,False,['314766-38-6'],1.8671551539,1,,,
+POOL-00024459,"InChI=1S/C14H9BrF3NO/c15-11-5-2-6-12(8-11)19-13(20)9-3-1-4-10(7-9)14(16,17)18/h1-8H,(H,19,20)",OC(=Nc1cccc(Br)c1)c1cccc(C(F)(F)F)c1,652.8624300402118,False,['710310-54-6'],1.8264485481,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r130362
+POOL-00034020,"InChI=1S/C16H15NO3/c1-10-7-8-11(2)14(9-10)17-15(18)12-5-3-4-6-13(12)16(19)20/h3-9H,1-2H3,(H,17,18)(H,19,20)",Cc1ccc(C)c(N=C(O)c2ccccc2C(=O)O)c1,689.8713823028047,False,['19368-17-3'],1.8711842816,1,,,
+POOL-00030274,"InChI=1S/C14H9BrF3NO/c15-11-4-6-12(7-5-11)19-13(20)9-2-1-3-10(8-9)14(16,17)18/h1-8H,(H,19,20)",O=C(Nc1ccc(Br)cc1)c1cccc(C(F)(F)F)c1,623.0612969345251,False,['562080-79-9'],1.8415693836,1,$172.00/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r130257
+POOL-00037662,"InChI=1S/C14H13NO2/c1-10(16)15-12-7-8-14(17)13(9-12)11-5-3-2-4-6-11/h2-9,17H,1H3,(H,15,16)",CC(O)=Nc1ccc(O)c(-c2ccccc2)c1,543.4035973914794,False,['29785-41-9'],1.8610146442,1,$81.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph007947
+POOL-00032582,"InChI=1S/C15H12O4/c1-10(16)19-14-12(11-6-3-2-4-7-11)8-5-9-13(14)15(17)18/h2-9H,1H3,(H,17,18)",CC(=O)Oc1c(C(=O)O)cccc1-c1ccccc1,617.297630273375,False,['60821-26-3'],1.8439463355,1,,,
+POOL-00024466,"InChI=1S/C15H14O3/c1-11-5-4-6-12(9-11)10-18-14-8-3-2-7-13(14)15(16)17/h2-9H,10H2,1H3,(H,16,17)",Cc1cccc(COc2ccccc2C(=O)O)c1,561.1701015887004,False,['744242-83-9'],1.9282366079,1,,,
+POOL-00041858,"InChI=1S/C14H12O3S/c1-9(14(16)17)11-7-8-12(18-11)13(15)10-5-3-2-4-6-10/h2-9H,1H3,(H,16,17)",CC(C(=O)O)c1ccc(C(=O)c2ccccc2)s1,571.7348569747639,False,['33005-95-7'],1.8974015667,1,$149.00/nan,"Estimated to ship on June 16, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/sial/t1410900
+POOL-00032287,"InChI=1S/C13H9BrFNO/c14-10-4-5-13(17)9(6-10)8-16-12-3-1-2-11(15)7-12/h1-8,17H",Oc1ccc(Br)cc1C=Nc1cccc(F)c1,569.0959624622881,False,['329935-95-7'],1.833909902,1,,,
+POOL-00034032,"InChI=1S/C12H10FNO2S/c13-10-6-8-11(9-7-10)14-17(15,16)12-4-2-1-3-5-12/h1-9,14H",O=S(=O)(Nc1ccc(F)cc1)c1ccccc1,594.1625722468401,False,['312-63-0'],1.8554400189,1,,,
+POOL-00027905,"InChI=1S/C14H12N2O3/c1-10-6-2-4-8-12(10)15-14(17)11-7-3-5-9-13(11)16(18)19/h2-9H,1H3,(H,15,17)",Cc1ccccc1N=C(O)c1ccccc1[N+](=O)[O-],650.6442659022198,False,['2385-25-3'],1.8290906231,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r588970
+POOL-00022771,"InChI=1S/C14H12O3S/c15-14(16)12-8-4-5-9-13(12)18(17)10-11-6-2-1-3-7-11/h1-9H,10H2,(H,15,16)",O=C(O)c1ccccc1S(=O)Cc1ccccc1,578.6027923612364,False,['28175-35-1'],1.8228520511,1,,,
+POOL-00037445,"InChI=1S/C15H11F3O2S/c16-15(17,18)11-6-7-13(12(8-11)14(19)20)21-9-10-4-2-1-3-5-10/h1-8H,9H2,(H,19,20)",O=C(O)c1cc(C(F)(F)F)ccc1SCc1ccccc1,639.1121439954974,False,['24156-14-7'],1.8760453945,1,$81.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph003289
+POOL-00001512,"InChI=1S/C12H11BrN2O3/c1-2-17-12(16)10-9(11(14)18-15-10)7-3-5-8(13)6-4-7/h3-6H,2,14H2,1H3",CCOC(=O)c1noc(N)c1-c1ccc(Br)cc1,563.2015417499622,False,['925007-20-1'],1.9127212871,1,"$70.20
+$21.06/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/717886
+POOL-00008150,"InChI=1S/C15H13F2NO/c16-12-5-3-4-11(10-12)8-9-15(19)18-14-7-2-1-6-13(14)17/h1-7,10H,8-9H2,(H,18,19)",OC(CCc1cccc(F)c1)=Nc1ccccc1F,596.2043750653814,False,['853313-49-2'],1.836946837,1,$68.10/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t103675
+POOL-00013599,"InChI=1S/C14H14FNO/c1-16-10-11-4-2-3-5-14(11)17-13-8-6-12(15)7-9-13/h2-9,16H,10H2,1H3",CNCc1ccccc1Oc1ccc(F)cc1,481.8358125246547,False,['833482-53-4'],1.8307429517,1,,,
+POOL-00003966,"InChI=1S/C13H9FN2O3/c14-10-7-4-8-11(16(18)19)12(10)13(17)15-9-5-2-1-3-6-9/h1-8H,(H,15,17)",O=[N+]([O-])c1cccc(F)c1C(O)=Nc1ccccc1,641.5915184751921,False,['870281-83-7'],1.8332607281,1,,,
+POOL-00022654,"InChI=1S/C13H12F3NO2/c1-7-10(8-5-3-4-6-9(8)17-7)11(12(18)19-2)13(14,15)16/h3-6,11,17H,1-2H3",COC(=O)C(c1c(C)[nH]c2ccccc12)C(F)(F)F,615.8661217265973,False,['252729-32-1'],1.8233239082,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r267910
+POOL-00033270,"InChI=1S/C14H12O2S/c15-14(16)12-8-4-5-9-13(12)17-10-11-6-2-1-3-7-11/h1-9H,10H2,(H,15,16)",O=C(O)c1ccccc1SCc1ccccc1,508.6404762859226,False,['1531-80-2'],1.9098529645,1,$106.00/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r415588
+POOL-00001586,"InChI=1S/C13H10F5NOS/c14-21(15,16,17,18)10-6-7-12(19)11(8-10)13(20)9-4-2-1-3-5-9/h1-8H,19H2",Nc1ccc(S(F)(F)(F)(F)F)cc1C(=O)c1ccccc1,712.6528472935307,False,['1379811-86-5'],2.0282682682,1,,,
+POOL-00007655,"InChI=1S/C13H7BrF3NO2/c14-6-1-4-10(9(16)5-6)18-12-7(13(19)20)2-3-8(15)11(12)17/h1-5,18H,(H,19,20)",O=C(O)c1ccc(F)c(F)c1Nc1ccc(Br)cc1F,691.5567530860632,False,['391212-04-7'],1.851386604,1,,,
+POOL-00036619,"InChI=1S/C13H13NO3/c1-2-17-13(16)14-12-5-3-4-9-6-7-10(15)8-11(9)12/h3-8,15H,2H2,1H3,(H,14,16)",CCOC(O)=Nc1cccc2ccc(O)cc12,563.5931721470813,False,['68214-72-2'],1.8348529839,1,$28.60/25MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l157740
+POOL-00024483,"InChI=1S/C11H9FN2O2S/c1-17-11-13-6-9(10(15)16)14(11)8-4-2-7(12)3-5-8/h2-6H,1H3,(H,15,16)",CSc1ncc(C(=O)O)n1-c1ccc(F)cc1,551.0991160333468,False,['750598-95-9'],1.8252286154,1,,,
+POOL-00006370,"InChI=1S/C14H17NO3/c1-3-4-8-18-13-7-5-6-11-10(13)9-12(15-11)14(16)17-2/h5-7,9,15H,3-4,8H2,1-2H3",CCCCOc1cccc2[nH]c(C(=O)OC)cc12,544.9627219182454,False,['887360-12-5'],1.8998900221,1,,,
+POOL-00019125,"InChI=1S/C14H12N2O4/c17-14(15-12-4-2-1-3-5-12)20-10-11-6-8-13(9-7-11)16(18)19/h1-9H,10H2,(H,15,17)",O=[N+]([O-])c1ccc(COC(O)=Nc2ccccc2)cc1,608.8308469431789,False,['74109-32-3'],1.8663066949,1,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s595365
+POOL-00030567,"InChI=1S/C14H12O3/c15-9-12-6-7-13(8-14(12)16)17-10-11-4-2-1-3-5-11/h1-9,16H,10H2",O=Cc1ccc(OCc2ccccc2)cc1O,506.1307012815957,False,['52085-14-0'],1.8478859498,1,,,
+POOL-00022944,"InChI=1S/C13H10O3S/c14-12(15)8-10-6-7-11(17-10)13(16)9-4-2-1-3-5-9/h1-7H,8H2,(H,14,15)",O=C(O)Cc1ccc(C(=O)c2ccccc2)s1,542.8020350046863,False,['33006-00-7'],1.8467690645,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r128821
+POOL-00032347,"InChI=1S/C16H17NO2/c1-11-8-12(2)10-14(9-11)17-16(18)13-4-6-15(19-3)7-5-13/h4-10H,1-3H3,(H,17,18)",COc1ccc(C(=O)Nc2cc(C)cc(C)c2)cc1,567.9479703531082,False,['127291-98-9'],1.8720362643,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r574570
+POOL-00024469,"InChI=1S/C15H12F2O2S/c16-12-5-1-10(2-6-12)15(20-9-14(18)19)11-3-7-13(17)8-4-11/h1-8,15H,9H2,(H,18,19)",O=C(O)CSC(c1ccc(F)cc1)c1ccc(F)cc1,536.3274380634631,False,['90212-81-0'],1.8486749254,1,,,
+POOL-00017306,"InChI=1S/C12H12N2O2S/c1-9(11(15)16)17-12-13-7-8-14(12)10-5-3-2-4-6-10/h2-9H,1H3,(H,15,16)",CC(Sc1nccn1-c1ccccc1)C(=O)O,510.23399740425407,False,['478046-20-7'],1.8378706023,1,,,
+POOL-00024457,"InChI=1S/C15H14O2S/c16-14(17)11-18-15(12-7-3-1-4-8-12)13-9-5-2-6-10-13/h1-10,15H,11H2,(H,16,17)",O=C(O)CSC(c1ccccc1)c1ccccc1,456.91675548747065,False,['63547-22-8'],1.8253217852,1,$134.00/500 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph011112
+POOL-00019877,"InChI=1S/C15H14F3O2P/c16-15(17,18)14(19)11-21(20,12-7-3-1-4-8-12)13-9-5-2-6-10-13/h1-10,14,19H,11H2",O=P(CC(O)C(F)(F)F)(c1ccccc1)c1ccccc1,582.8719189998244,False,['123271-28-3'],1.9284776737,1,$28.60/10MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s179124
+POOL-00023811,"InChI=1S/C16H19NO4/c1-10(18)11-6-8-12(9-7-11)17-15(19)13-4-2-3-5-14(13)16(20)21/h6-9,13-14H,2-5H2,1H3,(H,17,19)(H,20,21)",CC(=O)c1ccc(NC(=O)C2CCCCC2C(=O)O)cc1,549.9003333222288,False,['324061-21-4'],1.8800046919,1,,,
+POOL-00023814,"InChI=1S/C13H8F5NO2S/c1-6-2-4-7(5-3-6)22(20,21)19-13-11(17)9(15)8(14)10(16)12(13)18/h2-5,19H,1H3",Cc1ccc(S(=O)(=O)Nc2c(F)c(F)c(F)c(F)c2F)cc1,805.4943336495639,False,['118841-85-3'],1.8627860621,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s169560
+POOL-00020410,"InChI=1S/C16H13F4NO/c17-13-5-1-11(2-6-13)15(22)9-10-21-14-7-3-12(4-8-14)16(18,19)20/h1-8,21H,9-10H2",O=C(CCNc1ccc(C(F)(F)F)cc1)c1ccc(F)cc1,632.6905364961106,False,['477334-16-0'],1.8757712131,1,,,
+POOL-00031741,"InChI=1S/C14H10FNO3/c15-10-2-4-11(5-3-10)16-14(17)9-1-6-12-13(7-9)19-8-18-12/h1-7H,8H2,(H,16,17)",O=C(Nc1ccc(F)cc1)c1ccc2c(c1)OCO2,625.0882452943695,False,['349415-30-1'],1.8806136676,1,,,
+POOL-00018395,"InChI=1S/C15H9F6NO/c16-14(17,18)8-5-6-11(15(19,20)21)10(7-8)13(23)9-3-1-2-4-12(9)22/h1-7H,22H2",Nc1ccccc1C(=O)c1cc(C(F)(F)F)ccc1C(F)(F)F,748.3628131887975,False,['34186-96-4'],1.9949623645,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s879606
+POOL-00002775,"InChI=1S/C13H11BrO4/c1-2-18-13(17)9-11(15)8-6-4-3-5-7(8)10(14)12(9)16/h3-6,15-16H,2H2,1H3",CCOC(=O)c1c(O)c(Br)c2ccccc2c1O,621.9076205717968,False,['100375-06-2'],1.8418155412,1,$134.00/1 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph003600
+POOL-00025197,"InChI=1S/C12H11F3N2S/c13-12(14,15)11-7-10(18-6-5-16)8-3-1-2-4-9(8)17-11/h1-4,7H,5-6,16H2",NCCSc1cc(C(F)(F)F)nc2ccccc12,554.5040870449965,False,['175203-50-6'],1.8502795725,1,,,
+POOL-00022105,"InChI=1S/C15H14O5/c1-19-15(18)11-7-12(16)14(17)13(8-11)20-9-10-5-3-2-4-6-10/h2-8,16-17H,9H2,1H3",COC(=O)c1cc(O)c(O)c(OCc2ccccc2)c1,607.1609798510394,False,['79831-86-0'],1.8511054469,1,,,
+POOL-00034996,"InChI=1S/C14H10N2O/c15-10-14(11-4-2-1-3-5-11)12-6-8-13(16-17)9-7-12/h1-9,17H",N#CC(=C1C=CC(=NO)C=C1)c1ccccc1,553.9898150707321,False,['888-39-1'],1.8486337791,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s350869
+POOL-00033835,"InChI=1S/C13H9NO5/c15-13(16)9-1-5-11(6-2-9)19-12-7-3-10(4-8-12)14(17)18/h1-8H,(H,15,16)",O=C(O)c1ccc(Oc2ccc([N+](=O)[O-])cc2)cc1,548.4356323972319,False,['16309-45-8'],1.8449902257,1,$56.00/1 G,"Estimated to ship on June 22, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/659479
+POOL-00031521,"InChI=1S/C15H9F6NO/c16-14(17,18)10-5-11(15(19,20)21)7-12(6-10)22-8-9-3-1-2-4-13(9)23/h1-8,23H",Oc1ccccc1C=Nc1cc(C(F)(F)F)cc(C(F)(F)F)c1,701.2274524592627,False,['92175-89-8'],1.8650496554,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s649333
+POOL-00018449,"InChI=1S/C13H16O4/c1-8(2)9(3)17-13(16)11-7-5-4-6-10(11)12(14)15/h4-9H,1-3H3,(H,14,15)",CC(C)C(C)OC(=O)c1ccccc1C(=O)O,423.1825683848336,False,['198284-10-5'],1.8437765855,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s793493
+POOL-00032278,"InChI=1S/C15H9F6NO/c16-14(17,18)10-6-11(15(19,20)21)8-12(7-10)22-13(23)9-4-2-1-3-5-9/h1-8H,(H,22,23)",OC(=Nc1cc(C(F)(F)F)cc(C(F)(F)F)c1)c1ccccc1,686.7323399614263,False,['192049-16-4'],1.8472538541,1,$68.10/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t109924
+POOL-00018313,"InChI=1S/C14H10N2O3/c17-13(15-10-6-2-1-3-7-10)16-11-8-4-5-9-12(11)19-14(16)18/h1-9H,(H,15,17)",O=c1oc2ccccc2n1C(O)=Nc1ccccc1,800.1740705199901,False,['7039-00-1'],1.898888105,1,$106.00/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s816183
+POOL-00031925,"InChI=1S/C14H10N2OS/c17-13(16-14-15-8-9-18-14)12-7-3-5-10-4-1-2-6-11(10)12/h1-9H,(H,15,16,17)",OC(=Nc1nccs1)c1cccc2ccccc12,699.4005533176643,False,['309734-88-1'],1.828567252,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l173134
+POOL-00016398,"InChI=1S/C16H13BrF3NO/c17-13-5-1-11(2-6-13)15(22)9-10-21-14-7-3-12(4-8-14)16(18,19)20/h1-8,21H,9-10H2",O=C(CCNc1ccc(C(F)(F)F)cc1)c1ccc(Br)cc1,635.9356489939471,False,['477334-28-4'],1.8759729001,1,$28.60/10MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l250708
+POOL-00023196,"InChI=1S/C12H10O2S2/c13-12(14)10-4-1-3-9(7-10)8-16-11-5-2-6-15-11/h1-7H,8H2,(H,13,14)",O=C(O)c1cccc(CSc2cccs2)c1,477.52379958204847,False,['845266-20-8'],1.8236357635,1,,,
+POOL-00016546,"InChI=1S/C15H13NO3/c17-15(16-18)19-9-14-12-7-3-1-5-10(12)11-6-2-4-8-13(11)14/h1-8,14,18H,9H2,(H,16,17)",ON=C(O)OCC1c2ccccc2-c2ccccc21,591.2927427712116,False,['190656-01-0'],1.8304182002,1,,,
+POOL-00035495,"InChI=1S/C15H22O3/c1-14(2,3)9-7-10(13(17)18)12(16)11(8-9)15(4,5)6/h7-8,16H,1-6H3,(H,17,18)",CC(C)(C)c1cc(C(=O)O)c(O)c(C(C)(C)C)c1,473.7376856292587,False,['19715-19-6'],1.8989800422,1,$49.20/5 G,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/149136
+POOL-00032430,"InChI=1S/C13H10F2N2S/c14-9-5-1-3-7-11(9)16-13(18)17-12-8-4-2-6-10(12)15/h1-8H,(H2,16,17,18)",Fc1ccccc1N=C(S)Nc1ccccc1F,584.7088567442288,False,['368-05-8'],1.8618766805,1,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s675032
+POOL-00018568,"InChI=1S/C13H13F3N2O2S2/c1-7-4-8(2)11(9(3)5-7)22(19,20)18-12-17-10(6-21-12)13(14,15)16/h4-6H,1-3H3,(H,17,18)",Cc1cc(C)c(S(=O)(=O)Nc2nc(C(F)(F)F)cs2)c(C)c1,787.92807470922,False,['330677-38-8'],1.8689703159,1,$106.00/10MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r567779
+POOL-00017259,"InChI=1S/C15H10F6N2O/c16-14(17,18)9-6-10(15(19,20)21)8-12(7-9)23-13(24)22-11-4-2-1-3-5-11/h1-8H,(H2,22,23,24)",OC(=Nc1ccccc1)Nc1cc(C(F)(F)F)cc(C(F)(F)F)c1,705.6148757189574,False,['6528-01-4'],1.8329533709,1,,,
+POOL-00037787,"InChI=1S/C15H10F6N2/c16-14(17,18)10-3-1-5-12(7-10)22-9-23-13-6-2-4-11(8-13)15(19,20)21/h1-9H,(H,22,23)",FC(F)(F)c1cccc(N=CNc2cccc(C(F)(F)F)c2)c1,703.5986688980879,False,['16659-14-6'],1.8302033601,1,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s878618
+POOL-00042881,"InChI=1S/C12H12N2S2/c13-9-1-5-11(6-2-9)15-16-12-7-3-10(14)4-8-12/h1-8H,13-14H2",Nc1ccc(SSc2ccc(N)cc2)cc1,405.9499059485861,False,"['722-27-0', '6961-89-3']",1.8594066947,1,$102.00/5 G,"Available to ship on May 25, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/369462
+POOL-00034430,"InChI=1S/C17H18N2O5S/c1-3-24-17(21)13-4-6-15(7-5-13)19-25(22,23)16-10-8-14(9-11-16)18-12(2)20/h4-11,19H,3H2,1-2H3,(H,18,20)",CCOC(=O)c1ccc(NS(=O)(=O)c2ccc(N=C(C)O)cc2)cc1,868.2591553059208,False,['89113-20-2'],1.8439235174,1,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s676756
+POOL-00025133,"InChI=1S/C8H9NO3/c1-12-6-4-2-3-5(9)7(6)8(10)11/h2-4H,9H2,1H3,(H,10,11)",COc1cccc(N)c1C(=O)O,309.1713244639388,False,['53600-33-2'],1.8435829726,2,,,
+POOL-00009403,"InChI=1S/C8H8FNO2/c1-4-6(9)3-2-5(7(4)10)8(11)12/h2-3H,10H2,1H3,(H,11,12)",Cc1c(F)ccc(C(=O)O)c1N,336.0748996548373,False,['129833-28-9'],1.8248374012,2,,,
+POOL-00033520,"InChI=1S/C8H9NO3/c1-12-5-2-3-7(9)6(4-5)8(10)11/h2-4H,9H2,1H3,(H,10,11)",COc1ccc(N)c(C(=O)O)c1,309.1713244639388,False,['6705-03-9'],1.8413193222,2,$80.90/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/665118
+POOL-00026511,"InChI=1S/C8H8FNO2/c9-6-3-5(4-8(11)12)1-2-7(6)10/h1-3H,4,10H2,(H,11,12)",Nc1ccc(CC(=O)O)cc1F,311.92621196610224,False,['503315-77-3'],1.8293695434,2,,,
+POOL-00040319,"InChI=1S/C8H8O4/c1-12-8(11)5-2-6(9)4-7(10)3-5/h2-4,9-10H,1H3",COC(=O)c1cc(O)cc(O)c1,285.6762119661022,False,['2150-44-9'],1.8357790524,2,$55.50/25 G,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/159603
+POOL-00033029,"InChI=1S/C8H9NO3/c1-12-6-4-2-3-5(7(6)9)8(10)11/h2-4H,9H2,1H3,(H,10,11)",COc1cccc(C(=O)O)c1N,309.1713244639388,False,['3177-80-8'],1.8468275234,2,,,
+POOL-00031042,"InChI=1S/C8H8O4/c1-12-6-4-2-3-5(9)7(6)8(10)11/h2-4,9H,1H3,(H,10,11)",COc1cccc(O)c1C(=O)O,305.92621196610224,False,['3147-64-6'],1.8314561046,2,$32.50/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/464139
+POOL-00005346,"InChI=1S/C8H8FNO2/c1-4-2-5(9)3-6(7(4)10)8(11)12/h2-3H,10H2,1H3,(H,11,12)",Cc1cc(F)cc(C(=O)O)c1N,336.0748996548373,False,['874804-25-8'],1.8344470777,2,,,
+POOL-00033715,"InChI=1S/C8H8O4/c1-12-8(11)5-2-3-6(9)7(10)4-5/h2-4,9-10H,1H3",COC(=O)c1ccc(O)c(O)c1,305.92621196610224,False,['2150-43-8'],1.8314272492,2,,,
+POOL-00025295,"InChI=1S/C8H7F2NO2/c9-5-2-1-4(3-6(5)10)7(11)8(12)13/h1-3,7H,11H2,(H,12,13)",NC(C(=O)O)c1ccc(F)c(F)c1,340.91595348418105,False,['225641-94-1'],1.8274857625,2,$97.75/500 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/achemblock/advh0430a572?context=bbe
+POOL-00006908,"InChI=1S/C7H6BrNO3/c8-7-5(2-1-3-9-7)12-4-6(10)11/h1-3H,4H2,(H,10,11)",O=C(O)COc1cccnc1Br,289.73490681848904,False,['118650-04-7'],1.8252039989,2,,,
+POOL-00003988,"InChI=1S/C7H6BrNO3/c1-12-5-3-2-4(8)6(9-5)7(10)11/h2-3H,1H3,(H,10,11)",COc1ccc(Br)c(C(=O)O)n1,313.5198400095355,False,['1196147-56-4'],1.8465265633,2,$128.40/50 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/jwpharmlabllc/jwph3249e4c3?context=bbe
+POOL-00031860,"InChI=1S/C7H7NO3S/c9-6(10)4-8-7(11)5-2-1-3-12-5/h1-3H,4H2,(H,8,11)(H,9,10)",O=C(O)CNC(=O)c1cccs1,280.8514121027007,False,['33955-17-8'],1.8428999791,2,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r648248
+POOL-00007134,"InChI=1S/C8H4BrNO2/c9-7-2-1-5(8(11)12)3-6(7)4-10/h1-3H,(H,11,12)",N#Cc1cc(C(=O)O)ccc1Br,367.8108766972155,False,['887757-25-7'],1.8236395647,2,,,
+POOL-00027246,"InChI=1S/C7H7NO3S/c1-4(9)8-6-5(7(10)11)2-3-12-6/h2-3H,1H3,(H,8,9)(H,10,11)",CC(O)=Nc1sccc1C(=O)O,325.14740849378177,False,['51419-38-6'],1.8249471886,2,,,
+POOL-00030406,"InChI=1S/C8H7NO4/c1-4-2-3-5(7(10)11)6(9-4)8(12)13/h2-3H,1H3,(H,10,11)(H,12,13)",Cc1ccc(C(=O)O)c(C(=O)O)n1,372.4068180287228,False,['53636-70-7'],1.8452088691,2,$120.00/5 G,"Estimated to ship on June 16, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/344184
+POOL-00035946,"InChI=1S/C8H9NO3/c9-6-1-3-7(4-2-6)12-5-8(10)11/h1-4H,5,9H2,(H,10,11)",Nc1ccc(OCC(=O)O)cc1,268.1363912728923,False,['2298-36-4'],1.8296901481,2,,,
+POOL-00043386,"InChI=1S/C8H7NO4/c1-5-4-6(8(10)11)2-3-7(5)9(12)13/h2-4H,1H3,(H,10,11)",Cc1cc(C(=O)O)ccc1[N+](=O)[O-],372.4068180287228,False,['3113-71-1'],1.8268356647,2,$39.50/25 G,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/m60600
+POOL-00003987,"InChI=1S/C7H6BrNO3/c1-12-6-4(8)2-3-5(9-6)7(10)11/h2-3H,1H3,(H,10,11)",COc1nc(C(=O)O)ccc1Br,313.5198400095355,False,['1214334-70-9'],1.8231947579,2,,,
+POOL-00042597,"InChI=1S/C8H8O4/c1-4(9)5-2-3-6(10)8(12)7(5)11/h2-3,10-12H,1H3",CC(=O)c1ccc(O)c(O)c1O,330.0748996548373,False,['528-21-2'],1.8273419889,2,,,
+POOL-00040362,"InChI=1S/C8H6O5/c9-7(10)5-3-1-2-4-6(5)8(11)13-12/h1-4,12H,(H,9,10)",O=C(O)c1ccccc1C(=O)OO,344.14255226526035,False,['2311-91-3'],1.8339237917,2,,,
+POOL-00026015,"InChI=1S/C8H9NO3/c1-2-7(10)5-3-6(8(11)12)9-4-5/h3-4,9H,2H2,1H3,(H,11,12)",CCC(=O)c1c[nH]c(C(=O)O)c1,313.85780383279206,False,['111468-94-1'],1.8382730438,2,,,
+POOL-00040281,"InChI=1S/C8H7NO4/c1-5-4-6(9(12)13)2-3-7(5)8(10)11/h2-4H,1H3,(H,10,11)",Cc1cc([N+](=O)[O-])ccc1C(=O)O,372.4068180287228,False,['1975-51-5'],1.8274122999,2,$199.00/5 G,"Only 6 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/638315
+POOL-00031173,"InChI=1S/C8H8F3NO/c1-13-7-3-2-5(4-6(7)12)8(9,10)11/h2-4H,12H2,1H3",COc1ccc(C(F)(F)F)cc1N,308.7477157867921,False,['349-65-5'],1.8396442762,2,$63.40/5 G,"Available to ship on May 25, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/336599
+POOL-00031255,"InChI=1S/C8H8F3NO/c1-13-7-3-5(8(9,10)11)2-6(12)4-7/h2-4H,12H2,1H3",COc1cc(N)cc(C(F)(F)F)c1,308.7477157867921,False,['349-55-3'],1.8226526211,2,,,
+POOL-00039639,"InChI=1S/C8H8O4/c1-4-2-5(9)7(8(11)12)6(10)3-4/h2-3,9-10H,1H3,(H,11,12)",Cc1cc(O)c(C(=O)O)c(O)c1,306.8248996548372,False,['480-67-1'],1.8439711563,2,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s84299
+POOL-00005147,"InChI=1S/C7H6BrF2NO/c8-5-3-4(12-7(9)10)1-2-6(5)11/h1-3,7H,11H2",Nc1ccc(OC(F)F)cc1Br,280.108927830968,False,['1000574-79-7'],1.8226381824,2,,,
+POOL-00038426,"InChI=1S/C7H4BrNO4/c8-5-2-1-4(7(10)11)3-6(5)9(12)13/h1-3H,(H,10,11)",O=C(O)c1ccc(Br)c([N+](=O)[O-])c1,376.7553335743196,False,['6319-40-0'],1.8271443258,2,"$24.00
+$7.20/5 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/724734
+POOL-00041549,"InChI=1S/C8H8O4/c9-6-2-1-5(3-7(6)10)4-8(11)12/h1-3,9-10H,4H2,(H,11,12)",O=C(O)Cc1ccc(O)c(O)c1,305.92621196610224,False,['102-32-9'],1.8324605311,2,$44.30/1 G,"Only 6 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/850217
+POOL-00039417,"InChI=1S/C8H5F3O3/c9-8(10,11)14-6-3-1-2-5(4-6)7(12)13/h1-4H,(H,12,13)",O=C(O)c1cccc(OC(F)(F)F)c1,345.9298953040156,False,['1014-81-9'],1.8334254905,2,$46.40/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/301388
+POOL-00022299,"InChI=1S/C7H5BrO4/c8-3-1-2-4(9)5(6(3)10)7(11)12/h1-2,9-10H,(H,11,12)",O=C(O)c1c(O)ccc(Br)c1O,334.423415200434,False,['26792-49-4'],1.8442963892,2,,,
+POOL-00041856,"InChI=1S/C7H6O2S/c8-7(9)5-3-1-2-4-6(5)10/h1-4,10H,(H,8,9)",O=C(O)c1ccccc1S,257.53794892648057,False,['147-93-3'],1.8469647605,2,$40.20/5 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/t33200
+POOL-00031730,"InChI=1S/C7H8FNO2S/c1-12(10,11)9-7-5-3-2-4-6(7)8/h2-5,9H,1H3",CS(=O)(=O)Nc1ccccc1F,374.74769522287335,False,['98611-90-6'],1.8224539531,2,,,
+POOL-00026421,"InChI=1S/C8H8F3NO/c9-8(10,11)5-13-7-3-1-6(12)2-4-7/h1-4H,5,12H2",Nc1ccc(OCC(F)(F)F)cc1,267.7127825957457,False,['57946-61-9'],1.8324178695,2,,,
+POOL-00031408,"InChI=1S/C7H4BrNO4/c8-5-1-4(3-10)7(11)6(2-5)9(12)13/h1-3,11H",O=Cc1cc(Br)cc([N+](=O)[O-])c1O,377.0004460721561,False,"['16634-88-1', '20044-86-4']",1.8256724644,2,"$477.00
+$143.10/5 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/652768
+POOL-00041557,"InChI=1S/C8H8O4/c9-6-1-2-7(10)5(3-6)4-8(11)12/h1-3,9-10H,4H2,(H,11,12)",O=C(O)Cc1cc(O)ccc1O,305.92621196610224,False,"['451-13-8', '71694-00-3']",1.8335641725,2,$135.00/100 MG,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/h0751
+POOL-00011810,"InChI=1S/C7H9O4P/c8-7-3-1-6(2-4-7)5-12(9,10)11/h1-4,8H,5H2,(H2,9,10,11)",O=P(O)(O)Cc1ccc(O)cc1,299.68734400453286,False,['90001-07-3'],1.8378176486,2,"$98.50
+$29.55/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/759783
+POOL-00041261,"InChI=1S/C7H6BrNO3/c8-6-4(10)1-3(7(9)12)2-5(6)11/h1-2,10-11H,(H2,9,12)",N=C(O)c1cc(O)c(Br)c(O)c1,314.41852769827057,False,['13429-12-4'],1.8784158624,2,,,
+POOL-00040654,"InChI=1S/C7H6BrNO/c8-6-4-2-1-3-5(6)7(9)10/h1-4H,(H2,9,10)",N=C(O)c1ccccc1Br,259.53794892648057,False,['4001-73-4'],1.831331341,2,"$152.00
+$45.60/10 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/190594
+POOL-00033586,"InChI=1S/C6H4Br2O2/c7-3-1-5(9)4(8)2-6(3)10/h1-2,9-10H",Oc1cc(Br)c(O)cc1Br,209.9198833722299,False,['14753-51-6'],1.8233447973,2,,,
+POOL-00039662,"InChI=1S/C7H6OS2/c8-6-4-2-1-3-5(6)7(9)10/h1-4,8H,(H,9,10)",Oc1ccccc1C(=S)S,257.53794892648057,False,['527-89-9'],1.8305686462,2,$134.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r465135
+POOL-00040750,"InChI=1S/C15H30O3/c16-14-12-10-8-6-4-2-1-3-5-7-9-11-13-15(17)18/h16H,1-14H2,(H,17,18)",O=C(O)CCCCCCCCCCCCCCO,180.57752738516484,False,['4617-33-8'],1.8846987305,3,$399.00/5 G,"Only 6 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/392979
+POOL-00035736,"InChI=1S/C16H32O3/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15(17)16(18)19/h15,17H,2-14H2,1H3,(H,18,19)",CCCCCCCCCCCCCCC(O)C(=O)O,204.1707264733057,False,"['764-67-0', '10067-06-8']",1.8401623837,3,$396.00/100 MG,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/sigma/h7021
+POOL-00013588,"InChI=1S/C14H28O4/c1-2-3-4-5-6-7-8-9-10-14(17)18-12-13(16)11-15/h13,15-16H,2-12H2,1H3",CCCCCCCCCCC(=O)OCC(O)CO,194.23301287386312,False,['64633-19-8'],1.8377055457,3,,,
+POOL-00042912,"InChI=1S/C14H26O4/c15-13(16)11-9-7-5-3-1-2-4-6-8-10-12-14(17)18/h1-12H2,(H,15,16)(H,17,18)",O=C(O)CCCCCCCCCCCCC(=O)O,201.83388115177075,False,['821-38-5'],1.8499771696,3,$88.00/5 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/d221201
+POOL-00040759,"InChI=1S/C14H31O3P/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-18(15,16)17/h2-14H2,1H3,(H2,15,16,17)",CCCCCCCCCCCCCCP(=O)(O)O,213.0846435936143,False,['4671-75-4'],1.8698408412,3,$108.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/736414
+POOL-00003058,"InChI=1S/C13H27O4PS/c1-13(14)19-12-10-8-6-4-2-3-5-7-9-11-18(15,16)17/h2-12H2,1H3,(H2,15,16,17)",CC(=O)SCCCCCCCCCCCP(=O)(O)O,277.8167820548197,False,['304012-57-5'],1.8728851805,3,,,
+POOL-00004490,"InChI=1S/C14H27O5P/c1-2-14(15)19-12-10-8-6-4-3-5-7-9-11-13-20(16,17)18/h2H,1,3-13H2,(H2,16,17,18)",C=CC(=O)OCCCCCCCCCCCP(=O)(O)O,310.6861237584903,False,['915376-49-7'],1.8832202951,3,,,
+POOL-00041596,"InChI=1S/C14H28O3/c1-2-3-4-5-6-7-8-9-10-11-12-13(15)14(16)17/h13,15H,2-12H2,1H3,(H,16,17)",CCCCCCCCCCCCC(O)C(=O)O,180.3061356857803,False,['2507-55-3'],1.8774153459,3,$156.00/10 MG,"Estimated to ship on June 16, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/sigma/h6771
+POOL-00036481,"InChI=1S/C14H26O4/c1-2-3-4-5-6-7-8-9-10-12(14(17)18)11-13(15)16/h12H,2-11H2,1H3,(H,15,16)(H,17,18)",CCCCCCCCCCC(CC(=O)O)C(=O)O,237.94849060589132,False,['2530-33-8'],1.8293076204,3,$68.10/5 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds013509
+POOL-00040091,"InChI=1S/C16H31NO3/c1-2-3-4-5-6-7-8-9-10-11-12-13-15(18)17-14-16(19)20/h2-14H2,1H3,(H,17,18)(H,19,20)",CCCCCCCCCCCCCC(O)=NCC(=O)O,264.4475995124111,False,['14246-55-0'],1.8290393509,3,$68.10/5 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds007442
+POOL-00027587,"InChI=1S/C14H25NO3/c1-2-3-4-5-6-7-8-9-12-15-13(16)10-11-14(17)18/h10-11H,2-9,12H2,1H3,(H,15,16)(H,17,18)",CCCCCCCCCCN=C(O)C=CC(=O)O,272.2126692502175,False,['20516-87-4'],1.8691705274,3,,,
+POOL-00042581,"InChI=1S/C16H32O3/c17-15-13-11-9-7-5-3-1-2-4-6-8-10-12-14-16(18)19/h17H,1-15H2,(H,18,19)",O=C(O)CCCCCCCCCCCCCCCO,192.4330670099726,False,['506-13-8'],1.8575742361,3,"$72.70
+$43.62/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/177490
+POOL-00006153,"InChI=1S/C12H27O3PS/c13-16(14,15)11-9-7-5-3-1-2-4-6-8-10-12-17/h17H,1-12H2,(H2,13,14,15)",O=P(O)(O)CCCCCCCCCCCCS,205.92742201047943,False,['159239-33-5'],1.9338868839,3,"$198.00
+$118.80/250 MG","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/745855
+POOL-00021363,"InChI=1S/C16H31NO4/c1-16(2,3)21-15(20)17-13-11-9-7-5-4-6-8-10-12-14(18)19/h4-13H2,1-3H3,(H,17,20)(H,18,19)",CC(C)(C)OC(O)=NCCCCCCCCCCC(=O)O,307.8890621180133,False,['10436-25-6'],1.8313810552,3,,,
+POOL-00036735,"InChI=1S/C16H30O4/c1-2-3-4-5-6-7-8-9-10-11-14-20-16(19)13-12-15(17)18/h2-14H2,1H3,(H,17,18)",CCCCCCCCCCCCOC(=O)CCC(=O)O,250.86142724108407,False,['21668-03-1'],1.8285395544,3,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s568503
+POOL-00003854,"InChI=1S/C11H25O4PS/c12-16(13,14)15-10-8-6-4-2-1-3-5-7-9-11-17/h17H,1-11H2,(H2,12,13,14)",O=P(O)(O)OCCCCCCCCCCCS,207.6481117162865,False,['188678-49-1'],1.8867279246,3,,,
+POOL-00021055,"InChI=1S/C14H28O3/c1-2-3-4-5-6-7-8-9-10-11-12-17-13-14(15)16/h2-13H2,1H3,(H,15,16)",CCCCCCCCCCCCOCC(=O)O,168.8502574011421,False,['6064-75-1'],1.868413751,3,$106.00/25MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s233773
+POOL-00035059,"InChI=1S/C15H30O4S/c1-2-3-4-5-6-7-8-9-10-11-13-20(18,19)14-12-15(16)17/h2-14H2,1H3,(H,16,17)",CCCCCCCCCCCCS(=O)(=O)CCC(=O)O,335.78267616864264,False,['101453-22-9'],1.8410487739,3,$28.60/25MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s233439
+POOL-00035085,"InChI=1S/C12H28NO3P/c1-2-3-4-5-6-7-8-9-10-11-12-13-17(14,15)16/h2-12H2,1H3,(H3,13,14,15,16)",CCCCCCCCCCCCNP(=O)(O)O,205.92742201047952,False,['45208-12-6'],1.919822642,3,,,
+POOL-00013103,"InChI=1S/C16H35O3P/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-20(17,18)19/h2-16H2,1H3,(H2,17,18,19)",CCCCCCCCCCCCCCCCP(=O)(O)O,237.87648388432004,False,['4721-17-9'],1.8282140151,3,$96.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/736244
+POOL-00001540,"InChI=1S/C11H25O3PS/c12-15(13,14)10-8-6-4-2-1-3-5-7-9-11-16/h16H,1-11H2,(H2,12,13,14)",O=P(O)(O)CCCCCCCCCCCS,193.66869644953417,False,['156125-36-9'],1.8545425803,3,$329.00/500 MG,"Estimated to ship on September 28, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/754269
+POOL-00007680,"InChI=1S/C12H28O6P2/c13-19(14,15)11-9-7-5-3-1-2-4-6-8-10-12-20(16,17)18/h1-12H2,(H2,13,14,15)(H2,16,17,18)",O=P(O)(O)CCCCCCCCCCCCP(=O)(O)O,289.9092368847664,False,['7450-59-1'],1.8227281734,3,$104.00/1 G,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/685437
+POOL-00038935,"InChI=1S/C19H26N2O4S/c1-19(2,12-14-7-5-4-6-8-14)20-13-18(23)15-9-10-17(22)16(11-15)21-26(3,24)25/h4-11,18,20-23H,12-13H2,1-3H3",CC(C)(Cc1ccccc1)NCC(O)c1ccc(O)c(NS(C)(=O)=O)c1,835.8725547747084,False,['37000-20-7'],1.8470331177,3,$143.00/5 MG,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/sigma/z4402
+POOL-00003394,"InChI=1S/C9H8N2O2/c1-5-2-6-7(9(12)13)4-11-8(6)10-3-5/h2-4H,1H3,(H,10,11)(H,12,13)",Cc1cnc2[nH]cc(C(=O)O)c2c1,473.4194793183052,False,['1198095-99-6'],1.8720593377,4,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade001020
+POOL-00037693,"InChI=1S/C9H8N2O2/c1-5-2-3-7-6(4-5)8(9(12)13)11-10-7/h2-4H,1H3,(H,10,11)(H,12,13)",Cc1ccc2[nH]nc(C(=O)O)c2c1,473.4194793183052,False,['1201-24-7'],1.8753025554,4,,,
+POOL-00000478,"InChI=1S/C9H8N2O2/c1-5-10-8-3-2-6(12)4-7(8)9(13)11-5/h2-4,12H,1H3,(H,10,11,13)",Cc1nc(O)c2cc(O)ccc2n1,468.3665095200525,False,['1882-77-5'],1.8651430028,4,,,
+POOL-00010722,"InChI=1S/C8H5FN2O2/c9-4-1-2-5-6(3-4)10-11-7(5)8(12)13/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1n[nH]c2cc(F)ccc12,477.94880433128606,False,['129295-30-3'],1.8533143387,4,,,
+POOL-00033353,"InChI=1S/C9H8N2O2/c1-5-4-8(13)11-9-6(5)2-3-7(12)10-9/h2-4H,1H3,(H2,10,11,12,13)",Cc1cc(O)nc2nc(O)ccc12,463.11650952005255,False,['7668-02-2'],1.8655027319,4,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s437727
+POOL-00000027,"InChI=1S/C9H8N2O2/c1-5-10-8-6(9(13)11-5)3-2-4-7(8)12/h2-4,12H,1H3,(H,10,11,13)",Cc1nc(O)c2cccc(O)c2n1,468.3665095200525,False,['90417-38-2'],1.86475072,4,$205.00/5 MG,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/sigma/n7287
+POOL-00009473,"InChI=1S/C8H5FN2O2/c9-4-1-2-6-5(3-4)7(8(12)13)11-10-6/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1n[nH]c2ccc(F)cc12,477.94880433128606,False,['1077-96-9'],1.8512015297,4,$115.00/1 g,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/achemblock/advh97ac6a81?context=bbe
+POOL-00024018,"InChI=1S/C8H5FN2O2/c9-4-1-2-5-6(3-4)11-7(10-5)8(12)13/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1nc2cc(F)ccc2[nH]1,477.94880433128606,False,['876710-76-8'],1.8553072036,4,,,
+POOL-00025962,"InChI=1S/C8H8N2O2/c9-5-1-2-7-6(3-5)10-8(11)4-12-7/h1-3H,4,9H2,(H,10,11)",Nc1ccc2c(c1)N=C(O)CO2,346.91113891035343,False,['89976-75-0'],1.8431269236,4,,,
+POOL-00025999,"InChI=1S/C8H8N2O2/c9-5-1-2-6-7(3-5)12-4-8(11)10-6/h1-3H,4,9H2,(H,10,11)",Nc1ccc2c(c1)OCC(O)=N2,346.91113891035343,False,['26215-14-5'],1.8346568204,4,,,
+POOL-00011593,"InChI=1S/C8H8N2O2/c9-5-2-1-3-6-8(5)12-4-7(11)10-6/h1-3H,4,9H2,(H,10,11)",Nc1cccc2c1OCC(O)=N2,346.91113891035343,False,['321126-82-3'],1.8404665959,4,,,
+POOL-00007524,"InChI=1S/C8H6N2O2/c11-8(12)5-2-1-3-7-6(5)4-9-10-7/h1-4H,(H,9,10)(H,11,12)",O=C(O)c1cccc2[nH]ncc12,433.3054103500143,False,"['677306-38-6', '1445696-34-3']",1.8292655741,4,"$101.00
+$30.30/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/729752
+POOL-00007731,"InChI=1S/C8H6N2O2/c11-8(12)6-2-4-10-7-5(6)1-3-9-7/h1-4H,(H,9,10)(H,11,12)",O=C(O)c1cc[nH]c2nccc1-2,394.0601766886357,False,['479553-01-0'],1.8312104381,4,$596.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade000938
+POOL-00005313,"InChI=1S/C9H6FNO2/c10-7-3-1-2-5-6(9(12)13)4-11-8(5)7/h1-4,11H,(H,12,13)",O=C(O)c1c[nH]c2c(F)cccc12,475.41947931830526,False,['858515-66-9'],1.8642824772,4,$37.95/100 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh2d6f72be?context=bbe
+POOL-00039724,"InChI=1S/C8H6N2O2/c11-8-7(10-12)5-3-1-2-4-6(5)9-8/h1-4,9,11H",O=Nc1c(O)[nH]c2ccccc12,433.5505228478508,False,"['607-28-3', '73859-64-0', '73859-66-2']",1.8298880407,4,,,
+POOL-00008776,"InChI=1S/C8H5BrN2O2/c9-6-1-4(8(12)13)2-7-5(6)3-10-11-7/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1cc(Br)c2cn[nH]c2c1,477.94880433128606,False,['885523-43-3'],1.8868172964,4,,,
+POOL-00006904,"InChI=1S/C9H7NO3/c11-7-4-5-2-1-3-6(9(12)13)8(5)10-7/h1-3H,4H2,(H,10,11)(H,12,13)",O=C(O)c1cccc2c1N=C(O)C2,409.320883113212,False,['25369-43-1'],1.872515825,4,,,
+POOL-00026703,"InChI=1S/C9H9NO2/c11-7-3-1-6-2-4-9(12)10-8(6)5-7/h1,3,5,11H,2,4H2,(H,10,12)",OC1=Nc2cc(O)ccc2CC1,344.38181389737264,False,['22246-18-0'],1.8458088349,4,"$25.00
+$15.00/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/675369
+POOL-00041612,"InChI=1S/C9H6FNO2/c10-6-1-2-7-5(3-6)4-8(11-7)9(12)13/h1-4,11H,(H,12,13)",O=C(O)c1cc2cc(F)ccc2[nH]1,475.41947931830526,False,['399-76-8'],1.8691200107,4,$377.00/5 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/265128
+POOL-00019611,"InChI=1S/C9H8N2O/c10-8-5-4-6-2-1-3-7(12)9(6)11-8/h1-5,12H,(H2,10,11)",N=c1ccc2cccc(O)c2[nH]1,473.15738428454847,False,['70125-16-5'],1.8655651625,4,$185.00/nan,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/sial/08128
+POOL-00005088,"InChI=1S/C8H5BrN2O2/c9-4-1-5-6(8(12)13)3-11-7(5)10-2-4/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1c[nH]c2ncc(Br)cc12,477.94880433128606,False,['849068-61-7'],1.8712841527,4,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade001006
+POOL-00014336,"InChI=1S/C9H9NO2/c11-9(12)8-5-6-3-1-2-4-7(6)10-8/h1-4,8,10H,5H2,(H,11,12)",O=C(O)C1Cc2ccccc2N1,297.05950344595533,False,"['78348-24-0', '16851-56-2', '749177-69-3']",1.8417264576,4,$27.00/5 G,"Only 6 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/302244
+POOL-00040110,"InChI=1S/C9H7NO2/c11-9(12)8-5-6-3-1-2-4-7(6)10-8/h1-5,10H,(H,11,12)",O=C(O)c1cc2ccccc2[nH]1,397.7760853370335,False,"['1477-50-5', '137497-03-1']",1.8490680576,4,,,
+POOL-00019951,"InChI=1S/C9H6FNO2/c10-6-2-1-3-7-5(6)4-8(11-7)9(12)13/h1-4,11H,(H,12,13)",O=C(O)c1cc2c(F)cccc2[nH]1,475.41947931830526,False,['399-68-8'],1.8658334086,4,,,
+POOL-00009666,"InChI=1S/C9H8N2O/c10-7-2-1-6-3-4-11-9(12)8(6)5-7/h1-5H,10H2,(H,11,12)",Nc1ccc2ccnc(O)c2c1,425.7980911891212,False,['174302-46-6'],1.8421938994,4,,,
+POOL-00024057,"InChI=1S/C9H6FNO2/c10-6-3-1-2-5-4-7(9(12)13)11-8(5)6/h1-4,11H,(H,12,13)",O=C(O)c1cc2cccc(F)c2[nH]1,475.41947931830526,False,['399-67-7'],1.8675893692,4,,,
+POOL-00008774,"InChI=1S/C8H5BrN2O2/c9-7-5-3-4(8(12)13)1-2-6(5)10-11-7/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1ccc2[nH]nc(Br)c2c1,477.94880433128606,False,['885521-49-3'],1.8953975542,4,"$252.00
+$75.60/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/708097
+POOL-00012083,"InChI=1S/C9H9NO2/c11-8-2-1-6-4-9(12)10-5-7(6)3-8/h1-3,11H,4-5H2,(H,10,12)",OC1=NCc2cc(O)ccc2C1,344.38181389737264,False,['53389-81-4'],1.8653176682,4,,,
+POOL-00005820,"InChI=1S/C8H5BrN2O2/c9-7-4-2-1-3-5(8(12)13)6(4)10-11-7/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1cccc2c(Br)n[nH]c12,477.94880433128606,False,['1040101-01-6'],1.8808811406,4,,,
+POOL-00035350,"InChI=1S/C9H8N2O/c10-7-3-4-8(12)9-6(7)2-1-5-11-9/h1-5,12H,10H2",Nc1ccc(O)c2ncccc12,385.2980911891212,False,['13207-66-4'],1.8510716986,4,,,
+POOL-00003889,"InChI=1S/C9H7NO3/c11-8-5-2-1-3-6(9(12)13)7(5)4-10-8/h1-3H,4H2,(H,10,11)(H,12,13)",O=C(O)c1cccc2c1CN=C2O,409.320883113212,False,['1261740-37-7'],1.8669299634,4,$163.75/50 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/jwpharmlabllc/jwph3249c2bc?context=bbe
+POOL-00040220,"InChI=1S/C9H7NO2/c11-9(12)7-3-1-2-6-4-5-10-8(6)7/h1-5,10H,(H,11,12)",O=C(O)c1cccc2cc[nH]c12,430.7760853370335,False,['1670-83-3'],1.8401646826,4,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph006856
+POOL-00014845,"InChI=1S/C8H5BrN2O2/c9-4-1-2-6-5(3-4)7(8(12)13)11-10-6/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1n[nH]c2ccc(Br)cc12,477.94880433128606,False,['1077-94-7'],1.8674945996,4,,,
+POOL-00005154,"InChI=1S/C9H9FN2O/c10-6-1-2-7-8(5-6)12-9(11-7)3-4-13/h1-2,5,13H,3-4H2,(H,11,12)",OCCc1nc2ccc(F)cc2[nH]1,424.4719650273174,False,['915924-12-8'],1.8782846169,4,,,
+POOL-00003907,"InChI=1S/C8H5BrN2O2/c9-5-1-4-3-10-11-7(4)6(2-5)8(12)13/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1cc(Br)cc2cn[nH]c12,477.94880433128606,False,['953409-99-9'],1.8667865488,4,,,
+POOL-00017703,"InChI=1S/C9H8N2O2/c12-10-8-5-6-11(13)9-4-2-1-3-7(8)9/h1-6,12-13H",ON=c1ccn(O)c2ccccc12,502.1860155641943,False,['4637-56-3'],1.8580716638,4,,,
+POOL-00023128,"InChI=1S/C8H6BrNO2/c9-4-1-2-6-5(3-4)7(11)8(12)10-6/h1-3,7,11H,(H,10,12)",OC1=Nc2ccc(Br)cc2C1O,362.0755349357245,False,['99304-37-7'],1.8502372391,4,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph011113
+POOL-00029243,"InChI=1S/C8H8N2O3/c9-8(11)10-5-1-2-6-7(3-5)13-4-12-6/h1-3H,4H2,(H3,9,10,11)",N=C(O)Nc1ccc2c(c1)OCO2,351.2424177353703,False,['119179-46-3'],1.8784221486,4,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s732141
+POOL-00043354,"InChI=1S/C10H9NO/c11-9-5-6-10(12)8-4-2-1-3-7(8)9/h1-6,12H,11H2",Nc1ccc(O)c2ccccc12,382.60813525322834,False,['2834-90-4'],1.8526041121,4,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s57836
+POOL-00008775,"InChI=1S/C8H5BrN2O2/c9-4-2-1-3-5-6(4)7(8(12)13)11-10-5/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1n[nH]c2cccc(Br)c12,477.94880433128606,False,['885521-80-2'],1.8844987326,4,,,
+POOL-00008780,"InChI=1S/C8H5BrN2O2/c9-4-1-5(8(12)13)6-3-10-11-7(6)2-4/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1cc(Br)cc2[nH]ncc12,477.94880433128606,False,['885523-08-0'],1.8808117769,4,,,
+POOL-00014888,"InChI=1S/C9H7NO3/c11-8-4-5-1-2-6(9(12)13)3-7(5)10-8/h1-3H,4H2,(H,10,11)(H,12,13)",O=C(O)c1ccc2c(c1)N=C(O)C2,409.320883113212,False,['334952-09-9'],1.8783513223,4,,,
+POOL-00017172,"InChI=1S/C9H10N2O/c10-7-3-1-6-2-4-9(12)11-8(6)5-7/h1,3,5H,2,4,10H2,(H,11,12)",Nc1ccc2c(c1)N=C(O)CC2,344.38181389737264,False,['22246-07-7'],1.8909931274,4,,,
+POOL-00039386,"InChI=1S/C10H9NO/c11-9-5-1-4-8-7(9)3-2-6-10(8)12/h1-6,12H,11H2",Nc1cccc2c(O)cccc12,381.8581352532283,False,"['83-55-6', '134016-72-1']",1.84693618,4,$88.30/25 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/376469
+POOL-00035631,"InChI=1S/C10H9NO/c11-8-4-5-9-7(6-8)2-1-3-10(9)12/h1-6,12H,11H2",Nc1ccc2c(O)cccc2c1,423.10813525322834,False,['23894-12-4'],1.8552767458,4,,,
+POOL-00035444,"InChI=1S/C10H9NO/c11-9-3-1-8-6-10(12)4-2-7(8)5-9/h1-6,12H,11H2",Nc1ccc2cc(O)ccc2c1,381.8581352532283,False,['4363-04-6'],1.8629411654,4,$398.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph007390
+POOL-00026168,"InChI=1S/C9H7NO3/c11-8-4-6-3-5(9(12)13)1-2-7(6)10-8/h1-3H,4H2,(H,10,11)(H,12,13)",O=C(O)c1ccc2c(c1)CC(O)=N2,409.320883113212,False,['102359-00-2'],1.8954894308,4,,,
+POOL-00008771,"InChI=1S/C8H5BrN2O2/c9-4-1-2-5-6(3-4)10-11-7(5)8(12)13/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1n[nH]c2cc(Br)ccc12,477.94880433128606,False,['660823-36-9'],1.8684335531,4,,,
+POOL-00041978,"InChI=1S/C10H9NO/c11-10-3-1-2-7-6-8(12)4-5-9(7)10/h1-6,12H,11H2",Nc1cccc2cc(O)ccc12,423.10813525322834,False,['86-97-5'],1.8548568978,4,$68.10/250 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds000157
+POOL-00031598,"InChI=1S/C8H10N2O2/c11-8(12)7-5-3-1-2-4-6(5)9-10-7/h1-4H2,(H,9,10)(H,11,12)",O=C(O)c1n[nH]c2c1CCCC2,316.857803832792,False,"['6076-13-7', '714255-28-4']",1.8505367203,4,,,
+POOL-00042342,"InChI=1S/C10H9NO/c11-10-3-1-2-7-4-5-8(12)6-9(7)10/h1-6,12H,11H2",Nc1cccc2ccc(O)cc12,423.10813525322834,False,['118-46-7'],1.8516511629,4,,,
+POOL-00035841,"InChI=1S/C10H9NO/c11-8-5-1-3-7-4-2-6-9(12)10(7)8/h1-6,12H,11H2",Nc1cccc2cccc(O)c12,386.3581352532283,False,['2834-91-5'],1.8470284226,4,$134.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t285277
+POOL-00006187,"InChI=1S/C8H5FN2O2/c9-5-1-4-2-6(8(12)13)11-7(4)10-3-5/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1cc2cc(F)cnc2[nH]1,477.94880433128606,False,['920978-94-5'],1.8503075934,4,,,
+POOL-00031943,"InChI=1S/C8H8N2OS/c9-5-1-2-7-6(3-5)10-8(11)4-12-7/h1-3H,4,9H2,(H,10,11)",Nc1ccc2c(c1)N=C(O)CS2,348.91113891035343,False,['21762-78-7'],1.8670664488,4,,,
+POOL-00007469,"InChI=1S/C9H6N2O3/c12-7(9(13)14)6-4-11-8-5(6)2-1-3-10-8/h1-4H,(H,10,11)(H,13,14)",O=C(O)C(=O)c1c[nH]c2ncccc12,515.506353290838,False,['478677-93-9'],1.8648492558,4,$416.00/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/combiblocksinc/com448640046?context=bbe
+POOL-00005892,"InChI=1S/C9H10N2O/c1-5-3-2-4-6-7(5)8(10)9(12)11-6/h2-4,8H,10H2,1H3,(H,11,12)",Cc1cccc2c1C(N)C(O)=N2,357.54620992274374,False,['1105693-06-8'],1.8485384074,4,,,
+POOL-00007742,"InChI=1S/C9H6N2O3/c12-4-8-6-3-5(9(13)14)1-2-7(6)10-11-8/h1-4H,(H,10,11)(H,13,14)",O=Cc1n[nH]c2ccc(C(=O)O)cc12,515.7514657886744,False,['885519-98-2'],1.8659224589,4,,,
+POOL-00007506,"InChI=1S/C9H7NO3/c11-8-7-3-5(9(12)13)1-2-6(7)4-10-8/h1-3H,4H2,(H,10,11)(H,12,13)",O=C(O)c1ccc2c(c1)C(O)=NC2,409.320883113212,False,['23386-41-6'],1.9066738821,4,,,
+POOL-00043045,"InChI=1S/C10H9NO/c11-10-8-4-2-1-3-7(8)5-6-9(10)12/h1-6,12H,11H2",Nc1c(O)ccc2ccccc12,423.10813525322834,False,"['2834-92-6', '95609-86-2']",1.8632224095,4,,,
+POOL-00005397,"InChI=1S/C8H5BrN2O2/c9-5-3-1-2-4-6(5)10-11-7(4)8(12)13/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1n[nH]c2c(Br)cccc12,477.94880433128606,False,['885278-71-7'],1.8628607079,4,$146.25/100 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/jwpharmlabllc/jwph3249d0f0?context=bbe
+POOL-00012906,"InChI=1S/C9H9NO2/c11-9(12)8-7-4-2-1-3-6(7)5-10-8/h1-4,8,10H,5H2,(H,11,12)",O=C(O)C1NCc2ccccc21,322.0595034459553,False,['66938-02-1'],1.8438155405,4,,,
+POOL-00028630,"InChI=1S/C9H11NO2/c11-9(12)8-5-6-3-1-2-4-7(6)10-8/h5,10H,1-4H2,(H,11,12)",O=C(O)c1cc2c([nH]1)CCCC2,290.8284788198112,False,['131172-64-0'],1.8730077331,4,,,
+POOL-00010298,"InChI=1S/C8H7FN2O/c9-5-1-2-6-7(3-5)11-8(4-12)10-6/h1-3,12H,4H2,(H,10,11)",OCc1nc2ccc(F)cc2[nH]1,410.3501069254241,False,['39811-07-9'],1.8290218144,4,,,
+POOL-00007737,"InChI=1S/C9H6N2O3/c12-4-7-8-5(9(13)14)2-1-3-6(8)10-11-7/h1-4H,(H,10,11)(H,13,14)",O=Cc1n[nH]c2cccc(C(=O)O)c12,515.7514657886744,False,['885519-78-8'],1.8485656094,4,,,
+POOL-00003409,"InChI=1S/C8H8N2O3/c11-8(12)5-3-9-4-6-7(5)10-1-2-13-6/h3-4,10H,1-2H2,(H,11,12)",O=C(O)c1cncc2c1NCCO2,351.2424177353703,False,['1228665-92-6'],1.8681179413,4,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade001275
+POOL-00028710,"InChI=1S/C8H6N2O3/c11-7(12)4-1-2-5-6(3-4)10-8(13)9-5/h1-3H,(H,11,12)(H2,9,10,13)",O=C(O)c1ccc2nc(O)[nH]c2c1,475.1939168291226,False,['23814-14-4'],1.8881905631,4,,,
+POOL-00026357,"InChI=1S/C9H8N2S/c10-9(11)7-5-12-8-4-2-1-3-6(7)8/h1-5H,(H3,10,11)",N=C(N)c1csc2ccccc12,430.7760853370335,False,['154650-83-6'],1.8841292798,4,,,
+POOL-00007979,"InChI=1S/C8H5BrN2O2/c9-4-1-2-5-6(3-4)11-7(10-5)8(12)13/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1nc2cc(Br)ccc2[nH]1,477.94880433128606,False,['40197-20-4'],1.863425287,4,,,
+POOL-00007370,"InChI=1S/C9H12N2/c10-11-9-5-4-7-2-1-3-8(7)6-9/h4-6,11H,1-3,10H2",NNc1ccc2c(c1)CCC2,268.26528506874683,False,['887593-51-3'],1.8266142964,4,,,
+POOL-00031170,"InChI=1S/C9H8N2O2/c10-7-5-3-1-2-4-6(5)13-8(7)9(11)12/h1-4H,10H2,(H2,11,12)",N=C(O)c1oc2ccccc2c1N,473.41947931830526,False,['54802-10-7'],1.9073734198,4,$67.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/631523
+POOL-00000028,"InChI=1S/C9H6N2O3/c12-8-5-3-1-2-4-6(5)10-7(11-8)9(13)14/h1-4H,(H,13,14)(H,10,11,12)",O=C(O)c1nc(=O)c2ccccc2[nH]1,559.2307765753221,False,['29113-34-6'],1.8714746107,4,$72.80/100 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/enamine/enah984b7291?context=bbe
+POOL-00038834,"InChI=1S/C7H6N2OS/c8-7-9-5-2-1-4(10)3-6(5)11-7/h1-3,10H,(H2,8,9)",N=c1[nH]c2ccc(O)cc2s1,442.88245407860506,False,['26278-79-5'],1.8233841857,4,"$27.00
+$16.20/1 G","Only 4 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/750786
+POOL-00013349,"InChI=1S/C9H11NO2/c10-9-6-3-1-2-4-8(6)12-5-7(9)11/h1-4,7,9,11H,5,10H2",NC1c2ccccc2OCC1O,287.61195376207496,False,['454679-90-4'],1.8538802417,4,,,
+POOL-00014053,"InChI=1S/C8H5NO4/c10-7(11)4-1-2-6-5(3-4)9-8(12)13-6/h1-3H,(H,9,12)(H,10,11)",O=C(O)c1ccc2oc(O)nc2c1,473.94880433128606,False,['65422-72-2'],1.8535165292,4,,,
+POOL-00034757,"InChI=1S/C8H6N2O2S/c9-5-4-2-1-3-10-7(4)13-6(5)8(11)12/h1-3H,9H2,(H,11,12)",Nc1c(C(=O)O)sc2ncccc12,477.94880433128606,False,['58327-75-6'],1.9082831669,4,,,
+POOL-00003688,"InChI=1S/C8H5BrN2O2/c9-5-1-4-2-6(8(12)13)11-7(4)10-3-5/h1-3H,(H,10,11)(H,12,13)",O=C(O)c1cc2cc(Br)cnc2[nH]1,477.94880433128606,False,['1222175-20-3'],1.8596102339,4,$958.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade001120
+POOL-00009088,"InChI=1S/C8H5NO3S/c10-7(11)4-1-2-5-6(3-4)13-8(12)9-5/h1-3H,(H,9,12)(H,10,11)",O=C(O)c1ccc2nc(O)sc2c1,477.1939168291226,False,['99615-68-6'],1.8760704884,4,$174.20/100 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/enamine/enah95e733fb?context=bbe
+POOL-00013401,"InChI=1S/C8H7NO3/c10-5-1-2-6-7(3-5)12-4-8(11)9-6/h1-3,10H,4H2,(H,9,11)",OC1=Nc2ccc(O)cc2OC1,346.15625140819,False,['67193-97-9'],1.8338411939,4,,,
+POOL-00006950,"InChI=1S/C9H7NO3/c11-7-3-1-2-5-4-6(9(12)13)10-8(5)7/h1-4,10-11H,(H,12,13)",O=C(O)c1cc2cccc(O)c2[nH]1,472.6645918161418,False,['84639-84-9'],1.8993478669,4,,,
+POOL-00016256,"InChI=1S/C8H6N2O4/c1-3-4(8(12)13)5-6(11)9-2-10-7(5)14-3/h2H,1H3,(H,12,13)(H,9,10,11)",Cc1oc2ncnc(O)c2c1C(=O)O,517.2807908016551,False,['852399-94-1'],1.840020665,4,,,
+POOL-00036918,"InChI=1S/C8H10N2O2/c9-5-3-7-8(4-6(5)10)12-2-1-11-7/h3-4H,1-2,9-10H2",Nc1cc2c(cc1N)OCCO2,281.1713244639388,False,['81927-47-1'],1.8761671937,4,$68.10/5 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds020583
+POOL-00007754,"InChI=1S/C7H4BrNO2S/c8-3-2-12-5-1-4(7(10)11)9-6(3)5/h1-2,9H,(H,10,11)",O=C(O)c1cc2scc(Br)c2[nH]1,445.13180607185245,False,['332099-36-2'],1.8986988602,4,$156.00/1 g,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/astatechinc/ate245846091?context=bbe
+POOL-00043253,"InChI=1S/C10H10N2/c11-9-5-6-10(12)8-4-2-1-3-7(8)9/h1-6H,11-12H2",Nc1ccc(N)c2ccccc12,380.60813525322834,False,['2243-61-0'],1.8644282198,4,"$228.00
+$136.80/500 MG","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/667617
+POOL-00017072,"InChI=1S/C8H10N2O2/c9-10-6-1-2-7-8(5-6)12-4-3-11-7/h1-2,5,10H,3-4,9H2",NNc1ccc2c(c1)OCCO2,288.38639127289224,False,['299165-45-0'],1.8944563857,4,,,
+POOL-00003523,"InChI=1S/C8H5BrN2O2/c9-7-2-4-1-5(8(12)13)11-6(4)3-10-7/h1-3,11H,(H,12,13)",O=C(O)c1cc2cc(Br)ncc2[nH]1,477.94880433128606,False,['800401-71-2'],1.864372085,4,,,
+POOL-00038918,"InChI=1S/C9H11NO2/c11-8-3-6-1-2-10-5-7(6)4-9(8)12/h3-4,10-12H,1-2,5H2",Oc1cc2c(cc1O)CNCC2,278.641999450958,False,"['34827-33-3', '42887-47-8']",1.8723926201,4,,,
+POOL-00035551,"InChI=1S/C9H7NO3/c11-6-1-2-7-5(3-6)4-8(10-7)9(12)13/h1-4,10-11H,(H,12,13)",O=C(O)c1cc2cc(O)ccc2[nH]1,472.6645918161418,False,['21598-06-1'],1.8881679762,4,$101.00/1 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/143510
+POOL-00011589,"InChI=1S/C9H12N2/c10-9-2-1-7-3-4-11-6-8(7)5-9/h1-2,5,11H,3-4,6,10H2",Nc1ccc2c(c1)CNCC2,268.2652850687468,False,['72299-68-4'],1.8336289969,4,,,
+POOL-00003473,"InChI=1S/C8H7NO3/c10-4-6-2-7-8(12-6)1-5(11)3-9-7/h1-3,10-11H,4H2",OCc1cc2ncc(O)cc2o1,407.59521942326063,False,['1186310-89-3'],1.8275393087,4,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade001182
+POOL-00011718,"InChI=1S/C8H5F3N2O/c9-8(10,11)4-1-2-5-6(3-4)13-7(14)12-5/h1-3H,(H2,12,13,14)",Oc1nc2ccc(C(F)(F)F)cc2[nH]1,474.8813943977679,False,['133687-93-1'],1.8453132658,4,$212.75/1 g,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/achemblock/advh98732e96?context=bbe
+POOL-00010599,"InChI=1S/C9H12N2/c10-8-4-6-2-1-3-7(6)5-9(8)11/h4-5H,1-3,10-11H2",Nc1cc2c(cc1N)CCC2,262.859361715645,False,['52957-65-0'],1.8332873668,4,,,
+POOL-00012002,"InChI=1S/C9H8N2S/c10-9(12)7-5-11-8-4-2-1-3-6(7)8/h1-5,11H,(H2,10,12)",N=C(S)c1c[nH]c2ccccc12,430.7760853370335,False,['59108-90-6'],1.8831245524,4,,,
+POOL-00009123,"InChI=1S/C9H12N2/c10-11-9-5-7-3-1-2-4-8(7)6-9/h1-4,9,11H,5-6,10H2",NNC1Cc2ccccc2C1,232.4945752240396,False,['45894-21-1'],1.8272791361,4,,,
+POOL-00043254,"InChI=1S/C10H10N2/c11-9-5-1-3-7-8(9)4-2-6-10(7)12/h1-6H,11-12H2",Nc1cccc2c(N)cccc12,379.8581352532283,False,"['2243-62-1', '155055-89-3']",1.8539980096,4,$73.00/25 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/d21200
+POOL-00029295,"InChI=1S/C7H6N2S2/c8-4-1-2-5-6(3-4)11-7(10)9-5/h1-3H,8H2,(H,9,10)",Nc1ccc2nc(S)sc2c1,394.2399457476436,False,['7442-07-1'],1.8548865601,4,$504.00/1 G,"Estimated to ship on June 19, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/454370
+POOL-00033166,"InChI=1S/C10H7NO2/c12-10(13)9-3-1-2-7-6-11-5-4-8(7)9/h1-6H,(H,12,13)",O=C(O)c1cccc2cnccc12,459.93632858848656,False,['27810-64-6'],1.8372017556,5,,,
+POOL-00029956,"InChI=1S/C10H7NO2/c12-10(13)9-6-11-5-7-3-1-2-4-8(7)9/h1-6H,(H,12,13)",O=C(O)c1cncc2ccccc12,459.93632858848656,False,['7159-36-6'],1.8390578271,5,,,
+POOL-00006626,"InChI=1S/C10H7NO2/c12-10(13)8-2-1-7-3-4-11-6-9(7)5-8/h1-6H,(H,12,13)",O=C(O)c1ccc2ccncc2c1,465.18632858848656,False,['221050-96-0'],1.8370138945,5,,,
+POOL-00039640,"InChI=1S/C10H7NO2/c12-10(13)9-8-4-2-1-3-7(8)5-6-11-9/h1-6H,(H,12,13)",O=C(O)c1nccc2ccccc12,459.93632858848656,False,['486-73-7'],1.8384291863,5,,,
+POOL-00042392,"InChI=1S/C10H7NO2/c12-9-6-5-7-3-1-2-4-8(7)10(9)11-13/h1-6,12H",O=Nc1c(O)ccc2ccccc12,465.4314410863231,False,"['131-91-9', '2636-79-5']",1.8506531482,5,$76.90/25 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/114693
+POOL-00042544,"InChI=1S/C10H7NO2/c12-10(13)8-5-6-11-9-4-2-1-3-7(8)9/h1-6H,(H,12,13)",O=C(O)c1ccnc2ccccc12,459.93632858848656,False,['486-74-8'],1.8299560996,5,$46.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/174823
+POOL-00031154,"InChI=1S/C10H7NO2/c12-10(13)8-4-3-7-2-1-5-11-9(7)6-8/h1-6H,(H,12,13)",O=C(O)c1ccc2cccnc2c1,465.18632858848656,False,['1078-30-4'],1.8404641235,5,,,
+POOL-00039718,"InChI=1S/C10H7NO2/c12-10-6-5-9(11-13)7-3-1-2-4-8(7)10/h1-6,12H",O=Nc1ccc(O)c2ccccc12,465.4314410863231,False,"['605-60-7', '4965-30-4']",1.8435323314,5,$134.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph007264
+POOL-00033479,"InChI=1S/C10H7NO2/c12-6-7-3-4-9(13)10-8(7)2-1-5-11-10/h1-6,13H",O=Cc1ccc(O)c2ncccc12,465.4314410863231,False,['2598-30-3'],1.841754207,5,$68.10/10 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds018146
+POOL-00042394,"InChI=1S/C10H7NO2/c12-10-8-4-2-1-3-7(8)5-6-9(10)11-13/h1-6,12H",O=Nc1ccc2ccccc2c1O,465.4314410863231,False,"['132-53-6', '6373-60-0']",1.8521374728,5,,,
+POOL-00004044,"InChI=1S/C9H9NO2/c1-5-3-7-8(4-6(5)2)12-9(11)10-7/h3-4H,1-2H3,(H,10,11)",Cc1cc2nc(O)oc2cc1C,392.26631033270655,False,['412307-87-0'],1.8249414128,5,,,
+POOL-00038404,"InChI=1S/C10H7NO2/c12-10(13)8-3-1-5-9-7(8)4-2-6-11-9/h1-6H,(H,12,13)",O=C(O)c1cccc2ncccc12,459.93632858848656,False,['7250-53-5'],1.8393996875,5,$201.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds001076
+POOL-00007293,"InChI=1S/C10H7NO2/c12-10(13)8-3-1-2-7-4-5-11-6-9(7)8/h1-6H,(H,12,13)",O=C(O)c1cccc2ccncc12,459.93632858848656,False,['61563-43-7'],1.8573790766,5,,,
+POOL-00039461,"InChI=1S/C10H7NO2/c12-10(13)8-5-1-3-7-4-2-6-11-9(7)8/h1-6H,(H,12,13)",O=C(O)c1cccc2cccnc12,459.93632858848656,False,['86-59-9'],1.8455641145,5,$34.00/250 MG,"Only 2 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/367796
+POOL-00026332,"InChI=1S/C10H9NO/c12-7-10-9-4-2-1-3-8(9)5-6-11-10/h1-6,12H,7H2",OCc1nccc2ccccc12,392.4656418352572,False,['27311-63-3'],1.8265943366,5,,,
+POOL-00029045,"InChI=1S/C10H9NO/c12-7-8-3-1-5-10-9(8)4-2-6-11-10/h1-6,12H,7H2",OCc1cccc2ncccc12,392.4656418352572,False,['16178-42-0'],1.8284430697,5,,,
+POOL-00016085,"InChI=1S/C10H7NO2/c12-6-7-5-10(13)8-3-1-2-4-9(8)11-7/h1-6H,(H,11,13)",O=Cc1cc(=O)c2ccccc2[nH]1,513.5588270694699,False,['168141-99-9'],1.8317074663,5,,,
+POOL-00041211,"InChI=1S/C10H7NO2/c12-10(13)8-3-4-9-7(6-8)2-1-5-11-9/h1-6H,(H,12,13)",O=C(O)c1ccc2ncccc2c1,465.18632858848656,False,['10349-57-2'],1.8370475067,5,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph006820
+POOL-00027015,"InChI=1S/C10H8FNO/c1-6-8-4-7(11)2-3-9(8)12-10(6)5-13/h2-5,12H,1H3",Cc1c(C=O)[nH]c2ccc(F)cc12,472.9746358802489,False,['842972-09-2'],1.8667311289,5,,,
+POOL-00034239,"InChI=1S/C9H7NO3/c11-9(12)5-7-6-3-1-2-4-8(6)13-10-7/h1-4H,5H2,(H,11,12)",O=C(O)Cc1noc2ccccc12,446.8114695530149,False,['4865-84-3'],1.8330849305,5,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l157759
+POOL-00007578,"InChI=1S/C10H7NO2/c12-10(13)8-1-2-9-6-11-4-3-7(9)5-8/h1-6H,(H,12,13)",O=C(O)c1ccc2cnccc2c1,465.18632858848656,False,['106778-43-2'],1.8467458789,5,,,
+POOL-00042918,"InChI=1S/C10H9NO/c1-7-5-6-8-3-2-4-9(12)10(8)11-7/h2-6,12H,1H3",Cc1ccc2cccc(O)c2n1,423.10813525322834,False,['826-81-3'],1.8247369502,5,$71.80/100 G,"Only 2 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/h57602
+POOL-00005087,"InChI=1S/C8H6BrNO2/c9-6-1-2-7-5(3-6)4-12-8(11)10-7/h1-3H,4H2,(H,10,11)",O=C1Nc2ccc(Br)cc2CO1,337.82978715700074,False,['1017783-09-3'],1.8414711808,5,$32.20/250 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh9884c162?context=bbe
+POOL-00007902,"InChI=1S/C10H8FNO/c1-6-9(11)3-2-7-4-8(5-13)12-10(6)7/h2-5,12H,1H3",Cc1c(F)ccc2cc(C=O)[nH]c12,472.97463588024885,False,['883531-54-2'],1.8560405457,5,,,
+POOL-00003086,"InChI=1S/C10H8FNO/c1-6-9(11)3-2-8-7(5-13)4-12-10(6)8/h2-5,12H,1H3",Cc1c(F)ccc2c(C=O)c[nH]c12,472.9746358802489,False,['1352396-37-2'],1.8567798546,5,,,
+POOL-00025915,"InChI=1S/C10H8O3/c11-10(12)5-7-6-13-9-4-2-1-3-8(7)9/h1-4,6H,5H2,(H,11,12)",O=C(O)Cc1coc2ccccc12,442.1215136171221,False,['64175-51-5'],1.83730571,5,,,
+POOL-00035232,"InChI=1S/C9H6BrNO/c10-7-4-3-6-2-1-5-11-8(6)9(7)12/h1-5,12H",Oc1c(Br)ccc2cccnc12,427.7980911891212,False,['13019-32-4'],1.8329734081,5,$168.00/5 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/722049
+POOL-00032035,"InChI=1S/C9H7NO3/c1-5(11)6-2-3-7-8(4-6)13-9(12)10-7/h2-4H,1H3,(H,10,12)",CC(=O)c1ccc2nc(O)oc2c1,472.6645918161418,False,['54903-09-2'],1.8482511629,5,,,
+POOL-00041045,"InChI=1S/C10H7NO2/c12-10(13)8-5-7-3-1-2-4-9(7)11-6-8/h1-6H,(H,12,13)",O=C(O)c1cnc2ccccc2c1,465.18632858848656,False,['6480-68-8'],1.852818843,5,$35.80/1 G,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/177148
+POOL-00010691,"InChI=1S/C9H7NO3/c11-4-6-1-2-8-7(3-6)10-9(12)5-13-8/h1-4H,5H2,(H,10,12)",O=Cc1ccc2c(c1)N=C(O)CO2,384.4462459871492,False,['200195-15-9'],1.8400847141,5,,,
+POOL-00034160,"InChI=1S/C9H8O3/c10-7-3-1-6-2-4-9(11)12-8(6)5-7/h1,3,5,10H,2,4H2",O=C1CCc2ccc(O)cc2O1,330.54557464185643,False,['5631-67-4'],1.8226644381,5,,,
+POOL-00021223,"InChI=1S/C10H10O2/c11-9-3-1-7-2-4-10(12)6-8(7)5-9/h1,3,5,11H,2,4,6H2",O=C1CCc2ccc(O)cc2C1,328.6105062081271,False,['37827-68-2'],1.8231720688,5,,,
+POOL-00009993,"InChI=1S/C8H6BrNO2/c9-5-1-2-7-6(3-5)10-8(11)4-12-7/h1-3H,4H2,(H,10,11)",OC1=Nc2cc(Br)ccc2OC1,348.91113891035343,False,['24036-52-0'],1.8300641336,5,"$256.00
+$76.80/10 G","Only 6 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/662348
+POOL-00033300,"InChI=1S/C10H7NO2/c12-6-8-4-3-7-2-1-5-11-9(7)10(8)13/h1-6,13H",O=Cc1ccc2cccnc2c1O,465.4314410863231,False,['5683-78-3'],1.843791204,5,,,
+POOL-00033506,"InChI=1S/C10H9NO/c1-7-8-4-2-3-5-9(8)11-10(7)6-12/h2-6,11H,1H3",Cc1c(C=O)[nH]c2ccccc12,428.3312418989772,False,['5257-24-9'],1.8396319432,5,$244.00/1 G,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/774464
+POOL-00026300,"InChI=1S/C9H11NO2/c10-7-2-3-8-9(6-7)12-5-1-4-11-8/h2-3,6H,1,4-5,10H2",Nc1ccc2c(c1)OCCCO2,285.85706625991145,False,['175136-34-2'],1.835713618,5,,,
+POOL-00010483,"InChI=1S/C9H6BrNO/c10-7-1-2-9-6(3-7)4-8(12)5-11-9/h1-5,12H",Oc1cnc2ccc(Br)cc2c1,391.0480911891211,False,['552330-94-6'],1.8350950273,5,,,
+POOL-00031097,"InChI=1S/C9H7NO3/c1-5-10-7-4-2-3-6(9(11)12)8(7)13-5/h2-4H,1H3,(H,11,12)",Cc1nc2cccc(C(=O)O)c2o1,472.66459181614175,False,['52395-92-3'],1.8711567028,5,,,
+POOL-00025889,"InChI=1S/C10H9NO/c1-7-3-2-4-9-10(7)8(6-12)5-11-9/h2-6,11H,1H3",Cc1cccc2[nH]cc(C=O)c12,428.3312418989771,False,['4771-48-6'],1.8336725489,5,,,
+POOL-00012297,"InChI=1S/C10H8O3/c11-9-5-4-6-7(9)2-1-3-8(6)10(12)13/h1-3H,4-5H2,(H,12,13)",O=C(O)c1cccc2c1CCC2=O,393.1563736409663,False,['56461-20-2'],1.8666506668,5,,,
+POOL-00027363,"InChI=1S/C10H9NO/c12-7-8-3-4-10-9(6-8)2-1-5-11-10/h1-6,12H,7H2",OCc1ccc2ncccc2c1,397.7156418352572,False,['100516-88-9'],1.8262934844,5,,,
+POOL-00025023,"InChI=1S/C8H7NO2S/c10-5-9-6-3-1-2-4-7(6)12-8(9)11/h1-4,10H,5H2",O=c1sc2ccccc2n1CO,457.2709542723538,False,['72679-97-1'],1.8321711628,5,,,
+POOL-00009065,"InChI=1S/C9H6BrNO/c10-8-3-1-2-7-6(5-12)4-11-9(7)8/h1-5,11H",O=Cc1c[nH]c2c(Br)cccc12,433.02119783487,False,['115666-21-2'],1.8426963177,5,,,
+POOL-00029414,"InChI=1S/C8H7NO2S/c10-5-9-6-3-1-2-4-7(6)11-8(9)12/h1-4,10H,5H2",OCn1c(=S)oc2ccccc21,457.2709542723538,False,['3161-58-8'],1.8288737373,5,$28.60/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r240605
+POOL-00035814,"InChI=1S/C8H5NO2S/c10-8(11)7-5-3-1-2-4-6(5)12-9-7/h1-4H,(H,10,11)",O=C(O)c1nsc2ccccc12,435.3054103500143,False,['40991-34-2'],1.8325549387,5,,,
+POOL-00010123,"InChI=1S/C9H11NO2/c1-11-8-4-2-3-6-7(10)5-12-9(6)8/h2-4,7H,5,10H2,1H3",COc1cccc2c1OCC2N,298.58005142145214,False,['885278-21-7'],1.8283555674,5,,,
+POOL-00003402,"InChI=1S/C10H7NO2/c12-4-1-2-8-6-10-9(11-7-8)3-5-13-10/h3,5-7,12H,4H2",OCC#Cc1cnc2ccoc2c1,476.12066966566,False,['1228665-83-5'],1.8355261362,5,,,
+POOL-00042397,"InChI=1S/C10H8O2/c11-8-5-7-3-1-2-4-9(7)10(12)6-8/h1-6,11-12H",Oc1cc(O)c2ccccc2c1,421.10813525322834,False,['132-86-5'],1.8472752843,5,$35.60/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/sigma/n6250
+POOL-00013001,"InChI=1S/C9H6BrNO/c10-7-2-1-6-3-8(5-12)11-9(6)4-7/h1-5,11H",O=Cc1cc2ccc(Br)cc2[nH]1,433.02119783487,False,['105191-12-6'],1.8428644709,5,,,
+POOL-00033128,"InChI=1S/C10H9NO/c1-7-2-3-10-9(4-7)8(6-12)5-11-10/h2-6,11H,1H3",Cc1ccc2[nH]cc(C=O)c2c1,428.3312418989772,False,['52562-50-2'],1.8440158395,5,"$218.00
+$65.40/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/134139
+POOL-00012520,"InChI=1S/C8H7NO2S/c1-11-5-3-2-4-6-7(5)9-8(10)12-6/h2-4H,1H3,(H,9,10)",COc1cccc2sc(O)nc12,410.3501069254241,False,['80567-66-4'],1.8455462759,5,,,
+POOL-00040210,"InChI=1S/C9H7NO2/c10-7-5-6-3-1-2-4-8(6)12-9(7)11/h1-5H,10H2",Nc1cc2ccccc2oc1=O,473.15738428454847,False,['1635-31-0'],1.824660407,5,$222.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/411183
+POOL-00006102,"InChI=1S/C8H5NO2S/c10-8(11)5-2-1-3-6-7(5)12-4-9-6/h1-4H,(H,10,11)",O=C(O)c1cccc2ncsc12,435.3054103500143,False,['677304-83-5'],1.8243748649,5,$69.00/100 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/synthonixcorporation/sy3h990f82d2?context=bbe
+POOL-00006711,"InChI=1S/C10H11NO/c1-11-5-4-9-3-2-8(7-12)6-10(9)11/h2-6,12H,7H2,1H3",Cn1ccc2ccc(CO)cc21,403.13082597655045,False,['199590-00-6'],1.8601334308,5,$51.75/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh97b9f478?context=bbe
+POOL-00026200,"InChI=1S/C9H9NO2/c11-7-2-3-8-6(5-7)1-4-9(12)10-8/h2-3,5,11H,1,4H2,(H,10,12)",O=C1CCc2cc(O)ccc2N1,333.30046214401995,False,['54197-66-9'],1.836412764,5,$27.10/1 G,"Estimated to ship on June 23, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/675350
+POOL-00042647,"InChI=1S/C10H8O2/c11-9-6-5-7-3-1-2-4-8(7)10(9)12/h1-6,11-12H",Oc1ccc2ccccc2c1O,421.10813525322834,False,['574-00-5'],1.831946653,5,"$174.00
+$52.20/250 MG","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/232505
+POOL-00012074,"InChI=1S/C10H8O3/c11-9-4-3-6-1-2-7(10(12)13)5-8(6)9/h1-2,5H,3-4H2,(H,12,13)",O=C(O)c1ccc2c(c1)C(=O)CC2,393.1563736409663,False,['60031-08-5'],1.8820501381,5,,,
+POOL-00003446,"InChI=1S/C8H6BrNO2/c9-5-1-8-7(10-3-5)2-6(4-11)12-8/h1-3,11H,4H2",OCc1cc2ncc(Br)cc2o1,410.3501069254241,False,['1131335-66-4'],1.8288998108,5,$761.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ade001137
+POOL-00024305,"InChI=1S/C10H11NO/c1-7-8-5-6-11-9(8)3-4-10(7)12-2/h3-6,11H,1-2H3",COc1ccc2[nH]ccc2c1C,403.13082597655045,False,['302912-21-6'],1.8451959015,5,,,
+POOL-00012132,"InChI=1S/C9H6BrNO/c10-7-2-3-8-6(5-7)1-4-9(12)11-8/h1-5H,(H,11,12)",O=c1ccc2cc(Br)ccc2[nH]1,475.1573842845486,False,['1810-66-8'],1.8352370028,5,,,
+POOL-00040118,"InChI=1S/C10H9NO/c1-7-9(6-12)8-4-2-3-5-10(8)11-7/h2-6,11H,1H3",Cc1[nH]c2ccccc2c1C=O,428.3312418989772,False,['5416-80-8'],1.8267964246,5,,,
+POOL-00014848,"InChI=1S/C8H5NO2S/c10-8(11)6-4-5-2-1-3-9-7(5)12-6/h1-4H,(H,10,11)",O=C(O)c1cc2cccnc2s1,402.3054103500143,False,['59944-76-2'],1.8333930435,5,$425.50/1 g,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/synthonixcorporation/sy3h990f9358?context=bbe
+POOL-00042593,"InChI=1S/C10H11NO/c12-6-5-8-7-11-10-4-2-1-3-9(8)10/h1-4,7,11-12H,5-6H2",OCCc1c[nH]c2ccccc12,377.9739569094373,False,['526-55-6'],1.8594770893,5,$98.60/5 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/t90301
+POOL-00042644,"InChI=1S/C10H8O2/c11-9-5-6-10(12)8-4-2-1-3-7(8)9/h1-6,11-12H",Oc1ccc(O)c2ccccc12,380.60813525322834,False,['571-60-8'],1.8330097727,5,$151.00/10 G,"Estimated to ship on July 10, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/70430
+POOL-00029013,"InChI=1S/C8H9NO3/c10-8(11)7-5-3-1-2-4-6(5)12-9-7/h1-4H2,(H,10,11)",O=C(O)c1noc2c1CCCC2,316.10291633062855,False,['90005-77-9'],1.8245556504,5,,,
+POOL-00011176,"InChI=1S/C10H8O3/c11-10(12)6-8-5-7-3-1-2-4-9(7)13-8/h1-5H,6H2,(H,11,12)",O=C(O)Cc1cc2ccccc2o1,409.1215136171221,False,['62119-70-4'],1.8554960905,5,,,
+POOL-00036733,"InChI=1S/C9H11NO2/c1-2-10-7-3-4-8-9(5-7)12-6-11-8/h3-5,10H,2,6H2,1H3",CCNc1ccc2c(c1)OCO2,285.85706625991145,False,['32953-14-3'],1.8357759812,5,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r427209
+POOL-00036364,"InChI=1S/C10H8O3/c11-9-5-8(10(12)13)6-3-1-2-4-7(6)9/h1-4,8H,5H2,(H,12,13)",O=C1CC(C(=O)O)c2ccccc21,381.5111775534198,False,['29427-69-8'],1.8409151203,5,$91.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/410772
+POOL-00004213,"InChI=1S/C9H8FNO2/c1-5-9(12)11-7-4-6(10)2-3-8(7)13-5/h2-5H,1H3,(H,11,12)",CC1Oc2ccc(F)cc2N=C1O,375.877493015742,False,['925005-78-3'],1.8419833712,5,,,
+POOL-00012974,"InChI=1S/C9H6BrNO/c10-7-1-2-9-6(3-7)4-8(5-12)11-9/h1-5,11H",O=Cc1cc2cc(Br)ccc2[nH]1,433.02119783487,False,['53590-50-4'],1.8371786956,5,,,
+POOL-00026849,"InChI=1S/C9H6BrNO/c10-7-1-2-8-6(5-12)4-11-9(8)3-7/h1-5,11H",O=Cc1c[nH]c2cc(Br)ccc12,433.02119783487,False,"['17826-04-9', '96564-48-6']",1.8408987895,5,$52.20/1 G,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/666416
+POOL-00042668,"InChI=1S/C10H8O2/c11-9-3-1-7-2-4-10(12)6-8(7)5-9/h1-6,11-12H",Oc1ccc2ccc(O)cc2c1,384.3581352532283,False,"['582-17-2', '147398-48-9']",1.8460433291,5,,,
+POOL-00042036,"InChI=1S/C10H8O2/c11-9-5-7-3-1-2-4-8(7)6-10(9)12/h1-6,11-12H",Oc1cc2ccccc2cc1O,380.60813525322834,False,['92-44-4'],1.8430472593,5,$141.00/50 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/37760
+POOL-00013545,"InChI=1S/C9H8FNO/c1-5-4-6-7(11-5)2-3-8(12)9(6)10/h2-4,11-12H,1H3",Cc1cc2c(F)c(O)ccc2[nH]1,433.2663103327066,False,['288385-88-6'],1.8287143576,5,,,
+POOL-00012208,"InChI=1S/C10H11NO/c1-6-7(2)12-10-4-3-8(11)5-9(6)10/h3-5H,11H2,1-2H3",Cc1oc2ccc(N)cc2c1C,428.57635439681377,False,['3782-22-7'],1.864714872,5,$352.30/100 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/enamine/ena413166664?context=bbe
+POOL-00011374,"InChI=1S/C9H6BrNO/c10-7-2-1-6-3-4-11-9(12)8(6)5-7/h1-5H,(H,11,12)",Oc1nccc2ccc(Br)cc12,427.7980911891212,False,['223671-15-6'],1.8360399637,5,"$69.10
+$20.73/500 MG","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/749559
+POOL-00012759,"InChI=1S/C9H7FO3/c10-6-1-2-7-5(3-6)4-8(13-7)9(11)12/h1-3,8H,4H2,(H,11,12)",O=C(O)C1Cc2cc(F)ccc2O1,361.8774887477606,False,['89197-63-7'],1.8470490127,5,,,
+POOL-00031189,"InChI=1S/C9H6O2S/c10-9(11)7-5-12-8-4-2-1-3-6(7)8/h1-5H,(H,10,11)",O=C(O)c1csc2ccccc12,430.7760853370335,False,['5381-25-9'],1.8582993444,5,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph006834
+POOL-00013084,"InChI=1S/C8H7NO2S/c1-11-5-2-3-6-7(4-5)12-8(10)9-6/h2-4H,1H3,(H,9,10)",COc1ccc2nc(O)sc2c1,410.3501069254241,False,['40925-65-3'],1.8376274071,5,,,
+POOL-00039915,"InChI=1S/C9H6BrNO/c10-7-1-2-9-8(3-7)6(5-12)4-11-9/h1-5,11H",O=Cc1c[nH]c2ccc(Br)cc12,433.02119783487,False,['877-03-2'],1.8414024624,5,$81.60/5 G,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/518743
+POOL-00022907,"InChI=1S/C9H6F3NO/c10-9(11,12)6-1-2-7-5(3-6)4-8(14)13-7/h1-3H,4H2,(H,13,14)",O=C1Cc2cc(C(F)(F)F)ccc2N1,397.53380714550445,False,['71293-62-4'],1.8438269893,5,$99.70/100 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds008597
+POOL-00007564,"InChI=1S/C10H11NO/c1-7-2-3-9-8(6-12)5-11-10(9)4-7/h2-5,11-12H,6H2,1H3",Cc1ccc2c(CO)c[nH]c2c1,403.13082597655045,False,['437988-53-9'],1.86958553,5,,,
+POOL-00026151,"InChI=1S/C8H7NO2S/c1-10-5-2-3-7-6(4-5)9-8(12)11-7/h2-4H,1H3,(H,9,12)",COc1ccc2oc(S)nc2c1,410.3501069254241,False,['49559-83-3'],1.8239197282,5,"$117.00
+$70.20/1 G","Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/699993
+POOL-00007559,"InChI=1S/C8H5NO2S/c10-8(11)7-4-5-6(12-7)2-1-3-9-5/h1-4H,(H,10,11)",O=C(O)c1cc2ncccc2s1,402.3054103500143,False,['347187-30-8'],1.8418455609,5,,,
+POOL-00011436,"InChI=1S/C10H8O3/c11-5-7-6-13-9-4-2-1-3-8(9)10(7)12/h1-4,6,11H,5H2",O=c1c(CO)coc2ccccc12,484.7389947562,False,['37770-89-1'],1.8402836082,5,$134.00/25 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph007744
+POOL-00034063,"InChI=1S/C10H11NO/c1-11-9(7-12)6-8-4-2-3-5-10(8)11/h2-6,12H,7H2,1H3",Cn1c(CO)cc2ccccc21,403.13082597655045,False,['1485-22-9'],1.8471819004,5,,,
+POOL-00040774,"InChI=1S/C9H6O4/c10-8(11)5-1-2-7-6(3-5)4-13-9(7)12/h1-3H,4H2,(H,10,11)",O=C(O)c1ccc2c(c1)COC2=O,394.60121707902255,False,['4792-29-4'],1.8390060639,5,$99.70/100 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds014604
+POOL-00041473,"InChI=1S/C9H11NO2/c10-6-7-1-2-8-9(5-7)12-4-3-11-8/h1-2,5H,3-4,6,10H2",NCc1ccc2c(c1)OCCO2,285.85706625991145,False,['17413-10-4'],1.8429398644,5,,,
+POOL-00027234,"InChI=1S/C9H7NO3/c11-9(12)4-6-1-2-8-7(3-6)10-5-13-8/h1-3,5H,4H2,(H,11,12)",O=C(O)Cc1ccc2ocnc2c1,446.8114695530149,False,['153810-37-8'],1.8482931603,5,,,
+POOL-00039990,"InChI=1S/C10H11NO/c1-7-5-8-6-9(12-2)3-4-10(8)11-7/h3-6,11H,1-2H3",COc1ccc2[nH]c(C)cc2c1,403.13082597655045,False,['1076-74-0'],1.8396664972,5,$50.40/1 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/m15451
+POOL-00007108,"InChI=1S/C8H5NO3/c10-8(11)7-9-5-3-1-2-4-6(5)12-7/h1-4H,(H,10,11)",O=C(O)c1nc2ccccc2o1,399.5505228478508,False,['21598-08-3'],1.8263733373,5,,,
+POOL-00016273,"InChI=1S/C9H5FO2S/c10-6-2-1-5-3-8(9(11)12)13-7(5)4-6/h1-4H,(H,11,12)",O=C(O)c1cc2ccc(F)cc2s1,475.41947931830526,False,['142329-23-5'],1.8676469059,5,,,
+POOL-00026898,"InChI=1S/C9H7BrO2/c10-7-1-2-9-6(3-7)4-8(5-11)12-9/h1-4,11H,5H2",OCc1cc2cc(Br)ccc2o1,405.8207819124433,False,['38220-77-8'],1.8462847133,5,,,
+POOL-00006207,"InChI=1S/C8H4BrNO3/c9-4-1-2-5-6(3-4)13-10-7(5)8(11)12/h1-3H,(H,11,12)",O=C(O)c1noc2cc(Br)ccc12,477.1939168291226,False,['1123169-17-4'],1.8483650638,5,,,
+POOL-00012849,"InChI=1S/C8H9NO3/c1-10-6-2-5(9)3-7-8(6)12-4-11-7/h2-3H,4,9H2,1H3",COc1cc(N)cc2c1OCO2,311.4164369617753,False,['5876-57-3'],1.8433505399,5,,,
+POOL-00038181,"InChI=1S/C8H7BrO3/c9-6-2-8-7(11-4-12-8)1-5(6)3-10/h1-2,10H,3-4H2",OCc1cc2c(cc1Br)OCO2,310.6664369617753,False,['6642-34-8'],1.8238482169,5,,,
+POOL-00029679,"InChI=1S/C9H7NO3/c11-9(12)5-8-10-6-3-1-2-4-7(6)13-8/h1-4H,5H2,(H,11,12)",O=C(O)Cc1nc2ccccc2o1,413.8114695530149,False,['78756-98-6'],1.8532638865,5,$260.00/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/combiblocksinc/com448676440?context=bbe
+POOL-00026860,"InChI=1S/C9H11NO2/c10-6-7-2-1-3-8-9(7)12-5-4-11-8/h1-3H,4-6,10H2",NCc1cccc2c1OCCO2,271.60706625991145,False,['261633-71-0'],1.8323712097,5,$130.00/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/combiblocksinc/com945512104?context=bbe
+POOL-00029851,"InChI=1S/C10H10O2/c11-9-6-5-7-3-1-2-4-8(7)10(9)12/h1-6,9-12H",OC1C=Cc2ccccc2C1O,317.36954751006243,False,['7234-04-0'],1.8258964298,5,,,
+POOL-00039683,"InChI=1S/C10H8O2/c11-8-5-4-7-2-1-3-10(12)9(7)6-8/h1-6,11-12H",Oc1ccc2cccc(O)c2c1,421.10813525322834,False,['575-38-2'],1.8454991732,5,,,
+POOL-00009801,"InChI=1S/C8H9NO3/c1-10-6-3-8-7(2-5(6)9)11-4-12-8/h2-3H,4,9H2,1H3",COc1cc2c(cc1N)OCO2,310.6664369617753,False,['69151-32-2'],1.8226918841,5,$17.60/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh581768e8?context=bbe
+POOL-00043526,"InChI=1S/C11H10O/c12-8-10-6-3-5-9-4-1-2-7-11(9)10/h1-7,12H,8H2",OCc1cccc2ccccc12,387.6311749791205,False,['4780-79-4'],1.829933591,5,"$95.40
+$57.24/10 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/184284
+POOL-00005493,"InChI=1S/C7H4BrF2NO2/c8-3-1-5-6(2-4(3)11)13-7(9,10)12-5/h1-2H,11H2",Nc1cc2c(cc1Br)OC(F)(F)O2,336.7553293063381,False,['887267-84-7'],1.844950925,5,$23.00/100 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/synthonixcorporation/sy3h3d67747a?context=bbe
+POOL-00040198,"InChI=1S/C11H10O/c12-8-9-5-6-10-3-1-2-4-11(10)7-9/h1-7,12H,8H2",OCc1ccc2ccccc2c1,392.8811749791205,False,['1592-38-7'],1.8362068848,5,$76.20/5 G,"Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/187313
+POOL-00043441,"InChI=1S/C9H10O3/c10-5-7-6-11-8-3-1-2-4-9(8)12-7/h1-4,7,10H,5-6H2",OCC1COc2ccccc2O1,272.2310872723904,False,['3663-82-9'],1.823562891,5,"$49.10
+$29.46/5 G","Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/h38403
+POOL-00003765,"InChI=1S/C8H4BrNO3/c9-4-1-2-6-5(3-4)10-7(13-6)8(11)12/h1-3H,(H,11,12)",O=C(O)c1nc2cc(Br)ccc2o1,477.1939168291226,False,['944898-52-6'],1.8467095824,5,,,
+POOL-00010869,"InChI=1S/C9H6O4/c10-6-2-1-3-7-8(6)5(4-13-7)9(11)12/h1-4,10H,(H,11,12)",O=C(O)c1coc2cccc(O)c12,469.41947931830526,False,['112678-09-8'],1.8533897256,5,,,
+POOL-00039684,"InChI=1S/C10H8O2/c11-8-4-5-9-7(6-8)2-1-3-10(9)12/h1-6,11-12H",Oc1ccc2c(O)cccc2c1,421.10813525322834,False,['575-44-0'],1.8499879813,5,"$112.00
+$67.20/50 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/274127
+POOL-00040471,"InChI=1S/C9H8O4/c10-9(11)4-6-1-2-7-8(3-6)13-5-12-7/h1-3H,4-5H2,(H,10,11)",O=C(O)Cc1ccc2c(c1)OCO2,345.46798022455295,False,['2861-28-1'],1.8403727651,5,$162.00/5 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/329673
+POOL-00005737,"InChI=1S/C8H8O3S/c9-8(10)7-3-5-4-11-2-1-6(5)12-7/h3H,1-2,4H2,(H,9,10)",O=C(O)c1cc2c(s1)CCOC2,292.60291633062855,False,['933747-41-2'],1.8379128917,5,,,
+POOL-00031293,"InChI=1S/C9H6F3NO/c10-9(11,12)6-2-1-5-3-8(14)13-7(5)4-6/h1-2,4H,3H2,(H,13,14)",OC1=Nc2cc(C(F)(F)F)ccc2C1,409.00836068185725,False,['1735-89-3'],1.8447009936,5,,,
+POOL-00039544,"InChI=1S/C11H7NO/c13-11-8-5-1-3-7-4-2-6-9(12-11)10(7)8/h1-6H,(H,12,13)",OC1=Nc2cccc3cccc1c23,523.351358982028,False,['130-00-7'],1.8290677384,5,$116.00/5 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/336467
+POOL-00039044,"InChI=1S/C10H7BrO/c11-9-5-7-3-1-2-4-8(7)6-10(9)12/h1-6,12H",Oc1cc2ccccc2cc1Br,382.60813525322834,False,"['30478-88-7', '63980-30-3']",1.8433696758,5,$158.00/1 G,"Estimated to ship on July 06, 2023
+From MILWAUKEE",https://www.sigmaaldrich.com/US/en/product/aldrich/690120
+POOL-00023204,"InChI=1S/C8H9NO2S/c9-8-2-1-6-4-12(10,11)5-7(6)3-8/h1-3H,4-5,9H2",Nc1ccc2c(c1)CS(=O)(=O)C2,422.6840427776531,False,['70654-85-2'],1.8707100047,5,,,
+POOL-00025142,"InChI=1S/C9H8O4/c10-9(11)8-5-12-6-3-1-2-4-7(6)13-8/h1-4,8H,5H2,(H,10,11)",O=C(O)C1COc2ccccc2O1,334.1415159733637,False,"['3663-80-7', '34385-93-8']",1.82448097,5,$543.00/nan,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/sial/phr3312
+POOL-00035770,"InChI=1S/C10H8O2/c11-9-3-1-7-5-10(12)4-2-8(7)6-9/h1-6,11-12H",Oc1ccc2cc(O)ccc2c1,379.8581352532283,False,['581-43-1'],1.8486376853,5,,,
+POOL-00041956,"InChI=1S/C10H8O2/c11-9-5-1-3-7-8(9)4-2-6-10(7)12/h1-6,11-12H",Oc1cccc2c(O)cccc12,379.8581352532283,False,['83-56-7'],1.8338077624,5,$52.30/100 G,"Only 1 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/d115606
+POOL-00027223,"InChI=1S/C9H9NO3/c1-5-3-6-8(13-5)4-7(10-6)9(11)12-2/h3-4,10H,1-2H3",COC(=O)c1cc2oc(C)cc2[nH]1,420.8146985486508,False,['155445-28-6'],1.8405342409,5,$138.00/5MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t310514
+POOL-00026460,"InChI=1S/C9H6F3N/c10-9(11,12)7-2-1-6-3-4-13-8(6)5-7/h1-5,13H",FC(F)(F)c1ccc2cc[nH]c2c1,427.59758915772346,False,['13544-43-9'],1.8224553333,5,,,
+POOL-00013072,"InChI=1S/C10H9NO2/c1-2-9-10(13-6-5-12-9)7-3-4-11-8(1)7/h1-4,11H,5-6H2",c1cc2c3c(ccc2[nH]1)OCCO3,447.1215136171221,False,['111506-26-4'],1.8242120121,5,,,
+POOL-00034310,"InChI=1S/C8H6O4/c9-8(10)5-2-1-3-6-7(5)12-4-11-6/h1-3H,4H2,(H,9,10)",O=C(O)c1cccc2c1OCO2,331.82978715700074,False,['5768-39-8'],1.8290922776,5,$68.10/100 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds015304
+POOL-00026401,"InChI=1S/C9H3F4NO/c10-5-4-3(2-15)1-14-9(4)8(13)7(12)6(5)11/h1-2,14H",O=Cc1c[nH]c2c(F)c(F)c(F)c(F)c12,560.9730656215303,False,['30683-38-6'],1.8384109548,5,,,
+POOL-00003591,"InChI=1S/C8H7NO4/c10-8(11)5-1-2-9-7-6(5)12-3-4-13-7/h1-2H,3-4H2,(H,10,11)",O=C(O)c1ccnc2c1OCCO2,349.99730523753374,False,['1228665-94-8'],1.8486868795,5,,,
+POOL-00033603,"InChI=1S/C10H10O2/c11-10(12)9-5-3-8(4-6-9)7-1-2-7/h3-7H,1-2H2,(H,11,12)",O=C(O)c1ccc(C2CC2)cc1,296.11954751006243,False,['1798-82-9'],1.823385338,5,,,
+POOL-00032473,"InChI=1S/C10H10O2/c11-10(12)9-6-8(9)7-4-2-1-3-5-7/h1-5,8-9H,6H2,(H,11,12)",O=C(O)C1CC1c1ccccc1,291.9667060215555,False,['5685-38-1'],1.8415813155,5,,,
+POOL-00003819,"InChI=1S/C10H7FO2/c11-8-4-7(5-9(12)6-8)10-2-1-3-13-10/h1-6,12H",Oc1cc(F)cc(-c2ccco2)c1,386.6180242616029,False,['1261996-61-5'],1.8458998728,5,$260.00/1 g,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/combiblocksinc/com448685107?context=bbe
+POOL-00031298,"InChI=1S/C8H4F2O4/c9-8(10)13-5-2-1-4(7(11)12)3-6(5)14-8/h1-3H,(H,11,12)",O=C(O)c1ccc2c(c1)OC(F)(F)O2,402.3277946649756,False,['656-46-2'],1.8308165032,5,,,
+POOL-00037326,"InChI=1S/C11H11N/c12-10-3-1-2-9-7-4-5-8(6-7)11(9)10/h1-5,7-8H,6,12H2",Nc1cccc2c1C1C=CC2C1,365.266903896532,False,['61346-80-3'],1.8226056645,5,$28.60/25MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/t198625
+POOL-00006483,"InChI=1S/C9H8O2S/c10-6-7-3-4-9(12-7)8-2-1-5-11-8/h1-5,10H,6H2",OCc1ccc(-c2ccco2)s1,348.25204960510905,False,['868755-65-1'],1.8356303537,5,,,
+POOL-00041973,"InChI=1S/C12H9N/c1-3-7-11-9(5-1)10-6-2-4-8-12(10)13-11/h1-8,13H",c1ccc2c(c1)[nH]c1ccccc12,512.8841359099093,False,"['86-74-8', '51555-21-6']",1.82957291,5,$52.60/100 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/sigma/c5132
+POOL-00008945,"InChI=1S/C12H9NO2S/c14-8-5-6-10-12(7-8)16(15)11-4-2-1-3-9(11)13-10/h1-7,13-14H",O=S1c2ccccc2Nc2ccc(O)cc21,595.3226737332639,False,['38015-17-7'],1.8286856148,5,,,
+POOL-00036281,"InChI=1S/C8H10N2O2/c1-12-7-5-3-2-4-6(7)10-8(9)11/h2-5H,1H3,(H3,9,10,11)",COc1ccccc1NC(=N)O,286.1412787750557,False,['135-92-2'],1.8314710361,6,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s352535
+POOL-00004501,"InChI=1S/C8H8F2N2O/c9-6-1-5(2-7(10)4-6)3-8(11)12-13/h1-2,4,13H,3H2,(H2,11,12)",N=C(Cc1cc(F)cc(F)c1)NO,307.6701072839529,False,['280110-80-7'],1.8254758943,6,,,
+POOL-00006159,"InChI=1S/C8H8F2N2O/c9-6-1-2-7(10)5(3-6)4-8(11)12-13/h1-3,13H,4H2,(H2,11,12)",N=C(Cc1cc(F)ccc1F)NO,327.9201072839529,False,['280110-79-4'],1.8232804378,6,,,
+POOL-00036444,"InChI=1S/C8H10N2O2/c1-12-7-4-2-3-6(5-7)10-8(9)11/h2-5H,1H3,(H3,9,10,11)",COc1cccc(NC(=N)O)c1,286.1412787750557,False,['139-77-5'],1.8279853934,6,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s576743
+POOL-00019435,"InChI=1S/C7H7BrN2/c8-6-3-1-2-5(4-6)7(9)10/h1-4H,(H3,9,10)",N=C(N)c1cccc(Br)c1,257.53794892648057,False,['26157-85-7'],1.827401609,6,,,
+POOL-00038360,"InChI=1S/C8H10N2O2/c9-8(11)10-12-6-7-4-2-1-3-5-7/h1-5H,6H2,(H3,9,10,11)",N=C(O)NOCc1ccccc1,248.4945899428275,False,['2048-50-2'],1.838627286,6,$136.40/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/apolloscientificltd/apoh6f3d0466?context=bbe
+POOL-00040186,"InChI=1S/C8H10N2O2/c1-12-7-4-2-6(3-5-7)10-8(9)11/h2-5H,1H3,(H3,9,10,11)",COc1ccc(NC(=N)O)cc1,268.8912787750557,False,['1566-42-3'],1.8338373354,6,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s576751
+POOL-00034767,"InChI=1S/C8H7F3N2/c9-8(10,11)6-3-1-2-5(4-6)7(12)13/h1-4H,(H3,12,13)",N=C(N)c1cccc(C(F)(F)F)c1,330.40617847985413,False,['26130-45-0'],1.8355311884,6,,,
+POOL-00009768,"InChI=1S/C7H7F3N2O/c8-7(9,10)13-6-4-2-1-3-5(6)12-11/h1-4,12H,11H2",NNc1ccccc1OC(F)(F)F,287.3112981413424,False,['791029-98-6'],1.8232996628,6,,,
+POOL-00015159,"InChI=1S/C8H10N2O2/c9-8(10-11)6-12-7-4-2-1-3-5-7/h1-5,11H,6H2,(H2,9,10)",N=C(COc1ccccc1)NO,248.4945899428275,False,['90007-06-0'],1.8478294217,6,$87.40/1 g,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/advancedchemicalintermediatesltd/ac7h039c8496?context=bbe
+POOL-00013231,"InChI=1S/C8H10N2O2/c1-12-7-5-3-2-4-6(7)8(9)10-11/h2-5,11H,1H3,(H2,9,10)",COc1ccccc1C(=N)NO,286.1412787750557,False,"['771-28-8', '1772588-79-0', '184778-34-5']",1.8405438433,6,,,
+POOL-00021151,"InChI=1S/C8H10N2O2/c1-12-7-4-2-3-6(5-7)8(9)10-11/h2-5,11H,1H3,(H2,9,10)",COc1cccc(C(=N)NO)c1,286.1412787750557,False,"['73647-50-4', '934367-07-4']",1.8416717425,6,"$57.80
+$17.34/1 G","Only 6 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/733571
+POOL-00021443,"InChI=1S/C7H7BrN2O2/c8-5-1-3-6(4-2-5)9-7(11)10-12/h1-4,12H,(H2,9,10,11)",ON=C(O)Nc1ccc(Br)cc1,283.9627794821931,False,['89677-50-9'],1.8342834138,6,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s649791
+POOL-00041839,"InChI=1S/C8H10N2S/c9-8(10)11-6-7-4-2-1-3-5-7/h1-5H,6H2,(H3,9,10)",N=C(N)SCc1ccccc1,233.1071909292144,False,['621-85-2'],1.8526283057,6,,,
+POOL-00006609,"InChI=1S/C8H10N2O2/c9-7-3-1-6(5-10-7)2-4-8(11)12/h1,3,5H,2,4H2,(H2,9,10)(H,11,12)",N=c1ccc(CCC(=O)O)c[nH]1,309.5797871570007,False,['446263-96-3'],1.8356204355,6,$77.00/100 mg,Ships in 10 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/synthonixcorporation/sy3h3d675966?context=bbe
+POOL-00038121,"InChI=1S/C7H8BrNO/c8-6-1-2-7(10)5(3-6)4-9/h1-3,10H,4,9H2",NCc1cc(Br)ccc1O,237.04775799182192,False,['58349-96-5'],1.8225618828,6,,,
+POOL-00026669,"InChI=1S/C7H6F2N2S/c8-4-2-1-3-5(6(4)9)11-7(10)12/h1-3H,(H3,10,11,12)",N=C(S)Nc1cccc(F)c1F,314.274727511699,False,['572889-25-9'],1.8341521683,6,"$77.90
+$23.37/1 G","Only 3 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/654833
+POOL-00017704,"InChI=1S/C8H10N2O2/c1-12-7-4-2-6(3-5-7)8(9)10-11/h2-5,11H,1H3,(H2,9,10)",COc1ccc(C(N)=NO)cc1,279.6142639365964,False,"['5373-87-5', '1079393-88-6']",1.8456269633,6,$81.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph009929
+POOL-00035074,"InChI=1S/C7H7BrN2O2/c8-4-1-2-6(11)5(3-4)7(12)10-9/h1-3,11H,9H2,(H,10,12)",NN=C(O)c1cc(Br)ccc1O,325.1824565023694,False,['39635-10-4'],1.8393518464,6,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph010958
+POOL-00004053,"InChI=1S/C7H7BrN2O2/c8-4-1-2-5(6(11)3-4)7(12)10-9/h1-3,11H,9H2,(H,10,12)",NN=C(O)c1ccc(Br)cc1O,325.1824565023694,False,['28076-35-9'],1.8612892765,6,,,
+POOL-00022912,"InChI=1S/C8H9NOS/c9-7-3-1-6(2-4-7)5-8(10)11/h1-4H,5,9H2,(H,10,11)",Nc1ccc(CC(=O)S)cc1,255.2994975838911,False,['354531-38-7'],1.8322749799,6,$106.00/50MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r466522
+POOL-00031306,"InChI=1S/C6H6BrFN2/c7-4-1-2-6(10-9)5(8)3-4/h1-3,10H,9H2",NNc1ccc(Br)cc1F,239.18946744189824,False,['299440-17-8'],1.8278481835,6,,,
+POOL-00026222,"InChI=1S/C7H6F2N2S/c8-4-1-2-5(9)6(3-4)11-7(10)12/h1-3H,(H3,10,11,12)",N=C(S)Nc1cc(F)ccc1F,314.274727511699,False,['207981-44-0'],1.8413277145,6,"$37.00
+$11.10/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/654868
+POOL-00031823,"InChI=1S/C7H10N2O2/c1-2-3-5-4-6(7(10)11)9-8-5/h4H,2-3H2,1H3,(H,8,9)(H,10,11)",CCCc1cc(C(=O)O)n[nH]1,254.69818175131496,False,['76424-47-0'],1.8259860099,6,,,
+POOL-00028007,"InChI=1S/C8H10N2S/c1-6-2-4-7(5-3-6)10-8(9)11/h2-5H,1H3,(H3,9,10,11)",Cc1ccc(NC(=N)S)cc1,253.2994975838911,False,['622-52-6'],1.8273744065,6,$28.60/10MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/r612898
+POOL-00015042,"InChI=1S/C8H12N2O/c9-7-1-3-8(4-2-7)10-5-6-11/h1-4,10-11H,5-6,9H2",Nc1ccc(NCCO)cc1,207.83697234853025,False,['19298-14-7'],1.8237435776,6,$143.00/250 mg,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/combiblocksinc/com497518674?context=bbe
+POOL-00028345,"InChI=1S/C8H10N2S/c9-8(11)10-6-7-4-2-1-3-5-7/h1-5H,6H2,(H3,9,10,11)",N=C(S)NCc1ccccc1,233.1071909292144,False,['621-83-0'],1.8588897035,6,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s385816
+POOL-00022138,"InChI=1S/C8H8N2O2/c9-7(10)5-1-3-6(4-2-5)8(11)12/h1-4H,(H3,9,10)(H,11,12)",N=C(N)c1ccc(C(=O)O)cc1,283.3346746591642,False,['15535-95-2'],1.826279,6,,,
+POOL-00025167,"InChI=1S/C7H7BrN2S/c8-5-2-1-3-6(4-5)10-7(9)11/h1-4H,(H3,9,10,11)",N=C(S)Nc1cccc(Br)c1,274.8980131294879,False,['21327-14-0'],1.8366881584,6,,,
+POOL-00035487,"InChI=1S/C7H6F3NS/c8-7(9,10)4-1-2-6(12)5(11)3-4/h1-3,12H,11H2",Nc1cc(C(F)(F)F)ccc1S,295.19322947353925,False,['19406-49-6'],1.8323350385,6,,,
+POOL-00032144,"InChI=1S/C8H10N2S/c1-9-8(11)10-7-5-3-2-4-6-7/h2-6H,1H3,(H2,9,10,11)",CN=C(S)Nc1ccccc1,243.52878773918383,False,['2724-69-8'],1.8231590734,6,$39.90/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s615188
+POOL-00025168,"InChI=1S/C7H7BrN2S/c8-5-1-3-6(4-2-5)10-7(9)11/h1-4H,(H3,9,10,11)",N=C(S)Nc1ccc(Br)cc1,257.6480131294878,False,['2646-30-2'],1.8253628906,6,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph010901
+POOL-00025445,"InChI=1S/C9H8N2O/c10-9-8(6-11-12-9)7-4-2-1-3-5-7/h1-6H,10H2",Nc1oncc1-c1ccccc1,367.0273776360866,False,['4320-83-6'],1.8227278242,7,,,
+POOL-00007713,"InChI=1S/C9H7FN2O/c10-7-3-1-6(2-4-7)8-5-12-13-9(8)11/h1-5H,11H2",Nc1oncc1-c1ccc(F)cc1,407.8079801974957,False,['914635-91-9'],1.8401207559,7,$172.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/jrd0172
+POOL-00022972,"InChI=1S/C9H7FN2O/c10-7-4-2-1-3-6(7)8-5-9(11)13-12-8/h1-5H,11H2",Nc1cc(-c2ccccc2F)no1,425.0579801974958,False,['119162-49-1'],1.8474689994,7,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l482951
+POOL-00016584,"InChI=1S/C9H7FN2O/c10-6-1-2-9(13)7(5-6)8-3-4-11-12-8/h1-5,13H,(H,11,12)",Oc1ccc(F)cc1-c1cc[nH]n1,411.5579801974957,False,['288401-64-9'],1.8473908219,7,,,
+POOL-00040327,"InChI=1S/C10H8N2O/c13-10-7-6-9(11-12-10)8-4-2-1-3-5-8/h1-7H,(H,12,13)",Oc1ccc(-c2ccccc2)nn1,383.4293168219371,False,['2166-31-6'],1.8250707932,7,,,
+POOL-00012803,"InChI=1S/C9H7FN2O/c10-7-3-1-6(2-4-7)8-5-9(11)12-13-8/h1-5H,(H2,11,12)",N=c1cc(-c2ccc(F)cc2)o[nH]1,454.9669827464828,False,['925005-35-2'],1.8421202107,7,"$45.50
+$13.65/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/676268
+POOL-00012524,"InChI=1S/C9H8N2O2/c1-6-2-4-7(5-3-6)8-10-11-9(12)13-8/h2-5H,1H3,(H,11,12)",Cc1ccc(-c2nnc(O)o2)cc1,405.8079801974957,False,['83725-78-4'],1.8326079285,7,,,
+POOL-00010903,"InChI=1S/C9H8N2O/c10-8-3-1-2-7(4-8)9-5-12-6-11-9/h1-6H,10H2",Nc1cccc(-c2cocn2)c1,367.7773776360867,False,['521982-80-9'],1.8448570278,7,,,
+POOL-00028996,"InChI=1S/C9H8N2O/c12-9-4-2-1-3-7(9)8-5-6-10-11-8/h1-6,12H,(H,10,11)",Oc1ccccc1-c1cc[nH]n1,367.7773776360867,False,['34810-67-8'],1.8305301329,7,$94.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/417831
+POOL-00030005,"InChI=1S/C9H8N2O/c10-8-3-1-7(2-4-8)9-5-11-6-12-9/h1-6H,10H2",Nc1ccc(-c2cnco2)cc1,350.52737763608667,False,['1008-95-3'],1.8237041066,7,,,
+POOL-00000560,"InChI=1S/C9H7FN2O/c10-6-1-2-7(9(13)5-6)8-3-4-11-12-8/h1-5,13H,(H,11,12)",Oc1cc(F)ccc1-c1cc[nH]n1,411.5579801974957,False,['929903-46-8'],1.8553941639,7,,,
+POOL-00005296,"InChI=1S/C9H7FN2O/c10-7-3-1-2-6(4-7)8-5-9(11)13-12-8/h1-5H,11H2",Nc1cc(-c2cccc(F)c2)no1,425.0579801974958,False,['119162-50-4'],1.8577500318,7,$308.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/jrd0164
+POOL-00033820,"InChI=1S/C10H8N2O/c13-7-9-6-11-12-10(9)8-4-2-1-3-5-8/h1-7H,(H,11,12)",O=Cc1c[nH]nc1-c1ccccc1,405.8729117637664,False,['26033-20-5'],1.8265518983,7,$75.10/5 G,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/734993
+POOL-00025397,"InChI=1S/C9H8N2O/c10-8-3-1-2-7(4-8)9-5-11-6-12-9/h1-6H,10H2",Nc1cccc(-c2cnco2)c1,367.7773776360867,False,['157837-31-5'],1.8445326601,7,$68.10/250 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cds014206
+POOL-00028400,"InChI=1S/C9H8N2O2/c1-6-10-9(13-11-6)7-4-2-3-5-8(7)12/h2-5,12H,1H3",Cc1noc(-c2ccccc2O)n1,423.0579801974958,False,['79349-23-8'],1.847662369,7,,,
+POOL-00005358,"InChI=1S/C9H8N2O2/c1-6-10-9(13-11-6)7-3-2-4-8(12)5-7/h2-5,12H,1H3",Cc1noc(-c2cccc(O)c2)n1,423.0579801974958,False,['1082766-16-2'],1.8326170121,7,,,
+POOL-00033025,"InChI=1S/C9H8N2O/c12-9(7-3-1-5-10-7)8-4-2-6-11-8/h1-6,10-11H",O=C(c1ccc[nH]1)c1ccc[nH]1,322.90369804717767,False,['15770-21-5'],1.8280061872,7,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l161462
+POOL-00027799,"InChI=1S/C9H7FN2O/c10-7-3-1-6(2-4-7)8-5-9(11)13-12-8/h1-5H,11H2",Nc1cc(-c2ccc(F)cc2)no1,407.8079801974957,False,['81465-82-9'],1.8655136218,7,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l482927
+POOL-00037896,"InChI=1S/C9H10N2O/c12-8-4-2-1-3-7(8)9-10-5-6-11-9/h1-4,12H,5-6H2,(H,10,11)",Oc1ccccc1C1=NCCN1,320.05950344595533,False,['1565-39-5'],1.8242680386,7,"$88.20
+$26.46/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/654698
+POOL-00011815,"InChI=1S/C9H8N2O2/c1-6-10-9(11-13-6)7-3-2-4-8(12)5-7/h2-5,12H,1H3",Cc1nc(-c2cccc(O)c2)no1,423.0579801974958,False,['58599-05-6'],1.8328140153,7,,,
+POOL-00009495,"InChI=1S/C9H8N2S/c10-8-3-1-2-7(4-8)9-5-12-6-11-9/h1-6H,10H2",Nc1cccc(-c2cscn2)c1,367.7773776360867,False,['134812-28-5'],1.860614532,7,$376.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cbr00146
+POOL-00025648,"InChI=1S/C9H6FNO2/c10-6-1-2-8(12)7(5-6)9-3-4-11-13-9/h1-5,12H",Oc1ccc(F)cc1-c1ccno1,411.5579801974957,False,['288401-62-7'],1.8351891141,7,$185.00/1 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/543683
+POOL-00016272,"InChI=1S/C9H8N2O2/c1-6-10-9(11-13-6)7-2-4-8(12)5-3-7/h2-5,12H,1H3",Cc1nc(-c2ccc(O)cc2)no1,405.8079801974957,False,['49787-02-2'],1.8353564288,7,,,
+POOL-00016856,"InChI=1S/C9H8N2O2/c1-6-10-11-9(13-6)7-2-4-8(12)5-3-7/h2-5,12H,1H3",Cc1nnc(-c2ccc(O)cc2)o1,405.8079801974957,False,['25877-46-7'],1.8338173413,7,,,
+POOL-00000559,"InChI=1S/C9H6FNO2/c10-6-1-2-7(8(12)5-6)9-3-4-11-13-9/h1-5,12H",Oc1cc(F)ccc1-c1ccno1,411.5579801974957,False,['876149-59-6'],1.8250017138,7,,,
+POOL-00025747,"InChI=1S/C10H10N2/c11-9-4-3-5-10(8-9)12-6-1-2-7-12/h1-8H,11H2",Nc1cccc(-n2cccc2)c1,363.0874217001939,False,['89353-42-4'],1.8524436075,7,$22.00/250 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/ambeedinc/ambh98c8e519?context=bbe
+POOL-00006234,"InChI=1S/C9H8N2S/c10-9-6-7(3-4-11-9)8-2-1-5-12-8/h1-6H,(H2,10,11)",N=c1cc(-c2cccs2)cc[nH]1,414.0985085335023,False,['1159815-95-8'],1.8578347974,7,,,
+POOL-00027227,"InChI=1S/C8H6N2OS/c11-7-3-1-2-6(4-7)8-5-12-10-9-8/h1-5,11H",Oc1cccc(-c2csnn2)c1,372.3067026490675,False,['303149-00-0'],1.834609884,7,$102.00/500 mg,Ships in 14 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/keyorganicsbionet/key001126979?context=bbe
+POOL-00021264,"InChI=1S/C9H9FN2O/c10-7-1-3-8(4-2-7)11-9(13)12-5-6-12/h1-4H,5-6H2,(H,11,13)",O=C(Nc1ccc(F)cc1)N1CC1,318.8915159733637,False,['15460-49-8'],1.8326029057,7,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/s772968
+POOL-00007400,"InChI=1S/C9H8N2S/c10-8-3-1-7(2-4-8)9-5-12-6-11-9/h1-6H,10H2",Nc1ccc(-c2cscn2)cc1,350.52737763608667,False,['60759-10-6'],1.8426859651,7,$167.00/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/cbr00254
+POOL-00031667,"InChI=1S/C9H7FN2/c10-8-3-1-7(2-4-8)9-5-11-6-12-9/h1-6H,(H,11,12)",Fc1ccc(-c2cnc[nH]2)cc1,350.52737763608667,False,['65020-70-4'],1.8240740502,7,"$91.00
+$54.60/5 G","Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/687065
+POOL-00020837,"InChI=1S/C10H9NO/c11-9-4-1-3-8(7-9)10-5-2-6-12-10/h1-7H,11H2",Nc1cccc(-c2ccco2)c1,365.0874217001939,False,['102269-42-1'],1.8458645516,7,,,
+POOL-00024877,"InChI=1S/C10H10N2/c1-8-2-4-9(5-3-8)10-6-7-11-12-10/h2-7H,1H3,(H,11,12)",Cc1ccc(-c2cc[nH]n2)cc1,345.83742170019383,False,['59843-75-3'],1.8237984968,7,$68.10/1 G,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/jrd0093
+POOL-00021132,"InChI=1S/C10H9NO/c11-9-5-3-8(4-6-9)10-2-1-7-12-10/h1-7H,11H2",Nc1ccc(-c2ccco2)cc1,347.83742170019383,False,['59147-02-3'],1.838757458,7,,,
+POOL-00009995,"InChI=1S/C9H10N2O/c12-8-3-1-2-7(6-8)9-10-4-5-11-9/h1-3,6,12H,4-5H2,(H,10,11)",Oc1cccc(C2=NCCN2)c1,320.05950344595533,False,['834884-99-0'],1.8362844243,7,,,
+POOL-00043691,"InChI=1S/C10H10N2/c11-5-8-1-3-9(4-2-8)10-6-12-7-10/h1-4,10,12H,6-7H2",N#Cc1ccc(C2CNC2)cc1,303.6056187059636,False,['7215-03-4'],1.824064496,7,,,
+POOL-00011799,"InChI=1S/C8H5F3N2O/c9-8(10,11)7-4-5(12-13-7)6-2-1-3-14-6/h1-4H,(H,12,13)",FC(F)(F)c1cc(-c2ccco2)[nH]n1,415.9783046609492,False,['197507-85-0'],1.8384566312,7,,,
+POOL-00031090,"InChI=1S/C10H10N2/c1-8-11-7-10(12-8)9-5-3-2-4-6-9/h2-7H,1H3,(H,11,12)",Cc1ncc(-c2ccccc2)[nH]1,362.3374217001938,False,['13739-48-5'],1.8269679974,7,,,
+POOL-00039896,"InChI=1S/C10H10N2/c1-8-7-11-10(12-8)9-5-3-2-4-6-9/h2-7H,1H3,(H,11,12)",Cc1cnc(-c2ccccc2)[nH]1,362.3374217001938,False,['827-43-0'],1.8237869341,7,,,
+POOL-00043410,"InChI=1S/C10H10N2/c1-8-7-10(12-11-8)9-5-3-2-4-6-9/h2-7H,1H3,(H,11,12)",Cc1cc(-c2ccccc2)n[nH]1,362.3374217001938,False,['3347-62-4'],1.8284546595,7,$28.60/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l496162
+POOL-00033839,"InChI=1S/C10H11NO/c11-9(12)10(6-7-10)8-4-2-1-3-5-8/h1-5H,6-7H2,(H2,11,12)",N=C(O)C1(c2ccccc2)CC1,300.87443501222594,False,['6120-96-3'],1.8269306342,7,$134.00/100 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph000225
+POOL-00003891,"InChI=1S/C9H6F2N2/c10-6-1-2-7(8(11)5-6)9-12-3-4-13-9/h1-5H,(H,12,13)",Fc1ccc(-c2ncc[nH]2)c(F)c1,409.5579801974958,False,['885278-05-7'],1.8467031611,7,,,
+POOL-00038246,"InChI=1S/C9H8N2O2/c12-8-6-10-9(13)11(8)7-4-2-1-3-5-7/h1-5H,6H2,(H,10,13)",O=C1CN=C(O)N1c1ccccc1,359.1372680200689,False,['2221-13-8'],1.8365777471,7,$28.60/10MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l158313
+POOL-00006239,"InChI=1S/C9H7NOS/c11-7-3-4-8(10-6-7)9-2-1-5-12-9/h1-6,11H",Oc1ccc(-c2cccs2)nc1,352.52737763608667,False,['1159815-70-9'],1.8372894635,7,,,
+POOL-00000094,"InChI=1S/C9H10N2O/c12-8-3-1-7(2-4-8)9-10-5-6-11-9/h1-4,12H,5-6H2,(H,10,11)",Oc1ccc(C2=NCCN2)cc1,302.80950344595533,False,['212485-91-1'],1.8413104849,7,,,
+POOL-00043237,"InChI=1S/C9H10N2O/c10-9-11-6-8(12-9)7-4-2-1-3-5-7/h1-5,8H,6H2,(H2,10,11)",N=C1NCC(c2ccccc2)O1,283.83982642577905,False,['2207-50-3'],1.824754274,7,,,
+POOL-00024479,"InChI=1S/C8H8N2OS/c1-5-2-3-7(11-5)6-4-12-8(9)10-6/h2-4H,1H3,(H2,9,10)",Cc1ccc(-c2csc(=N)[nH]2)o1,437.6025029535248,False,['1634-46-4'],1.874127266,7,,,
+POOL-00012224,"InChI=1S/C9H7NO2/c11-8-3-1-7(2-4-8)9-5-12-6-10-9/h1-6,11H",Oc1ccc(-c2cocn2)cc1,350.52737763608667,False,['57801-65-7'],1.8315940364,7,$134.00/1 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph003573
+POOL-00028213,"InChI=1S/C8H6N2OS/c12-8-10-9-7(11-8)6-4-2-1-3-5-6/h1-5H,(H,10,12)",Sc1nnc(-c2ccccc2)o1,371.55670264906746,False,"['3004-42-0', '1630090-69-5']",1.8270918952,7,,,
+POOL-00041802,"InChI=1S/C9H8N2O2/c10-9-11-8(12)7(13-9)6-4-2-1-3-5-6/h1-5,7H,(H2,10,11,12)",N=C1N=C(O)C(c2ccccc2)O1,359.1372680200689,False,"['2152-34-3', '101053-01-4']",1.8495876476,7,,,
+POOL-00032160,"InChI=1S/C9H7NOS/c11-9-10-8(6-12-9)7-4-2-1-3-5-7/h1-6H,(H,10,11)",Oc1nc(-c2ccccc2)cs1,369.0273776360866,False,['3884-31-9'],1.8328979259,7,$109.00/5 G,"Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/688142
+POOL-00038976,"InChI=1S/C9H8N2S/c10-9-11-8(6-12-9)7-4-2-1-3-5-7/h1-6H,(H2,10,11)",N=c1[nH]c(-c2ccccc2)cs1,413.34850853350224,False,['2010-06-2'],1.8652901729,7,,,
+POOL-00030666,"InChI=1S/C9H7NOS/c11-8-6-12-9(10-8)7-4-2-1-3-5-7/h1-6,11H",Oc1csc(-c2ccccc2)n1,369.0273776360866,False,['827-45-2'],1.8257990042,7,,,
+POOL-00023127,"InChI=1S/C9H6F2N2O/c10-5-3-6(8-1-2-12-13-8)9(14)7(11)4-5/h1-4,14H,(H,12,13)",Oc1c(F)cc(F)cc1-c1cc[nH]n1,454.0855558655616,False,['663179-74-6'],1.8607503389,7,,,
+POOL-00012086,"InChI=1S/C9H8N2S/c1-2-4-8(5-3-1)11-9-10-6-7-12-9/h1-7H,(H,10,11)",c1ccc(Nc2nccs2)cc1,328.6939078791548,False,['33142-18-6'],1.8445072354,7,$172.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph010014
+POOL-00025165,"InChI=1S/C9H7BrN2/c10-8-3-1-7(2-4-8)9-5-6-11-12-9/h1-6H,(H,11,12)",Brc1ccc(-c2cc[nH]n2)cc1,350.52737763608667,False,['73387-46-9'],1.8263415519,7,,,
+POOL-00026392,"InChI=1S/C8H7NO2S/c10-5-6-4-7(11-9-6)8-2-1-3-12-8/h1-4,10H,5H2",OCc1cc(-c2cccs2)on1,352.78137461808984,False,['194491-44-6'],1.8312673704,7,$106.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/l482765
+POOL-00014665,"InChI=1S/C9H11NO2/c10-8-3-1-2-7(6-8)9-11-4-5-12-9/h1-3,6,9H,4-5,10H2",Nc1cccc(C2OCCO2)c1,268.9859747745539,False,['6398-87-4'],1.8349532791,7,,,
+POOL-00003784,"InChI=1S/C8H8N2O2/c11-8(12)6-3-4-9-7(10-6)5-1-2-5/h3-5H,1-2H2,(H,11,12)",O=C(O)c1ccnc(C2CC2)n1,320.5888284589361,False,['1211533-70-8'],1.8238737355,7,,,
+POOL-00025164,"InChI=1S/C9H7BrN2/c10-8-3-1-2-7(6-8)9-4-5-11-12-9/h1-6H,(H,11,12)",Brc1cccc(-c2cc[nH]n2)c1,367.7773776360867,False,"['149739-65-1', '948294-12-0']",1.8307170584,7,"$96.00
+$28.80/1 G","Available to ship on May 26, 2023
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/678805
+POOL-00038450,"InChI=1S/C9H6N2O3/c12-9-8(10-13)7(11-14-9)6-4-2-1-3-5-6/h1-5,11H",O=Nc1c(-c2ccccc2)[nH]oc1=O,498.2756605009873,False,['6265-53-8'],1.8481267889,7,,,
+POOL-00027009,"InChI=1S/C9H8N2S/c12-9-10-6-8(11-9)7-4-2-1-3-5-7/h1-6H,(H2,10,11,12)",Sc1ncc(-c2ccccc2)[nH]1,367.0273776360866,False,['6857-34-7'],1.859748554,7,$86.30/5 G,"Only 5 left in stock 
+Details...",https://www.sigmaaldrich.com/US/en/product/aldrich/730750
+POOL-00005473,"InChI=1S/C8H6N2O3/c11-8(12)7-3-6(9-10-7)5-1-2-13-4-5/h1-4H,(H,9,10)(H,11,12)",O=C(O)c1cc(-c2ccoc2)[nH]n1,416.2908270923037,False,"['2129110-26-3', '1187566-11-5']",1.8430711643,7,,,
+POOL-00012747,"InChI=1S/C9H6FNO3/c10-6-3-1-2-5(4-6)7-8(12)11-9(13)14-7/h1-4,7H,(H,11,12,13)",O=C1N=C(O)C(c2cccc(F)c2)O1,416.2730231883476,False,['82128-95-8'],1.8307745825,7,$134.00/nan,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph008375
+POOL-00022417,"InChI=1S/C9H8N2S/c12-9(7-3-1-5-10-7)8-4-2-6-11-8/h1-6,10-11H",S=C(c1ccc[nH]1)c1ccc[nH]1,322.90369804717767,False,['21401-55-8'],1.8552889199,7,,,
+POOL-00010272,"InChI=1S/C8H6N2O2S/c11-8(12)7-3-6(9-10-7)5-1-2-13-4-5/h1-4H,(H,9,10)(H,11,12)",O=C(O)c1cc(-c2ccsc2)[nH]n1,419.0457145944672,False,['1029108-69-7'],1.872740697,7,$616.00/5 g,Ships in 7 days - from Aldrich Partner.,https://www.sigmaaldrich.com/US/en/product/chembridgecorporation/ch4102149894?context=bbe
+POOL-00006338,"InChI=1S/C7H7BrN2O2/c8-4-5(3-1-2-3)9-10-6(4)7(11)12/h3H,1-2H2,(H,9,10)(H,11,12)",O=C(O)c1n[nH]c(C2CC2)c1Br,330.14740849378177,False,['1290764-98-5'],1.8801458431,7,,,
+POOL-00012746,"InChI=1S/C9H6FNO3/c10-6-4-2-1-3-5(6)7-8(12)11-9(13)14-7/h1-4,7H,(H,11,12,13)",O=C1N=C(O)C(c2ccccc2F)O1,416.2730231883476,False,['82128-78-7'],1.8291022413,7,$134.00/25 MG,We apologize but fulfillment and delivery of this product is delayed. We are working to minimize these delays as quickly as possible.,https://www.sigmaaldrich.com/US/en/product/aldrich/ph008374
