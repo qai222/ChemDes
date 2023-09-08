@@ -32,6 +32,10 @@ L2Rs = RC.ligand_to_reactions_mapping()
 def seed_one_by_one(
         init_lig: Molecule, rank_method="rank_average_pred_std", use_al=True,
 ):
+    """
+    explore the ligand space one by one, either using AL or randomly
+    by default use `rank_average_pred_std` ie pure exploration
+    """
     if use_al:
         wdir = f"{_work_folder}/al/init__{init_lig.label}"
     else:
@@ -85,6 +89,9 @@ def seed_one_by_one(
 
 
 def run_obo(use_al=True):
+    """
+    run one by one exploration and dump output to json
+    """
     random.seed(28931)
     ligs = random.sample(LigPool, 10)
 
@@ -94,6 +101,14 @@ def run_obo(use_al=True):
 
 
 def get_obo_eval_xy_2d(use_al=True, average_over_untaught=True):
+    """
+    collect one by one exploration data as a dataframe of columns:
+    - `x`: number of taught ligands
+    - `init_lig_lab`: which ligand is used for initialization for this specific one-by-one run
+    - `y_mae`: mean absolute error between `pred_mu` and expt. data
+    - `y_conf`: `pred_std`
+    if `average_over_untaught`, the latter 2 are averaged for untaught ligands only
+    """
     rank_method = "rank_average_pred_std"
     if use_al:
         files = "./al/obo_LIGAND-*.json.gz"
@@ -182,4 +197,5 @@ def plot_obo():
 if __name__ == '__main__':
     run_obo(use_al=True)
     run_obo(use_al=False)
+    # if you have `obo_LIGAND-*.json.gz` files in `al` and `rand`, use the following for plotting
     plot_obo()
