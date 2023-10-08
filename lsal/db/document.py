@@ -45,7 +45,10 @@ def prepare_model_doc(ip: IterationPaths):
     return doc
 
 
-def prepare_cfpool_docs(ip: IterationPaths, ligands: list[Molecule], dmat_chem_npy: FilePath, ncfs=100):
+def prepare_cfpool_docs(
+        ip: IterationPaths, ligands: list[Molecule], dmat_chem_npy: FilePath,
+        specify_vendor_csv: str = None,
+        ncfs=100):
     assert ip.model_folder is not None
     with open(dmat_chem_npy, 'rb') as f:
         dmat_chem = np.load(f)
@@ -57,6 +60,9 @@ def prepare_cfpool_docs(ip: IterationPaths, ligands: list[Molecule], dmat_chem_n
     cf_docs = []
 
     for directed_u_score, vendor_csv in ip.path_dict_vendor.items():
+        if specify_vendor_csv is not None:
+            if vendor_csv != specify_vendor_csv:
+                continue
         df_vendor = pd.read_csv(vendor_csv, low_memory=False)
         rank_method_colname = [c for c in df_vendor.columns if c.startswith("rank_average_")][0]
         rank_method = rank_method_colname.replace("rank_average_pred_", "")
