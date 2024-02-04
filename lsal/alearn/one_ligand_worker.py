@@ -64,6 +64,9 @@ class OneLigandWorker(Worker):
 
     @log_time
     def teach(self):
+        """
+        teach the learner using current and historical reactions
+        """
         reactions = []
         for rc_json in self.reaction_collection_json:
             rc = json_load(rc_json, gz=True)
@@ -81,6 +84,9 @@ class OneLigandWorker(Worker):
 
     @log_time
     def predict(self):
+        """
+        make predictions for the pool
+        """
         ligand_pool = json_load(self.prediction_ligand_pool_json, gz=True)
         logger.warning(f"making predictions for # of ligands: {len(ligand_pool)}")
         if self.test_predict:
@@ -111,6 +117,9 @@ class OneLigandWorker(Worker):
 
     @log_time
     def query(self):
+        """
+        organize and save predictions into a QueryRecord
+        """
         ligands = []
         rkdfs = []
         for pkl in tqdm(sorted(glob.glob(f"{self.prediction_dir}/prediction_*.pkl"))):
@@ -126,6 +135,9 @@ class OneLigandWorker(Worker):
 
     @log_time
     def ranking_dataframe(self):
+        """
+        export the ranking dataframe, will be used for suggestions
+        """
         createdir(self.ranking_df_dir)
 
         top_percentile = 2
@@ -195,6 +207,9 @@ class OneLigandWorker(Worker):
 
     @log_time
     def suggestions(self):
+        """
+        produce suggestions based on selected ranking parameters using a DiversitySuggestor
+        """
         createdir(self.suggestion_dir)
 
         from lsal.tasks.suggestor import DiversitySuggestor
@@ -269,109 +284,3 @@ class OneLigandWorker(Worker):
             else:
                 d[r['ligand_smiles']] = ic
         return d
-
-# # deprecated in favor of mongodb push
-# class VisdataExporter(Worker):
-#     def __init__(
-#             self,
-#             code_dir: FilePath,
-#             work_dir: FilePath,
-#             ligands_json_gz: FilePath,
-#             learning_folders: list[FilePath],
-#             reaction_collection_folder: FilePath,
-#             fp_type: str = 'ECFP4'
-#     ):
-#         super().__init__(name=self.__class__.__name__, code_dir=code_dir, work_dir=work_dir)
-#         self.fp_type = fp_type
-#         self.ligands_json_gz = ligands_json_gz
-#         self.reaction_collection_folder = reaction_collection_folder
-#         self.learning_folders = learning_folders
-#
-#         self.data = dict()
-#
-#     @log_time
-#     def load_ligands(self):
-#         ligands = json_load(self.ligands_json_gz, gz=True)
-#         ligands: list[Molecule]
-#         self.data['ligands'] = [lig.as_dict() for lig in ligands]
-#
-#     @log_time
-#     def load_svgs(self):
-#         assets = f"{self.work_dir}/assets"
-#         createdir(assets)
-#         for d in self.data['ligands']:
-#             smiles = d['smiles']
-#             label = get_molecule_label(d['mol_type'], d['int_label'])
-#             draw_svg(smiles, fn=f"{assets}/{label}.svg")
-#
-#     @log_time
-#     def load_reaction_collections(self):
-#         for json_gz in sorted(glob.glob(f"{self.reaction_collection_folder}/reaction_collection_*.json.gz")):
-#             rcname = get_basename(json_gz)
-#             self.data[rcname] = json_load(json_gz, gz=True).as_dict()
-#
-#     @log_time
-#     def load_model_results(self):
-#         for lf in self.learning_folders:
-#             model_name = "Model:" + get_basename(lf).replace("learning_", "")
-#             ranking_df = pd.read_csv(f"{lf}/ranking_df/qr_ranking.csv", low_memory=False)
-#             suggestion_df = pd.read_csv(f"{lf}/suggestion/suggestion__mu_top2%mu__feature__top.csv", low_memory=False)
-#             self.data[model_name] = {
-#                 "ranking_df": ranking_df,
-#                 "suggestion_df": suggestion_df,
-#             }
-#
-#     @log_time
-#     def calculate_pool_counterfactuals(self):
-#         for model_name in self.data:
-#             if not model_name.startswith("Model:"):
-#                 continue
-#             ranking_df = self.data[model_name]['ranking_df']
-#             suggestion_df = self.data[model_name]['suggestion_df']
-#             base_smi_to_cluster = OneLigandWorker.parse_suggestion_df(suggestion_df)
-#             suggestion_df = suggestion_df.dropna(axis=0, how="all", inplace=False)
-#
-#             label_to_smiles = dict(zip(ranking_df['ligand_label'].tolist(), ranking_df['ligand_smiles'].tolist()))
-#             smiles_to_label = {v: k for k, v in label_to_smiles.items()}
-#             smiles = ranking_df['ligand_smiles'].tolist()
-#
-#             rank_method = [c for c in suggestion_df.columns if c.startswith('rank_average')]
-#             assert len(rank_method) == 1
-#             rank_method = rank_method[0]
-#
-#             smi_to_rp = dict(zip(ranking_df['ligand_smiles'].tolist(), ranking_df[rank_method].tolist()))
-#
-#             fps = [stoned.get_fingerprint(smi2mol(smi), self.fp_type) for smi in smiles]
-#
-#             cf_data = dict()
-#             base_smis = suggestion_df['ligand_smiles'].tolist()
-#             for base_smi in tqdm(base_smis, desc=f'cf data'):
-#                 base_rp = smi_to_rp[base_smi]
-#                 fp_base = stoned.get_fingerprint(smi2mol(base_smi), self.fp_type)
-#                 sim_array = BulkTanimotoSimilarity(fp_base, fps)
-#                 # drp_array = [abs(rp - base_rp) for rp in ranking_df[rank_method]]
-#                 sim_cutoff = np.percentile(sim_array, q=98)
-#                 # drp_cutoff = np.percentile(drp_array, q=90)
-#                 data = []
-#                 for j, cf_smi in enumerate(smiles):
-#                     cf_rp = smi_to_rp[cf_smi]
-#                     drp = cf_rp - base_rp
-#                     if sim_array[j] > sim_cutoff:
-#                         data.append((cf_smi, sim_array[j], drp, base_rp, cf_rp))
-#                     # if abs(drp) >= drp_cutoff or sim_array[j] > sim_cutoff:
-#                     #     data.append((cf_smi, sim_array[j], drp))
-#                     # data.append((cf_smi, sim_array[j], drp))
-#                 cf_data[base_smi] = data
-#             data = {
-#                 'rank_method': rank_method,
-#                 'smiles_list': smiles,
-#                 'smiles_to_label': smiles_to_label,
-#                 'label_to_smiles': label_to_smiles,
-#                 'cf_data': cf_data,
-#                 'base_smi_to_cluster': base_smi_to_cluster
-#             }
-#             self.data[model_name]['cf_pool'] = data
-#
-#     @log_time
-#     def dump(self):
-#         json_dump(self.data, f"{self.work_dir}/visdata.json.gz", gz=True)
