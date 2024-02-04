@@ -2,9 +2,14 @@ ALLiS
 ---
 **A**ctive **L**earning **Li**gand **S**election
 
-### Results and visualizations
-The visualization app is available [here](http://67.205.164.214/explorer).
+All data and illustrations can be found in the [workplace](./workplace) folder. Specifically,
 
-### Workplace data sync
-Content of [workplace/data](./workplace/data) is synced to
-a [shared drive](https://drive.google.com/drive/folders/0AOdERHOdV4xpUk9PVA) using `rclone`
+- [workplace/Correlation](workplace/Correlation): Correlation analyses based on the last active learning iteration;
+- [workplace/Counterfactual](workplace/Counterfactual): Raw data for counterfactual pair analysis;
+- [workplace/example](workplace/example): Example scripts for loading raw experimental data;
+- [workplace/MolecularInventory](workplace/MolecularInventory): Raw data and scripts for building the ligand pool;
+- [workplace/OneLigand](workplace/OneLigand): Active learning data and scripts for all iterations;
+- [workplace/Sampler](workplace/Sampler): Example sampling scripts;
+- [workplace/SeedOBO](workplace/SeedOBO): One-by-one active learning for the seed dataset;
+
+Python modules used for active learning and suggestion are located in the [lsal](lsal) folder.
