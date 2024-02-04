@@ -17,6 +17,10 @@ from lsal.schema import L1XReactionCollection, Molecule
 from lsal.utils import get_basename, get_workplace_data_folder, get_folder
 from lsal.utils import json_load, json_dump, createdir
 
+"""
+perform one-by-one active learning iterations using the seed dataset
+"""
+
 _work_folder = get_workplace_data_folder(__file__)
 _code_folder = get_folder(__file__)
 _basename = get_basename(__file__)

@@ -12,6 +12,9 @@ from lsal.utils import json_load
 _SIMILARITY_THRESHOLD = 0.6  # only molecular pairs above this will be considered
 _DELTA_THRESHOLD = 0.6  # only molecular pairs above this are counterfactuals
 
+"""
+export counterfactuals as a collection of DiffSmiles 
+"""
 
 def remove_atom_by_indices(mol, indices):
     """ return a new rdkit.Mol with selected atoms removed """
@@ -51,20 +54,22 @@ class DiffSmiles(BaseModel):
     residual1: str
     residual2: str
     delta: float
+    rkp1: float
+    rkp2: float
     similarity: float
     is_cf: bool
 
 
 def inspect_pairs(
-        dmat_npy: FilePath = "../../../workplace_data/OneLigand/dimred/dmat_chem.npy",
-        iteraction_yaml: FilePath = "../../OneLigand/visualize_mongo/iteration_paths.yaml",
-        ligands_json: FilePath = "../../MolecularInventory/ligands.json.gz",
-):
+        dmat_npy: FilePath = "../../workplace_data/OneLigand/dimred/dmat_chem.npy",
+        iteraction_yaml: FilePath = "../OneLigand/visualize_mongo/iteration_paths.yaml",
+        ligands_json: FilePath = "../MolecularInventory/ligands.json.gz",
+) -> list[DiffSmiles]:
     ips = load_cps(iteraction_yaml)
     ligands = json_load(ligands_json)
     ligands: list[Molecule]
     ligand_dict = {ligand.label: ligand for ligand in ligands}
-    ip = ips[-1]
+    ip = ips[-1]  # last iteration
     docs = prepare_cfpool_docs(
         ip,
         ligands,
@@ -81,15 +86,19 @@ def inspect_pairs(
         ref = ligand_dict[d['ligand_label_base']]
         cf = ligand_dict[d['ligand_label_cf']]
         res1, res2 = get_diff_smiles(ref.smiles, cf.smiles)
-        delta = d['rank_value_delta']
+        rkp1 = d['rank_value_base']
+        rkp2 = d['rank_value_cf']
+        # delta = d['rank_value_delta']
         ds = DiffSmiles(
             smiles1=ref.smiles,
             smiles2=cf.smiles,
+            rkp1=rkp1,
+            rkp2=rkp2,
             residual1=res1,
             residual2=res2,
-            delta=delta,
+            delta=rkp2 - rkp1,
             similarity=smilarity,
-            is_cf=delta > _DELTA_THRESHOLD,
+            is_cf=abs(rkp2 - rkp1) > _DELTA_THRESHOLD,
         )
         smiles_diffs.append(ds)
     return smiles_diffs
