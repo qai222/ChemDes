@@ -11,6 +11,7 @@ from lsal.utils import json_load, pkl_load, tqdm, FilePath
 
 
 def prepare_lig_doc(ligand: Molecule, dimred_dict: dict):
+    """ ligand document """
     doc = {
         "_id": ligand.label,
         "smiles": ligand.smiles,
@@ -27,6 +28,7 @@ def prepare_lig_doc(ligand: Molecule, dimred_dict: dict):
 
 
 def prepare_model_doc(ip: IterationPaths):
+    """ model document """
     assert ip.model_folder is not None
     training_reactions_rc = json_load(ip.path_training_rc_json)
     training_reactions_rc: L1XReactionCollection
@@ -47,8 +49,20 @@ def prepare_model_doc(ip: IterationPaths):
 
 def prepare_cfpool_docs(
         ip: IterationPaths, ligands: list[Molecule], dmat_chem_npy: FilePath,
-        specify_vendor_csv: str = None,
+        specify_directed_u_score: str = None,
+        base_label_only_from_suggestions: bool = True,
         ncfs=100):
+    """
+    counterfactual documents
+
+    :param ip:
+    :param ligands:
+    :param dmat_chem_npy: distance matrix in the fp space
+    :param specify_directed_u_score: if specified, only return cfs for that ranking parameter
+    :param base_label_only_from_suggestions: only generate cf if base label is one of the suggestions
+    :param ncfs: max number of cfs to be generated
+    :return:
+    """
     assert ip.model_folder is not None
     with open(dmat_chem_npy, 'rb') as f:
         dmat_chem = np.load(f)
@@ -60,8 +74,8 @@ def prepare_cfpool_docs(
     cf_docs = []
 
     for directed_u_score, vendor_csv in ip.path_dict_vendor.items():
-        if specify_vendor_csv is not None:
-            if vendor_csv != specify_vendor_csv:
+        if directed_u_score is not None:
+            if directed_u_score != specify_directed_u_score:
                 continue
         df_vendor = pd.read_csv(vendor_csv, low_memory=False)
         rank_method_colname = [c for c in df_vendor.columns if c.startswith("rank_average_")][0]
@@ -70,9 +84,12 @@ def prepare_cfpool_docs(
             df_rkp['ligand_label'].tolist(), df_rkp[rank_method_colname].tolist()
         ))
 
-        for row in tqdm(df_vendor.to_dict(orient="records"),
-                        desc=f"working on vendor list: {ip.name}@{directed_u_score}"):
-            base_label = row['ligand_label']
+        if base_label_only_from_suggestions:
+            base_labels = [df_vendor['ligand_label'].tolist()]
+        else:
+            base_labels = labels
+
+        for base_label in tqdm(base_labels, f"working on vendor list: {ip.name} -- {directed_u_score}"):
             base_index = label_to_list_index[base_label]
             sim_array = dmat_chem[base_index]
             label_to_sim = dict(zip(labels, sim_array.tolist()))
@@ -106,6 +123,7 @@ def prepare_cfpool_docs(
 
 
 def prepare_campaign_doc(ip: IterationPaths):
+    """ expt campaign document """
     doc = {k: v for k, v in ip.as_dict().items() if not k.startswith("@")}
     doc['_id'] = _get_campaign_id(ip)
     rc = json_load(ip.expt_rc_json)
@@ -116,6 +134,7 @@ def prepare_campaign_doc(ip: IterationPaths):
 
 
 def prepare_pred_docs(ip: IterationPaths):
+    """ prediction documents """
     prediction_folder = ip.path_pred_folder
     pred_docs = []
     for pred_pkl in tqdm(sorted(glob.glob(prediction_folder + "/*.pkl")), desc=f"loading predictions: {ip.name}..."):
@@ -135,6 +154,7 @@ def prepare_pred_docs(ip: IterationPaths):
 
 
 def prepare_reaction_doc(rc_master: L1XReactionCollection, reaction: L1XReaction):
+    """ reaction document """
     if reaction.is_reaction_real:
         rtype = "real"
         lig_amount = reaction.ligand_solution.amount
