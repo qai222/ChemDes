@@ -5,9 +5,15 @@ import pandas as pd
 import umap
 from loguru import logger
 
-from lsal.alearn.one_ligand_worker import Worker, log_time, Molecule
+from lsal.alearn.one_ligand_worker import Worker, log_time
+from lsal.schema import Molecule
 from lsal.utils import get_basename, get_workplace_data_folder, get_folder, file_exists, similarity_matrix
 from lsal.utils import json_load, FilePath, calculate_distance_matrix, SEED
+"""
+dimensionality reduction visualization for the molecular pool
+only used in visualization
+"""
+
 
 _work_folder = get_workplace_data_folder(__file__)
 _code_folder = get_folder(__file__)

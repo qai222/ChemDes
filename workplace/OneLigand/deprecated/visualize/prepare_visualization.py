@@ -16,6 +16,8 @@ from lsal.utils import get_basename, get_workplace_data_folder, get_folder, file
 from lsal.utils import json_load, FilePath, calculate_distance_matrix, SEED, json_dump, pkl_load
 
 """
+**DEPRECATED, USE ONLY MONGO BACKEND**
+
 produce json data for visualization
 
 not useful if using mongo backend
