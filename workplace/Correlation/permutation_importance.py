@@ -74,6 +74,7 @@ def get_r_df(X, y) -> pd.DataFrame:
     return pd.DataFrame.from_records(records)
 
 
+
 def main_analysis(learner_name: str, expt_only_r: bool = True):
     """
     perform feature importance analysis
@@ -103,6 +104,8 @@ def main_analysis(learner_name: str, expt_only_r: bool = True):
     if expt_only_r:
         suffix = "expt"
         X, y = learner.teaching_records[-1].X, learner.teaching_records[-1].y
+        corr = X.corr()
+        corr.to_csv(f"corr_{learner_name}_{suffix}.csv", index=False)
     else:
         suffix = "all"
         import glob
@@ -122,7 +125,7 @@ def main_analysis(learner_name: str, expt_only_r: bool = True):
 
 
 if __name__ == '__main__':
-    LEARNER_NAME = """learning_AL0503"""
-    # LEARNER_NAME = """learning_SL0519"""
+    # LEARNER_NAME = """learning_AL0503"""
+    LEARNER_NAME = """learning_SL0519"""
     main_analysis(LEARNER_NAME, expt_only_r=True)
-    main_analysis(LEARNER_NAME, expt_only_r=False)
+    # main_analysis(LEARNER_NAME, expt_only_r=False)
