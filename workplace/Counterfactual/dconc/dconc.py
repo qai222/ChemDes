@@ -1,5 +1,4 @@
 import glob
-import math
 import os.path
 
 import numpy as np
@@ -8,14 +7,14 @@ import tqdm
 from loguru import logger
 
 from lsal.alearn.one_ligand import SingleLigandPrediction
-from lsal.utils import json_load
+from lsal.utils import json_load, json_dump
 from lsal.utils import pkl_load, pkl_dump, truncate_distribution
 
 
 def select_cfs(res1: str, res2: str) -> list[dict]:
     selected = []
     unique_pairs = []
-    exported_cfs = json_load("export_cfs.json.gz")
+    exported_cfs = json_load("../export_cfs.json.gz")
     for cf in exported_cfs:
         if cf['residual1'] == res1 and cf['residual2'] == res2:
             selected.append(cf)
@@ -35,6 +34,7 @@ def dump_pred_from_selected_cfs(res1: str, res2: str):
         unique_smiles.append(cf['smiles1'])
         unique_smiles.append(cf['smiles2'])
     unique_smiles = sorted(set(unique_smiles))
+    pred_ranges = []
     selected_preds = []
     for pred_file in tqdm.tqdm(
             sorted(glob.glob("E:\workplace_data\OneLigand\learning_SL0519\prediction\prediction_*.pkl"))):
@@ -62,7 +62,7 @@ def main_analysis(preds: list[SingleLigandPrediction], cfs: list[dict]):
         smi2 = cf['smiles2']
         pred1 = pred_dict[smi1]
         pred2 = pred_dict[smi2]
-        delta_max_conc = math.log10(get_max_conc(pred2)) - math.log10(get_max_conc(pred1))
+        delta_max_conc = get_max_conc(pred2) - get_max_conc(pred1)
         delta_fom.append(cf['delta'])
         delta_conc.append(delta_max_conc)
     return delta_conc, delta_fom
@@ -84,8 +84,10 @@ def main(res1: str, res2: str):
     predictions, selected_cfs = dump_pred_from_selected_cfs(res1, res2)
     logger.info(f"selected predictions: {len(predictions)}")
     delta_conc, delta_fom = main_analysis(predictions, selected_cfs)
+    json_dump({"delta_conc": delta_conc, "delta_fom": delta_fom}, f"dconc_{res1}-{res2}.json")
     fig = main_plot(delta_conc, delta_fom)
     fig.savefig(f"dconc_{res1}-{res2}.png")
+
 
 if __name__ == '__main__':
     main("N", "Br")
