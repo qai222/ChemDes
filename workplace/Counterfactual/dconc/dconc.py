@@ -75,7 +75,8 @@ def main_plot(delta_conc: list[float], delta_fom: list[float]):
         data, x="dconc", y="dfom",
         marker="+", s=100, marginal_kws=dict(bins=25, fill=False),
     )
-    fig.ax_joint.set_xlabel("$\Delta \log c_{max}$")
+    fig.ax_marg_x.ticklabel_format(style='scientific', axis='x')
+    fig.ax_joint.set_xlabel("$\Delta c_{max}$")
     fig.ax_joint.set_ylabel("$\Delta FOM_{max}$")
     return fig
 
